@@ -323,5 +323,155 @@
       "on_update": "NO ACTION",
       "on_delete": "CASCADE"
     }
+  },
+  {
+    "collection": "products",
+    "field": "image",
+    "related_collection": "directus_files",
+    "meta": {
+      "many_collection": "products",
+      "many_field": "image",
+      "one_collection": "directus_files",
+      "one_field": null,
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": null,
+      "sort_field": null,
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "products_image_foreign",
+      "table": "products",
+      "column": "image",
+      "foreign_key_table": "directus_files",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    }
+  },
+  {
+    "collection": "products_directus_files",
+    "field": "products_id",
+    "related_collection": "products",
+    "meta": {
+      "many_collection": "products_directus_files",
+      "many_field": "products_id",
+      "one_collection": "products",
+      "one_field": "gallery",
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": "directus_files_id",
+      "sort_field": "sort",
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "products_directus_files_products_id_foreign",
+      "table": "products_directus_files",
+      "column": "products_id",
+      "foreign_key_table": "products",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    }
+  },
+  {
+    "collection": "products_directus_files",
+    "field": "directus_files_id",
+    "related_collection": "directus_files",
+    "meta": {
+      "many_collection": "products_directus_files",
+      "many_field": "directus_files_id",
+      "one_collection": "directus_files",
+      "one_field": null,
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": "products_id",
+      "sort_field": "sort",
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "products_directus_files_directus_files_id_foreign",
+      "table": "products_directus_files",
+      "column": "directus_files_id",
+      "foreign_key_table": "directus_files",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "CASCADE"
+    }
+  },
+  {
+    "collection": "categories",
+    "field": "image",
+    "related_collection": "directus_files",
+    "meta": {
+      "many_collection": "categories",
+      "many_field": "image",
+      "one_collection": "directus_files",
+      "one_field": null,
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": null,
+      "sort_field": null,
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "categories_image_foreign",
+      "table": "categories",
+      "column": "image",
+      "foreign_key_table": "directus_files",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    }
+  },
+  {
+    "collection": "banners",
+    "field": "image",
+    "related_collection": "directus_files",
+    "meta": {
+      "many_collection": "banners",
+      "many_field": "image",
+      "one_collection": "directus_files",
+      "one_field": null,
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": null,
+      "sort_field": null,
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "banners_image_foreign",
+      "table": "banners",
+      "column": "image",
+      "foreign_key_table": "directus_files",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    }
+  },
+  {
+    "collection": "tags",
+    "field": "icon",
+    "related_collection": "directus_files",
+    "meta": {
+      "many_collection": "tags",
+      "many_field": "icon",
+      "one_collection": "directus_files",
+      "one_field": null,
+      "one_collection_field": null,
+      "one_allowed_collections": null,
+      "junction_field": null,
+      "sort_field": null,
+      "one_deselect_action": "nullify"
+    },
+    "schema": {
+      "constraint_name": "tags_icon_foreign",
+      "table": "tags",
+      "column": "icon",
+      "foreign_key_table": "directus_files",
+      "foreign_key_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "SET NULL"
+    }
   }
 ]

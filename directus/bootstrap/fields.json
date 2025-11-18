@@ -64,6 +64,15 @@
       }
     },
     {
+      "field": "image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
+    },
+    {
       "field": "parent_id",
       "type": "integer",
       "meta": {
@@ -125,6 +134,15 @@
         "interface": "select-color",
         "width": "half"
       }
+    },
+    {
+      "field": "icon",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
     }
   ],
   "products": [
@@ -181,6 +199,20 @@
         "interface": "input",
         "required": true,
         "width": "half"
+      }
+    },
+    {
+      "field": "categories",
+      "type": "alias",
+      "meta": {
+        "interface": "list-m2m",
+        "special": ["m2m"],
+        "display": "related-values",
+        "display_options": {
+          "template": "{{categories_id.name}}"
+        },
+        "width": "half",
+        "junction_field": "products_categories"
       }
     },
     {
@@ -256,14 +288,16 @@
       "type": "uuid",
       "meta": {
         "interface": "file-image",
+        "special": ["file"],
         "width": "half"
       }
     },
     {
       "field": "gallery",
-      "type": "json",
+      "type": "alias",
       "meta": {
         "interface": "files",
+        "special": ["m2m"],
         "width": "full"
       }
     },
@@ -313,6 +347,15 @@
         "interface": "datetime",
         "readonly": true,
         "hidden": true
+      }
+    },
+    {
+      "field": "tags",
+      "type": "alias",
+      "meta": {
+        "interface": "list-m2m",
+        "special": ["m2m"],
+        "junction_field": "products_tags"
       }
     }
   ],
@@ -364,6 +407,40 @@
     },
     {
       "field": "tags_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    }
+  ],
+  "products_directus_files": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "products_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "directus_files_id",
+      "type": "uuid",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "sort",
       "type": "integer",
       "meta": {
         "hidden": true
@@ -1088,6 +1165,7 @@
       "type": "uuid",
       "meta": {
         "interface": "file-image",
+        "special": ["file"],
         "width": "half"
       }
     },

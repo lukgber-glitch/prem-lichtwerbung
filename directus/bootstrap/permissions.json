@@ -3,22 +3,14 @@
     "policy": null,
     "collection": "products",
     "action": "read",
-    "permissions": {
-      "status": {
-        "_eq": "published"
-      }
-    },
+    "permissions": {},
     "fields": ["*"]
   },
   {
     "policy": null,
     "collection": "categories",
     "action": "read",
-    "permissions": {
-      "status": {
-        "_eq": "published"
-      }
-    },
+    "permissions": {},
     "fields": ["*"]
   },
   {
@@ -30,40 +22,49 @@
   },
   {
     "policy": null,
+    "collection": "products_categories",
+    "action": "read",
+    "permissions": {},
+    "fields": ["*"]
+  },
+  {
+    "policy": null,
+    "collection": "products_tags",
+    "action": "read",
+    "permissions": {},
+    "fields": ["*"]
+  },
+  {
+    "policy": null,
     "collection": "reviews",
     "action": "read",
-    "permissions": {
-      "status": {
-        "_eq": "published"
-      }
-    },
+    "permissions": {},
     "fields": ["*"]
   },
   {
     "policy": null,
     "collection": "pages",
     "action": "read",
-    "permissions": {
-      "status": {
-        "_eq": "published"
-      }
-    },
+    "permissions": {},
     "fields": ["*"]
   },
   {
     "policy": null,
     "collection": "banners",
     "action": "read",
-    "permissions": {
-      "status": {
-        "_eq": "published"
-      }
-    },
+    "permissions": {},
     "fields": ["*"]
   },
   {
     "policy": null,
     "collection": "settings",
+    "action": "read",
+    "permissions": {},
+    "fields": ["*"]
+  },
+  {
+    "policy": null,
+    "collection": "directus_files",
     "action": "read",
     "permissions": {},
     "fields": ["*"]

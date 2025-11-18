@@ -14,6 +14,20 @@ until nc -z postgres 5432; do
 done
 echo "✅ PostgreSQL is ready"
 
+# Check if bootstrap has already been completed
+BOOTSTRAP_FLAG="/directus/.bootstrap_complete"
+
+if [ -f "$BOOTSTRAP_FLAG" ]; then
+  echo ""
+  echo "✅ Bootstrap already completed (flag file exists)"
+  echo "🚀 Starting Directus server..."
+  echo ""
+  exec directus start
+fi
+
+echo ""
+echo "🆕 First-time setup detected - running bootstrap..."
+
 # Bootstrap Directus (create admin user and apply schema)
 echo ""
 echo "📦 Bootstrapping Directus..."
@@ -26,7 +40,7 @@ DIRECTUS_PID=$!
 
 # Wait for Directus to be fully initialized
 echo "⏳ Waiting for Directus to be ready..."
-sleep 10
+sleep 30
 
 # Authenticate and get access token
 echo "🔑 Authenticating with Directus..."
@@ -99,23 +113,30 @@ if [ -f "/directus/bootstrap/roles.json" ]; then
   done
 fi
 
-# Import permissions
-# Note: Skipping permissions import - Directus 11.x uses a different permissions API
-# Public access can be configured through the Directus admin panel after setup
-# For now, admin token provides full access during bootstrap
-# if [ -f "/directus/bootstrap/permissions.json" ]; then
-#   echo ""
-#   echo "🔐 Importing permissions..."
-#   permissions=$(cat /directus/bootstrap/permissions.json | jq -c '.[]')
-#   echo "$permissions" | while IFS= read -r permission; do
-#     curl -X POST http://localhost:8055/permissions \
-#       -H "Content-Type: application/json" \
-#       -H "Authorization: Bearer $ACCESS_TOKEN" \
-#       --data "$permission" || echo "Permission already exists or import failed"
-#   done
-# fi
+# Public Access Permissions - Manual Configuration Required
 echo ""
-echo "🔐 Skipping permissions import (configure via Directus admin panel)"
+echo "⚠️  PUBLIC ACCESS PERMISSIONS - MANUAL CONFIGURATION REQUIRED"
+echo "================================================================"
+echo ""
+echo "Directus 11.x Security Limitation:"
+echo "  The Public role cannot be modified via API (returns 403 Forbidden)"
+echo "  even with admin credentials. This is a Directus security restriction."
+echo ""
+echo "📝 You must configure public permissions manually via the admin panel:"
+echo "  1. Open http://localhost:8055 in your browser"
+echo "  2. Log in with: $ADMIN_EMAIL / $ADMIN_PASSWORD"
+echo "  3. Go to Settings → Access Control → Public"
+echo "  4. Add read permissions for: products, categories, tags,"
+echo "     products_categories, products_tags, reviews, pages, banners, settings"
+echo "  5. Add create permissions for: customers, orders"
+echo ""
+echo "✅ This is a ONE-TIME setup that persists across container restarts."
+echo ""
+echo "📖 See README.md 'Troubleshooting' section for detailed step-by-step"
+echo "   instructions with screenshots and troubleshooting tips."
+echo ""
+echo "================================================================"
+echo ""
 
 # Import sample data
 echo ""
@@ -157,6 +178,18 @@ if [ -f "/directus/bootstrap/sample-data/products.json" ]; then
   done
 fi
 
+# Import products_categories junction data
+if [ -f "/directus/bootstrap/sample-data/products_categories.json" ]; then
+  echo "  - Importing products_categories (M2M relations)..."
+  products_categories=$(cat /directus/bootstrap/sample-data/products_categories.json | jq -c '.[]')
+  echo "$products_categories" | while IFS= read -r junction; do
+    curl -X POST http://localhost:8055/items/products_categories \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $ACCESS_TOKEN" \
+      --data "$junction" > /dev/null 2>&1 || true
+  done
+fi
+
 # Import customers
 if [ -f "/directus/bootstrap/sample-data/customers.json" ]; then
   echo "  - Importing customers..."
@@ -189,6 +222,11 @@ echo ""
 echo "🌐 Directus is running at: http://localhost:8055"
 echo "👤 Admin email: $ADMIN_EMAIL"
 echo "🔑 Admin password: $ADMIN_PASSWORD"
+echo ""
+
+# Create flag file to prevent re-running bootstrap on restart
+touch "$BOOTSTRAP_FLAG"
+echo "📝 Created bootstrap completion flag: $BOOTSTRAP_FLAG"
 echo ""
 
 # Keep Directus running in foreground

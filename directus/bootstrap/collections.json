@@ -61,6 +61,17 @@
     }
   },
   {
+    "collection": "products_directus_files",
+    "meta": {
+      "icon": "import_export",
+      "hidden": true,
+      "singleton": false
+    },
+    "schema": {
+      "name": "products_directus_files"
+    }
+  },
+  {
     "collection": "customers",
     "meta": {
       "icon": "person",
