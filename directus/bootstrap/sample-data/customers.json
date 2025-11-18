@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "email": "john.doe@example.com",
+    "password_hash": "$2a$10$5I8D7z.qKqZQN.6aX5PBROqKLQN5bZ5X4KqZQN.6aX5PBROqKLQN5",
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone": "+1-555-0123"
+  }
+]

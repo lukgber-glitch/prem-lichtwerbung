@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "status": "published",
+    "name": "Electronics",
+    "slug": "electronics",
+    "description": "Latest electronics and gadgets",
+    "parent_id": null,
+    "sort": 1
+  },
+  {
+    "id": 2,
+    "status": "published",
+    "name": "Laptops",
+    "slug": "laptops",
+    "description": "High-performance laptops for work and gaming",
+    "parent_id": 1,
+    "sort": 1
+  },
+  {
+    "id": 3,
+    "status": "published",
+    "name": "Smartphones",
+    "slug": "smartphones",
+    "description": "Latest smartphones and accessories",
+    "parent_id": 1,
+    "sort": 2
+  },
+  {
+    "id": 4,
+    "status": "published",
+    "name": "Headphones",
+    "slug": "headphones",
+    "description": "Premium audio equipment",
+    "parent_id": 1,
+    "sort": 3
+  },
+  {
+    "id": 5,
+    "status": "published",
+    "name": "Fashion",
+    "slug": "fashion",
+    "description": "Trendy clothing and accessories",
+    "parent_id": null,
+    "sort": 2
+  },
+  {
+    "id": 6,
+    "status": "published",
+    "name": "Men's Clothing",
+    "slug": "mens-clothing",
+    "description": "Fashion for men",
+    "parent_id": 5,
+    "sort": 1
+  },
+  {
+    "id": 7,
+    "status": "published",
+    "name": "Women's Clothing",
+    "slug": "womens-clothing",
+    "description": "Fashion for women",
+    "parent_id": 5,
+    "sort": 2
+  },
+  {
+    "id": 8,
+    "status": "published",
+    "name": "Home & Garden",
+    "slug": "home-garden",
+    "description": "Everything for your home",
+    "parent_id": null,
+    "sort": 3
+  },
+  {
+    "id": 9,
+    "status": "published",
+    "name": "Furniture",
+    "slug": "furniture",
+    "description": "Modern furniture pieces",
+    "parent_id": 8,
+    "sort": 1
+  },
+  {
+    "id": 10,
+    "status": "published",
+    "name": "Sports & Outdoors",
+    "slug": "sports-outdoors",
+    "description": "Gear for active lifestyle",
+    "parent_id": null,
+    "sort": 4
+  }
+]

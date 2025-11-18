@@ -1,0 +1,21 @@
+{
+  "name": "webshop-directus",
+  "version": "1.0.0",
+  "description": "Directus backend for webshop application",
+  "main": "index.js",
+  "scripts": {
+    "start": "directus start",
+    "bootstrap": "directus bootstrap",
+    "check:updates": "npm-check-updates"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "stripe": "^14.14.0"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^16.14.12"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

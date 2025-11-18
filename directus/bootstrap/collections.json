@@ -1,0 +1,167 @@
+[
+  {
+    "collection": "categories",
+    "meta": {
+      "icon": "category",
+      "display_template": "{{name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 1
+    },
+    "schema": {
+      "name": "categories"
+    }
+  },
+  {
+    "collection": "tags",
+    "meta": {
+      "icon": "local_offer",
+      "display_template": "{{name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 2
+    },
+    "schema": {
+      "name": "tags"
+    }
+  },
+  {
+    "collection": "products",
+    "meta": {
+      "icon": "inventory_2",
+      "display_template": "{{name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 3
+    },
+    "schema": {
+      "name": "products"
+    }
+  },
+  {
+    "collection": "products_categories",
+    "meta": {
+      "icon": "import_export",
+      "hidden": true,
+      "singleton": false
+    },
+    "schema": {
+      "name": "products_categories"
+    }
+  },
+  {
+    "collection": "products_tags",
+    "meta": {
+      "icon": "import_export",
+      "hidden": true,
+      "singleton": false
+    },
+    "schema": {
+      "name": "products_tags"
+    }
+  },
+  {
+    "collection": "customers",
+    "meta": {
+      "icon": "person",
+      "display_template": "{{first_name}} {{last_name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 4
+    },
+    "schema": {
+      "name": "customers"
+    }
+  },
+  {
+    "collection": "addresses",
+    "meta": {
+      "icon": "place",
+      "display_template": "{{street}}, {{city}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 5
+    },
+    "schema": {
+      "name": "addresses"
+    }
+  },
+  {
+    "collection": "orders",
+    "meta": {
+      "icon": "shopping_cart",
+      "display_template": "Order #{{id}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 6
+    },
+    "schema": {
+      "name": "orders"
+    }
+  },
+  {
+    "collection": "order_items",
+    "meta": {
+      "icon": "list",
+      "display_template": "{{product_id}} x {{quantity}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 7
+    },
+    "schema": {
+      "name": "order_items"
+    }
+  },
+  {
+    "collection": "reviews",
+    "meta": {
+      "icon": "star",
+      "display_template": "{{rating}} stars - {{title}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 8
+    },
+    "schema": {
+      "name": "reviews"
+    }
+  },
+  {
+    "collection": "pages",
+    "meta": {
+      "icon": "article",
+      "display_template": "{{title}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 9
+    },
+    "schema": {
+      "name": "pages"
+    }
+  },
+  {
+    "collection": "banners",
+    "meta": {
+      "icon": "image",
+      "display_template": "{{title}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 10
+    },
+    "schema": {
+      "name": "banners"
+    }
+  },
+  {
+    "collection": "settings",
+    "meta": {
+      "icon": "settings",
+      "display_template": "Settings",
+      "hidden": false,
+      "singleton": true,
+      "sort": 11
+    },
+    "schema": {
+      "name": "settings"
+    }
+  }
+]

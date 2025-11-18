@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "status": "delivered",
+    "payment_status": "paid",
+    "total": 2897.99,
+    "subtotal": 2748.99,
+    "tax": 137.45,
+    "shipping": 11.55,
+    "notes": "Please leave at front door",
+    "stripe_payment_intent_id": "pi_3ABC123def456GHI789jkl",
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 1,
+        "price": 2499.00,
+        "total": 2499.00
+      },
+      {
+        "product_id": 6,
+        "quantity": 1,
+        "price": 249.00,
+        "total": 249.00
+      }
+    ],
+    "reviews": [
+      {
+        "product_id": 1,
+        "customer_id": 1,
+        "rating": 5,
+        "title": "Excellent laptop for professionals",
+        "comment": "The MacBook Pro 16-inch is an amazing machine. The performance is outstanding and the display is gorgeous. Highly recommended for developers and designers!",
+        "status": "published"
+      },
+      {
+        "product_id": 6,
+        "customer_id": 1,
+        "rating": 5,
+        "title": "Best wireless earbuds",
+        "comment": "The AirPods Pro 2 have incredible sound quality and the noise cancellation is top-notch. Battery life is great too.",
+        "status": "published"
+      },
+      {
+        "product_id": 3,
+        "customer_id": 1,
+        "rating": 4,
+        "title": "Great smartphone",
+        "comment": "The iPhone 15 Pro Max is a solid upgrade. Camera is fantastic and the battery lasts all day.",
+        "status": "published"
+      }
+    ]
+  }
+]

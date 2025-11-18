@@ -1,0 +1,1194 @@
+{
+  "categories": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Published", "value": "published"},
+            {"text": "Draft", "value": "draft"},
+            {"text": "Archived", "value": "archived"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "description",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full"
+      }
+    },
+    {
+      "field": "parent_id",
+      "type": "integer",
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "width": "half"
+      }
+    },
+    {
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "color",
+      "type": "string",
+      "meta": {
+        "interface": "select-color",
+        "width": "half"
+      }
+    }
+  ],
+  "products": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Published", "value": "published"},
+            {"text": "Draft", "value": "draft"},
+            {"text": "Archived", "value": "archived"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "description",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full"
+      }
+    },
+    {
+      "field": "price",
+      "type": "decimal",
+      "schema": {
+        "is_nullable": false,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "compare_at_price",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "stock",
+      "type": "integer",
+      "schema": {
+        "default_value": 0
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "sku",
+      "type": "string",
+      "schema": {
+        "is_unique": true
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "weight",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "width": "half"
+      }
+    },
+    {
+      "field": "gallery",
+      "type": "json",
+      "meta": {
+        "interface": "files",
+        "width": "full"
+      }
+    },
+    {
+      "field": "featured",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "stripe_product_id",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "stripe_price_id",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "date_created",
+      "type": "timestamp",
+      "schema": {
+        "default_value": "now()"
+      },
+      "meta": {
+        "interface": "datetime",
+        "readonly": true,
+        "hidden": true
+      }
+    },
+    {
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "interface": "datetime",
+        "readonly": true,
+        "hidden": true
+      }
+    }
+  ],
+  "products_categories": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "products_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "categories_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    }
+  ],
+  "products_tags": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "products_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "tags_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    }
+  ],
+  "customers": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "email",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "password_hash",
+      "type": "string",
+      "meta": {
+        "interface": "input-hash",
+        "hidden": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "first_name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "last_name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "phone",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "stripe_customer_id",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "date_created",
+      "type": "timestamp",
+      "schema": {
+        "default_value": "now()"
+      },
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    },
+    {
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    }
+  ],
+  "addresses": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "customer_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "default_value": "shipping"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Shipping", "value": "shipping"},
+            {"text": "Billing", "value": "billing"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "first_name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "last_name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "street",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "full"
+      }
+    },
+    {
+      "field": "city",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "state",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "postal_code",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "country",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "is_default",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    }
+  ],
+  "orders": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "customer_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "pending"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Pending", "value": "pending"},
+            {"text": "Processing", "value": "processing"},
+            {"text": "Shipped", "value": "shipped"},
+            {"text": "Delivered", "value": "delivered"},
+            {"text": "Cancelled", "value": "cancelled"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "payment_status",
+      "type": "string",
+      "schema": {
+        "default_value": "unpaid"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Unpaid", "value": "unpaid"},
+            {"text": "Paid", "value": "paid"},
+            {"text": "Refunded", "value": "refunded"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "total",
+      "type": "decimal",
+      "schema": {
+        "is_nullable": false,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "subtotal",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "tax",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "shipping",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "shipping_address_id",
+      "type": "integer",
+      "meta": {
+        "interface": "select-dropdown-m2o"
+      }
+    },
+    {
+      "field": "billing_address_id",
+      "type": "integer",
+      "meta": {
+        "interface": "select-dropdown-m2o"
+      }
+    },
+    {
+      "field": "stripe_payment_intent_id",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "stripe_checkout_session_id",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "notes",
+      "type": "text",
+      "meta": {
+        "interface": "input-multiline",
+        "width": "full"
+      }
+    },
+    {
+      "field": "date_created",
+      "type": "timestamp",
+      "schema": {
+        "default_value": "now()"
+      },
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    },
+    {
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    }
+  ],
+  "order_items": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "order_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "product_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "quantity",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false,
+        "default_value": 1
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "price",
+      "type": "decimal",
+      "schema": {
+        "is_nullable": false,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "total",
+      "type": "decimal",
+      "schema": {
+        "is_nullable": false,
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "product_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "customer_id",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "required": true
+      }
+    },
+    {
+      "field": "rating",
+      "type": "integer",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "1 Star", "value": 1},
+            {"text": "2 Stars", "value": 2},
+            {"text": "3 Stars", "value": 3},
+            {"text": "4 Stars", "value": 4},
+            {"text": "5 Stars", "value": 5}
+          ]
+        },
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "title",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "comment",
+      "type": "text",
+      "meta": {
+        "interface": "input-multiline",
+        "width": "full"
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Published", "value": "published"},
+            {"text": "Draft", "value": "draft"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "date_created",
+      "type": "timestamp",
+      "schema": {
+        "default_value": "now()"
+      },
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    }
+  ],
+  "pages": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Published", "value": "published"},
+            {"text": "Draft", "value": "draft"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "title",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "slug",
+      "type": "string",
+      "schema": {
+        "is_unique": true,
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "content",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full"
+      }
+    },
+    {
+      "field": "date_created",
+      "type": "timestamp",
+      "schema": {
+        "default_value": "now()"
+      },
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    },
+    {
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "interface": "datetime",
+        "readonly": true
+      }
+    }
+  ],
+  "banners": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "status",
+      "type": "string",
+      "schema": {
+        "default_value": "published"
+      },
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Published", "value": "published"},
+            {"text": "Draft", "value": "draft"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "title",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "subtitle",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "width": "half"
+      }
+    },
+    {
+      "field": "link",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    }
+  ],
+  "settings": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "site_name",
+      "type": "string",
+      "schema": {
+        "default_value": "Webshop"
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "site_description",
+      "type": "text",
+      "meta": {
+        "interface": "input-multiline",
+        "width": "full"
+      }
+    },
+    {
+      "field": "logo",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "width": "half"
+      }
+    },
+    {
+      "field": "contact_email",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "contact_phone",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "shipping_fee",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "default_value": 0
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "tax_rate",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 5,
+        "numeric_scale": 2,
+        "default_value": 0
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    }
+  ]
+}
