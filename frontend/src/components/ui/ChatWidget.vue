@@ -1,0 +1,286 @@
+<template>
+  <div>
+    <!-- Floating Chat Button -->
+    <button
+      @click="toggleChat"
+      :class="[
+        'fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-lg transition-all duration-300',
+        'flex items-center justify-center',
+        isOpen 
+          ? 'bg-brand-pink hover:shadow-glow-pink' 
+          : 'bg-brand-blue hover:shadow-glow-blue hover:scale-110'
+      ]"
+      aria-label="Chat with us"
+    >
+      <!-- Message Icon (when closed) -->
+      <svg 
+        v-if="!isOpen"
+        class="w-8 h-8 text-white" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+      
+      <!-- Close Icon (when open) -->
+      <svg 
+        v-else
+        class="w-8 h-8 text-white" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+
+      <!-- Unread Badge -->
+      <span 
+        v-if="unreadCount > 0 && !isOpen"
+        class="absolute -top-1 -right-1 w-6 h-6 bg-brand-pink text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse"
+      >
+        {{ unreadCount }}
+      </span>
+    </button>
+
+    <!-- Chat Modal -->
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      leave-active-class="transition-all duration-200 ease-in"
+      enter-from-class="opacity-0 translate-y-full md:translate-y-0 md:scale-95"
+      enter-to-class="opacity-100 translate-y-0 md:scale-100"
+      leave-from-class="opacity-100 translate-y-0 md:scale-100"
+      leave-to-class="opacity-0 translate-y-full md:translate-y-0 md:scale-95"
+    >
+      <div
+        v-if="isOpen"
+        class="fixed inset-x-0 bottom-0 md:bottom-6 md:right-6 md:inset-x-auto z-40"
+      >
+        <div class="bg-white rounded-t-2xl md:rounded-2xl shadow-2xl w-full md:w-96 h-[80vh] md:h-[600px] flex flex-col overflow-hidden">
+          <!-- Header -->
+          <div class="bg-gradient-to-r from-brand-blue to-brand-pink p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-white">Chat with us</h3>
+                <p class="text-xs text-brand-warm">We typically reply instantly</p>
+              </div>
+            </div>
+            <button
+              @click="toggleChat"
+              class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-colors"
+              aria-label="Close chat"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Chat Messages -->
+          <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-brand-gray-light">
+            <!-- Welcome Message -->
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
+                <p class="text-sm text-gray-800">
+                  👋 Hello! Welcome to Prem-Lichtwerbung. How can we help you today?
+                </p>
+                <span class="text-xs text-gray-500 mt-1 block">Just now</span>
+              </div>
+            </div>
+
+            <!-- Placeholder Notice -->
+            <div class="bg-brand-blue bg-opacity-10 border border-brand-blue rounded-lg p-4 text-center">
+              <svg class="w-12 h-12 mx-auto mb-3 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p class="text-sm font-semibold text-brand-navy mb-2">Live Chat Integration</p>
+              <p class="text-xs text-gray-600 mb-3">
+                Connect your preferred live chat service to enable real-time customer support:
+              </p>
+              <div class="text-xs text-left text-gray-700 space-y-1 max-w-xs mx-auto">
+                <p>• Intercom</p>
+                <p>• Tawk.to</p>
+                <p>• Crisp</p>
+                <p>• Zendesk Chat</p>
+                <p>• LiveChat</p>
+              </div>
+            </div>
+
+            <!-- Example Messages -->
+            <div v-for="(message, index) in demoMessages" :key="index">
+              <!-- Customer Message (right aligned) -->
+              <div v-if="message.type === 'customer'" class="flex items-start gap-3 justify-end">
+                <div class="bg-brand-blue text-white rounded-lg rounded-tr-none shadow-sm p-3 max-w-[80%]">
+                  <p class="text-sm">{{ message.text }}</p>
+                  <span class="text-xs opacity-75 mt-1 block">{{ message.time }}</span>
+                </div>
+                <div class="w-8 h-8 bg-brand-pink rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Agent Message (left aligned) -->
+              <div v-else class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
+                  <p class="text-sm text-gray-800">{{ message.text }}</p>
+                  <span class="text-xs text-gray-500 mt-1 block">{{ message.time }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Typing Indicator (optional) -->
+            <div v-if="isTyping" class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3">
+                <div class="flex gap-1">
+                  <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+                  <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></span>
+                  <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <div class="p-4 bg-white border-t border-gray-200">
+            <div class="flex gap-2">
+              <input
+                v-model="messageInput"
+                type="text"
+                placeholder="Type your message..."
+                class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all"
+                @keypress.enter="sendMessage"
+              />
+              <button
+                @click="sendMessage"
+                :disabled="!messageInput.trim()"
+                class="px-4 py-3 bg-brand-blue text-white rounded-lg hover:shadow-glow-blue transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                aria-label="Send message"
+              >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-2 text-center">
+              Demo mode • Connect your live chat service for real conversations
+            </p>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+    <!-- Backdrop (mobile only) -->
+    <Transition
+      enter-active-class="transition-opacity duration-300"
+      leave-active-class="transition-opacity duration-200"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="isOpen"
+        class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+        @click="toggleChat"
+      ></div>
+    </Transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+interface Message {
+  type: 'customer' | 'agent'
+  text: string
+  time: string
+}
+
+// State
+const isOpen = ref(false)
+const unreadCount = ref(1)
+const messageInput = ref('')
+const isTyping = ref(false)
+
+// Demo messages
+const demoMessages = ref<Message[]>([
+  {
+    type: 'customer',
+    text: "I'm interested in custom neon signs for my restaurant.",
+    time: '10:30 AM'
+  },
+  {
+    type: 'agent',
+    text: "Great! We'd love to help. Can you tell me more about what you're looking for?",
+    time: '10:31 AM'
+  },
+  {
+    type: 'customer',
+    text: 'I need a logo sign about 2 meters wide with LED neon lighting.',
+    time: '10:32 AM'
+  },
+  {
+    type: 'agent',
+    text: "Perfect! That sounds like our Custom Logo LED Neon Sign. Let me connect you with our design team to create a mockup for you. Would that work?",
+    time: '10:33 AM'
+  }
+])
+
+// Toggle chat
+const toggleChat = () => {
+  isOpen.value = !isOpen.value
+  if (isOpen.value) {
+    unreadCount.value = 0
+  }
+}
+
+// Send message (demo only)
+const sendMessage = () => {
+  if (!messageInput.value.trim()) return
+
+  // Add customer message
+  demoMessages.value.push({
+    type: 'customer',
+    text: messageInput.value,
+    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+  })
+
+  messageInput.value = ''
+
+  // Simulate typing indicator
+  isTyping.value = true
+  
+  setTimeout(() => {
+    isTyping.value = false
+    
+    // Add auto-response
+    demoMessages.value.push({
+      type: 'agent',
+      text: "Thanks for your message! This is a demo response. In production, your live chat service will handle real conversations.",
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    })
+  }, 2000)
+}
+</script>

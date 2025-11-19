@@ -174,5 +174,18 @@
     "schema": {
       "name": "settings"
     }
+  },
+  {
+    "collection": "product_configurator",
+    "meta": {
+      "icon": "tune",
+      "display_template": "{{product_id}} - {{option_name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort": 12
+    },
+    "schema": {
+      "name": "product_configurator"
+    }
   }
 ]

@@ -5,12 +5,12 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: directus
-      POSTGRES_PASSWORD: directus
+      POSTGRES_PASSWORD: directus  # ⚠️ CHANGE IN PRODUCTION
       POSTGRES_DB: directus
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ${PROJECT_NAME:-webshop}_postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U directus"]
       interval: 10s
@@ -34,10 +34,10 @@ services:
       DB_PORT: "5432"
       DB_DATABASE: "directus"
       DB_USER: "directus"
-      DB_PASSWORD: "directus"
+      DB_PASSWORD: "directus"  # ⚠️ CHANGE IN PRODUCTION (must match POSTGRES_PASSWORD)
       
       ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "admin123"
+      ADMIN_PASSWORD: "admin123"  # ⚠️ CHANGE IN PRODUCTION
       
       PUBLIC_URL: "http://localhost:8055"
       
@@ -58,8 +58,8 @@ services:
       STRIPE_PUBLISHABLE_KEY: ""
       STRIPE_WEBHOOK_SECRET: ""
     volumes:
-      - directus_uploads:/directus/uploads
-      - directus_extensions:/directus/extensions
+      - ${PROJECT_NAME:-webshop}_directus_uploads:/directus/uploads
+      - ${PROJECT_NAME:-webshop}_directus_extensions:/directus/extensions
       - ./directus/bootstrap:/directus/bootstrap
     depends_on:
       postgres:
@@ -101,6 +101,6 @@ services:
       - frontend
 
 volumes:
-  postgres_data:
-  directus_uploads:
-  directus_extensions:
+  webshop_postgres_data:
+  webshop_directus_uploads:
+  webshop_directus_extensions:

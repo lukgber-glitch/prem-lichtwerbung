@@ -2,91 +2,226 @@
   {
     "id": 1,
     "status": "published",
-    "name": "Electronics",
-    "slug": "electronics",
-    "description": "Latest electronics and gadgets",
+    "name": "Lightboxes",
+    "slug": "lightboxes",
+    "description": "Illuminated display boxes for storefronts and indoor displays",
     "parent_id": null,
     "sort": 1
   },
   {
     "id": 2,
     "status": "published",
-    "name": "Laptops",
-    "slug": "laptops",
-    "description": "High-performance laptops for work and gaming",
+    "name": "Single-sided Lightboxes",
+    "slug": "single-sided-lightboxes",
+    "description": "Single-sided illuminated lightboxes perfect for wall mounting",
     "parent_id": 1,
     "sort": 1
   },
   {
     "id": 3,
     "status": "published",
-    "name": "Smartphones",
-    "slug": "smartphones",
-    "description": "Latest smartphones and accessories",
+    "name": "Double-sided Lightboxes",
+    "slug": "double-sided-lightboxes",
+    "description": "Double-sided lightboxes for maximum visibility from multiple angles",
     "parent_id": 1,
     "sort": 2
   },
   {
     "id": 4,
     "status": "published",
-    "name": "Headphones",
-    "slug": "headphones",
-    "description": "Premium audio equipment",
+    "name": "LED Lightboxes",
+    "slug": "led-lightboxes",
+    "description": "Ultra-slim LED edge-lit lightboxes for modern interiors",
     "parent_id": 1,
     "sort": 3
   },
   {
     "id": 5,
     "status": "published",
-    "name": "Fashion",
-    "slug": "fashion",
-    "description": "Trendy clothing and accessories",
+    "name": "Channel Letters",
+    "slug": "channel-letters",
+    "description": "Individual illuminated letters for storefronts and building signage",
     "parent_id": null,
     "sort": 2
   },
   {
     "id": 6,
     "status": "published",
-    "name": "Men's Clothing",
-    "slug": "mens-clothing",
-    "description": "Fashion for men",
+    "name": "Front-lit Channel Letters",
+    "slug": "front-lit-channel-letters",
+    "description": "Classic front-illuminated channel letters with translucent faces",
     "parent_id": 5,
     "sort": 1
   },
   {
     "id": 7,
     "status": "published",
-    "name": "Women's Clothing",
-    "slug": "womens-clothing",
-    "description": "Fashion for women",
+    "name": "Back-lit Halo Channel Letters",
+    "slug": "backlit-halo-channel-letters",
+    "description": "Sophisticated halo-lit letters creating a stunning glow effect",
     "parent_id": 5,
     "sort": 2
   },
   {
     "id": 8,
     "status": "published",
-    "name": "Home & Garden",
-    "slug": "home-garden",
-    "description": "Everything for your home",
-    "parent_id": null,
+    "name": "Face and Halo Channel Letters",
+    "slug": "face-halo-channel-letters",
+    "description": "Premium dual-illumination combining front-lit and halo effects",
+    "parent_id": 5,
     "sort": 3
   },
   {
     "id": 9,
     "status": "published",
-    "name": "Furniture",
-    "slug": "furniture",
-    "description": "Modern furniture pieces",
-    "parent_id": 8,
-    "sort": 1
+    "name": "Open Face Channel Letters",
+    "slug": "open-face-channel-letters",
+    "description": "Exposed neon tube channel letters for vintage or modern aesthetics",
+    "parent_id": 5,
+    "sort": 4
   },
   {
     "id": 10,
     "status": "published",
-    "name": "Sports & Outdoors",
-    "slug": "sports-outdoors",
-    "description": "Gear for active lifestyle",
+    "name": "LED Neon Signs",
+    "slug": "led-neon-signs",
+    "description": "Modern LED neon signs for custom designs and branding",
+    "parent_id": null,
+    "sort": 3
+  },
+  {
+    "id": 11,
+    "status": "published",
+    "name": "Custom Neon Designs",
+    "slug": "custom-neon-designs",
+    "description": "Fully custom LED neon signs in any shape or design",
+    "parent_id": 10,
+    "sort": 1
+  },
+  {
+    "id": 12,
+    "status": "published",
+    "name": "Logo Neon Signs",
+    "slug": "logo-neon-signs",
+    "description": "Transform your logo into a stunning LED neon sign",
+    "parent_id": 10,
+    "sort": 2
+  },
+  {
+    "id": 13,
+    "status": "published",
+    "name": "Text Neon Signs",
+    "slug": "text-neon-signs",
+    "description": "Custom text messages in vibrant LED neon",
+    "parent_id": 10,
+    "sort": 3
+  },
+  {
+    "id": 14,
+    "status": "published",
+    "name": "Pylons and Totems",
+    "slug": "pylons-totems",
+    "description": "Freestanding illuminated signs for maximum roadside visibility",
     "parent_id": null,
     "sort": 4
+  },
+  {
+    "id": 15,
+    "status": "published",
+    "name": "Illuminated Pylons",
+    "slug": "illuminated-pylons",
+    "description": "Tall freestanding pylon signs for business parks and highways",
+    "parent_id": 14,
+    "sort": 1
+  },
+  {
+    "id": 16,
+    "status": "published",
+    "name": "Monument Signs",
+    "slug": "monument-signs",
+    "description": "Low-profile monument signs with elegant LED illumination",
+    "parent_id": 14,
+    "sort": 2
+  },
+  {
+    "id": 17,
+    "status": "published",
+    "name": "Fascia Signs",
+    "slug": "fascia-signs",
+    "description": "Building-mounted fascia signage for storefronts",
+    "parent_id": null,
+    "sort": 5
+  },
+  {
+    "id": 18,
+    "status": "published",
+    "name": "Illuminated Fascia",
+    "slug": "illuminated-fascia",
+    "description": "Complete illuminated fascia boards with internal LED lighting",
+    "parent_id": 17,
+    "sort": 1
+  },
+  {
+    "id": 19,
+    "status": "published",
+    "name": "Built-up Letter Fascia",
+    "slug": "built-up-letter-fascia",
+    "description": "Individual dimensional letters mounted to fascia boards",
+    "parent_id": 17,
+    "sort": 2
+  },
+  {
+    "id": 20,
+    "status": "published",
+    "name": "Window Signs",
+    "slug": "window-signs",
+    "description": "Window graphics and displays for storefronts",
+    "parent_id": null,
+    "sort": 6
+  },
+  {
+    "id": 21,
+    "status": "published",
+    "name": "Vinyl Window Graphics",
+    "slug": "vinyl-window-graphics",
+    "description": "High-quality vinyl window graphics for branding and promotions",
+    "parent_id": 20,
+    "sort": 1
+  },
+  {
+    "id": 22,
+    "status": "published",
+    "name": "LED Window Displays",
+    "slug": "led-window-displays",
+    "description": "Eye-catching LED displays for storefront windows",
+    "parent_id": 20,
+    "sort": 2
+  },
+  {
+    "id": 23,
+    "status": "published",
+    "name": "Terminal Integration",
+    "slug": "terminal-integration",
+    "description": "POS terminals integrated with illuminated signage solutions",
+    "parent_id": null,
+    "sort": 7
+  },
+  {
+    "id": 24,
+    "status": "published",
+    "name": "POS Terminals with Signage",
+    "slug": "pos-terminals-signage",
+    "description": "Complete POS terminal systems bundled with illuminated menu boards",
+    "parent_id": 23,
+    "sort": 1
+  },
+  {
+    "id": 25,
+    "status": "published",
+    "name": "Digital Menu Boards",
+    "slug": "digital-menu-boards",
+    "description": "LED-backlit menu boards for restaurants and cafes",
+    "parent_id": 23,
+    "sort": 2
   }
 ]

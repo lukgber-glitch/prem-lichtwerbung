@@ -1,24 +1,71 @@
 <template>
   <div>
-    <!-- Breadcrumbs -->
-    <nav class="bg-brand-gray-light py-4">
-      <div class="container mx-auto px-4">
-        <ol class="flex items-center space-x-2 text-sm">
-          <li>
-            <router-link to="/" class="text-brand-navy hover:text-brand-blue transition-colors">
-              Home
-            </router-link>
-          </li>
-          <li class="text-gray-400">/</li>
-          <li class="text-brand-gray-dark font-semibold">Products</li>
-        </ol>
+    <!-- Category Hero Section -->
+    <section 
+      v-if="category"
+      class="relative bg-gradient-to-br from-brand-navy to-brand-blue text-white py-20 overflow-hidden"
+      :style="category.image ? `background-image: url(${category.image}); background-size: cover; background-position: center;` : ''"
+    >
+      <!-- Dark overlay for better text readability -->
+      <div class="absolute inset-0 bg-brand-navy bg-opacity-80"></div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <!-- Breadcrumbs -->
+        <nav class="mb-6">
+          <ol class="flex items-center space-x-2 text-sm">
+            <li>
+              <router-link to="/" class="text-brand-warm hover:text-brand-blue transition-colors">
+                Home
+              </router-link>
+            </li>
+            <li class="text-brand-warm">/</li>
+            <li class="text-white font-semibold">{{ category.name }}</li>
+          </ol>
+        </nav>
+
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 font-accent">
+          {{ category.name }}
+        </h1>
+        <p v-if="category.description" class="text-xl text-brand-warm max-w-3xl">
+          {{ category.description }}
+        </p>
       </div>
-    </nav>
+    </section>
+
+    <!-- Subcategories Filter Chips -->
+    <section v-if="subcategories.length > 0" class="bg-brand-gray-light py-6">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="text-sm font-semibold text-brand-navy">Filter by subcategory:</span>
+          <button
+            @click="selectedSubcategory = null"
+            :class="[
+              'px-4 py-2 rounded-full transition-all text-sm font-semibold',
+              selectedSubcategory === null
+                ? 'bg-brand-blue text-white shadow-glow-blue'
+                : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+            ]"
+          >
+            All {{ category?.name }}
+          </button>
+          <button
+            v-for="subcategory in subcategories"
+            :key="subcategory.id"
+            @click="selectedSubcategory = subcategory.id"
+            :class="[
+              'px-4 py-2 rounded-full transition-all text-sm font-semibold',
+              selectedSubcategory === subcategory.id
+                ? 'bg-brand-blue text-white shadow-glow-blue'
+                : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+            ]"
+          >
+            {{ subcategory.name }}
+          </button>
+        </div>
+      </div>
+    </section>
 
     <div class="container mx-auto px-4 py-8">
-      <!-- Page Title -->
-      <h1 class="text-4xl font-bold mb-8 font-accent text-brand-navy">All Products</h1>
-
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Left Sidebar - Filters (Desktop) -->
         <aside class="hidden lg:block w-64 flex-shrink-0">
@@ -89,6 +136,9 @@
               <!-- Product Count -->
               <div class="text-gray-600">
                 Showing <span class="font-semibold text-brand-navy">{{ totalProducts }}</span> products
+                <span v-if="selectedSubcategory" class="text-sm">
+                  in {{ subcategories.find(s => s.id === selectedSubcategory)?.name }}
+                </span>
               </div>
 
               <!-- Sort and View Controls -->
@@ -183,11 +233,16 @@
             <svg class="w-24 h-24 mx-auto mb-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
             </svg>
-            <p class="text-gray-600 text-lg mb-2">No products found</p>
-            <p class="text-gray-500 mb-6">Try adjusting your filters to see more results</p>
-            <ButtonGlow v-if="activeFilterCount > 0" variant="secondary" @click="clearFilters">
-              Clear Filters
-            </ButtonGlow>
+            <p class="text-gray-600 text-lg mb-2">No products found in this category</p>
+            <p class="text-gray-500 mb-6">Try adjusting your filters or selecting a different subcategory</p>
+            <div class="flex gap-4 justify-center">
+              <ButtonGlow v-if="activeFilterCount > 0" variant="secondary" @click="clearFilters">
+                Clear Filters
+              </ButtonGlow>
+              <ButtonGlow variant="primary" @click="$router.push('/products')">
+                Browse All Products
+              </ButtonGlow>
+            </div>
           </div>
 
           <!-- Products Grid -->
@@ -261,11 +316,15 @@ import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import ProductCard from '@/components/products/ProductCard.vue'
 import ProductFilters from '@/components/products/ProductFilters.vue'
 import { getProducts } from '@/api/products'
+import { getCategories } from '@/api/categories'
 
 const route = useRoute()
 const router = useRouter()
 
 // State
+const category = ref<any>(null)
+const subcategories = ref<any[]>([])
+const selectedSubcategory = ref<number | null>(null)
 const products = ref<any[]>([])
 const loading = ref(false)
 const error = ref<string | null>(null)
@@ -356,14 +415,61 @@ const displayedPages = computed(() => {
 })
 
 // Methods
+const loadCategory = async (slug: string) => {
+  try {
+    const response = await getCategories({
+      filter: { slug: { _eq: slug }, status: { _eq: 'published' } },
+      limit: 1
+    })
+    
+    if (response.data && response.data.length > 0) {
+      category.value = response.data[0]
+      await loadSubcategories(category.value.id)
+    } else {
+      error.value = 'Category not found'
+    }
+  } catch (err: any) {
+    error.value = err.message || 'Failed to load category'
+  }
+}
+
+const loadSubcategories = async (parentId: number) => {
+  try {
+    const response = await getCategories({
+      filter: { parent_id: { _eq: parentId }, status: { _eq: 'published' } },
+      sort: ['sort']
+    })
+    subcategories.value = response.data
+  } catch (err) {
+    console.error('Failed to load subcategories:', err)
+  }
+}
+
 const loadProducts = async () => {
+  if (!category.value) return
+  
   loading.value = true
   error.value = null
   
   try {
+    // Build category filter - include current category and selected subcategory
+    const categoryIds = [category.value.id]
+    
+    if (selectedSubcategory.value) {
+      categoryIds.push(selectedSubcategory.value)
+    } else {
+      // Include all subcategories if none selected
+      subcategories.value.forEach(sub => categoryIds.push(sub.id))
+    }
+    
     // Build filter object for API
     const apiFilters: any = {
-      status: { _eq: 'published' }
+      status: { _eq: 'published' },
+      categories: {
+        categories_id: {
+          id: { _in: categoryIds }
+        }
+      }
     }
     
     // Price range
@@ -379,7 +485,7 @@ const loadProducts = async () => {
       apiFilters.illumination_type = { _in: filters.value.illuminationType }
     }
     
-    // Suitable for (JSON field contains check)
+    // Suitable for
     if (filters.value.suitableFor.length > 0) {
       apiFilters.suitable_for = { _contains: filters.value.suitableFor }
     }
@@ -479,18 +585,43 @@ const goToPage = (page: number) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page
     loadProducts()
-    // Scroll to top of products
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 
-// Watch for sort option changes
+// Watch for changes
 watch(sortOption, () => {
   loadProducts()
 })
 
-// On mount: load initial products
-onMounted(() => {
+watch(selectedSubcategory, () => {
+  currentPage.value = 1
   loadProducts()
 })
+
+// On mount
+onMounted(async () => {
+  const slug = route.params.slug as string
+  await loadCategory(slug)
+  if (category.value) {
+    loadProducts()
+  }
+})
 </script>
+
+<style scoped>
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-left-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+</style>

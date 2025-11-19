@@ -357,6 +357,273 @@
         "special": ["m2m"],
         "junction_field": "products_tags"
       }
+    },
+    {
+      "field": "illumination_type",
+      "type": "string",
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "LED", "value": "LED"},
+            {"text": "Neon", "value": "Neon"},
+            {"text": "Backlit", "value": "Backlit"},
+            {"text": "Edge-lit", "value": "Edge-lit"},
+            {"text": "Front-lit", "value": "Front-lit"},
+            {"text": "Non-illuminated", "value": "Non-illuminated"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "suitable_for",
+      "type": "json",
+      "meta": {
+        "interface": "select-multiple-checkbox",
+        "options": {
+          "choices": [
+            {"text": "Indoor", "value": "Indoor"},
+            {"text": "Outdoor", "value": "Outdoor"},
+            {"text": "All-weather", "value": "All-weather"},
+            {"text": "Showroom", "value": "Showroom"},
+            {"text": "Mall", "value": "Mall"},
+            {"text": "Storefront", "value": "Storefront"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "mounting_type",
+      "type": "string",
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Wall-mounted", "value": "Wall-mounted"},
+            {"text": "Ceiling-suspended", "value": "Ceiling-suspended"},
+            {"text": "Freestanding", "value": "Freestanding"},
+            {"text": "Pylon-mounted", "value": "Pylon-mounted"},
+            {"text": "Window-mounted", "value": "Window-mounted"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "profile_type",
+      "type": "string",
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Flat", "value": "Flat"},
+            {"text": "Box profile", "value": "Box profile"},
+            {"text": "Built-up letters", "value": "Built-up letters"},
+            {"text": "Channel letters", "value": "Channel letters"},
+            {"text": "Neon tube", "value": "Neon tube"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "ip_rating",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "power_consumption_watts",
+      "type": "integer",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "dimensions_width_cm",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "dimensions_height_cm",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "dimensions_depth_cm",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "material",
+      "type": "text",
+      "meta": {
+        "interface": "input",
+        "width": "full"
+      }
+    },
+    {
+      "field": "color_options",
+      "type": "json",
+      "meta": {
+        "interface": "input-code",
+        "width": "full"
+      }
+    },
+    {
+      "field": "customizable",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "lead_time_days",
+      "type": "integer",
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "installation_included",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "installation_price",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "shipping_price",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "power_supply_included",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "day_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
+    },
+    {
+      "field": "night_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
+    },
+    {
+      "field": "video_url",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "full"
+      }
+    },
+    {
+      "field": "technical_sheet_pdf",
+      "type": "uuid",
+      "meta": {
+        "interface": "file",
+        "special": ["file"],
+        "width": "half"
+      }
+    },
+    {
+      "field": "before_after_enabled",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "before_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
+    },
+    {
+      "field": "after_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half"
+      }
     }
   ],
   "products_categories": [
@@ -1263,6 +1530,115 @@
         "numeric_scale": 2,
         "default_value": 0
       },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    }
+  ],
+  "product_configurator": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true,
+        "readonly": true
+      }
+    },
+    {
+      "field": "product_id",
+      "type": "integer",
+      "meta": {
+        "interface": "select-dropdown-m2o",
+        "display": "related-values",
+        "display_options": {
+          "template": "{{name}}"
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "option_name",
+      "type": "string",
+      "schema": {
+        "is_nullable": false
+      },
+      "meta": {
+        "interface": "input",
+        "required": true,
+        "width": "half"
+      }
+    },
+    {
+      "field": "option_type",
+      "type": "string",
+      "meta": {
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {"text": "Dropdown", "value": "dropdown"},
+            {"text": "Color Picker", "value": "color_picker"},
+            {"text": "Text Input", "value": "text_input"},
+            {"text": "File Upload", "value": "file_upload"},
+            {"text": "Slider", "value": "slider"}
+          ]
+        },
+        "width": "half"
+      }
+    },
+    {
+      "field": "option_values",
+      "type": "json",
+      "meta": {
+        "interface": "input-code",
+        "options": {
+          "language": "json"
+        },
+        "width": "full"
+      }
+    },
+    {
+      "field": "price_modifier",
+      "type": "decimal",
+      "schema": {
+        "numeric_precision": 10,
+        "numeric_scale": 2,
+        "default_value": 0
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "affects_lead_time",
+      "type": "boolean",
+      "schema": {
+        "default_value": false
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "half"
+      }
+    },
+    {
+      "field": "lead_time_modifier_days",
+      "type": "integer",
+      "schema": {
+        "default_value": 0
+      },
+      "meta": {
+        "interface": "input",
+        "width": "half"
+      }
+    },
+    {
+      "field": "sort",
+      "type": "integer",
       "meta": {
         "interface": "input",
         "width": "half"
