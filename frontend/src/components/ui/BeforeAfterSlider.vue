@@ -11,6 +11,7 @@
       <img
         :src="beforeImage"
         alt="Before"
+        loading="lazy"
         class="w-full h-full object-cover"
       />
       <!-- BEFORE Label -->
@@ -27,6 +28,7 @@
       <img
         :src="afterImage"
         alt="After"
+        loading="lazy"
         class="w-full h-full object-cover"
       />
       <!-- AFTER Label -->

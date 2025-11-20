@@ -1,23 +1,30 @@
 <template>
   <router-link
     :to="`/categories/${category.slug}`"
-    class="group relative block rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-glow-blue h-64"
+    class="group relative block rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-glow-blue hover:border-glow h-64"
   >
     <!-- Category Image with Overlay -->
     <div class="relative w-full h-full">
       <img
         :src="category.image || '/placeholder-category.jpg'"
         :alt="category.name"
+        loading="lazy"
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
       />
       
       <!-- Dark Overlay -->
       <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/70 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-300"></div>
+      
+      <!-- Electric sparks in corners -->
+      <div class="absolute top-2 left-2 w-3 h-3 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark"></div>
+      <div class="absolute top-2 right-2 w-3 h-3 bg-brand-pink rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.3s;"></div>
+      <div class="absolute bottom-2 left-2 w-3 h-3 bg-brand-yellow rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.6s;"></div>
+      <div class="absolute bottom-2 right-2 w-3 h-3 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.9s;"></div>
     </div>
 
     <!-- Category Info -->
     <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-      <h3 class="font-accent font-bold text-2xl mb-2 group-hover:text-brand-blue transition-colors duration-300">
+      <h3 class="font-accent font-bold text-2xl mb-2 group-hover:text-brand-blue group-hover:text-glow-strong transition-all duration-300">
         {{ category.name }}
       </h3>
       
@@ -37,7 +44,7 @@
 
     <!-- Hover Arrow -->
     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <div class="bg-brand-blue rounded-full p-2">
+      <div class="bg-brand-blue rounded-full p-2 shadow-glow-blue">
         <svg class="w-6 h-6 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>

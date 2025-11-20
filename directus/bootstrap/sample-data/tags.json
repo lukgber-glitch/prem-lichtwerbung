@@ -2,48 +2,56 @@
   {
     "id": 1,
     "name": "New Arrival",
+    "name_de": "Neuankömmling",
     "slug": "new-arrival",
     "color": "#10b981"
   },
   {
     "id": 2,
     "name": "Best Seller",
+    "name_de": "Bestseller",
     "slug": "best-seller",
     "color": "#f59e0b"
   },
   {
     "id": 3,
     "name": "Sale",
+    "name_de": "Angebot",
     "slug": "sale",
     "color": "#ef4444"
   },
   {
     "id": 4,
     "name": "Premium",
+    "name_de": "Premium",
     "slug": "premium",
     "color": "#8b5cf6"
   },
   {
     "id": 5,
     "name": "Eco-Friendly",
+    "name_de": "Umweltfreundlich",
     "slug": "eco-friendly",
     "color": "#059669"
   },
   {
     "id": 6,
     "name": "Limited Edition",
+    "name_de": "Limitierte Auflage",
     "slug": "limited-edition",
     "color": "#dc2626"
   },
   {
     "id": 7,
     "name": "Featured",
+    "name_de": "Empfohlen",
     "slug": "featured",
     "color": "#3b82f6"
   },
   {
     "id": 8,
     "name": "Bestselling",
+    "name_de": "Meistverkauft",
     "slug": "bestselling",
     "color": "#f97316"
   }

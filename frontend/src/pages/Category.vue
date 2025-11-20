@@ -3,47 +3,47 @@
     <!-- Category Hero Section -->
     <section 
       v-if="category"
-      class="relative bg-gradient-to-br from-brand-navy to-brand-blue text-white py-20 overflow-hidden"
+      class="relative bg-surface text-text-main py-20 overflow-hidden border-b border-primary/20"
       :style="category.image ? `background-image: url(${category.image}); background-size: cover; background-position: center;` : ''"
     >
       <!-- Dark overlay for better text readability -->
-      <div class="absolute inset-0 bg-brand-navy bg-opacity-80"></div>
+      <div class="absolute inset-0 bg-background bg-opacity-90"></div>
       
       <div class="container mx-auto px-4 relative z-10">
         <!-- Breadcrumbs -->
         <nav class="mb-6">
           <ol class="flex items-center space-x-2 text-sm">
             <li>
-              <router-link to="/" class="text-brand-warm hover:text-brand-blue transition-colors">
+              <router-link to="/" class="text-text-muted hover:text-primary transition-colors cursor-pointer">
                 Home
               </router-link>
             </li>
-            <li class="text-brand-warm">/</li>
-            <li class="text-white font-semibold">{{ category.name }}</li>
+            <li class="text-text-muted">/</li>
+            <li class="text-primary font-semibold">{{ category.name }}</li>
           </ol>
         </nav>
 
-        <h1 class="text-5xl md:text-6xl font-bold mb-4 font-accent">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 font-heading text-primary">
           {{ category.name }}
         </h1>
-        <p v-if="category.description" class="text-xl text-brand-warm max-w-3xl">
+        <p v-if="category.description" class="text-xl text-text-muted max-w-3xl">
           {{ category.description }}
         </p>
       </div>
     </section>
 
     <!-- Subcategories Filter Chips -->
-    <section v-if="subcategories.length > 0" class="bg-brand-gray-light py-6">
+    <section v-if="subcategories.length > 0" class="bg-surface py-6 border-b border-primary/20">
       <div class="container mx-auto px-4">
         <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-sm font-semibold text-brand-navy">Filter by subcategory:</span>
+          <span class="text-sm font-semibold text-text-main">Filter by subcategory:</span>
           <button
             @click="selectedSubcategory = null"
             :class="[
-              'px-4 py-2 rounded-full transition-all text-sm font-semibold',
+              'px-4 py-2 rounded-full transition-all text-sm font-semibold cursor-pointer',
               selectedSubcategory === null
-                ? 'bg-brand-blue text-white shadow-glow-blue'
-                : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+                ? 'bg-primary text-background border-2 border-primary'
+                : 'bg-surface-alt text-text-main border-2 border-text-muted hover:border-primary hover:text-primary'
             ]"
           >
             All {{ category?.name }}
@@ -53,10 +53,10 @@
             :key="subcategory.id"
             @click="selectedSubcategory = subcategory.id"
             :class="[
-              'px-4 py-2 rounded-full transition-all text-sm font-semibold',
+              'px-4 py-2 rounded-full transition-all text-sm font-semibold cursor-pointer',
               selectedSubcategory === subcategory.id
-                ? 'bg-brand-blue text-white shadow-glow-blue'
-                : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+                ? 'bg-primary text-background border-2 border-primary'
+                : 'bg-surface-alt text-text-main border-2 border-text-muted hover:border-primary hover:text-primary'
             ]"
           >
             {{ subcategory.name }}
@@ -80,13 +80,13 @@
         <div class="lg:hidden mb-4">
           <button 
             @click="showMobileFilters = true"
-            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand-navy text-white rounded-lg hover:bg-opacity-90 transition-all"
+            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-background rounded-lg hover:bg-primary/90 transition-all cursor-pointer border-2 border-primary"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
             Filters
-            <span v-if="activeFilterCount > 0" class="bg-brand-pink text-white px-2 py-1 rounded-full text-xs">
+            <span v-if="activeFilterCount > 0" class="bg-accent text-background px-2 py-1 rounded-full text-xs font-bold">
               {{ activeFilterCount }}
             </span>
           </button>
@@ -105,14 +105,14 @@
             ></div>
             
             <!-- Drawer -->
-            <div class="absolute left-0 top-0 bottom-0 w-80 max-w-full bg-white shadow-xl overflow-y-auto">
-              <div class="p-4 border-b flex items-center justify-between">
-                <h2 class="text-xl font-semibold font-accent">Filters</h2>
+            <div class="absolute left-0 top-0 bottom-0 w-80 max-w-full bg-surface shadow-xl overflow-y-auto">
+              <div class="p-4 border-b border-primary/20 flex items-center justify-between">
+                <h2 class="text-xl font-semibold font-heading text-text-main">Filters</h2>
                 <button 
                   @click="showMobileFilters = false"
-                  class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  class="p-2 hover:bg-primary/10 rounded-full transition-colors cursor-pointer"
                 >
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-text-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -131,11 +131,11 @@
         <!-- Right Content Area -->
         <div class="flex-1 min-w-0">
           <!-- Top Toolbar -->
-          <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <div class="bg-surface rounded-lg border border-primary/20 p-4 mb-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <!-- Product Count -->
-              <div class="text-gray-600">
-                Showing <span class="font-semibold text-brand-navy">{{ totalProducts }}</span> products
+              <div class="text-text-muted">
+                Showing <span class="font-semibold text-text-main">{{ totalProducts }}</span> products
                 <span v-if="selectedSubcategory" class="text-sm">
                   in {{ subcategories.find(s => s.id === selectedSubcategory)?.name }}
                 </span>
@@ -145,10 +145,10 @@
               <div class="flex items-center gap-4">
                 <!-- Sort Dropdown -->
                 <div class="flex items-center gap-2">
-                  <label class="text-sm text-gray-600 whitespace-nowrap">Sort by:</label>
+                  <label class="text-sm text-text-muted whitespace-nowrap">Sort by:</label>
                   <select 
                     v-model="sortOption"
-                    class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-brand-blue text-sm"
+                    class="px-3 py-2 border border-surface-alt rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm bg-surface-alt text-text-main cursor-pointer"
                   >
                     <option value="newest">Newest</option>
                     <option value="price-low-high">Price: Low to High</option>
@@ -158,12 +158,12 @@
                 </div>
 
                 <!-- View Toggle -->
-                <div class="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                <div class="flex items-center gap-1 bg-surface-alt rounded-lg p-1">
                   <button 
                     @click="viewMode = 'grid'"
                     :class="[
-                      'p-2 rounded transition-all',
-                      viewMode === 'grid' ? 'bg-white shadow-sm text-brand-blue' : 'text-gray-400 hover:text-gray-600'
+                      'p-2 rounded transition-all cursor-pointer',
+                      viewMode === 'grid' ? 'bg-surface border border-primary/20 text-primary' : 'text-text-muted hover:text-text-main'
                     ]"
                     aria-label="Grid view"
                   >
@@ -174,8 +174,8 @@
                   <button 
                     @click="viewMode = 'list'"
                     :class="[
-                      'p-2 rounded transition-all',
-                      viewMode === 'list' ? 'bg-white shadow-sm text-brand-blue' : 'text-gray-400 hover:text-gray-600'
+                      'p-2 rounded transition-all cursor-pointer',
+                      viewMode === 'list' ? 'bg-surface border border-primary/20 text-primary' : 'text-text-muted hover:text-text-main'
                     ]"
                     aria-label="List view"
                   >
@@ -192,12 +192,12 @@
               <div 
                 v-for="chip in activeFilterChips"
                 :key="chip.key"
-                class="flex items-center gap-2 px-3 py-1 bg-brand-blue bg-opacity-10 text-brand-navy rounded-full text-sm"
+                class="flex items-center gap-2 px-3 py-1 bg-primary/10 text-text-main border border-primary/30 rounded-full text-sm"
               >
                 <span>{{ chip.label }}</span>
                 <button 
                   @click="removeFilter(chip.key)"
-                  class="hover:text-brand-pink transition-colors"
+                  class="hover:text-accent transition-colors cursor-pointer"
                   :aria-label="`Remove ${chip.label} filter`"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +207,7 @@
               </div>
               <button 
                 @click="clearFilters"
-                class="px-3 py-1 text-sm text-brand-pink hover:text-brand-pink hover:underline"
+                class="px-3 py-1 text-sm text-accent hover:text-accent hover:underline cursor-pointer"
               >
                 Clear all
               </button>
@@ -216,13 +216,13 @@
 
           <!-- Loading State -->
           <div v-if="loading" class="text-center py-20">
-            <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-brand-blue border-t-transparent"></div>
-            <p class="text-gray-600 mt-4 text-lg">Loading products...</p>
+            <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
+            <p class="text-text-muted mt-4 text-lg">Loading products...</p>
           </div>
 
           <!-- Error State -->
           <div v-else-if="error" class="text-center py-20">
-            <p class="text-red-600 mb-4 text-lg">{{ error }}</p>
+            <p class="text-red-400 mb-4 text-lg">{{ error }}</p>
             <ButtonGlow variant="primary" @click="loadProducts">
               Try Again
             </ButtonGlow>
@@ -230,11 +230,11 @@
 
           <!-- Empty State -->
           <div v-else-if="products.length === 0" class="text-center py-20">
-            <svg class="w-24 h-24 mx-auto mb-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-24 h-24 mx-auto mb-6 text-text-muted opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
             </svg>
-            <p class="text-gray-600 text-lg mb-2">No products found in this category</p>
-            <p class="text-gray-500 mb-6">Try adjusting your filters or selecting a different subcategory</p>
+            <p class="text-text-main text-lg mb-2">No products found in this category</p>
+            <p class="text-text-muted mb-6">Try adjusting your filters or selecting a different subcategory</p>
             <div class="flex gap-4 justify-center">
               <ButtonGlow v-if="activeFilterCount > 0" variant="secondary" @click="clearFilters">
                 Clear Filters
@@ -267,10 +267,10 @@
               @click="goToPage(currentPage - 1)"
               :disabled="currentPage === 1"
               :class="[
-                'px-4 py-2 rounded-lg transition-all',
+                'px-4 py-2 rounded-lg transition-all border-2',
                 currentPage === 1 
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                  : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+                  ? 'bg-surface-alt text-text-muted border-surface-alt cursor-not-allowed' 
+                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary cursor-pointer'
               ]"
             >
               Previous
@@ -281,10 +281,10 @@
               :key="page"
               @click="goToPage(page)"
               :class="[
-                'px-4 py-2 rounded-lg transition-all',
+                'px-4 py-2 rounded-lg transition-all border-2 cursor-pointer',
                 page === currentPage 
-                  ? 'bg-brand-blue text-white shadow-glow-blue' 
-                  : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+                  ? 'bg-primary text-background border-primary' 
+                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary'
               ]"
             >
               {{ page }}
@@ -294,10 +294,10 @@
               @click="goToPage(currentPage + 1)"
               :disabled="currentPage === totalPages"
               :class="[
-                'px-4 py-2 rounded-lg transition-all',
+                'px-4 py-2 rounded-lg transition-all border-2',
                 currentPage === totalPages 
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                  : 'bg-white text-brand-navy hover:bg-brand-blue hover:text-white'
+                  ? 'bg-surface-alt text-text-muted border-surface-alt cursor-not-allowed' 
+                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary cursor-pointer'
               ]"
             >
               Next

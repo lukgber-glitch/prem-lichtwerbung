@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "site_name": "Prem-Lichtwerbung",
+    "site_description": "Premium illuminated signage and custom lighting solutions - Your Brand Deserves to Shine",
+    "contact_email": "info@prem-lichtwerbung.de",
+    "contact_phone": "+49 123 456 789",
+    "shipping_fee": 49.99,
+    "tax_rate": 19.00,
+    "hero_slider_enabled": true,
+    "hero_before_image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&h=1080&fit=crop",
+    "hero_after_image": "https://images.unsplash.com/photo-1565359741712-77cec71d5753?w=1920&h=1080&fit=crop"
+  }
+]

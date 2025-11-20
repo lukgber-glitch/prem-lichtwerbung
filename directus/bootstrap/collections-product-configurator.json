@@ -1,0 +1,18 @@
+[
+  {
+    "collection": "product_configurator",
+    "meta": {
+      "collection": "product_configurator",
+      "icon": "settings",
+      "note": "Product customization options",
+      "display_template": "{{product_id}} - {{option_name}}",
+      "hidden": false,
+      "singleton": false,
+      "sort_field": "sort",
+      "accountability": "all"
+    },
+    "schema": {
+      "name": "product_configurator"
+    }
+  }
+]

@@ -93,6 +93,7 @@
             <img 
               :src="step.image"
               :alt="`Step ${index + 1}: ${step.title}`"
+              loading="lazy"
               class="w-full h-auto"
             />
           </div>

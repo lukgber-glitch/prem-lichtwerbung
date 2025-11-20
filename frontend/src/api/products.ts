@@ -2,6 +2,15 @@ import { readItems, readItem } from '@directus/sdk'
 import directus from './directus'
 import type { Product } from '@/types'
 
+// Helper function to transform price fields from strings to numbers
+function transformProduct(product: any): Product {
+  return {
+    ...product,
+    price: Number(product.price) || 0,
+    compare_at_price: product.compare_at_price ? Number(product.compare_at_price) : undefined
+  }
+}
+
 export interface ProductFilter {
   category_id?: number
   tag_id?: number
@@ -104,7 +113,8 @@ export const productsApi = {
         query.filter.price = { ...query.filter.price, _lte: filter.max_price }
       }
 
-      return await directus.request(readItems('products', query))
+      const products = await directus.request(readItems('products', query))
+      return products.map(transformProduct)
     } catch (error: any) {
       console.error('❌ Failed to fetch products:', {
         message: error?.message,
@@ -143,7 +153,7 @@ export const productsApi = {
         throw new Error('Product not found')
       }
       
-      return products[0]
+      return transformProduct(products[0])
     } catch (error: any) {
       console.error(`❌ Failed to fetch product by slug "${slug}":`, {
         message: error?.message,
@@ -167,11 +177,12 @@ export const productsApi = {
 
   async getById(id: number): Promise<Product> {
     try {
-      return await directus.request(
+      const product = await directus.request(
         readItem('products', id, {
           fields: ['*', 'categories.categories_id.*', 'tags.tags_id.*', 'reviews.*']
         })
       )
+      return transformProduct(product)
     } catch (error: any) {
       console.error(`❌ Failed to fetch product by ID ${id}:`, {
         message: error?.message,
@@ -195,7 +206,7 @@ export const productsApi = {
 
   async getFeatured(limit: number = 8): Promise<Product[]> {
     try {
-      return await directus.request(
+      const products = await directus.request(
         readItems('products', {
           filter: {
             status: { _eq: 'published' },
@@ -205,6 +216,7 @@ export const productsApi = {
           limit
         })
       )
+      return products.map(transformProduct)
     } catch (error: any) {
       console.error('❌ Failed to fetch featured products:', {
         message: error?.message,
@@ -226,3 +238,10 @@ export const productsApi = {
     }
   }
 }
+
+// Standalone function exports for backwards compatibility
+export const getProducts = (filter?: ProductFilter) => productsApi.getAll(filter)
+export const getProductById = (id: number) => productsApi.getById(id)
+export const getProductBySlug = (slug: string) => productsApi.getBySlug(slug)
+export const getFeaturedProducts = (limit?: number) => productsApi.getFeatured(limit)
+export const getProductsByCategory = (categoryId: number) => productsApi.getAll({ category_id: categoryId })

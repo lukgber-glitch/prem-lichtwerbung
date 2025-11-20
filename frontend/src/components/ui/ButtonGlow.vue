@@ -2,7 +2,7 @@
   <button
     :class="[
       'px-6 py-3 rounded-lg font-semibold transition-all duration-300',
-      'hover:shadow-glow-blue active:scale-95',
+      'active:scale-95',
       variantClasses,
       $attrs.class
     ]"
@@ -23,13 +23,13 @@ const props = defineProps<{
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'bg-brand-blue text-brand-navy hover:shadow-glow-blue'
+      return 'bg-primary text-background hover:bg-primary/90 border-2 border-primary'
     case 'secondary':
-      return 'bg-brand-navy text-brand-warm hover:bg-opacity-90'
+      return 'bg-transparent text-text-main border-2 border-text-muted hover:border-primary hover:text-primary'
     case 'accent':
-      return 'bg-brand-pink text-white hover:shadow-glow-pink'
+      return 'bg-accent text-background hover:bg-accent/90 border-2 border-accent'
     default:
-      return 'bg-brand-blue text-brand-navy hover:shadow-glow-blue'
+      return 'bg-primary text-background hover:bg-primary/90 border-2 border-primary'
   }
 })
 </script>

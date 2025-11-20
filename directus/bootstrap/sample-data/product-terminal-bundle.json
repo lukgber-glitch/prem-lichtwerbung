@@ -1,0 +1,22 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440020",
+    "name": "Complete POS Terminal + Illuminated Menu Board Bundle",
+    "slug": "pos-terminal-menu-board-bundle",
+    "description": "Get the best of both worlds! Upgrade your checkout and display with our integrated solution. Includes a modern POS terminal system PLUS a stunning LED-backlit menu board. Save 20% when purchasing together versus separate components. Perfect for restaurants, cafes, food trucks, and retail stores. This bundle includes FREE installation (€300 value), FREE software setup and training, and a 3-year warranty on all hardware. The POS terminal features a responsive touchscreen, receipt printer, and payment processing. The menu board is fully customizable with your branding and pricing.",
+    "price": 1899.00,
+    "compare_at_price": 2499.00,
+    "stock": 8,
+    "sku": "TERM-BUNDLE-001",
+    "featured": true,
+    "status": "published",
+    "category": null,
+    "images": [],
+    "customizable": true,
+    "lead_time_days": 14,
+    "installation_included": true,
+    "installation_price": 0,
+    "shipping_price": 0,
+    "power_supply_included": true
+  }
+]

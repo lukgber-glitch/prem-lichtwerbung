@@ -1,387 +1,366 @@
 <template>
-  <div>
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-brand-navy via-brand-navy to-brand-blue text-brand-warm py-32 overflow-hidden">
-      <!-- Animated background glow effect -->
-      <div class="absolute inset-0 opacity-30">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-pink rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  <div class="min-h-screen">
+    
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center bg-background overflow-hidden">
+      
+      <!-- Before/After Slider Background (if enabled) -->
+      <div 
+        v-if="settings?.hero_slider_enabled && settings?.hero_before_image && settings?.hero_after_image" 
+        class="absolute inset-0 z-0"
+      >
+        <BeforeAfterSlider 
+          :before-image="settings.hero_before_image" 
+          :after-image="settings.hero_after_image" 
+        />
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-background/60"></div>
       </div>
       
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 font-accent">
-          Your Brand Deserves to <span class="text-brand-blue">Shine</span>
+      <!-- Hero content -->
+      <div class="relative z-10 text-center px-6 max-w-5xl">
+        
+        <!-- Main headline -->
+        <h1 class="text-6xl md:text-9xl font-heading font-bold text-primary mb-6">
+          {{ t('home.hero.title1') }}<br>
+          <span class="text-accent">{{ t('home.hero.title2') }}</span><br>
+          {{ t('home.hero.title3') }}
         </h1>
-        <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
-          Premium illuminated signage that makes you impossible to miss
+        
+        <!-- Subheadline -->
+        <p class="text-xl md:text-3xl text-text-main mb-8 font-medium">
+          {{ t('home.hero.subtitle') }}<br>
+          <span class="text-primary">{{ t('home.hero.subtitleHighlight') }}</span>
         </p>
-        <ButtonGlow variant="primary" @click="$router.push('/products')" class="text-lg px-10 py-4">
-          Explore Products
-        </ButtonGlow>
-      </div>
-    </section>
-
-    <!-- Featured Products Carousel -->
-    <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold mb-12 text-center font-accent text-brand-navy">
-        Featured Products
-      </h2>
-      
-      <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-600">Loading featured products...</p>
-      </div>
-
-      <div v-else-if="error" class="text-center py-12">
-        <p class="text-red-600">{{ error }}</p>
-      </div>
-
-      <div v-else class="relative">
-        <!-- Carousel Container -->
-        <div class="overflow-hidden">
-          <div 
-            class="flex transition-transform duration-500 ease-in-out gap-6"
-            :style="{ transform: `translateX(-${currentSlide * (100 / visibleProducts)}%)` }"
+        
+        <!-- CTA Buttons -->
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+          <button 
+            @click="$router.push('/products')"
+            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all duration-300 border-2 border-primary"
           >
-            <div 
-              v-for="product in featuredProducts" 
-              :key="product.id"
-              class="flex-shrink-0"
-              :style="{ width: `calc(${100 / visibleProducts}% - ${(visibleProducts - 1) * 1.5 / visibleProducts}rem)` }"
-            >
-              <ProductCard :product="product" />
+            {{ t('home.hero.exploreProducts') }}
+          </button>
+          
+          <button 
+            @click="$router.push('/contact')"
+            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all duration-300"
+          >
+            {{ t('home.hero.getCustomQuote') }}
+          </button>
+        </div>
+        
+        <!-- Trust badges -->
+        <div class="flex gap-8 justify-center mt-16 flex-wrap">
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-surface border border-primary/30 rounded-full flex items-center justify-center mb-2">
+              <span class="text-3xl">⚡</span>
+            </div>
+            <span class="text-text-main text-sm">{{ t('home.badges.fastDelivery') }}</span>
+          </div>
+          
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-surface border border-accent/30 rounded-full flex items-center justify-center mb-2">
+              <span class="text-3xl">🎨</span>
+            </div>
+            <span class="text-text-main text-sm">{{ t('home.badges.customDesign') }}</span>
+          </div>
+          
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-surface border border-primary/30 rounded-full flex items-center justify-center mb-2">
+              <span class="text-3xl">💎</span>
+            </div>
+            <span class="text-text-main text-sm">{{ t('home.badges.premiumQuality') }}</span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div class="w-8 h-12 border-2 border-primary rounded-full flex justify-center pt-2">
+          <div class="w-1 h-3 bg-primary rounded-full animate-pulse"></div>
+        </div>
+      </div>
+      
+    </section>
+    
+    <!-- Products Section -->
+    <section class="py-20 bg-surface">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-heading font-bold text-center text-text-main mb-4">
+          {{ t('home.featured.title') }}
+        </h2>
+        <p class="text-xl text-center text-text-muted mb-12">
+          {{ t('home.featured.subtitle') }}
+        </p>
+        
+        <!-- Loading State -->
+        <div v-if="loading" class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-primary"></div>
+          <div class="text-xl text-text-muted mt-4">{{ t('home.loadingProducts') }}</div>
+        </div>
+        
+        <!-- Error State -->
+        <div v-else-if="error" class="text-center py-12 bg-red-50 border border-red-200 rounded-xl p-8 max-w-2xl mx-auto">
+          <div class="text-6xl mb-4">⚠️</div>
+          <div class="text-2xl font-bold text-red-600 mb-4">{{ error }}</div>
+          <div class="text-gray-600 mb-6">
+            <p class="mb-2">Configure Directus public permissions:</p>
+            <ol class="text-left list-decimal list-inside space-y-2 text-sm">
+              <li>Go to <a href="http://localhost:8055" target="_blank" class="text-primary underline">Directus Admin</a></li>
+              <li>Login: admin@example.com / admin123</li>
+              <li>Settings → Access Control → Public</li>
+              <li>Add read permission for "products" and "directus_files"</li>
+            </ol>
+          </div>
+        </div>
+        
+        <!-- Empty State -->
+        <div v-else-if="!featuredProducts || featuredProducts.length === 0" class="text-center py-12">
+          <div class="text-6xl mb-4">📦</div>
+          <div class="text-2xl font-bold text-text-main mb-2">No products found</div>
+          <p class="text-text-muted">Add products in Directus admin panel.</p>
+        </div>
+        
+        <!-- Products Grid -->
+        <div v-else class="grid md:grid-cols-3 gap-8">
+          <div 
+            v-for="product in featuredProducts" 
+            :key="product.id"
+            class="group bg-surface-alt rounded-xl border border-surface overflow-hidden hover:border-primary transition-all duration-300 cursor-pointer"
+            @click="$router.push(`/products/${product.id}`)"
+          >
+            <!-- Product Image -->
+            <div class="aspect-[4/3] bg-surface flex items-center justify-center relative overflow-hidden">
+              <span class="text-8xl relative z-10 group-hover:scale-110 transition-transform duration-300">💡</span>
+              
+              <!-- Customizable badge -->
+              <div v-if="product.customizable" class="absolute top-4 left-4 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold z-10">
+                Customizable
+              </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="p-6">
+              <div class="flex gap-2 mb-3">
+                <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold border border-primary/20">
+                  {{ product.illumination_type || 'LED' }}
+                </span>
+                <span v-if="product.lead_time_days" class="inline-block bg-surface text-text-muted px-3 py-1 rounded-full text-xs">
+                  {{ product.lead_time_days }} days
+                </span>
+              </div>
+              
+              <h3 class="font-heading text-xl font-bold text-text-main mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                {{ product.name }}
+              </h3>
+              
+              <p v-if="product.description" class="text-text-muted text-sm mb-4 line-clamp-2">
+                {{ product.description }}
+              </p>
+              
+              <div class="flex items-baseline gap-3 mb-4">
+                <span class="text-3xl font-bold text-primary">
+                  €{{ Number(product.price).toFixed(2) }}
+                </span>
+                <span v-if="product.compare_at_price" class="text-lg text-text-muted line-through">
+                  €{{ Number(product.compare_at_price).toFixed(2) }}
+                </span>
+              </div>
+              
+              <button 
+                class="w-full px-6 py-3 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
+                @click.stop="$router.push(`/products/${product.id}`)"
+              >
+                View Details
+              </button>
             </div>
           </div>
         </div>
-
-        <!-- Navigation Arrows -->
-        <button 
-          v-if="featuredProducts.length > visibleProducts"
-          @click="prevSlide"
-          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-brand-blue hover:text-white transition-all duration-300 z-10"
-          aria-label="Previous products"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button 
-          v-if="featuredProducts.length > visibleProducts"
-          @click="nextSlide"
-          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-brand-blue hover:text-white transition-all duration-300 z-10"
-          aria-label="Next products"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        
+        <!-- View All Products Button -->
+        <div v-if="featuredProducts && featuredProducts.length > 0" class="text-center mt-12">
+          <button 
+            @click="$router.push('/products')"
+            class="px-12 py-4 bg-surface-alt text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all"
+          >
+            View All Products →
+          </button>
+        </div>
       </div>
     </section>
-
-    <!-- Category Grid -->
-    <section class="bg-brand-gray-light py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-12 text-center font-accent text-brand-navy">
+    
+    <!-- Trust Badges -->
+    <section class="py-24 bg-surface">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-12">
+          <div class="text-center">
+            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
+              15+
+            </div>
+            <div class="text-lg md:text-xl text-text-main">Years in Business</div>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
+              500+
+            </div>
+            <div class="text-lg md:text-xl text-text-main">Projects Completed</div>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
+              98%
+            </div>
+            <div class="text-lg md:text-xl text-text-main">Customer Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Categories Preview -->
+    <section class="py-20 bg-background">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-heading font-bold text-center text-text-main mb-4">
           Explore Our Collections
         </h2>
-        
-        <div v-if="loadingCategories" class="text-center py-12">
-          <p class="text-gray-600">Loading categories...</p>
-        </div>
-
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <CategoryCard 
-            v-for="category in mainCategories" 
-            :key="category.id"
-            :category="category"
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold mb-16 text-center font-accent text-brand-navy">
-        Why Choose Prem-Lichtwerbung
-      </h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Quality -->
-        <div class="text-center p-6 hover:shadow-glow-blue rounded-lg transition-all duration-300">
-          <div class="w-20 h-20 mx-auto mb-6 bg-brand-blue bg-opacity-10 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 font-accent">Premium Quality</h3>
-          <p class="text-gray-600">
-            Highest quality materials and precision craftsmanship in every sign we create
-          </p>
-        </div>
-
-        <!-- Customization -->
-        <div class="text-center p-6 hover:shadow-glow-blue rounded-lg transition-all duration-300">
-          <div class="w-20 h-20 mx-auto mb-6 bg-brand-pink bg-opacity-10 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-brand-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 font-accent">Full Customization</h3>
-          <p class="text-gray-600">
-            Tailor every detail to match your brand identity perfectly
-          </p>
-        </div>
-
-        <!-- Fast Delivery -->
-        <div class="text-center p-6 hover:shadow-glow-blue rounded-lg transition-all duration-300">
-          <div class="w-20 h-20 mx-auto mb-6 bg-brand-yellow bg-opacity-20 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 font-accent">Fast Delivery</h3>
-          <p class="text-gray-600">
-            Quick turnaround times without compromising on quality
-          </p>
-        </div>
-
-        <!-- Support -->
-        <div class="text-center p-6 hover:shadow-glow-blue rounded-lg transition-all duration-300">
-          <div class="w-20 h-20 mx-auto mb-6 bg-brand-blue bg-opacity-10 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 font-accent">Expert Support</h3>
-          <p class="text-gray-600">
-            Professional guidance from consultation to installation
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Case Studies Preview -->
-    <section class="bg-brand-navy py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-4 text-center font-accent text-brand-warm">
-          See Our Work in Action
-        </h2>
-        <p class="text-center text-brand-warm text-lg mb-12">
-          Real projects, real results
+        <p class="text-xl text-center text-text-muted mb-12">
+          From lightboxes to LED neon - professional illuminated signage
         </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <!-- Project 1 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-xl">
-            <BeforeAfterSlider 
-              before-image="https://via.placeholder.com/600x400/1a1a1a/666666?text=Before"
-              after-image="https://via.placeholder.com/600x400/00D9FF/ffffff?text=After+%28Illuminated%29"
-            />
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-brand-blue text-white text-sm rounded-full mb-3">
-                Retail Store
-              </span>
-              <h3 class="text-xl font-semibold mb-2 font-accent">Downtown Boutique</h3>
-              <p class="text-gray-600">
-                Custom LED lightbox and channel letters transformed this storefront into a nighttime landmark
-              </p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div 
+            v-for="category in sampleCategories" 
+            :key="category.name"
+            class="group relative block rounded-2xl overflow-hidden border border-surface hover:border-primary transition-all duration-300 cursor-pointer bg-surface"
+            @click="$router.push('/products')"
+          >
+            <div class="relative aspect-[16/9]">
+              <!-- Category background -->
+              <div :class="`w-full h-full bg-gradient-to-br ${category.gradient} flex items-center justify-center relative overflow-hidden`">
+                <span class="text-9xl group-hover:scale-110 transition-transform duration-300 relative z-10">{{ category.icon }}</span>
+              </div>
+              
+              <!-- Dark gradient overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
             </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-xl">
-            <BeforeAfterSlider 
-              before-image="https://via.placeholder.com/600x400/1a1a1a/666666?text=Before"
-              after-image="https://via.placeholder.com/600x400/FF006E/ffffff?text=After+%28Neon%29"
-            />
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-brand-pink text-white text-sm rounded-full mb-3">
-                Restaurant
-              </span>
-              <h3 class="text-xl font-semibold mb-2 font-accent">Urban Bar & Grill</h3>
-              <p class="text-gray-600">
-                Eye-catching LED neon signage created a vibrant atmosphere and increased foot traffic by 40%
-              </p>
+            
+            <div class="absolute inset-0 flex flex-col justify-end p-6">
+              <h3 class="font-heading text-3xl font-bold text-primary mb-2 group-hover:text-accent transition-all">
+                {{ category.name }}
+              </h3>
+              <p class="text-text-main text-sm">{{ category.description }}</p>
+              
+              <!-- Arrow -->
+              <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-surface border border-primary flex items-center justify-center group-hover:bg-primary transition-all">
+                <svg class="w-5 h-5 text-primary group-hover:text-background group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
             </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="bg-white rounded-lg overflow-hidden shadow-xl">
-            <BeforeAfterSlider 
-              before-image="https://via.placeholder.com/600x400/1a1a1a/666666?text=Before"
-              after-image="https://via.placeholder.com/600x400/FFD600/000000?text=After+%28Pylon%29"
-            />
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-brand-yellow text-brand-navy text-sm rounded-full mb-3">
-                Office Complex
-              </span>
-              <h3 class="text-xl font-semibold mb-2 font-accent">Business Park Gateway</h3>
-              <p class="text-gray-600">
-                5-meter illuminated pylon provides 24/7 visibility from the highway
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <ButtonGlow variant="secondary" @click="$router.push('/portfolio')">
-            View All Projects
-          </ButtonGlow>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trust Badges / Statistics -->
-    <section class="bg-gradient-to-r from-brand-blue to-brand-pink py-20">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center text-white">
-          <div>
-            <div class="text-6xl font-bold mb-3 font-accent drop-shadow-lg">15+</div>
-            <div class="text-xl font-semibold mb-2">Years in Business</div>
-            <p class="text-brand-warm">
-              Trusted expertise in illuminated signage
-            </p>
-          </div>
-          <div>
-            <div class="text-6xl font-bold mb-3 font-accent drop-shadow-lg">500+</div>
-            <div class="text-xl font-semibold mb-2">Projects Completed</div>
-            <p class="text-brand-warm">
-              From small signs to large installations
-            </p>
-          </div>
-          <div>
-            <div class="text-6xl font-bold mb-3 font-accent drop-shadow-lg">98%</div>
-            <div class="text-xl font-semibold mb-2">Satisfied Customers</div>
-            <p class="text-brand-warm">
-              Quality and service you can count on
-            </p>
           </div>
         </div>
       </div>
     </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 bg-surface">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-text-main mb-6">
+          Ready to Make Your Brand Visible?
+        </h2>
+        <p class="text-xl md:text-2xl text-text-muted mb-8">
+          Get a free quote and mockup for your project today
+        </p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+          <button 
+            @click="$router.push('/contact')"
+            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
+          >
+            Request Quote
+          </button>
+          <button 
+            @click="$router.push('/contact')"
+            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all"
+          >
+            Call Us
+          </button>
+        </div>
+      </div>
+    </section>
+    
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import ButtonGlow from '@/components/ui/ButtonGlow.vue'
-import ProductCard from '@/components/products/ProductCard.vue'
-import CategoryCard from '@/components/categories/CategoryCard.vue'
+import { useI18n } from 'vue-i18n'
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider.vue'
-import { getProducts } from '@/api/products'
-import { getCategories } from '@/api/categories'
+import { getSettings } from '@/api/settings'
+import type { Settings } from '@/api/settings'
 
 const router = useRouter()
+const { t } = useI18n()
 
-// Featured Products Carousel
 const featuredProducts = ref<any[]>([])
-const loading = ref(false)
-const error = ref<string | null>(null)
-const currentSlide = ref(0)
-const autoScrollInterval = ref<number | null>(null)
+const loading = ref(true)
+const error = ref('')
+const settings = ref<Settings | null>(null)
 
-// Responsive visible products count
-const visibleProducts = ref(4)
+const sampleCategories = [
+  { name: 'Lightboxes', icon: '💡', gradient: 'from-blue-400 to-blue-600', description: 'Illuminated display boxes for maximum visibility' },
+  { name: 'Channel Letters', icon: '🔤', gradient: 'from-pink-400 to-pink-600', description: 'Individual lit letters for premium signage' },
+  { name: 'LED Neon Signs', icon: '✨', gradient: 'from-yellow-400 to-yellow-600', description: 'Modern neon designs that captivate' },
+]
 
-// Categories
-const mainCategories = ref<any[]>([])
-const loadingCategories = ref(false)
-
-// Fetch featured products
 const fetchFeaturedProducts = async () => {
-  loading.value = true
-  error.value = null
   try {
-    const response = await getProducts({ 
-      filter: { featured: { _eq: true } },
-      limit: 6,
-      sort: ['-date_created']
-    })
-    featuredProducts.value = response.data
-  } catch (err: any) {
-    error.value = err.message || 'Failed to load featured products'
+    loading.value = true
+    error.value = ''
+    
+    const response = await fetch('http://localhost:8055/items/products?limit=6&filter[featured][_eq]=true')
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products. Check Directus permissions.`)
+    }
+    
+    const data = await response.json()
+    
+    if (data && data.data && Array.isArray(data.data)) {
+      featuredProducts.value = data.data
+    } else {
+      featuredProducts.value = []
+    }
+    
+  } catch (e: any) {
+    console.error('Error fetching products:', e)
+    error.value = e.message || 'Failed to load products'
+    featuredProducts.value = []
   } finally {
     loading.value = false
   }
 }
 
-// Fetch main parent categories (parent_id is null)
-const fetchMainCategories = async () => {
-  loadingCategories.value = true
+const fetchSettings = async () => {
   try {
-    const response = await getCategories({
-      filter: { parent_id: { _null: true } },
-      limit: 6,
-      sort: ['sort']
-    })
-    mainCategories.value = response.data
-  } catch (err) {
-    console.error('Failed to load categories:', err)
-  } finally {
-    loadingCategories.value = false
+    settings.value = await getSettings()
+  } catch (e: any) {
+    console.error('Error fetching settings:', e)
+    // Settings are optional, don't show error to user
   }
 }
 
-// Carousel navigation
-const nextSlide = () => {
-  if (currentSlide.value < featuredProducts.value.length - visibleProducts.value) {
-    currentSlide.value++
-  } else {
-    currentSlide.value = 0
-  }
-}
-
-const prevSlide = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
-  } else {
-    currentSlide.value = Math.max(0, featuredProducts.value.length - visibleProducts.value)
-  }
-}
-
-// Auto-scroll carousel every 5 seconds
-const startAutoScroll = () => {
-  autoScrollInterval.value = window.setInterval(() => {
-    nextSlide()
-  }, 5000)
-}
-
-const stopAutoScroll = () => {
-  if (autoScrollInterval.value) {
-    clearInterval(autoScrollInterval.value)
-    autoScrollInterval.value = null
-  }
-}
-
-// Update visible products based on screen size
-const updateVisibleProducts = () => {
-  if (window.innerWidth < 768) {
-    visibleProducts.value = 1
-  } else if (window.innerWidth < 1024) {
-    visibleProducts.value = 2
-  } else if (window.innerWidth < 1280) {
-    visibleProducts.value = 3
-  } else {
-    visibleProducts.value = 4
-  }
-}
-
-onMounted(async () => {
-  await fetchFeaturedProducts()
-  await fetchMainCategories()
-  
-  // Start auto-scroll if we have enough products
-  if (featuredProducts.value.length > visibleProducts.value) {
-    startAutoScroll()
-  }
-
-  // Setup responsive behavior
-  updateVisibleProducts()
-  window.addEventListener('resize', updateVisibleProducts)
-})
-
-onUnmounted(() => {
-  stopAutoScroll()
-  window.removeEventListener('resize', updateVisibleProducts)
+onMounted(() => {
+  fetchFeaturedProducts()
+  fetchSettings()
 })
 </script>
+
+<style scoped>
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

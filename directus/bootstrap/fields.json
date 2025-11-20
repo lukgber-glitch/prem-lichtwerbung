@@ -56,11 +56,29 @@
       }
     },
     {
+      "field": "name_de",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "German translation of category name"
+      }
+    },
+    {
       "field": "description",
       "type": "text",
       "meta": {
         "interface": "input-rich-text-md",
         "width": "full"
+      }
+    },
+    {
+      "field": "description_de",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full",
+        "note": "German translation of category description"
       }
     },
     {
@@ -112,6 +130,15 @@
         "interface": "input",
         "required": true,
         "width": "half"
+      }
+    },
+    {
+      "field": "name_de",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "German translation of tag name"
       }
     },
     {
@@ -202,6 +229,15 @@
       }
     },
     {
+      "field": "name_de",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "German translation of product name"
+      }
+    },
+    {
       "field": "categories",
       "type": "alias",
       "meta": {
@@ -221,6 +257,15 @@
       "meta": {
         "interface": "input-rich-text-md",
         "width": "full"
+      }
+    },
+    {
+      "field": "description_de",
+      "type": "text",
+      "meta": {
+        "interface": "input-rich-text-md",
+        "width": "full",
+        "note": "German translation of product description"
       }
     },
     {
@@ -486,6 +531,15 @@
       "meta": {
         "interface": "input",
         "width": "full"
+      }
+    },
+    {
+      "field": "material_de",
+      "type": "text",
+      "meta": {
+        "interface": "input",
+        "width": "full",
+        "note": "German translation of material description"
       }
     },
     {
@@ -1533,6 +1587,38 @@
       "meta": {
         "interface": "input",
         "width": "half"
+      }
+    },
+    {
+      "field": "hero_slider_enabled",
+      "type": "boolean",
+      "schema": {
+        "default_value": true
+      },
+      "meta": {
+        "interface": "boolean",
+        "width": "full",
+        "note": "Enable day/night before/after slider on homepage hero section"
+      }
+    },
+    {
+      "field": "hero_before_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half",
+        "note": "Day image (before) for homepage hero slider"
+      }
+    },
+    {
+      "field": "hero_after_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half",
+        "note": "Night image (after) for homepage hero slider"
       }
     }
   ],

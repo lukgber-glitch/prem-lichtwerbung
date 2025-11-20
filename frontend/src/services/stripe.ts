@@ -1,156 +1,89 @@
 import { loadStripe, Stripe } from '@stripe/stripe-js'
 
-// Stripe publishable key from environment variable
-const stripePublishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || ''
-
 let stripePromise: Promise<Stripe | null> | null = null
 
-/**
- * Get Stripe instance (lazy loaded)
- */
-export const getStripe = (): Promise<Stripe | null> => {
+export const getStripe = () => {
   if (!stripePromise) {
-    stripePromise = loadStripe(stripePublishableKey)
+    const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+    if (!publishableKey) {
+      console.error('Stripe publishable key is not set in environment variables')
+      return null
+    }
+    stripePromise = loadStripe(publishableKey)
   }
   return stripePromise
 }
 
-/**
- * Create Stripe checkout session
- * @param orderData - Order information including items, customer, and shipping
- * @returns Session ID from Stripe
- */
-export const createCheckoutSession = async (orderData: {
+export interface CheckoutSessionData {
   items: Array<{
-    id: number
-    name: string
-    price: number
+    product_id: string
+    product_name: string
     quantity: number
-    image?: string
+    price: number
+    options?: Record<string, any>
   }>
-  customerEmail?: string
-  shippingAddress?: {
+  customer_email?: string
+  customer_name?: string
+  customer_phone?: string
+  shipping_address?: {
     line1: string
     line2?: string
     city: string
-    postalCode: string
+    postal_code: string
     country: string
   }
-  metadata?: Record<string, string>
-}): Promise<{ sessionId: string }> => {
+  billing_address?: {
+    line1: string
+    line2?: string
+    city: string
+    postal_code: string
+    country: string
+  }
+}
+
+export const createCheckoutSession = async (data: CheckoutSessionData): Promise<string> => {
   try {
-    // TODO: Replace with actual backend API endpoint
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-    
-    const response = await fetch(`${apiUrl}/api/stripe/create-checkout-session`, {
+    // TODO: Replace with your actual backend API endpoint
+    const response = await fetch('/api/stripe/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        items: orderData.items.map(item => ({
-          name: item.name,
-          amount: Math.round(item.price * 100), // Convert to cents
-          quantity: item.quantity,
-          images: item.image ? [item.image] : [],
-        })),
-        customerEmail: orderData.customerEmail,
-        shippingAddress: orderData.shippingAddress,
-        metadata: orderData.metadata,
-        successUrl: `${window.location.origin}/order/confirmation?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: `${window.location.origin}/cart`,
-      }),
+      body: JSON.stringify(data),
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message || 'Failed to create checkout session')
+      throw new Error('Failed to create checkout session')
     }
 
-    const data = await response.json()
-    return { sessionId: data.sessionId }
+    const { sessionId } = await response.json()
+    return sessionId
   } catch (error) {
     console.error('Error creating checkout session:', error)
     throw error
   }
 }
 
-/**
- * Redirect to Stripe Checkout
- * @param sessionId - Stripe session ID
- */
-export const redirectToCheckout = async (sessionId: string): Promise<void> => {
-  try {
-    const stripe = await getStripe()
-    
-    if (!stripe) {
-      throw new Error('Stripe failed to load')
-    }
+export const redirectToCheckout = async (sessionId: string) => {
+  const stripe = await getStripe()
+  if (!stripe) {
+    throw new Error('Stripe is not initialized')
+  }
 
-    const { error } = await stripe.redirectToCheckout({ sessionId })
+  const { error } = await stripe.redirectToCheckout({ sessionId })
 
-    if (error) {
-      console.error('Error redirecting to checkout:', error)
-      throw error
-    }
-  } catch (error) {
-    console.error('Error in redirectToCheckout:', error)
+  if (error) {
+    console.error('Error redirecting to checkout:', error)
     throw error
   }
 }
 
-/**
- * Retrieve checkout session details
- * @param sessionId - Stripe session ID
- */
-export const getCheckoutSession = async (sessionId: string): Promise<any> => {
+export const handleCheckoutFlow = async (data: CheckoutSessionData) => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-    
-    const response = await fetch(`${apiUrl}/api/stripe/checkout-session/${sessionId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to retrieve checkout session')
-    }
-
-    const data = await response.json()
-    return data
+    const sessionId = await createCheckoutSession(data)
+    await redirectToCheckout(sessionId)
   } catch (error) {
-    console.error('Error retrieving checkout session:', error)
+    console.error('Checkout flow error:', error)
     throw error
   }
-}
-
-/**
- * Format price for display (cents to euros)
- */
-export const formatPrice = (amountInCents: number): string => {
-  return `€${(amountInCents / 100).toFixed(2)}`
-}
-
-/**
- * Demo mode: Simulate successful checkout
- * This is used when Stripe is not configured (for development/demo)
- */
-export const simulateCheckout = async (orderData: any): Promise<{ orderId: string }> => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  
-  // Generate mock order ID
-  const orderId = `ORD-${Date.now()}-${Math.random().toString(36).substring(7).toUpperCase()}`
-  
-  // Store order data in localStorage for demo purposes
-  localStorage.setItem('demo_order_' + orderId, JSON.stringify({
-    orderId,
-    ...orderData,
-    status: 'paid',
-    createdAt: new Date().toISOString(),
-  }))
-  
-  return { orderId }
 }

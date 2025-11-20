@@ -30,6 +30,7 @@
                   <img 
                     :src="product.image || product.day_image || '/placeholder-product.jpg'"
                     :alt="product.name"
+                    loading="lazy"
                     class="w-full h-full object-cover"
                   />
                 </div>
@@ -127,6 +128,7 @@
                         <img 
                           :src="product.image || product.day_image || '/placeholder-product.jpg'"
                           :alt="product.name"
+                          loading="lazy"
                           class="w-full h-full object-cover"
                         />
                       </div>

@@ -1,16 +1,28 @@
 <template>
   <div
-    class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-glow-blue flex flex-col h-full"
+    class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-glow-blue flex flex-col h-full group"
   >
     <!-- Image Container with Day/Night Toggle -->
     <router-link :to="`/products/${product.slug}`" class="relative block overflow-hidden bg-brand-gray-light">
       <img
         :src="currentImage"
         :alt="product.name"
+        loading="lazy"
         class="w-full h-64 object-cover transition-opacity duration-300"
         @mouseenter="showNightImage = true"
         @mouseleave="showNightImage = false"
       />
+      
+      <!-- Shimmer overlay on hover -->
+      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div class="animate-shimmer w-full h-full"></div>
+      </div>
+      
+      <!-- Electric sparks in corners -->
+      <div class="absolute top-2 left-2 w-2 h-2 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark"></div>
+      <div class="absolute top-2 right-2 w-2 h-2 bg-brand-pink rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.3s;"></div>
+      <div class="absolute bottom-2 left-2 w-2 h-2 bg-brand-yellow rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.6s;"></div>
+      <div class="absolute bottom-2 right-2 w-2 h-2 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.9s;"></div>
       
       <!-- Badges Container -->
       <div class="absolute top-3 left-3 flex flex-col gap-2">
@@ -90,7 +102,7 @@
       <!-- Add to Cart Button -->
       <ButtonGlow
         variant="primary"
-        class="w-full"
+        :class="['w-full', { 'animate-glow-pulse': product.stock > 0 }]"
         :disabled="product.stock === 0"
         @click="addToCart"
       >

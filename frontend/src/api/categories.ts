@@ -66,3 +66,10 @@ export const tagsApi = {
     )
   }
 }
+
+// Standalone function exports for backwards compatibility
+export const getCategories = () => categoriesApi.getAll()
+export const getCategoryBySlug = (slug: string) => categoriesApi.getBySlug(slug)
+export const getTopLevelCategories = () => categoriesApi.getTopLevel()
+export const getCategoryChildren = (parentId: number) => categoriesApi.getChildren(parentId)
+export const getTags = () => tagsApi.getAll()
