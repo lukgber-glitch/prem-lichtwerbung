@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal with Gradient -->
-    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0A0A0A] to-black overflow-hidden px-6">
+    <!-- HERO SECTION - Omnicom Minimal -->
+    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
         <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em] mb-16">
           Our Story
@@ -14,27 +14,27 @@
     </section>
     
     <!-- NARRATIVE SECTION - Single Column with Accent Line -->
-    <section class="py-32 bg-[#FAFAFA]">
+    <section class="py-32 bg-omnicom-white">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
         <div class="w-[60px] h-[2px] bg-black mb-8"></div>
         
         <!-- Section Label -->
-        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-6">About Us</p>
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">About Us</p>
         
-        <h2 class="text-4xl md:text-5xl font-heading font-bold text-black mb-16 leading-tight">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-omnicom-text mb-16 leading-tight">
           Transforming businesses into landmarks
         </h2>
         
-        <p class="text-lg md:text-xl text-black/70 font-light leading-relaxed mb-12">
+        <p class="text-lg md:text-xl text-omnicom-muted font-light leading-relaxed mb-12">
           Since 2009, Prem-Lichtwerbung has been crafting premium illuminated signage that transforms businesses into landmarks. What started as a small workshop in Germany has grown into a leading provider of custom lighting solutions across Europe.
         </p>
         
-        <p class="text-lg md:text-xl text-black/70 font-light leading-relaxed mb-12">
+        <p class="text-lg md:text-xl text-omnicom-muted font-light leading-relaxed mb-12">
           We believe every business deserves signage that not only looks incredible but performs flawlessly for years. That's why we use only the highest-quality materials, LED technology, and weatherproof construction in every project.
         </p>
         
-        <p class="text-lg md:text-xl text-black/70 font-light leading-relaxed">
+        <p class="text-lg md:text-xl text-omnicom-muted font-light leading-relaxed">
           From elegant channel letters to eye-catching LED neon, from towering pylons to sleek lightboxes – we bring your vision to life with precision and passion.
         </p>
       </div>
@@ -86,42 +86,42 @@
     </section>
     
     <!-- CAPABILITIES SECTION - Off-White Background with Accent Line -->
-    <section class="py-32 bg-[#FAFAFA]">
+    <section class="py-32 bg-omnicom-white">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
         <div class="w-[60px] h-[2px] bg-black mb-8"></div>
         
         <!-- Section Label -->
-        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-6">Our Expertise</p>
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">Our Expertise</p>
         
-        <h2 class="text-4xl md:text-5xl font-heading font-bold text-black mb-16 leading-tight">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-omnicom-text mb-16 leading-tight">
           What we create
         </h2>
         
         <div class="space-y-8">
           <div class="pb-8 border-b border-black/10">
-            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Channel Letters</h3>
-            <p class="text-lg text-black/60 font-light">Individual illuminated letters that define your storefront</p>
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Channel Letters</h3>
+            <p class="text-lg text-omnicom-muted font-light">Individual illuminated letters that define your storefront</p>
           </div>
           
           <div class="pb-8 border-b border-black/10">
-            <h3 class="text-2xl font-heading font-semibold text-black mb-3">LED Neon</h3>
-            <p class="text-lg text-black/60 font-light">Modern flexible neon for creative and eye-catching designs</p>
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">LED Neon</h3>
+            <p class="text-lg text-omnicom-muted font-light">Modern flexible neon for creative and eye-catching designs</p>
           </div>
           
           <div class="pb-8 border-b border-black/10">
-            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Lightboxes</h3>
-            <p class="text-lg text-black/60 font-light">Premium illuminated panels for maximum brand visibility</p>
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Lightboxes</h3>
+            <p class="text-lg text-omnicom-muted font-light">Premium illuminated panels for maximum brand visibility</p>
           </div>
           
           <div class="pb-8 border-b border-black/10">
-            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Pylons</h3>
-            <p class="text-lg text-black/60 font-light">Towering structures that guide customers to your location</p>
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Pylons</h3>
+            <p class="text-lg text-omnicom-muted font-light">Towering structures that guide customers to your location</p>
           </div>
           
           <div class="pb-8 border-b border-black/10">
-            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Digital Solutions</h3>
-            <p class="text-lg text-black/60 font-light">Interactive terminals and digital menu boards</p>
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Digital Solutions</h3>
+            <p class="text-lg text-omnicom-muted font-light">Interactive terminals and digital menu boards</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal with Gradient -->
-    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-[#0A0A0A] overflow-hidden px-6">
+    <!-- HERO SECTION - Omnicom Minimal -->
+    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
         <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em]">
           Work
@@ -11,18 +11,18 @@
     </section>
     
     <!-- FILTERS SECTION - Omnicom Minimal with Accent Line -->
-    <section class="py-20 bg-[#FAFAFA] border-b border-black/10">
+    <section class="py-20 bg-omnicom-white border-b border-black/10">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Decorative Accent Line -->
         <div class="w-[60px] h-[2px] bg-black mb-8"></div>
         
         <!-- Section Label -->
-        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-12">Filter Products</p>
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-12">Filter Products</p>
         
         <!-- Category Filter -->
         <div class="mb-12">
-          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Category</h3>
+          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Category</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="category in categories" 
@@ -31,7 +31,7 @@
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedCategory === category 
                 ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-black border-black/20 hover:border-black'"
+                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
             >
               {{ category }}
             </button>
@@ -40,7 +40,7 @@
         
         <!-- Illumination Type Filter -->
         <div class="mb-12">
-          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Illumination</h3>
+          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Illumination</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="type in illuminationTypes" 
@@ -49,7 +49,7 @@
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedIllumination === type 
                 ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-black border-black/20 hover:border-black'"
+                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
             >
               {{ type }}
             </button>
@@ -58,7 +58,7 @@
         
         <!-- Price Range Filter -->
         <div class="mb-12">
-          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Price Range</h3>
+          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Price Range</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="range in priceRanges" 
@@ -67,7 +67,7 @@
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedPriceRange === range 
                 ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-black border-black/20 hover:border-black'"
+                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
             >
               {{ range.label }}
             </button>
@@ -75,7 +75,7 @@
         </div>
         
         <!-- Results Count -->
-        <div class="text-sm font-light text-black/60">
+        <div class="text-sm font-light text-omnicom-muted">
           {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'product' : 'products' }} found
         </div>
         

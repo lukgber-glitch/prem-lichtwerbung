@@ -2,35 +2,25 @@
   <div class="min-h-screen bg-white">
     
     <!-- HERO SECTION - Omnicom Minimal with Gradient -->
-    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-[#FAFAFA] overflow-hidden px-6 py-32">
-      
-      <!-- Hero content -->
-      <div class="text-center max-w-content mx-auto">
-        
-        <!-- Main headline - Massive Bold Typography -->
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-black mb-12 leading-none tracking-[-0.03em]">
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-omnicom-black to-black overflow-hidden">
+      <div class="max-w-content mx-auto px-6 text-center">
+        <h1 class="text-8xl md:text-10xl font-black text-white leading-none tracking-[-0.04em] mb-12">
           Your Brand<br>Deserves to Shine
         </h1>
-        
-        <!-- Minimal subtext - Ultra-light -->
-        <p class="text-xl md:text-2xl text-black/70 font-light mb-16 max-w-2xl mx-auto leading-relaxed">
-          Premium illuminated signage crafted with precision
+        <p class="text-xl md:text-2xl text-white/60 font-light max-w-2xl mx-auto mb-16">
+          Premium illuminated signage that transforms businesses into landmarks
         </p>
-        
-        <!-- Single Ghost Button -->
         <button 
           @click="$router.push('/products')"
-          class="px-16 py-6 bg-transparent text-black text-lg font-semibold border-2 border-black hover:bg-black hover:text-white transition-all duration-500 ease-omnicom cursor-pointer"
+          class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500"
         >
           Explore Our Work
         </button>
-        
       </div>
-      
     </section>
     
     <!-- ABOUT SECTION - Omnicom Narrative with Accent Line -->
-    <section class="py-32 bg-[#FAFAFA]">
+    <section class="py-32 bg-omnicom-white">
       <div class="max-w-content mx-auto px-6 md:px-32">
         <div class="grid md:grid-cols-2 gap-32 items-center">
           <!-- Left: Floating Text (40% of space) -->
@@ -39,12 +29,12 @@
             <div class="w-[60px] h-[2px] bg-black mb-8"></div>
             
             <!-- Section Label -->
-            <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-6">Our Story</p>
+            <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">Our Story</p>
             
-            <h2 class="text-5xl md:text-6xl font-heading font-bold text-black mb-12 leading-tight">
+            <h2 class="text-5xl md:text-6xl font-heading font-bold text-omnicom-text mb-12 leading-tight">
               15 Years of Illumination Excellence
             </h2>
-            <p class="text-lg md:text-xl text-black/70 font-light leading-relaxed max-w-text">
+            <p class="text-lg md:text-xl text-omnicom-muted font-light leading-relaxed max-w-text">
               Since our founding, we've transformed ordinary facades into extraordinary brand experiences. Our craft combines precision engineering with artistic vision, delivering illuminated signage that doesn't just light up buildings—it defines them. Every project reflects our commitment to quality, innovation, and the belief that your brand deserves nothing less than brilliance.
             </p>
           </div>
@@ -54,8 +44,8 @@
       </div>
     </section>
     
-    <!-- SERVICES SECTION - Omnicom Minimal Grid with Gradient -->
-    <section class="py-60 bg-gradient-to-b from-[#0A0A0A] to-black">
+    <!-- SERVICES SECTION - Omnicom Minimal Grid -->
+    <section class="py-60 bg-black">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Section Header -->

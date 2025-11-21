@@ -1,4 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
 @import "tailwindcss";
+
+body {
+  background-color: #FAFAFA;
+  color: #1A1A1A;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
 
 /* Tailwind v4 Custom Theme Configuration */
 @theme {
