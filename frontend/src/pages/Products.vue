@@ -10,6 +10,72 @@
       </div>
     </section>
     
+    <!-- FILTERS SECTION - Omnicom Minimal -->
+    <section class="py-20 bg-white border-b border-black/10">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        
+        <!-- Category Filter -->
+        <div class="mb-12">
+          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Category</h3>
+          <div class="flex flex-wrap gap-3">
+            <button 
+              v-for="category in categories" 
+              :key="category"
+              @click="selectedCategory = category"
+              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
+              :class="selectedCategory === category 
+                ? 'bg-black text-white border-black' 
+                : 'bg-transparent text-black border-black/20 hover:border-black'"
+            >
+              {{ category }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- Illumination Type Filter -->
+        <div class="mb-12">
+          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Illumination</h3>
+          <div class="flex flex-wrap gap-3">
+            <button 
+              v-for="type in illuminationTypes" 
+              :key="type"
+              @click="selectedIllumination = type"
+              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
+              :class="selectedIllumination === type 
+                ? 'bg-black text-white border-black' 
+                : 'bg-transparent text-black border-black/20 hover:border-black'"
+            >
+              {{ type }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- Price Range Filter -->
+        <div class="mb-12">
+          <h3 class="text-sm font-light text-black/60 mb-4 uppercase tracking-wider">Price Range</h3>
+          <div class="flex flex-wrap gap-3">
+            <button 
+              v-for="range in priceRanges" 
+              :key="range.label"
+              @click="selectedPriceRange = range"
+              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
+              :class="selectedPriceRange === range 
+                ? 'bg-black text-white border-black' 
+                : 'bg-transparent text-black border-black/20 hover:border-black'"
+            >
+              {{ range.label }}
+            </button>
+          </div>
+        </div>
+        
+        <!-- Results Count -->
+        <div class="text-sm font-light text-black/60">
+          {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'product' : 'products' }} found
+        </div>
+        
+      </div>
+    </section>
+    
     <!-- PRODUCTS GRID - Minimal Asymmetric Layout -->
     <section class="py-44 bg-white">
       <div class="max-w-content mx-auto px-6 md:px-32">
@@ -25,14 +91,20 @@
         </div>
         
         <!-- Empty State -->
-        <div v-else-if="products.length === 0" class="text-center py-20">
-          <p class="text-xl font-light text-black">No products available</p>
+        <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
+          <p class="text-xl font-light text-black">No products match your filters</p>
+          <button 
+            @click="resetFilters"
+            class="mt-8 px-8 py-4 bg-transparent text-black text-sm font-semibold border-2 border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer"
+          >
+            Reset Filters
+          </button>
         </div>
         
         <!-- Products Grid - Asymmetric 2-3 columns -->
         <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
           <ProductCard 
-            v-for="product in products" 
+            v-for="product in filteredProducts" 
             :key="product.id"
             :product="product"
           />
@@ -45,12 +117,65 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import ProductCard from '@/components/products/ProductCard.vue'
 
 const products = ref<any[]>([])
 const loading = ref(true)
 const error = ref('')
+
+// Filter options
+const categories = ['All', 'Lightboxes', 'Channel Letters', 'Neon', 'Pylons', 'Windows', 'Terminal']
+const illuminationTypes = ['All', 'LED', 'Neon']
+const priceRanges = [
+  { label: 'All', min: 0, max: Infinity },
+  { label: '< €500', min: 0, max: 500 },
+  { label: '€500 - €1000', min: 500, max: 1000 },
+  { label: '> €1000', min: 1000, max: Infinity }
+]
+
+// Filter state
+const selectedCategory = ref('All')
+const selectedIllumination = ref('All')
+const selectedPriceRange = ref(priceRanges[0])
+
+// Filtered products computed property
+const filteredProducts = computed(() => {
+  return products.value.filter(product => {
+    // Category filter
+    if (selectedCategory.value !== 'All') {
+      const productName = product.name.toLowerCase()
+      const category = selectedCategory.value.toLowerCase()
+      
+      // Match category in product name
+      if (category === 'lightboxes' && !productName.includes('lightbox')) return false
+      if (category === 'channel letters' && !productName.includes('channel') && !productName.includes('letter')) return false
+      if (category === 'neon' && !productName.includes('neon')) return false
+      if (category === 'pylons' && !productName.includes('pylon')) return false
+      if (category === 'windows' && !productName.includes('window')) return false
+      if (category === 'terminal' && !productName.includes('terminal') && !productName.includes('pos')) return false
+    }
+    
+    // Illumination type filter
+    if (selectedIllumination.value !== 'All') {
+      const illuminationType = product.illumination_type?.toLowerCase() || 'led'
+      if (selectedIllumination.value.toLowerCase() !== illuminationType) return false
+    }
+    
+    // Price range filter
+    const price = product.price
+    if (price < selectedPriceRange.value.min || price > selectedPriceRange.value.max) return false
+    
+    return true
+  })
+})
+
+// Reset filters
+const resetFilters = () => {
+  selectedCategory.value = 'All'
+  selectedIllumination.value = 'All'
+  selectedPriceRange.value = priceRanges[0]
+}
 
 const fetchProducts = async () => {
   try {
