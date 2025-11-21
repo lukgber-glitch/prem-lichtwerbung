@@ -102,13 +102,12 @@ const handleStart = () => {
 </script>
 
 <style scoped>
-/* Omnicom Minimal Black/White Aesthetic */
 .terminal-screen-content {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #FFFFFF;
-  color: #000000;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #fff;
   cursor: pointer;
   user-select: none;
 }
@@ -116,6 +115,27 @@ const handleStart = () => {
 .welcome-screen {
   position: relative;
   overflow: hidden;
+}
+
+/* Animated background effect */
+.welcome-screen::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .welcome-content {
@@ -126,6 +146,7 @@ const handleStart = () => {
   align-items: center;
   padding: 2rem;
   position: relative;
+  z-index: 1;
 }
 
 .terminal-icon {
@@ -134,29 +155,38 @@ const handleStart = () => {
 
 .icon-wrapper {
   font-size: 5rem;
-  color: #000000;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .welcome-title {
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 0.5rem;
-  color: #000000;
+  color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .brand-name {
   font-size: 2.5rem;
-  font-weight: 900;
+  font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #000000;
+  color: #3b82f6;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 .welcome-subtitle {
   font-size: 1rem;
-  color: #000000;
-  font-weight: 300;
+  color: #64748b;
   margin-bottom: 2rem;
 }
 
@@ -174,20 +204,21 @@ const handleStart = () => {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: transparent;
-  border: 1px solid #000000;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 0.5rem;
 }
 
 .fuel-name {
   font-size: 0.9rem;
-  color: #000000;
-  font-weight: 300;
+  color: #94a3b8;
+  font-weight: 600;
 }
 
 .fuel-price {
   font-size: 1rem;
-  color: #000000;
-  font-weight: 600;
+  color: #22c55e;
+  font-weight: bold;
   font-family: monospace;
 }
 
@@ -201,13 +232,25 @@ const handleStart = () => {
 
 .touch-icon {
   font-size: 3rem;
-  color: #000000;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 .touch-text {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #000000;
+  color: #3b82f6;
 }
 
 .animate-pulse {
@@ -236,18 +279,16 @@ const handleStart = () => {
   align-items: center;
   gap: 1rem;
   padding: 0.75rem;
-  background: transparent;
-  border: 1px solid #000000;
-  transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.3s;
 }
 
 .feature-item:hover {
-  background: #000000;
-  color: #FFFFFF;
-}
-
-.feature-item:hover .feature-text {
-  color: #FFFFFF;
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateX(5px);
 }
 
 .feature-icon {
@@ -256,34 +297,37 @@ const handleStart = () => {
 
 .feature-text {
   font-size: 0.9rem;
-  color: #000000;
-  font-weight: 300;
-  transition: color 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  color: #cbd5e1;
 }
 
 .welcome-footer {
   padding: 1.5rem;
   text-align: center;
-  background: #FAFAFA;
-  border-top: 1px solid #000000;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
   position: relative;
+  z-index: 1;
 }
 
 .footer-text {
   font-size: 0.85rem;
-  color: #000000;
-  font-weight: 300;
+  color: #64748b;
   margin-bottom: 0.25rem;
 }
 
 .footer-version {
   font-size: 0.75rem;
-  color: #000000;
-  font-weight: 300;
+  color: #475569;
 }
 
+/* Hover effect for entire screen */
 .welcome-screen:hover .brand-name {
-  opacity: 0.7;
+  color: #60a5fa;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
+}
+
+.welcome-screen:active {
+  transform: scale(0.99);
 }
 
 /* Responsive */

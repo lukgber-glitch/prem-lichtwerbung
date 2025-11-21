@@ -218,37 +218,49 @@ defineExpose({
 </script>
 
 <style scoped>
-/* Omnicom Minimal Terminal - Pure Black/White Aesthetic */
+/* Gas Station Terminal - Industrial Design */
 .pos-terminal-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: #FFFFFF;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  border-radius: 0.5rem;
   min-height: 600px;
 }
 
 .terminal-hardware {
   width: 100%;
   max-width: 500px;
-  background: #FFFFFF;
+  background: linear-gradient(145deg, #d4d4d8, #a1a1aa);
+  border-radius: 0.5rem;
   padding: 2rem;
-  border: 2px solid #000000;
+  border: 4px solid #71717a;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .terminal-screen {
-  background: #000000;
+  background: #18181b;
+  border-radius: 0.5rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  border: 2px solid #000000;
+  border: 4px solid #3f3f46;
+  box-shadow: 
+    inset 0 4px 12px rgba(0, 0, 0, 0.9),
+    0 0 0 2px #52525b;
 }
 
 .screen-bezel {
-  background: #FFFFFF;
-  border: 1px solid #000000;
+  background: #1f2937;
+  border: 4px solid #374151;
+  border-radius: 0.25rem;
   min-height: 500px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .terminal-buttons-panel {
@@ -264,63 +276,90 @@ defineExpose({
   justify-content: center;
 }
 
-/* Omnicom Minimal Buttons - Ghost Style */
+/* Gas Station Buttons - Chunky 3D Style */
 .terminal-btn {
   flex: 1;
   padding: 1.25rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: 2px solid #000000;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border: 4px solid;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  min-height: 60px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  color: #000000;
 }
 
-.terminal-btn:hover:not(:disabled) {
-  background: #000000;
-  color: #FFFFFF;
+.terminal-btn:active:not(:disabled) {
+  transform: translateY(4px);
 }
 
 .terminal-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
+  filter: grayscale(50%);
 }
 
 .terminal-btn-cancel {
-  background: #000000;
-  color: #FFFFFF;
+  background: #ef4444;
+  border-color: #dc2626;
+  color: #000;
+  box-shadow: 
+    0 6px 0 #b91c1c,
+    0 8px 12px rgba(0, 0, 0, 0.4);
 }
 
 .terminal-btn-cancel:hover:not(:disabled) {
-  background: #FFFFFF;
-  color: #000000;
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 0 #991b1b,
+    0 10px 16px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-btn-cancel:active:not(:disabled) {
+  box-shadow: 
+    0 2px 0 #b91c1c,
+    0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .terminal-btn-back {
-  background: transparent;
-  color: #000000;
+  background: #fbbf24;
+  border-color: #f59e0b;
+  color: #000;
+  box-shadow: 
+    0 6px 0 #d97706,
+    0 8px 12px rgba(0, 0, 0, 0.4);
 }
 
 .terminal-btn-back:hover:not(:disabled) {
-  background: #000000;
-  color: #FFFFFF;
+  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 0 #b45309,
+    0 10px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Omnicom Minimal Hardware Details */
+.terminal-btn-back:active:not(:disabled) {
+  box-shadow: 
+    0 2px 0 #d97706,
+    0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Gas Station Hardware Details */
 .terminal-hardware-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 1rem;
-  background: #FAFAFA;
-  border: 1px solid #000000;
+  background: linear-gradient(145deg, #52525b, #3f3f46);
+  border-radius: 0.25rem;
+  border: 2px solid #71717a;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .card-reader-slot {
@@ -333,8 +372,12 @@ defineExpose({
 .slot-line {
   width: 80px;
   height: 12px;
-  background: #000000;
-  border: 1px solid #000000;
+  background: linear-gradient(180deg, #18181b 0%, #09090b 100%);
+  border-radius: 2px;
+  border: 2px solid #27272a;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
 .receipt-printer-slot {
@@ -347,15 +390,20 @@ defineExpose({
 .printer-opening {
   width: 70px;
   height: 10px;
-  background: #000000;
-  border: 1px solid #000000;
+  background: linear-gradient(180deg, #09090b 0%, #000 100%);
+  border-radius: 2px;
+  border: 2px solid #27272a;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
 .slot-label {
-  font-size: 0.625rem;
-  color: #000000;
-  font-weight: 300;
+  font-size: 0.7rem;
+  color: #d4d4d8;
+  font-weight: bold;
   letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .status-lights {
@@ -365,29 +413,52 @@ defineExpose({
 }
 
 .status-light {
-  width: 12px;
-  height: 12px;
-  background: #FFFFFF;
-  border: 1px solid #000000;
-  transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #27272a;
+  border: 3px solid #3f3f46;
+  transition: all 0.3s;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.6),
+    0 0 0 2px #18181b;
 }
 
 .status-light.active {
-  background: #000000;
-  border: 1px solid #000000;
+  background: #fbbf24;
+  border-color: #f59e0b;
+  box-shadow: 
+    0 0 16px #fbbf24,
+    0 0 8px #f59e0b,
+    inset 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: status-pulse 1.5s ease-in-out infinite;
 }
 
 .status-light.green.active {
-  background: #000000;
-  border: 1px solid #000000;
+  background: #22c55e;
+  border-color: #16a34a;
+  box-shadow: 
+    0 0 16px #22c55e,
+    0 0 8px #16a34a,
+    inset 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: status-pulse 1.5s ease-in-out infinite;
 }
 
-/* Screen Transitions - Omnicom Timing */
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Screen Transitions */
 .slide-left-enter-active,
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all 0.3s ease;
 }
 
 .slide-left-enter-from {
@@ -427,7 +498,7 @@ defineExpose({
   
   .terminal-btn {
     padding: 0.75rem 1rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
   }
 }
 </style>
