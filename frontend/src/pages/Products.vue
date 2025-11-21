@@ -1,18 +1,24 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
+    <!-- HERO SECTION - Omnicom Minimal with Gradient -->
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-[#0A0A0A] overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-tighter">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em]">
           Work
         </h1>
       </div>
     </section>
     
-    <!-- FILTERS SECTION - Omnicom Minimal -->
-    <section class="py-20 bg-white border-b border-black/10">
+    <!-- FILTERS SECTION - Omnicom Minimal with Accent Line -->
+    <section class="py-20 bg-[#FAFAFA] border-b border-black/10">
       <div class="max-w-content mx-auto px-6 md:px-32">
+        
+        <!-- Decorative Accent Line -->
+        <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+        
+        <!-- Section Label -->
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-12">Filter Products</p>
         
         <!-- Category Filter -->
         <div class="mb-12">

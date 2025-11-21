@@ -1,127 +1,140 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
+    <!-- HERO SECTION - Omnicom Minimal with Radial Gradient -->
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[#1A1A1A] via-[#0A0A0A] to-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-tighter">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em]">
           Contact
         </h1>
       </div>
     </section>
     
-    <!-- CONTACT FORM SECTION - Single Column Minimal -->
-    <section class="py-44 bg-white">
-      <div class="max-w-text mx-auto px-6">
+    <!-- CONTACT FORM SECTION - Two Column Layout with Accent Line -->
+    <section class="py-32 bg-[#FAFAFA]">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <!-- Decorative Accent Line -->
+        <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+        
+        <!-- Section Label -->
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-6">Get In Touch</p>
         
         <h2 class="text-4xl md:text-5xl font-heading font-bold text-black mb-16 leading-tight">
           Let's start a conversation
         </h2>
         
-        <!-- Contact Form -->
-        <form @submit.prevent="submitForm" class="mb-20">
-          <div class="mb-8">
-            <label class="block text-sm font-light text-black/60 mb-3">Name *</label>
-            <input 
-              v-model="form.name"
-              type="text" 
-              required
-              class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
-            />
+        <!-- Two Column Grid: Form + Contact Info -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          
+          <!-- LEFT COLUMN: Contact Form -->
+          <div>
+            <form @submit.prevent="submitForm">
+              <div class="mb-8">
+                <label class="block text-sm font-light text-black/60 mb-3">Name *</label>
+                <input 
+                  v-model="form.name"
+                  type="text" 
+                  required
+                  class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
+                />
+              </div>
+              
+              <div class="mb-8">
+                <label class="block text-sm font-light text-black/60 mb-3">Email *</label>
+                <input 
+                  v-model="form.email"
+                  type="email" 
+                  required
+                  class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
+                />
+              </div>
+              
+              <div class="mb-8">
+                <label class="block text-sm font-light text-black/60 mb-3">Phone</label>
+                <input 
+                  v-model="form.phone"
+                  type="tel"
+                  class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
+                />
+              </div>
+              
+              <div class="mb-8">
+                <label class="block text-sm font-light text-black/60 mb-3">Subject *</label>
+                <select 
+                  v-model="form.subject"
+                  required
+                  class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light cursor-pointer focus:outline-none focus:border-black transition-all duration-500"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="quote">Request a Quote</option>
+                  <option value="question">General Question</option>
+                  <option value="support">Technical Support</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="mb-12">
+                <label class="block text-sm font-light text-black/60 mb-3">Message *</label>
+                <textarea 
+                  v-model="form.message"
+                  required
+                  rows="8"
+                  class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500 resize-none"
+                ></textarea>
+              </div>
+              
+              <button 
+                type="submit"
+                :disabled="submitting"
+                class="px-16 py-6 bg-black text-white text-lg font-semibold hover:bg-white hover:text-black border-2 border-black transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {{ submitting ? 'Sending...' : 'Send Message' }}
+              </button>
+              
+              <p v-if="submitSuccess" class="mt-8 text-black font-light">
+                Message sent successfully. We'll respond within 24 hours.
+              </p>
+              <p v-if="submitError" class="mt-8 text-black font-light">
+                {{ submitError }}
+              </p>
+            </form>
           </div>
           
-          <div class="mb-8">
-            <label class="block text-sm font-light text-black/60 mb-3">Email *</label>
-            <input 
-              v-model="form.email"
-              type="email" 
-              required
-              class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
-            />
-          </div>
-          
-          <div class="mb-8">
-            <label class="block text-sm font-light text-black/60 mb-3">Phone</label>
-            <input 
-              v-model="form.phone"
-              type="tel"
-              class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500"
-            />
-          </div>
-          
-          <div class="mb-8">
-            <label class="block text-sm font-light text-black/60 mb-3">Subject *</label>
-            <select 
-              v-model="form.subject"
-              required
-              class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light cursor-pointer focus:outline-none focus:border-black transition-all duration-500"
-            >
-              <option value="">Select a subject</option>
-              <option value="quote">Request a Quote</option>
-              <option value="question">General Question</option>
-              <option value="support">Technical Support</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          
-          <div class="mb-12">
-            <label class="block text-sm font-light text-black/60 mb-3">Message *</label>
-            <textarea 
-              v-model="form.message"
-              required
-              rows="8"
-              class="w-full px-6 py-4 border border-black/20 bg-white text-black font-light focus:outline-none focus:border-black transition-all duration-500 resize-none"
-            ></textarea>
-          </div>
-          
-          <button 
-            type="submit"
-            :disabled="submitting"
-            class="px-16 py-6 bg-black text-white text-lg font-semibold hover:bg-white hover:text-black border-2 border-black transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {{ submitting ? 'Sending...' : 'Send Message' }}
-          </button>
-          
-          <p v-if="submitSuccess" class="mt-8 text-black font-light">
-            Message sent successfully. We'll respond within 24 hours.
-          </p>
-          <p v-if="submitError" class="mt-8 text-black font-light">
-            {{ submitError }}
-          </p>
-        </form>
-        
-        <!-- Contact Information - Minimal List -->
-        <div class="pt-16 border-t border-black/10">
-          <h3 class="text-2xl font-heading font-semibold text-black mb-12">
-            Contact Information
-          </h3>
-          
-          <div class="space-y-8">
-            <div>
-              <div class="text-sm font-light text-black/60 mb-2">Email</div>
-              <a href="mailto:info@prem-lichtwerbung.de" class="text-lg text-black hover:text-black/60 transition-all duration-500">
-                info@prem-lichtwerbung.de
-              </a>
-            </div>
+          <!-- RIGHT COLUMN: Contact Information -->
+          <div>
+            <h3 class="text-2xl font-heading font-semibold text-black mb-12">
+              Contact Information
+            </h3>
             
-            <div>
-              <div class="text-sm font-light text-black/60 mb-2">Phone</div>
-              <a href="tel:+49123456789" class="text-lg text-black hover:text-black/60 transition-all duration-500">
-                +49 123 456 789
-              </a>
-            </div>
-            
-            <div>
-              <div class="text-sm font-light text-black/60 mb-2">Location</div>
-              <p class="text-lg text-black font-light">Berlin, Germany</p>
-            </div>
-            
-            <div>
-              <div class="text-sm font-light text-black/60 mb-2">Business Hours</div>
-              <p class="text-lg text-black font-light">Monday - Friday: 9:00 - 18:00</p>
-              <p class="text-lg text-black font-light">Saturday: 10:00 - 14:00</p>
+            <div class="space-y-8">
+              <div>
+                <div class="text-sm font-light text-black/60 mb-2">Email</div>
+                <a href="mailto:info@prem-lichtwerbung.de" class="text-lg text-black hover:text-black/60 transition-all duration-500">
+                  info@prem-lichtwerbung.de
+                </a>
+              </div>
+              
+              <div>
+                <div class="text-sm font-light text-black/60 mb-2">Phone</div>
+                <a href="tel:+49123456789" class="text-lg text-black hover:text-black/60 transition-all duration-500">
+                  +49 123 456 789
+                </a>
+              </div>
+              
+              <div>
+                <div class="text-sm font-light text-black/60 mb-2">Location</div>
+                <p class="text-lg text-black font-light">Berlin, Germany</p>
+              </div>
+              
+              <div>
+                <div class="text-sm font-light text-black/60 mb-2">Business Hours</div>
+                <p class="text-lg text-black font-light">Monday - Friday: 9:00 - 18:00</p>
+                <p class="text-lg text-black font-light">Saturday: 10:00 - 14:00</p>
+              </div>
             </div>
           </div>
+          
         </div>
         
       </div>

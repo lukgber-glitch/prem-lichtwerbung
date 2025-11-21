@@ -1,19 +1,19 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-6 py-32">
+    <!-- HERO SECTION - Omnicom Minimal with Gradient -->
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-[#FAFAFA] overflow-hidden px-6 py-32">
       
       <!-- Hero content -->
       <div class="text-center max-w-content mx-auto">
         
         <!-- Main headline - Massive Bold Typography -->
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-black mb-12 leading-none tracking-tighter">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-black mb-12 leading-none tracking-[-0.03em]">
           Your Brand<br>Deserves to Shine
         </h1>
         
         <!-- Minimal subtext - Ultra-light -->
-        <p class="text-xl md:text-2xl text-black font-light mb-16 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-xl md:text-2xl text-black/70 font-light mb-16 max-w-2xl mx-auto leading-relaxed">
           Premium illuminated signage crafted with precision
         </p>
         
@@ -29,16 +29,22 @@
       
     </section>
     
-    <!-- ABOUT SECTION - Omnicom Narrative -->
-    <section class="py-44 bg-white">
+    <!-- ABOUT SECTION - Omnicom Narrative with Accent Line -->
+    <section class="py-32 bg-[#FAFAFA]">
       <div class="max-w-content mx-auto px-6 md:px-32">
         <div class="grid md:grid-cols-2 gap-32 items-center">
           <!-- Left: Floating Text (40% of space) -->
           <div>
+            <!-- Decorative Accent Line -->
+            <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+            
+            <!-- Section Label -->
+            <p class="text-xs uppercase tracking-[0.2em] font-semibold text-black/60 mb-6">Our Story</p>
+            
             <h2 class="text-5xl md:text-6xl font-heading font-bold text-black mb-12 leading-tight">
               15 Years of Illumination Excellence
             </h2>
-            <p class="text-lg md:text-xl text-black font-light leading-relaxed max-w-text">
+            <p class="text-lg md:text-xl text-black/70 font-light leading-relaxed max-w-text">
               Since our founding, we've transformed ordinary facades into extraordinary brand experiences. Our craft combines precision engineering with artistic vision, delivering illuminated signage that doesn't just light up buildings—it defines them. Every project reflects our commitment to quality, innovation, and the belief that your brand deserves nothing less than brilliance.
             </p>
           </div>
@@ -48,9 +54,17 @@
       </div>
     </section>
     
-    <!-- SERVICES SECTION - Omnicom Minimal Grid -->
-    <section class="py-44 bg-black">
+    <!-- SERVICES SECTION - Omnicom Minimal Grid with Gradient -->
+    <section class="py-60 bg-gradient-to-b from-[#0A0A0A] to-black">
       <div class="max-w-content mx-auto px-6 md:px-32">
+        
+        <!-- Section Header -->
+        <div class="mb-20">
+          <div class="w-[60px] h-[2px] bg-white mb-8"></div>
+          <p class="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mb-6">What We Do</p>
+          <h2 class="text-5xl md:text-6xl font-heading font-bold text-white leading-tight">Our Services</h2>
+        </div>
+        
         <div class="grid md:grid-cols-3 gap-20">
           <div 
             v-for="service in services" 
@@ -67,12 +81,12 @@
     </section>
     
     <!-- CTA SECTION - Omnicom Dramatic -->
-    <section class="py-44 bg-black">
+    <section class="py-60 bg-black">
       <div class="max-w-content mx-auto px-6 md:px-32 text-center">
-        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-tight">
+        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-[-0.02em]">
           Let's Create Something<br>Extraordinary
         </h2>
-        <p class="text-xl text-white/80 font-light mb-12">
+        <p class="text-xl text-white/70 font-light mb-12">
           contact@prem-lichtwerbung.de
         </p>
         <button 
