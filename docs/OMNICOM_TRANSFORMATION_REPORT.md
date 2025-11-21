@@ -898,43 +898,130 @@ onMounted(() => {
 
 ---
 
+## ROLLBACK: Terminal Components Reverted to Original Styling
+
+### User Clarification (Post-Phase 9)
+
+**Issue**: User requested rollback of "last terminal style changes" with clarification: "only terminal site should have changed"
+
+**Interpretation**: User wanted terminal PAGE (TerminalDemo.vue at `/terminal-demo` route) to have Omnicom transformation, but NOT the terminal COMPONENT itself (POSTerminal.vue hardware frame and TerminalWelcome.vue screen).
+
+**Action Taken**: Reverted Phases 5 and 8 terminal component transformations while preserving Phase 9 terminal page transformation.
+
+---
+
+### Files Reverted (Commit 3920755)
+
+#### POSTerminal.vue (Terminal Hardware Component)
+**Reverted From**: Phase 5 minimal black/white transformation (commit 8b0a4f7)  
+**Restored To**: Pre-Phase 5 original styling (commit ef5a330)
+
+**Restored Styling**:
+- Industrial gray palette (#6b7280, #4b5563, #d4d4d8, #a1a1aa, #18181b)
+- Colored buttons: red (#ef4444), yellow (#fbbf24), green (#22c55e)
+- Rounded corners (border-radius 0.5rem, 0.25rem, 2px)
+- Box-shadows (3D depth, inset shadows, glow effects)
+- 3D transform effects (translateY on button press)
+- Circular status lights with pulse animations
+- Text-shadow effects
+- Gradients (linear-gradient 135deg/145deg/180deg)
+
+**Result**: Terminal hardware frame displays with original functional colorful design
+
+---
+
+#### TerminalWelcome.vue (Terminal Welcome Screen)
+**Reverted From**: Phase 8 minimal black/white transformation (commit e77a50a)  
+**Restored To**: Pre-Phase 8 original styling (commit 8884c1d)
+
+**Restored Styling**:
+- Dark blue gradient background (linear-gradient 135deg #0f172a to #1e293b)
+- Radial gradient animation effect with 20s rotation
+- Colored text: blues (#3b82f6, #60a5fa), greens (#22c55e), grays (#94a3b8, #64748b, #cbd5e1, #9ca3af)
+- Rounded corners (border-radius 0.5rem, 0.25rem)
+- Text-shadow glow effects (0 0 20px rgba)
+- Float and bounce animations
+- Colored borders on price items (rgba green/blue)
+- Colored backgrounds (rgba 34,197,94 / 59,130,246 / 255,255,255,0.05)
+- Transform hover effects (translateX, scale)
+
+**Result**: Terminal welcome screen displays with original engaging colorful design
+
+---
+
+### Files Preserved (No Changes)
+
+#### TerminalDemo.vue (Terminal Demo Page)
+**Status**: Phase 9 transformation PRESERVED (commit 5792d59)
+
+**Omnicom Styling Retained**:
+- Pure white/black backgrounds
+- Massive typography (text-7xl to text-9xl)
+- Ghost buttons with invert hover
+- Language selector integration
+- Overflow handling for content cutoff fix
+- Generous whitespace (py-44, px-32)
+- Sharp edges throughout
+- Minimal border styling
+
+**Result**: Terminal demo page at `/terminal-demo` route maintains complete Omnicom minimal aesthetic
+
+---
+
+### Rollback Summary
+
+**Commit**: 3920755 - "ROLLBACK: Revert terminal component transformations (Phases 5 & 8)"  
+**Files Changed**: 2 (POSTerminal.vue, TerminalWelcome.vue)  
+**Lines Changed**: 202 insertions, 87 deletions (net +115 lines restored)  
+**Phases Affected**: Phase 5 and Phase 8 terminal component changes reverted  
+**Phases Preserved**: All other phases (1-4, 6-7, 9) remain unchanged
+
+**Clarification Outcome**:
+- ✅ Terminal SITE (TerminalDemo.vue page) = Omnicom black/white minimal ✓ PRESERVED
+- ✅ Terminal COMPONENT (POSTerminal.vue, TerminalWelcome.vue) = Original colorful functional ✓ RESTORED
+- ✅ All main pages (Home, Products, ProductDetail, About, Contact) = Omnicom ✓ PRESERVED
+- ✅ All UI components (Header, Footer, ButtonGlow, ProductCard, etc.) = Omnicom ✓ PRESERVED
+- ✅ Product filters, animations, fonts, design system = All preserved ✓ PRESERVED
+
+---
+
 ## Conclusion
 
 The Prem-Lichtwerbung website has successfully completed **Phases 1-9** of the Omnicom Group-inspired transformation, evolving from a conventional, colorful illuminated signage website to a premium, ultra-minimal corporate experience with sophisticated black/white aesthetics, functional product filtering, user-visible hero sections, and complete terminal demo page transformation.
 
-### Key Achievements (Phases 1-9)
+### Key Achievements (Phases 1-9, with Rollback)
 ✅ Implemented pure black/white color palette (21:1 contrast, WCAG AAA)  
 ✅ Deployed massive typography system (96-160px headlines, 300/900 weights)  
 ✅ Created generous whitespace layouts (80%+ empty space per section)  
 ✅ Transformed all main pages (Home, Products, ProductDetail, About, Contact)  
 ✅ Simplified navigation to 4 core pages (Story, Work, Terminal, Contact)  
-✅ Redesigned 9 core components (Header, Footer, ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher)  
-✅ Transformed terminal hardware frame to minimal black/white ghost button design  
+✅ Redesigned 7 core UI components (Header, Footer, ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher)  
 ✅ Integrated product filters with category, illumination type, and price range  
 ✅ Fixed hero video visibility - pure white background with massive typography  
-✅ Transformed terminal welcome screen to complete black/white Omnicom aesthetic  
-✅ Reduced terminal codebase by 115 lines total (frame + welcome screen)  
 ✅ Added 125 lines for enhanced product filtering functionality  
 ✅ Installed premium fonts (Inter, Outfit) and GSAP animation system  
-✅ Achieved sharp edges throughout (no rounded corners)  
-✅ Eliminated all shadows, gradients, and decorative animations  
+✅ Achieved sharp edges throughout (no rounded corners on Omnicom pages)  
+✅ Eliminated all shadows, gradients, and decorative animations on Omnicom pages  
 ✅ Implemented 800-1200ms sophisticated transitions  
 ✅ Transformed Terminal Demo page (/terminal-demo) to complete Omnicom aesthetic  
 ✅ Integrated language selector on terminal demo section  
 ✅ Fixed content cutoff on terminal screens with overflow handling  
-✅ Resolved all 4 user-reported issues (terminal page, language selector, content cutoff, hero visibility)
+✅ Resolved all 4 user-reported issues (terminal page, language selector, content cutoff, hero visibility)  
+✅ Clarified and implemented terminal styling: Demo page = Omnicom minimal, Component = Original colorful  
+⚠️ Terminal component (POSTerminal.vue, TerminalWelcome.vue) reverted to original colorful styling per user request
 
-### Transformation Statistics (Updated)
-- **Total Files Transformed**: 27 files across 9 committed phases
+### Transformation Statistics (Updated with Rollback)
+- **Total Files Transformed**: 26 files across 9 phases + 1 rollback (25 files with Omnicom styling)
 - **Phase 1-4 Lines Removed**: 1,969 lines (35% average reduction)
-- **Phase 5 Lines Removed**: 71 lines (terminal frame)
+- **Phase 5 Lines Removed**: 71 lines (terminal frame - REVERTED in rollback)
 - **Phase 6 Lines Added**: 125 lines (product filters)
 - **Phase 7 Lines Added/Removed**: +14 lines (video, later removed in Phase 8)
-- **Phase 8 Lines Removed**: 58 lines (video fix -14, TerminalWelcome -44)
-- **Phase 9 Lines Removed**: 42 lines (TerminalDemo page -42, 13% reduction)
-- **Net Code Change**: -2,001 lines removed overall
-- **Largest Reductions**: Home.vue (70%), Products.vue (70% then enhanced), Footer.vue (51%), TerminalDemo.vue (13%), TerminalWelcome.vue (12%)
-- **Commits**: 9 comprehensive commits with full documentation
+- **Phase 8 Lines Removed**: 58 lines (video fix -14, TerminalWelcome -44 - REVERTED in rollback)
+- **Phase 9 Lines Removed**: 42 lines (TerminalDemo page -42, 13% reduction - PRESERVED)
+- **Rollback Lines Restored**: +115 lines (POSTerminal +71, TerminalWelcome +44 restored to original)
+- **Net Code Change**: -1,886 lines removed overall (after rollback adjustment)
+- **Largest Reductions**: Home.vue (70%), Products.vue (70% then enhanced), Footer.vue (51%), TerminalDemo.vue (13%)
+- **Commits**: 10 total (9 transformation phases + 1 rollback)
 
 ### Design Impact
 - **Visual Hierarchy**: Dramatically improved with massive bold typography
@@ -946,11 +1033,12 @@ The Prem-Lichtwerbung website has successfully completed **Phases 1-9** of the O
 - **User Experience**: Immediate hero visibility with pure white backgrounds and massive typography
 
 ### Completed Pages & Components
-**Pages**: Home (pure white hero), Products (with filters), ProductDetail, About, Contact, TerminalDemo (with language selector)  
-**Navigation**: Header (4 links), Footer (single row)  
-**Components**: ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher, POSTerminal (frame), TerminalWelcome (screen)  
+**Pages (Omnicom Styling)**: Home (pure white hero), Products (with filters), ProductDetail, About, Contact, TerminalDemo (demo page with language selector)  
+**Navigation (Omnicom Styling)**: Header (4 links), Footer (single row)  
+**UI Components (Omnicom Styling)**: ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher  
+**Terminal Components (Original Colorful Styling)**: POSTerminal (hardware frame), TerminalWelcome (welcome screen), 13 other terminal screens  
 **System**: Design documentation, Tailwind config, GSAP animations, Premium fonts  
-**Enhancements**: Product filters (category/illumination/price), Visible hero sections, Terminal overflow handling
+**Enhancements**: Product filters (category/illumination/price), Visible hero sections, Terminal page overflow handling
 
 ### Optional Future Enhancements
 1. Generate AI brand imagery for hero sections (scripts already exist)
@@ -963,21 +1051,20 @@ The Prem-Lichtwerbung website has successfully completed **Phases 1-9** of the O
 
 ---
 
-**Transformation Status**: ✅ **PHASES 1-9 COMPLETE**  
+**Transformation Status**: ✅ **PHASES 1-9 COMPLETE + ROLLBACK**  
 **Design System**: ✅ **Documented & Implemented**  
 **All Main Pages**: ✅ **Redesigned (Home, Products, ProductDetail, About, Contact, TerminalDemo)**  
 **Navigation**: ✅ **Header & Footer Ultra-Minimal**  
-**UI Components**: ✅ **All Core Components Transformed**  
-**Terminal Frame**: ✅ **Minimal Black/White Ghost Button Design**  
-**Terminal Welcome Screen**: ✅ **Complete Black/White Omnicom Transformation**  
+**UI Components**: ✅ **All Core Components Transformed (7 components)**  
+**Terminal Components**: ⚠️ **Original Colorful Styling Restored (POSTerminal, TerminalWelcome per user request)**  
 **Terminal Demo Page**: ✅ **Complete Omnicom Transformation with Language Selector**  
 **Product Filters**: ✅ **Category, Illumination, Price Range Integrated**  
 **Hero Visibility**: ✅ **Pure White Background with Massive Typography**  
 **Content Overflow**: ✅ **Terminal Screen Cutoff Fixed with Overflow Handling**  
-**Code Quality**: ✅ **Net 2,001 Lines Removed, Enhanced Functionality Added**  
-**Accessibility**: ✅ **WCAG AAA Compliance (21:1 Contrast)**  
-**User Issues**: ✅ **All 4 User-Reported Issues Resolved**
+**Code Quality**: ✅ **Net 1,886 Lines Removed (after rollback), Enhanced Functionality Added**  
+**Accessibility**: ✅ **WCAG AAA Compliance (21:1 Contrast) on Omnicom pages**  
+**User Issues**: ✅ **All 4 User-Reported Issues Resolved + Terminal Styling Clarified**
 
 **Prepared By**: Junie (Autonomous Programmer)  
 **Date**: November 21, 2025  
-**Version**: 3.2 (Phases 1-9 Complete)
+**Version**: 3.3 (Phases 1-9 Complete + Terminal Component Rollback)
