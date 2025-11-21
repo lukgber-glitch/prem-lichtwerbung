@@ -1,34 +1,39 @@
 <template>
-  <div class="terminal-demo-page">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="container mx-auto px-4 py-16 text-center">
-        <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+  <div class="terminal-demo-page bg-white">
+    <!-- HERO SECTION - Omnicom Minimal -->
+    <section class="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-6">
+      <div class="max-w-content mx-auto text-center">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-black leading-none tracking-tighter mb-16">
           {{ $t('terminalDemo.title') }}
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+        <p class="text-xl md:text-2xl text-black font-light max-w-2xl mx-auto leading-relaxed mb-16">
           {{ $t('terminalDemo.subtitle') }}
         </p>
-        <div class="flex gap-4 justify-center flex-wrap">
-          <a href="#demo" class="btn btn-primary btn-lg">
+        <div class="flex gap-6 justify-center flex-wrap">
+          <a href="#demo" class="px-16 py-6 bg-black text-white text-lg font-semibold border-2 border-black hover:bg-white hover:text-black transition-all duration-500 cursor-pointer">
             {{ $t('terminalDemo.tryDemo') }}
           </a>
-          <router-link to="/contact" class="btn btn-outline btn-lg">
+          <router-link to="/contact" class="px-16 py-6 bg-transparent text-black text-lg font-semibold border-2 border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer">
             {{ $t('terminalDemo.requestQuote') }}
           </router-link>
         </div>
       </div>
     </section>
 
-    <!-- Live Demo Section -->
-    <section id="demo" class="demo-section py-16 bg-gray-50 dark:bg-gray-900">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-4">
+    <!-- LIVE DEMO SECTION - Omnicom Black Background -->
+    <section id="demo" class="py-44 bg-black">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-white text-center mb-12 leading-tight">
           {{ $t('terminalDemo.liveDemoTitle') }}
         </h2>
-        <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+        <p class="text-center text-white/80 font-light text-lg mb-20 max-w-2xl mx-auto leading-relaxed">
           {{ $t('terminalDemo.liveDemoSubtitle') }}
         </p>
+        
+        <!-- Language Selector for Terminal -->
+        <div class="flex justify-center mb-8">
+          <LanguageSwitcher />
+        </div>
         
         <div class="terminal-demo-wrapper flex justify-center">
           <POSTerminal />
@@ -36,36 +41,35 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-12">
+    <!-- FEATURES SECTION - Omnicom Minimal Grid -->
+    <section class="py-44 bg-white">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-black text-center mb-20 leading-tight">
           {{ $t('terminalDemo.featuresTitle') }}
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="feature in features" :key="feature.icon" class="feature-card p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-            <div class="text-4xl mb-4">{{ feature.icon }}</div>
-            <h3 class="text-xl font-bold mb-2">{{ $t(feature.title) }}</h3>
-            <p class="text-gray-600 dark:text-gray-300">{{ $t(feature.description) }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+          <div v-for="feature in features" :key="feature.icon" class="feature-card py-8 border-b border-black/10 hover:border-black transition-all duration-500">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-4 leading-tight">{{ $t(feature.title) }}</h3>
+            <p class="text-black/60 font-light text-base leading-relaxed">{{ $t(feature.description) }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Technical Specifications -->
-    <section class="specs-section py-16 bg-gray-50 dark:bg-gray-900">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-12">
+    <!-- TECHNICAL SPECIFICATIONS - Omnicom Minimal Table -->
+    <section class="py-44 bg-black">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-white text-center mb-20 leading-tight">
           {{ $t('terminalDemo.specsTitle') }}
         </h2>
-        <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="max-w-4xl mx-auto bg-white border border-black overflow-hidden">
           <table class="w-full">
             <tbody>
-              <tr v-for="(spec, index) in specifications" :key="index" class="border-b dark:border-gray-700">
-                <td class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">
+              <tr v-for="(spec, index) in specifications" :key="index" class="border-b border-black/10 last:border-b-0">
+                <td class="px-8 py-6 font-semibold text-black font-light">
                   {{ $t(spec.label) }}
                 </td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-400">
+                <td class="px-8 py-6 text-black/60 font-light">
                   {{ $t(spec.value) }}
                 </td>
               </tr>
@@ -75,25 +79,25 @@
       </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold text-center mb-12">
+    <!-- PRICING SECTION - Omnicom Minimal Cards -->
+    <section class="py-44 bg-white">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-black text-center mb-20 leading-tight">
           {{ $t('terminalDemo.pricingTitle') }}
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div v-for="plan in pricingPlans" :key="plan.size" class="pricing-card p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center" :class="{ 'ring-2 ring-blue-500': plan.popular }">
-            <div v-if="plan.popular" class="text-blue-600 font-bold text-sm mb-2 uppercase">{{ $t('terminalDemo.popular') }}</div>
-            <h3 class="text-2xl font-bold mb-4">{{ $t(plan.size) }}</h3>
-            <div class="text-4xl font-bold mb-2">€{{ plan.price.toLocaleString() }}</div>
-            <p class="text-gray-500 dark:text-gray-400 mb-6">{{ $t(plan.description) }}</p>
-            <ul class="text-left mb-8 space-y-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          <div v-for="plan in pricingPlans" :key="plan.size" class="pricing-card p-12 border border-black/10 hover:border-black transition-all duration-500 text-center" :class="{ 'bg-black text-white': plan.popular }">
+            <div v-if="plan.popular" class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">{{ $t('terminalDemo.popular') }}</div>
+            <h3 class="text-3xl font-heading font-bold mb-6" :class="plan.popular ? 'text-white' : 'text-black'">{{ $t(plan.size) }}</h3>
+            <div class="text-5xl font-black mb-4" :class="plan.popular ? 'text-white' : 'text-black'">€{{ plan.price.toLocaleString() }}</div>
+            <p class="font-light text-base mb-12" :class="plan.popular ? 'text-white/60' : 'text-black/60'">{{ $t(plan.description) }}</p>
+            <ul class="text-left mb-12 space-y-4">
               <li v-for="feature in plan.features" :key="feature" class="flex items-start">
-                <span class="text-green-500 mr-2">✓</span>
-                <span class="text-gray-600 dark:text-gray-300">{{ $t(feature) }}</span>
+                <span class="mr-3" :class="plan.popular ? 'text-white' : 'text-black'">—</span>
+                <span class="font-light" :class="plan.popular ? 'text-white/80' : 'text-black/60'">{{ $t(feature) }}</span>
               </li>
             </ul>
-            <router-link to="/contact" class="btn btn-primary w-full">
+            <router-link to="/contact" class="inline-block px-12 py-4 text-base font-semibold border-2 transition-all duration-500 cursor-pointer w-full text-center" :class="plan.popular ? 'bg-white text-black border-white hover:bg-transparent hover:text-white' : 'bg-black text-white border-black hover:bg-white hover:text-black'">
               {{ $t('terminalDemo.getStarted') }}
             </router-link>
           </div>
@@ -101,20 +105,20 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section py-16 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold mb-6">
+    <!-- CTA SECTION - Omnicom Black Background -->
+    <section class="py-44 bg-black">
+      <div class="max-w-content mx-auto px-6 md:px-32 text-center">
+        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-tight">
           {{ $t('terminalDemo.ctaTitle') }}
         </h2>
-        <p class="text-xl mb-8 max-w-2xl mx-auto">
+        <p class="text-xl text-white/80 font-light mb-16 max-w-2xl mx-auto leading-relaxed">
           {{ $t('terminalDemo.ctaSubtitle') }}
         </p>
-        <div class="flex gap-4 justify-center flex-wrap">
-          <router-link to="/contact" class="btn bg-white text-blue-600 hover:bg-gray-100 btn-lg">
+        <div class="flex gap-6 justify-center flex-wrap">
+          <router-link to="/contact" class="px-16 py-6 bg-white text-black text-lg font-semibold border-2 border-white hover:bg-black hover:text-white transition-all duration-500 cursor-pointer">
             {{ $t('terminalDemo.contactSales') }}
           </router-link>
-          <router-link to="/products/pos-terminal-gas-station" class="btn btn-outline border-white text-white hover:bg-white hover:text-blue-600 btn-lg">
+          <router-link to="/products/pos-terminal-gas-station" class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer">
             {{ $t('terminalDemo.viewProduct') }}
           </router-link>
         </div>
@@ -126,6 +130,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import POSTerminal from '@/components/terminal/POSTerminal.vue'
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 
 const { t } = useI18n()
 
@@ -237,81 +242,34 @@ const pricingPlans = [
 </script>
 
 <style scoped>
+/* Omnicom Minimal Terminal Demo Page - Pure Black/White Aesthetic */
 .terminal-demo-page {
   min-height: 100vh;
+  background: #FFFFFF;
 }
 
-.hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 4rem 0;
-}
-
-.hero-section h1 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
+/* Terminal Demo Wrapper - Overflow Handling for Content Cutoff Fix */
 .terminal-demo-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-  border-radius: 1rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  max-height: 800px;
 }
 
+/* Feature Cards - Minimal Border Hover */
 .feature-card {
-  transition: transform 0.3s ease;
+  transition: border-color 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-}
-
+/* Pricing Cards - Minimal Transitions */
 .pricing-card {
-  transition: transform 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-.pricing-card:hover {
-  transform: translateY(-5px);
-}
-
-.btn {
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.btn-primary:hover {
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-}
-
-.btn-outline {
-  border: 2px solid currentColor;
-  background: transparent;
-}
-
-.btn-outline:hover {
-  background: currentColor;
-  color: white;
-}
-
-.btn-lg {
-  padding: 1rem 2.5rem;
-  font-size: 1.125rem;
-}
-
-table td {
-  border-bottom: 1px solid;
+/* Responsive - Mobile Optimization */
+@media (max-width: 768px) {
+  .terminal-demo-wrapper {
+    max-height: 600px;
+  }
 }
 </style>
