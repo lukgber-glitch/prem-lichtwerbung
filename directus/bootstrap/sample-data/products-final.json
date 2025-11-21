@@ -1,0 +1,627 @@
+[
+  {
+    "id": 1,
+    "status": "published",
+    "name": "Single-Sided LED Lightbox",
+    "name_de": "Einseitiger LED-Leuchtkasten",
+    "slug": "single-sided-led-lightbox",
+    "description": "Premium single-sided LED lightbox with crystal-clear acrylic face and energy-efficient LED edge lighting. Perfect for storefronts, malls, and indoor displays. Your graphics stay vibrant 24/7 with ultra-bright, uniform illumination.",
+    "description_de": "Premium einseitiger LED-Leuchtkasten mit kristallklarer Acrylfront und energieeffizienter LED-Kantenbeleuchtung. Perfekt f�r Schaufenster, Einkaufszentren und Innenausstellungen. Ihre Grafiken bleiben 24/7 lebendig mit ultraheller, gleichm��iger Beleuchtung.",
+    "price": 599,
+    "compare_at_price": 799,
+    "stock": 25,
+    "sku": "LBX-SS-001",
+    "featured": true,
+    "illumination_type": "LED Edge-Lit",
+    "suitable_for": [
+      "Indoor",
+      "Outdoor",
+      "Storefront",
+      "Mall"
+    ],
+    "mounting_type": "Wall-mounted",
+    "profile_type": "Slim aluminum profile",
+    "ip_rating": "IP65",
+    "power_consumption_watts": 45,
+    "dimensions_width_cm": 100,
+    "dimensions_height_cm": 100,
+    "dimensions_depth_cm": 8,
+    "material": "3mm acrylic face with powder-coated aluminum frame",
+    "material_de": "3mm Acrylfront mit pulverbeschichtetem Aluminiumrahmen",
+    "customizable": true,
+    "lead_time_days": 7,
+    "warranty_years": 2,
+    "installation_included": false,
+    "installation_price": 150,
+    "shipping_price": 50,
+    "power_supply_included": true,
+    "features": [
+      "Energy-efficient LED technology",
+      "Ultra-bright uniform illumination",
+      "Weatherproof IP65 rating",
+      "Easy graphic replacement",
+      "2-year warranty",
+      "Multiple size options available"
+    ],
+    "size_options": [
+      {
+        "size": "100x100cm",
+        "price": 599
+      },
+      {
+        "size": "150x100cm",
+        "price": 799
+      },
+      {
+        "size": "200x150cm",
+        "price": 1099
+      }
+    ],
+    "primary_image": "2f03a998-f7e7-455d-aca1-148c18d39dd7",
+    "day_image": "231e0e66-47af-4ad6-8f69-fcc37fdfbdd7",
+    "night_image": "18a30ea4-d516-40e8-ad82-a35f02bd7c8d",
+    "before_image": "5be975cb-ac8c-4e4f-a758-b0218a11b20c",
+    "after_image": "604e1a5f-16bd-43f1-8c34-af3806af0f08"
+  },
+  {
+    "id": 2,
+    "status": "published",
+    "name": "Double-Sided LED Lightbox",
+    "name_de": "Doppelseitiger LED-Leuchtkasten",
+    "slug": "double-sided-led-lightbox",
+    "description": "Maximize visibility from both directions with our double-sided LED lightbox. Perfect for ceiling-suspended or pole-mounted installations in high-traffic areas. Two independently illuminated faces for 360� impact.",
+    "description_de": "Maximieren Sie die Sichtbarkeit aus beiden Richtungen mit unserem doppelseitigen LED-Leuchtkasten. Perfekt f�r Deckenaufh�ngung oder Pfostenmontage in stark frequentierten Bereichen. Zwei unabh�ngig beleuchtete Fl�chen f�r 360�-Wirkung.",
+    "price": 899,
+    "compare_at_price": 1199,
+    "stock": 18,
+    "sku": "LBX-DS-001",
+    "featured": true,
+    "illumination_type": "LED Edge-Lit Dual",
+    "suitable_for": [
+      "Indoor",
+      "Outdoor",
+      "Mall",
+      "Suspended"
+    ],
+    "mounting_type": "Ceiling-suspended / Pole-mounted",
+    "profile_type": "Double-sided aluminum profile",
+    "ip_rating": "IP65",
+    "power_consumption_watts": 80,
+    "dimensions_width_cm": 100,
+    "dimensions_height_cm": 100,
+    "dimensions_depth_cm": 12,
+    "material": "Dual 3mm acrylic faces with reinforced aluminum frame",
+    "material_de": "Doppelte 3mm Acrylfronten mit verst�rktem Aluminiumrahmen",
+    "customizable": true,
+    "lead_time_days": 10,
+    "warranty_years": 2,
+    "installation_included": false,
+    "installation_price": 220,
+    "shipping_price": 75,
+    "power_supply_included": true,
+    "features": [
+      "Double-sided illumination",
+      "360-degree visibility",
+      "Weatherproof IP65 rating",
+      "Ceiling or pole mounting",
+      "Energy-efficient LED",
+      "2-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "100x100cm",
+        "price": 899
+      },
+      {
+        "size": "150x100cm",
+        "price": 1199
+      },
+      {
+        "size": "200x150cm",
+        "price": 1599
+      }
+    ],
+    "primary_image": "1404c92d-147c-4598-a593-d23f668d48f7",
+    "day_image": "f847c809-8159-43ce-990f-d5d6f0c26913",
+    "night_image": "692fe703-6a86-4f17-98a9-5402911f0b14",
+    "before_image": "f5205350-66ec-4c63-93fe-cbc209baa0e8",
+    "after_image": "52084c2e-c8e6-42f0-911b-079b42192306"
+  },
+  {
+    "id": 3,
+    "status": "published",
+    "name": "Illuminated Front-Lit Channel Letters",
+    "name_de": "Frontal beleuchtete Profilbuchstaben",
+    "slug": "front-lit-channel-letters",
+    "description": "Classic front-lit channel letters with translucent acrylic faces. Bold, bright 3D letters that make your brand shine day and night. Individual letters mounted directly to building facades for maximum impact.",
+    "description_de": "Klassische frontal beleuchtete Profilbuchstaben mit transluzenten Acrylfronten. Kr�ftige, helle 3D-Buchstaben, die Ihre Marke Tag und Nacht erstrahlen lassen. Einzelne Buchstaben direkt an Geb�udefassaden montiert f�r maximale Wirkung.",
+    "price": 89,
+    "compare_at_price": 129,
+    "stock": 100,
+    "sku": "CHL-FL-001",
+    "featured": true,
+    "illumination_type": "Front-Lit LED",
+    "suitable_for": [
+      "Outdoor",
+      "Storefront",
+      "Building Facade"
+    ],
+    "mounting_type": "Direct facade mounting",
+    "profile_type": "Aluminum channel",
+    "ip_rating": "IP67",
+    "power_consumption_watts": 5,
+    "dimensions_height_cm": 50,
+    "dimensions_depth_cm": 10,
+    "material": "Powder-coated aluminum with acrylic face",
+    "material_de": "Pulverbeschichtetes Aluminium mit Acrylfront",
+    "customizable": true,
+    "lead_time_days": 14,
+    "warranty_years": 3,
+    "installation_included": false,
+    "installation_price": 45,
+    "shipping_price": 25,
+    "power_supply_included": false,
+    "features": [
+      "Price per letter",
+      "3D dimensional letters",
+      "Bright LED illumination",
+      "Waterproof IP67",
+      "Custom colors available",
+      "3-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "30cm height",
+        "price": 69
+      },
+      {
+        "size": "50cm height",
+        "price": 89
+      },
+      {
+        "size": "70cm height",
+        "price": 129
+      },
+      {
+        "size": "100cm height",
+        "price": 189
+      }
+    ],
+    "primary_image": "111ffae3-3d13-474f-868a-e37ffeab7430",
+    "day_image": "07b51ed3-af2e-4f1c-8087-3dec8f73a5cd",
+    "night_image": "ee6479e9-624e-4483-a3e9-7e7d621814a4",
+    "before_image": "192faa4a-5b76-4a26-b93f-d7f3a6e334aa",
+    "after_image": "622581cd-bc0a-4b7a-9d06-8f07f0740b8f"
+  },
+  {
+    "id": 4,
+    "status": "published",
+    "name": "Halo-Lit Channel Letters",
+    "name_de": "Halo-beleuchtete Profilbuchstaben",
+    "slug": "halo-lit-channel-letters",
+    "description": "Sophisticated halo-lit channel letters creating a stunning backlit glow effect. Premium reverse-illuminated letters that project a soft halo of light behind each letter for an elegant, high-end appearance.",
+    "description_de": "Elegante Halo-beleuchtete Profilbuchstaben mit beeindruckendem Hintergrundlicht-Effekt. Premium r�ckw�rts beleuchtete Buchstaben, die einen sanften Lichthof hinter jedem Buchstaben projizieren f�r ein elegantes, hochwertiges Erscheinungsbild.",
+    "price": 119,
+    "compare_at_price": 169,
+    "stock": 80,
+    "sku": "CHL-HL-001",
+    "featured": true,
+    "illumination_type": "Halo Back-Lit LED",
+    "suitable_for": [
+      "Outdoor",
+      "Storefront",
+      "Premium Locations"
+    ],
+    "mounting_type": "Standoff facade mounting",
+    "profile_type": "Premium aluminum channel",
+    "ip_rating": "IP67",
+    "power_consumption_watts": 6,
+    "dimensions_height_cm": 50,
+    "dimensions_depth_cm": 12,
+    "material": "Brushed aluminum with LED halo",
+    "material_de": "Geb�rstetes Aluminium mit LED-Halo",
+    "customizable": true,
+    "lead_time_days": 14,
+    "warranty_years": 3,
+    "installation_included": false,
+    "installation_price": 55,
+    "shipping_price": 30,
+    "power_supply_included": false,
+    "features": [
+      "Price per letter",
+      "Stunning halo glow effect",
+      "Premium brushed aluminum",
+      "Waterproof IP67",
+      "Elegant back-lit design",
+      "3-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "30cm height",
+        "price": 89
+      },
+      {
+        "size": "50cm height",
+        "price": 119
+      },
+      {
+        "size": "70cm height",
+        "price": 169
+      },
+      {
+        "size": "100cm height",
+        "price": 249
+      }
+    ],
+    "primary_image": "b509a463-a5a8-4aad-b200-b6e6b2009c77",
+    "day_image": "ebc68d88-527a-4250-a758-051922dc58b7",
+    "night_image": "798b320d-f7fe-409e-8dec-772a7ed7ed12",
+    "before_image": "62895616-5e99-41c2-8462-69265892f58d",
+    "after_image": "510bc248-e548-413a-95b5-6ad8ac404845"
+  },
+  {
+    "id": 5,
+    "status": "published",
+    "name": "Custom LED Neon Sign",
+    "name_de": "Individuelles LED-Neon-Schild",
+    "slug": "custom-led-neon-sign",
+    "description": "Fully custom LED neon sign in any shape, text, or logo. Modern LED neon technology with the classic neon look but safer, more durable, and energy-efficient. Perfect for businesses, restaurants, bars, and events.",
+    "description_de": "Vollst�ndig individuelles LED-Neon-Schild in jeder Form, Text oder Logo. Moderne LED-Neon-Technologie mit klassischem Neon-Look, aber sicherer, langlebiger und energieeffizienter. Perfekt f�r Unternehmen, Restaurants, Bars und Events.",
+    "price": 299,
+    "compare_at_price": 449,
+    "stock": 50,
+    "sku": "NEON-CUST-001",
+    "featured": true,
+    "illumination_type": "LED Neon Flex",
+    "suitable_for": [
+      "Indoor",
+      "Outdoor",
+      "Restaurant",
+      "Bar",
+      "Event"
+    ],
+    "mounting_type": "Wall-mounted or freestanding",
+    "profile_type": "Flexible LED neon",
+    "ip_rating": "IP65",
+    "power_consumption_watts": 20,
+    "dimensions_width_cm": 100,
+    "dimensions_height_cm": 50,
+    "dimensions_depth_cm": 3,
+    "material": "Flexible LED neon with acrylic backing",
+    "material_de": "Flexibles LED-Neon mit Acryl-R�ckwand",
+    "customizable": true,
+    "lead_time_days": 10,
+    "warranty_years": 2,
+    "installation_included": false,
+    "installation_price": 99,
+    "shipping_price": 35,
+    "power_supply_included": true,
+    "features": [
+      "100% custom design",
+      "Vibrant LED neon colors",
+      "Safe cool-to-touch",
+      "Energy efficient",
+      "Indoor/outdoor use",
+      "2-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "Small (50cm)",
+        "price": 199
+      },
+      {
+        "size": "Medium (100cm)",
+        "price": 299
+      },
+      {
+        "size": "Large (150cm)",
+        "price": 449
+      }
+    ],
+    "primary_image": "06e0a36c-ce88-49f3-b09f-9003beec2d58",
+    "day_image": "e64e497c-566e-4b26-8546-9fd735e56768",
+    "night_image": "060286a4-e23a-4fac-bed3-714fe91666e5",
+    "before_image": "e9d587cf-b737-41e1-a1e8-b7276f0a1cc0",
+    "after_image": "213b6049-6a1b-4798-8a8d-0ed4ebcda4f5"
+  },
+  {
+    "id": 6,
+    "status": "published",
+    "name": "LED Neon Open Sign",
+    "name_de": "LED-Neon OPEN Schild",
+    "slug": "led-neon-open-sign",
+    "description": "Classic LED neon 'OPEN' sign for storefronts. Bright, eye-catching design that attracts customers day and night. Plug-and-play installation with on/off switch. Perfect for retail shops, cafes, and restaurants.",
+    "description_de": "Klassisches LED-Neon 'OPEN' Schild f�r Schaufenster. Helles, auff�lliges Design, das Kunden Tag und Nacht anzieht. Plug-and-Play Installation mit Ein/Aus-Schalter. Perfekt f�r Einzelhandel, Caf�s und Restaurants.",
+    "price": 149,
+    "compare_at_price": 199,
+    "stock": 75,
+    "sku": "NEON-OPEN-001",
+    "featured": false,
+    "illumination_type": "LED Neon Flex",
+    "suitable_for": [
+      "Indoor",
+      "Storefront",
+      "Retail",
+      "Restaurant"
+    ],
+    "mounting_type": "Wall-mounted",
+    "profile_type": "Pre-formed LED neon",
+    "ip_rating": "IP44",
+    "power_consumption_watts": 12,
+    "dimensions_width_cm": 60,
+    "dimensions_height_cm": 30,
+    "dimensions_depth_cm": 3,
+    "material": "LED neon flex with transparent acrylic backing",
+    "material_de": "LED-Neon-Flex mit transparenter Acryl-R�ckwand",
+    "customizable": false,
+    "lead_time_days": 3,
+    "warranty_years": 1,
+    "installation_included": false,
+    "installation_price": 50,
+    "shipping_price": 15,
+    "power_supply_included": true,
+    "features": [
+      "Ready-to-use OPEN sign",
+      "Bright vibrant colors",
+      "Plug-and-play",
+      "On/off switch included",
+      "Low energy consumption",
+      "1-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "60x30cm (fixed)",
+        "price": 149
+      }
+    ],
+    "primary_image": "541dbf5f-bfb7-4735-8545-76e29059918a",
+    "day_image": "9d291c67-8fd4-49e7-b01e-097e4240649d",
+    "night_image": "1e9b202d-0c15-4fa3-967d-1dce9085e951",
+    "before_image": "b229dcc0-01b7-4297-b2df-79d2dd15a5ff",
+    "after_image": "bb2faed0-bd05-4186-8c0c-fa6ce20cfca9"
+  },
+  {
+    "id": 7,
+    "status": "published",
+    "name": "Single-Post Pylon Sign",
+    "name_de": "Einmast-Pylon-Schild",
+    "slug": "single-post-pylon-sign",
+    "description": "Tall freestanding pylon sign for maximum roadside visibility. Perfect for business parks, shopping centers, gas stations, and highways. Illuminated cabinet with single-post support for clean modern look.",
+    "description_de": "Hoher freistehender Pylon f�r maximale Sichtbarkeit an der Stra�e. Perfekt f�r Gewerbeparks, Einkaufszentren, Tankstellen und Autobahnen. Beleuchteter Kasten mit Einmast-Tr�ger f�r sauberen modernen Look.",
+    "price": 3999,
+    "compare_at_price": 5499,
+    "stock": 5,
+    "sku": "PYL-SP-001",
+    "featured": true,
+    "illumination_type": "Internal LED Illumination",
+    "suitable_for": [
+      "Outdoor",
+      "Highway",
+      "Business Park",
+      "Shopping Center"
+    ],
+    "mounting_type": "Ground-mounted with foundation",
+    "profile_type": "Steel post with aluminum cabinet",
+    "ip_rating": "IP65",
+    "power_consumption_watts": 200,
+    "dimensions_width_cm": 200,
+    "dimensions_height_cm": 600,
+    "dimensions_depth_cm": 40,
+    "material": "Aluminum cabinet with steel post and concrete foundation",
+    "material_de": "Aluminium-Kasten mit Stahlpfosten und Betonfundament",
+    "customizable": true,
+    "lead_time_days": 30,
+    "warranty_years": 5,
+    "installation_included": true,
+    "installation_price": 1500,
+    "shipping_price": 500,
+    "power_supply_included": false,
+    "features": [
+      "Maximum visibility",
+      "Durable steel construction",
+      "LED illuminated cabinet",
+      "Foundation included",
+      "Professional installation",
+      "5-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "4m height",
+        "price": 3999
+      },
+      {
+        "size": "6m height",
+        "price": 5499
+      },
+      {
+        "size": "8m height",
+        "price": 7499
+      },
+      {
+        "size": "10m height",
+        "price": 9999
+      }
+    ],
+    "primary_image": "5427987b-850a-4010-9ad9-c8ccadc74e5a",
+    "day_image": "af127d24-dab5-4b08-a788-4bdd7129756f",
+    "night_image": "286b077d-abe8-4093-a957-b2d3d77534b4",
+    "before_image": "a4f279ec-fe58-45ad-8562-766c92dd1987",
+    "after_image": "c64ce588-3dd3-4d83-b4ed-e85b545150a3"
+  },
+  {
+    "id": 8,
+    "status": "published",
+    "name": "Monument Sign",
+    "name_de": "Monument-Schild",
+    "slug": "monument-sign",
+    "description": "Low-profile monument sign with elegant LED illumination. Ground-level design perfect for upscale businesses, corporate campuses, and communities. Stone or brick fa�ade options available.",
+    "description_de": "Flaches Monument-Schild mit eleganter LED-Beleuchtung. Bodennahes Design perfekt f�r gehobene Unternehmen, Firmencampus und Gemeinden. Stein- oder Ziegelfassaden-Optionen verf�gbar.",
+    "price": 2499,
+    "compare_at_price": 3299,
+    "stock": 8,
+    "sku": "MON-MS-001",
+    "featured": true,
+    "illumination_type": "Internal LED or Spot-Lit",
+    "suitable_for": [
+      "Outdoor",
+      "Corporate",
+      "Community",
+      "Upscale"
+    ],
+    "mounting_type": "Ground-level foundation",
+    "profile_type": "Stone/brick with aluminum cabinet",
+    "ip_rating": "IP65",
+    "power_consumption_watts": 100,
+    "dimensions_width_cm": 300,
+    "dimensions_height_cm": 150,
+    "dimensions_depth_cm": 50,
+    "material": "Stone or brick veneer with aluminum frame and concrete foundation",
+    "material_de": "Stein- oder Ziegelfurnier mit Aluminiumrahmen und Betonfundament",
+    "customizable": true,
+    "lead_time_days": 25,
+    "warranty_years": 5,
+    "installation_included": true,
+    "installation_price": 800,
+    "shipping_price": 300,
+    "power_supply_included": false,
+    "features": [
+      "Elegant low-profile design",
+      "Stone/brick fa�ade",
+      "LED illuminated",
+      "Foundation included",
+      "Professional installation",
+      "5-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "2x1m",
+        "price": 2499
+      },
+      {
+        "size": "3x1.5m",
+        "price": 3299
+      },
+      {
+        "size": "4x2m",
+        "price": 4499
+      }
+    ],
+    "primary_image": "d6232e77-8383-4e93-9830-9754e27e780c",
+    "day_image": "e6ff286a-1eab-49b2-9c53-1396cf1a826c",
+    "night_image": "3c9d91ee-824b-47a1-aaee-d85046e0abc5",
+    "before_image": "6af5f5fc-e19b-49c9-ab79-c8ddacc3c2cf",
+    "after_image": "a49e55cf-40f7-4a95-af4c-2108751ec576"
+  },
+  {
+    "id": 9,
+    "status": "published",
+    "name": "Frosted Window Film",
+    "name_de": "Milchglasfolie",
+    "slug": "frosted-window-film",
+    "description": "Premium frosted window film for privacy and elegance. Transforms clear glass into elegant frosted glass appearance. Perfect for offices, conference rooms, storefronts, and bathrooms. Easy to apply and remove.",
+    "description_de": "Premium Milchglasfolie f�r Privatsph�re und Eleganz. Verwandelt klares Glas in elegantes Milchglas-Erscheinungsbild. Perfekt f�r B�ros, Konferenzr�ume, Schaufenster und Badezimmer. Einfach anzubringen und zu entfernen.",
+    "price": 49,
+    "compare_at_price": 69,
+    "stock": 200,
+    "sku": "WIN-FROST-001",
+    "featured": false,
+    "illumination_type": "Non-illuminated",
+    "suitable_for": [
+      "Indoor",
+      "Office",
+      "Storefront",
+      "Privacy"
+    ],
+    "mounting_type": "Self-adhesive film",
+    "profile_type": "Window film",
+    "ip_rating": "N/A",
+    "power_consumption_watts": 0,
+    "dimensions_width_cm": 100,
+    "dimensions_height_cm": 100,
+    "dimensions_depth_cm": 0.1,
+    "material": "Premium vinyl frosted film",
+    "material_de": "Premium-Vinyl-Milchglasfolie",
+    "customizable": true,
+    "lead_time_days": 3,
+    "warranty_years": 3,
+    "installation_included": false,
+    "installation_price": 25,
+    "shipping_price": 10,
+    "power_supply_included": false,
+    "features": [
+      "Price per square meter",
+      "Privacy and UV protection",
+      "Easy application",
+      "Removable without residue",
+      "Elegant frosted look",
+      "3-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "Per m�",
+        "price": 49
+      }
+    ],
+    "primary_image": "913bcb4d-4539-4017-a4f9-42c306799de9",
+    "day_image": "a9df5ffe-dee2-4f64-8cf9-2af51b50f314",
+    "night_image": "760e0038-23d9-42ca-8cb7-e1fc236f0aa4",
+    "before_image": "0b20f429-6baa-4f81-9602-377ad709a867",
+    "after_image": "9baea797-7e06-4a2c-818e-2be873c65ee9"
+  },
+  {
+    "id": 10,
+    "status": "published",
+    "name": "Full-Color Window Decals",
+    "name_de": "Vollfarbige Fensteraufkleber",
+    "slug": "full-color-window-decals",
+    "description": "High-quality full-color printed window decals for branding and promotions. Vibrant graphics printed on premium vinyl. Perfect for storefronts, promotional campaigns, and seasonal displays. Custom designs welcome.",
+    "description_de": "Hochwertige vollfarbig bedruckte Fensteraufkleber f�r Branding und Promotionen. Lebendige Grafiken auf Premium-Vinyl gedruckt. Perfekt f�r Schaufenster, Werbekampagnen und saisonale Displays. Individuelle Designs willkommen.",
+    "price": 69,
+    "compare_at_price": 99,
+    "stock": 150,
+    "sku": "WIN-DECAL-001",
+    "featured": false,
+    "illumination_type": "Non-illuminated",
+    "suitable_for": [
+      "Indoor",
+      "Outdoor",
+      "Storefront",
+      "Promotional"
+    ],
+    "mounting_type": "Self-adhesive decal",
+    "profile_type": "Printed vinyl",
+    "ip_rating": "N/A",
+    "power_consumption_watts": 0,
+    "dimensions_width_cm": 100,
+    "dimensions_height_cm": 100,
+    "dimensions_depth_cm": 0.1,
+    "material": "Premium printed vinyl with UV protection",
+    "material_de": "Premium-Druck-Vinyl mit UV-Schutz",
+    "customizable": true,
+    "lead_time_days": 5,
+    "warranty_years": 2,
+    "installation_included": false,
+    "installation_price": 35,
+    "shipping_price": 15,
+    "power_supply_included": false,
+    "features": [
+      "Price per square meter",
+      "Full-color printing",
+      "UV-resistant inks",
+      "Custom designs",
+      "Easy application",
+      "2-year warranty"
+    ],
+    "size_options": [
+      {
+        "size": "Per m�",
+        "price": 69
+      }
+    ],
+    "primary_image": "07cecf98-6d79-4502-88e4-1097993fdbd1",
+    "day_image": "626320d4-fa21-4b8f-9837-901c3438c0cf",
+    "night_image": "c0e18e6f-b640-46b9-b706-b916b8726855",
+    "before_image": "957302e9-a78b-4519-8a29-409406bb36a3",
+    "after_image": "3c6e8d10-1755-4d57-bfcb-2e72a3539059"
+  }
+]

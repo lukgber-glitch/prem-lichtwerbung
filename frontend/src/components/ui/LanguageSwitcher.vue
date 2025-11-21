@@ -2,14 +2,12 @@
   <div class="relative">
     <button
       @click="toggleDropdown"
-      class="flex items-center gap-2 px-3 py-2 hover:bg-brand-blue/10 rounded-lg transition-colors text-brand-warm"
+      class="flex items-center gap-2 px-3 py-2 hover:bg-primary/10 rounded-lg transition-colors text-primary"
       :title="currentLanguage === 'en' ? 'Switch language' : 'Sprache wechseln'"
     >
-      <span class="text-xl">{{ currentLanguage === 'en' ? '🇬🇧' : '🇩🇪' }}</span>
-      <span class="hidden md:inline text-sm font-medium">{{ currentLanguage.toUpperCase() }}</span>
-      <svg class="w-4 h-4" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
+      <Globe :size="20" :stroke-width="2" />
+      <span class="text-sm font-medium">{{ currentLanguage.toUpperCase() }}</span>
+      <ChevronDown :size="16" :stroke-width="2" :class="{ 'rotate-180': isOpen }" />
     </button>
     
     <transition
@@ -22,23 +20,23 @@
     >
       <div
         v-if="isOpen"
-        class="absolute right-0 mt-2 w-40 bg-brand-navy border border-brand-blue/20 rounded-lg shadow-xl overflow-hidden z-50"
+        class="absolute right-0 mt-2 w-40 bg-surface border border-primary/20 rounded-lg shadow-xl overflow-hidden z-50"
       >
         <button
           @click="changeLanguage('en')"
-          class="w-full flex items-center gap-3 px-4 py-3 hover:bg-brand-blue/10 transition-colors text-left"
-          :class="{ 'bg-brand-blue/20': currentLanguage === 'en' }"
+          class="w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors text-left"
+          :class="{ 'bg-primary/20': currentLanguage === 'en' }"
         >
-          <span class="text-xl">🇬🇧</span>
-          <span class="text-brand-warm font-medium">English</span>
+          <span class="text-sm font-semibold text-primary">EN</span>
+          <span class="text-text-main font-medium">English</span>
         </button>
         <button
           @click="changeLanguage('de')"
-          class="w-full flex items-center gap-3 px-4 py-3 hover:bg-brand-blue/10 transition-colors text-left"
-          :class="{ 'bg-brand-blue/20': currentLanguage === 'de' }"
+          class="w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-colors text-left"
+          :class="{ 'bg-primary/20': currentLanguage === 'de' }"
         >
-          <span class="text-xl">🇩🇪</span>
-          <span class="text-brand-warm font-medium">Deutsch</span>
+          <span class="text-sm font-semibold text-primary">DE</span>
+          <span class="text-text-main font-medium">Deutsch</span>
         </button>
       </div>
     </transition>
@@ -48,6 +46,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ChevronDown, Globe } from 'lucide-vue-next'
 
 const { locale } = useI18n()
 const isOpen = ref(false)

@@ -58,7 +58,7 @@
                     status.completed ? 'bg-primary text-background border-primary' : 'bg-surface-alt text-text-muted border-text-muted'
                   ]"
                 >
-                  <span class="text-2xl">{{ status.icon }}</span>
+                  <component :is="iconMap[status.icon]" :size="24" :stroke-width="2" />
                 </div>
                 <div v-if="index < orderStatuses.length - 1" :class="['w-1 h-12', status.completed ? 'bg-primary/30' : 'bg-surface-alt']"></div>
               </div>
@@ -88,7 +88,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Component } from 'vue'
+import { Package, CreditCard, Factory, CheckCircle, Truck, PartyPopper } from 'lucide-vue-next'
 
 const trackingForm = ref({
   orderNumber: '',
@@ -98,13 +99,23 @@ const trackingForm = ref({
 const orderFound = ref(false)
 const estimatedDelivery = ref('')
 
+// Icon mapping
+const iconMap: Record<string, Component> = {
+  'Package': Package,
+  'CreditCard': CreditCard,
+  'Factory': Factory,
+  'CheckCircle': CheckCircle,
+  'Truck': Truck,
+  'PartyPopper': PartyPopper
+}
+
 const orderStatuses = ref([
-  { icon: '📦', title: 'Order Placed', completed: true, date: new Date().toLocaleDateString() },
-  { icon: '💳', title: 'Payment Confirmed', completed: true, date: new Date().toLocaleDateString() },
-  { icon: '🏭', title: 'In Production', completed: true, date: new Date().toLocaleDateString() },
-  { icon: '✅', title: 'Quality Check', completed: false, date: '' },
-  { icon: '🚚', title: 'Ready for Delivery', completed: false, date: '' },
-  { icon: '🎉', title: 'Delivered', completed: false, date: '' },
+  { icon: 'Package', title: 'Order Placed', completed: true, date: new Date().toLocaleDateString() },
+  { icon: 'CreditCard', title: 'Payment Confirmed', completed: true, date: new Date().toLocaleDateString() },
+  { icon: 'Factory', title: 'In Production', completed: true, date: new Date().toLocaleDateString() },
+  { icon: 'CheckCircle', title: 'Quality Check', completed: false, date: '' },
+  { icon: 'Truck', title: 'Ready for Delivery', completed: false, date: '' },
+  { icon: 'PartyPopper', title: 'Delivered', completed: false, date: '' },
 ])
 
 const trackOrder = () => {

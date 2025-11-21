@@ -78,6 +78,24 @@
       "subtitle": "Get a free consultation and quote for your project",
       "button": "Contact Us Today"
     },
+    "stats": {
+      "yearsInBusiness": "Years in Business",
+      "projectsCompleted": "Projects Completed",
+      "customerSatisfaction": "Customer Satisfaction"
+    },
+    "categoriesPreview": {
+      "title": "Explore Our Collections",
+      "subtitle": "From lightboxes to LED neon - professional illuminated signage",
+      "viewProducts": "View products"
+    },
+    "ctaAlt": {
+      "title": "Ready to Make Your Brand Visible?",
+      "subtitle": "Get a free quote and mockup for your project today",
+      "requestQuote": "Request Quote",
+      "callUs": "Call Us"
+    },
+    "viewAllProducts": "View All Products",
+    "viewDetails": "View Details",
     "loadingProducts": "Loading products...",
     "errorDirectusPermissions": "Configure Directus public permissions:",
     "errorStep1": "Go to",
@@ -85,25 +103,46 @@
     "errorStep3": "Go to Settings → Access Control → Public",
     "errorStep4": "Enable Read for collections: products, categories, tags, orders, customers"
   },
+  "categories": {
+    "lightboxes": "Lightboxes",
+    "channelLetters": "Channel Letters",
+    "ledNeonSigns": "LED Neon Signs",
+    "pylonsMonuments": "Pylons & Monuments",
+    "pylonsTotems": "Pylons & Totems",
+    "windowGraphics": "Window Graphics",
+    "windowSigns": "Window Signs",
+    "lightboxesDesc": "Illuminated display boxes for maximum visibility",
+    "channelLettersDesc": "Individual lit letters for premium signage",
+    "ledNeonSignsDesc": "Modern neon designs that captivate"
+  },
   "products": {
     "title": "Our Products",
     "subtitle": "Browse our complete range of premium illuminated signage",
     "noProducts": "No products found",
     "showingResults": "Showing {count} products",
+    "showing": "Showing",
     "filterByCategory": "Filter by Category",
     "allCategories": "All Categories",
+    "category": "Category",
     "sortBy": "Sort by",
     "sortNewest": "Newest First",
+    "sortNewest2": "Newest",
     "sortPriceAsc": "Price: Low to High",
     "sortPriceDesc": "Price: High to Low",
     "sortNameAsc": "Name: A-Z",
+    "sortNameAsc2": "Name A-Z",
     "sortNameDesc": "Name: Z-A",
     "priceRange": "Price Range",
     "stockStatus": "Stock Status",
     "inStock": "In Stock",
     "outOfStock": "Out of Stock",
     "customizable": "Customizable",
-    "featured": "Featured"
+    "featured": "Featured",
+    "resetFilters": "Reset Filters",
+    "searchPlaceholder": "Search products by name or description...",
+    "loadingProducts": "Loading products...",
+    "errorPermissions": "Make sure Directus is running and permissions are configured.",
+    "days": "days"
   },
   "productDetail": {
     "sku": "SKU",
@@ -254,14 +293,19 @@
   },
   "footer": {
     "aboutUs": "About Us",
+    "companyTagline": "Premium illuminated signage for professional visibility.",
+    "yearsExperience": "15+ years of excellence",
     "quickLinks": "Quick Links",
+    "categoriesTitle": "Categories",
     "contactInfo": "Contact Info",
+    "contact": "Contact",
+    "location": "Berlin, Germany",
     "followUs": "Follow Us",
     "newsletter": "Newsletter",
     "newsletterText": "Subscribe to our newsletter for updates and special offers",
     "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
-    "copyright": "© 2025 Prem-Lichtwerbung. All rights reserved.",
+    "copyright": "All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
   },
@@ -289,5 +333,257 @@
     "networkError": "Network error. Please check your connection.",
     "serverError": "Server error. Please try again later.",
     "notFound": "Not found"
+  },
+  "terminal": {
+    "common": {
+      "continue": "Continue",
+      "back": "Back",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "welcome": {
+      "title": "Welcome to",
+      "brand": "Prem Tankstelle",
+      "subtitle": "Self-Service Fuel Station",
+      "touchToStart": "Touch to begin fueling",
+      "fastAndSecure": "Fast & Secure",
+      "multiplePayment": "Multiple Payment Options",
+      "selfService": "24/7 Self-Service",
+      "footer": "Prem-Lichtwerbung Service Station",
+      "version": "Terminal v2.0"
+    },
+    "pumpSelection": {
+      "title": "Select Your Pump Number",
+      "subtitle": "Which pump are you at?",
+      "available": "Available",
+      "inUse": "In Use",
+      "outOfOrder": "Out of Order",
+      "continue": "Continue to Fuel Selection",
+      "selectPump": "Select Your Pump Number",
+      "helpText": "Pump number is displayed on the fuel dispenser"
+    },
+    "fuelType": {
+      "title": "Select Fuel Type",
+      "subtitle": "Choose the fuel type for Pump {pump}",
+      "diesel": "Diesel",
+      "super": "Super",
+      "superPlus": "Super Plus",
+      "e10": "Super E10",
+      "premium": "Premium",
+      "eco": "Eco",
+      "perLiter": "per liter",
+      "continue": "Continue to Amount",
+      "selectFuel": "Select Fuel Type",
+      "helpText": "Prices per liter include tax • Check your vehicle's fuel requirements"
+    },
+    "amountSelection": {
+      "title": "How much would you like?",
+      "subtitle": "Pump {pump} • {fuel} @ €{price}/L",
+      "fillTank": "Fill Tank",
+      "enterAmount": "Enter €",
+      "enterLiters": "Enter Liters",
+      "fillTankDesc": "Pump will authorize up to €150.00 and stop when tank is full",
+      "estimated": "Estimated",
+      "quickSelect": "Quick Select",
+      "continue": "Continue to Payment",
+      "enterAmountPrompt": "Enter Amount",
+      "helpText": "Maximum authorization: €150.00 • Pump will stop at selected amount"
+    },
+    "paymentMethod": {
+      "title": "Select Payment Method",
+      "subtitle": "Choose how you would like to pay",
+      "card": "Card Payment",
+      "cash": "Cash Payment",
+      "mobile": "Mobile Payment",
+      "debitCredit": "Credit / Debit",
+      "billsCoins": "Bills & Coins",
+      "applePay": "Apple Pay / Google Pay",
+      "mostPopular": "Most Popular",
+      "new": "New",
+      "continue": "Continue",
+      "selectMethod": "Please select a payment method",
+      "secureText": "Your payment is secure and encrypted"
+    },
+    "processing": {
+      "title": "Authorizing Pump...",
+      "subtitle": "Please wait, do not leave the pump",
+      "verifyingPayment": "Verifying payment method",
+      "contactingGateway": "Contacting payment gateway",
+      "authorizingPump": "Authorizing pump access",
+      "activatingFuel": "Activating fuel flow",
+      "pumpReady": "Pump Ready!",
+      "proceedToPump": "Please proceed to pump...",
+      "secureTransaction": "Secure encrypted transaction"
+    },
+    "fueling": {
+      "title": "Fueling in Progress",
+      "subtitle": "Pump {pump} • {fuel}",
+      "litersDispensed": "Liters Dispensed",
+      "totalAmount": "Total Amount",
+      "progress": "Progress",
+      "doNotRemove": "Do Not Remove Nozzle",
+      "autoComplete": "Fueling will complete automatically",
+      "pricePerLiter": "Price per liter",
+      "fillingTank": "Filling tank - will stop automatically",
+      "target": "Target"
+    },
+    "fuelingComplete": {
+      "title": "Fueling Complete",
+      "subtitle": "Thank you for fueling at Pump {pump}",
+      "totalLiters": "Total Liters",
+      "totalAmount": "Total Amount",
+      "fuelType": "Fuel Type",
+      "pricePerLiter": "Price per Liter",
+      "paymentMethod": "Payment Method",
+      "replaceNozzle": "Please Replace Nozzle",
+      "closeCapRemove": "Close fuel cap and remove nozzle from vehicle",
+      "continue": "Continue to Receipt",
+      "advancingIn": "Advancing automatically in {seconds} seconds..."
+    },
+    "success": {
+      "title": "Transaction Complete!",
+      "subtitle": "Thank you for your purchase",
+      "orderNumber": "Order Number",
+      "total": "Total",
+      "pumpNumber": "Pump Number",
+      "fuelType": "Fuel Type",
+      "litersDispensed": "Liters Dispensed",
+      "pricePerLiter": "Price per Liter",
+      "totalAmount": "Total Amount",
+      "paymentMethod": "Payment Method",
+      "transactionId": "Transaction ID",
+      "addToCart": "Add to Cart",
+      "newTransaction": "New Transaction",
+      "receiptAvailable": "Receipt available on request",
+      "thankYou": "Thank you for fueling with us!"
+    },
+    "error": {
+      "title": "Transaction Failed",
+      "pumpAuthFailed": "Pump authorization failed. Please try again or select a different pump.",
+      "fuelFlowError": "Fuel flow error detected. Please contact station attendant.",
+      "paymentFailed": "Your payment could not be processed at this time.",
+      "networkError": "Unable to connect to payment gateway. Please check your internet connection.",
+      "timeout": "The transaction timed out. Please try again.",
+      "declined": "Your payment method was declined. Please try a different payment method.",
+      "unexpectedError": "An unexpected error occurred. Please try again or contact support.",
+      "errorCode": "Error Code",
+      "tryDifferentPayment": "Try using a different payment method or card",
+      "checkConnection": "Check your internet connection and try again",
+      "serverTimeout": "The server took too long to respond, try again",
+      "contactSupport": "Contact our support team for assistance",
+      "tryAgain": "Try Again",
+      "cancelTransaction": "Cancel Transaction",
+      "contactSupportBtn": "Contact Support",
+      "needHelp": "Need help? Call us at +49 123 456 789"
+    }
+  },
+  "terminalDemo": {
+    "title": "POS Terminal System - Gas Station Edition",
+    "subtitle": "Experience our complete self-service terminal solution with 13 interactive touchscreen interfaces. Designed for 24/7 operation at gas stations and retail environments.",
+    "tryDemo": "Try Interactive Demo",
+    "requestQuote": "Request Quote",
+    "liveDemoTitle": "Interactive Live Demo",
+    "liveDemoSubtitle": "Click through the terminal interface below to experience the complete customer journey from pump selection to payment completion.",
+    "featuresTitle": "Key Features",
+    "features": {
+      "touchscreen": {
+        "title": "13 Interactive Screens",
+        "description": "Complete customer journey with intuitive touchscreen navigation through all transaction steps."
+      },
+      "pumpManagement": {
+        "title": "Pump Selection & Fuel Management",
+        "description": "Real-time pump status monitoring, fuel type selection, and dispenser control for seamless operation."
+      },
+      "payments": {
+        "title": "Multi-Payment Processing",
+        "description": "Accept card, cash, and mobile payments with integrated payment gateway and secure encryption."
+      },
+      "upselling": {
+        "title": "Product Upselling",
+        "description": "Integrated car wash, snacks, and convenience store product sales to maximize revenue per transaction."
+      },
+      "multilingual": {
+        "title": "Multi-Language Support",
+        "description": "Built-in English and German interfaces with easy expansion to additional languages for international customers."
+      },
+      "weatherproof": {
+        "title": "Weatherproof IP65 Enclosure",
+        "description": "Stainless steel construction with tempered glass touchscreen rated for outdoor 24/7 operation in all weather conditions."
+      },
+      "analytics": {
+        "title": "Remote Monitoring & Analytics",
+        "description": "Real-time transaction monitoring, sales analytics, and remote diagnostics for optimal performance management."
+      },
+      "offline": {
+        "title": "Offline Mode Capability",
+        "description": "Continue operations during network outages with local transaction processing and automatic synchronization."
+      },
+      "support": {
+        "title": "24/7 Support & Warranty",
+        "description": "Comprehensive 2-year warranty with round-the-clock technical support and maintenance services."
+      }
+    },
+    "specsTitle": "Technical Specifications",
+    "specs": {
+      "screens": "Interactive Screens",
+      "screensValue": "13 touchscreen interfaces",
+      "display": "Display Options",
+      "displayValue": "24\", 32\", or 42\" LED touchscreen",
+      "enclosure": "Enclosure Material",
+      "enclosureValue": "Stainless steel with tempered glass",
+      "rating": "Weather Rating",
+      "ratingValue": "IP65 (weatherproof for outdoor use)",
+      "power": "Power Consumption",
+      "powerValue": "150 watts average",
+      "dimensions": "Dimensions",
+      "dimensionsValue": "60cm W × 180cm H × 40cm D",
+      "mounting": "Mounting Options",
+      "mountingValue": "Freestanding kiosk or wall-mounted",
+      "languages": "Languages",
+      "languagesValue": "English, German (expandable)",
+      "warranty": "Warranty",
+      "warrantyValue": "2 years with 24/7 support",
+      "leadTime": "Lead Time",
+      "leadTimeValue": "30 days installation and setup"
+    },
+    "pricingTitle": "Pricing Plans",
+    "popular": "Popular",
+    "pricing": {
+      "basic": {
+        "size": "24\" Touchscreen",
+        "description": "Perfect for small stations",
+        "feature1": "24-inch LED touchscreen display",
+        "feature2": "13 interactive screen interfaces",
+        "feature3": "Multi-payment processing",
+        "feature4": "2-year warranty",
+        "feature5": "Email support"
+      },
+      "professional": {
+        "size": "32\" Touchscreen",
+        "description": "Most popular for medium stations",
+        "feature1": "32-inch LED touchscreen display",
+        "feature2": "13 interactive screen interfaces",
+        "feature3": "Multi-payment processing",
+        "feature4": "Product upselling integration",
+        "feature5": "Remote monitoring dashboard",
+        "feature6": "24/7 phone support"
+      },
+      "enterprise": {
+        "size": "42\" Touchscreen",
+        "description": "Premium for high-volume stations",
+        "feature1": "42-inch LED touchscreen display",
+        "feature2": "13 interactive screen interfaces",
+        "feature3": "Multi-payment processing",
+        "feature4": "Product upselling integration",
+        "feature5": "Advanced analytics platform",
+        "feature6": "Dedicated account manager",
+        "feature7": "Priority 24/7 support"
+      }
+    },
+    "getStarted": "Get Started",
+    "ctaTitle": "Ready to Modernize Your Gas Station?",
+    "ctaSubtitle": "Contact our sales team to discuss your requirements and get a customized quote with installation timeline.",
+    "contactSales": "Contact Sales",
+    "viewProduct": "View Product Details"
   }
 }

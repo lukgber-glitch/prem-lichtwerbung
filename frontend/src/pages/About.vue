@@ -34,7 +34,7 @@
           <div class="relative">
             <div class="aspect-square rounded-2xl overflow-hidden border-2 border-primary/20 bg-surface-alt">
               <div class="w-full h-full flex items-center justify-center">
-                <span class="text-9xl">🏭</span>
+                <Factory :size="120" :stroke-width="1.5" class="text-primary" />
               </div>
             </div>
           </div>
@@ -71,30 +71,24 @@
         
         <div class="grid md:grid-cols-3 gap-8">
           
-          <div class="bg-surface p-8 rounded-xl border border-primary/20 hover:border-primary transition-all duration-300 group">
-            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 border border-primary/30">
-              <span class="text-5xl group-hover:scale-110 transition-transform">💎</span>
-            </div>
+          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
+            <Gem :size="32" :stroke-width="2" class="text-primary mb-6" />
             <h3 class="text-2xl font-bold text-text-main mb-4">Premium Quality</h3>
             <p class="text-text-muted">
               We use only the highest-grade materials and LED technology. Every sign is built to last 10+ years with minimal maintenance.
             </p>
           </div>
           
-          <div class="bg-surface p-8 rounded-xl border border-accent/20 hover:border-accent transition-all duration-300 group">
-            <div class="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mb-6 border border-accent/30">
-              <span class="text-5xl group-hover:scale-110 transition-transform">🎨</span>
-            </div>
+          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
+            <Palette :size="32" :stroke-width="2" class="text-primary mb-6" />
             <h3 class="text-2xl font-bold text-text-main mb-4">Custom Design</h3>
             <p class="text-text-muted">
               Every project is unique. Our design team works with you to create signage that perfectly matches your brand identity.
             </p>
           </div>
           
-          <div class="bg-surface p-8 rounded-xl border border-primary/20 hover:border-primary transition-all duration-300 group">
-            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 border border-primary/30">
-              <span class="text-5xl group-hover:scale-110 transition-transform">⚡</span>
-            </div>
+          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
+            <Zap :size="32" :stroke-width="2" class="text-primary mb-6" />
             <h3 class="text-2xl font-bold text-text-main mb-4">Fast Turnaround</h3>
             <p class="text-text-muted">
               Most orders ready in 7-14 days. Need it faster? We offer rush production for urgent projects.
@@ -129,6 +123,7 @@
 </template>
 
 <script setup lang="ts">
+import { Factory, Gem, Palette, Zap } from 'lucide-vue-next'
 import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import AnimatedCounter from '@/components/ui/AnimatedCounter.vue'
 </script>

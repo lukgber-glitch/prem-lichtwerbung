@@ -64,20 +64,18 @@
       <!-- Product Name -->
       <router-link :to="`/products/${product.slug}`" class="hover:text-brand-blue transition-colors">
         <h3 class="font-accent font-bold text-lg mb-2 line-clamp-2">
-          {{ product.name }}
+          {{ productName }}
         </h3>
       </router-link>
 
       <!-- Description -->
       <p class="text-brand-gray-dark text-sm mb-3 line-clamp-2 flex-grow">
-        {{ product.description }}
+        {{ productDescription }}
       </p>
 
       <!-- Lead Time -->
       <div class="flex items-center gap-2 mb-3 text-sm text-brand-gray-dark">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        <Clock :size="16" :stroke-width="2" />
         <span>Ready in {{ product.lead_time_days }} days</span>
       </div>
 
@@ -115,13 +113,17 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { Clock } from 'lucide-vue-next'
 import ButtonGlow from '../ui/ButtonGlow.vue'
 
 interface Product {
   id: number
   slug: string
   name: string
+  name_de?: string
   description: string
+  description_de?: string
   price: number
   compare_at_price?: number
   stock: number
@@ -137,13 +139,40 @@ const props = defineProps<{
 }>()
 
 const router = useRouter()
+const { locale } = useI18n()
 const showNightImage = ref(false)
 
+// Locale-aware computed properties
+const productName = computed(() => {
+  return locale.value === 'de' && props.product.name_de 
+    ? props.product.name_de 
+    : props.product.name
+})
+
+const productDescription = computed(() => {
+  return locale.value === 'de' && props.product.description_de 
+    ? props.product.description_de 
+    : props.product.description
+})
+
 const currentImage = computed(() => {
-  if (showNightImage.value && props.product.night_image) {
-    return props.product.night_image
+  const directusUrl = 'http://localhost:8055'
+  
+  // Helper to check if value is UUID and convert to assets URL
+  const getImageUrl = (imageValue: string | undefined) => {
+    if (!imageValue) return null
+    // Check if it's a UUID (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(imageValue)) {
+      return `${directusUrl}/assets/${imageValue}`
+    }
+    // Otherwise return as-is (legacy path or URL)
+    return imageValue
   }
-  return props.product.day_image || '/placeholder-product.jpg'
+  
+  if (showNightImage.value && props.product.night_image) {
+    return getImageUrl(props.product.night_image) || '/placeholder-product.jpg'
+  }
+  return getImageUrl(props.product.day_image) || '/placeholder-product.jpg'
 })
 
 const addToCart = () => {

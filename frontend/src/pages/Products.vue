@@ -33,21 +33,40 @@
             </div>
             
             <div class="mb-6">
-              <label class="block text-text-main font-semibold mb-2">Category</label>
-              <select v-model="filters.category" class="w-full px-4 py-2 border border-surface-alt rounded-lg bg-surface-alt text-text-main">
-                <option value="">All Categories</option>
-                <option value="lightboxes">Lightboxes</option>
-                <option value="channel-letters">Channel Letters</option>
-                <option value="neon-signs">LED Neon Signs</option>
-                <option value="pylons">Pylons & Totems</option>
-              </select>
+              <label class="block text-text-main font-semibold mb-3">{{ t('products.category') }}</label>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  @click="filters.category = ''"
+                  :class="[
+                    'px-4 py-2 rounded-lg font-medium transition-all border-2',
+                    filters.category === '' 
+                      ? 'bg-primary text-background border-primary' 
+                      : 'bg-surface text-text-main border-primary/20 hover:border-primary/40'
+                  ]"
+                >
+                  {{ t('products.allCategories') }}
+                </button>
+                <button
+                  v-for="category in availableCategories"
+                  :key="category.id"
+                  @click="filters.category = category.id"
+                  :class="[
+                    'px-4 py-2 rounded-lg font-medium transition-all border-2',
+                    filters.category === category.id
+                      ? 'bg-primary text-background border-primary' 
+                      : 'bg-surface text-text-main border-primary/20 hover:border-primary/40'
+                  ]"
+                >
+                  {{ locale === 'de' && category.name_de ? category.name_de : category.name }}
+                </button>
+              </div>
             </div>
             
             <button 
               @click="resetFilters"
               class="w-full px-4 py-2 bg-primary text-background font-semibold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
             >
-              Reset Filters
+              {{ t('products.resetFilters') }}
             </button>
           </div>
         </aside>
@@ -55,93 +74,61 @@
         <!-- Products Grid -->
         <main class="md:w-3/4">
           
+          <!-- Search Bar -->
+          <div class="mb-6">
+            <div class="relative">
+              <input 
+                v-model="searchQuery"
+                type="text"
+                :placeholder="t('products.searchPlaceholder')"
+                class="w-full px-4 py-3 pl-12 border-2 border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-surface text-text-main placeholder-text-muted"
+              />
+              <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+          
           <!-- Sort & View Controls -->
           <div class="flex justify-between items-center mb-6">
             <p class="text-text-muted">
-              Showing {{ filteredProducts.length }} products
+              {{ t('products.showing') }} {{ filteredProducts.length }} {{ t('nav.products').toLowerCase() }}
             </p>
             <select 
               v-model="sortBy"
               class="px-4 py-2 border-2 border-primary/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-surface text-text-main"
               @change="sortProducts"
             >
-              <option value="newest">Newest</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="name">Name A-Z</option>
+              <option value="newest">{{ t('products.sortNewest2') }}</option>
+              <option value="price-low">{{ t('products.sortPriceAsc') }}</option>
+              <option value="price-high">{{ t('products.sortPriceDesc') }}</option>
+              <option value="name">{{ t('products.sortNameAsc2') }}</option>
             </select>
           </div>
           
           <!-- Loading State -->
           <div v-if="loading" class="text-center py-12">
-            <div class="text-xl text-text-muted">Loading products...</div>
+            <div class="text-xl text-text-muted">{{ t('products.loadingProducts') }}</div>
           </div>
           
           <!-- Error State -->
           <div v-else-if="error" class="text-center py-12">
             <div class="text-red-600 text-xl mb-4">{{ error }}</div>
-            <p class="text-text-muted">Make sure Directus is running and permissions are configured.</p>
+            <p class="text-text-muted">{{ t('products.errorPermissions') }}</p>
           </div>
           
           <!-- Empty State -->
           <div v-else-if="filteredProducts.length === 0" class="text-center py-12">
-            <p class="text-text-muted text-xl">No products found</p>
+            <p class="text-text-muted text-xl">{{ t('products.noProducts') }}</p>
           </div>
           
           <!-- Products Grid -->
           <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div 
+            <ProductCard 
               v-for="product in filteredProducts" 
               :key="product.id"
-              class="group bg-surface-alt rounded-xl border border-surface overflow-hidden hover:border-primary transition-all duration-300 cursor-pointer"
-              @click="$router.push(`/products/${product.id}`)"
-            >
-              <!-- Product Image -->
-              <div class="aspect-[4/3] bg-surface flex items-center justify-center relative overflow-hidden">
-                <span class="text-8xl relative z-10 group-hover:scale-110 transition-transform duration-300">💡</span>
-                
-                <!-- Customizable badge -->
-                <div v-if="product.customizable" class="absolute top-4 left-4 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold z-10">
-                  Customizable
-                </div>
-              </div>
-              
-              <!-- Product Info -->
-              <div class="p-6">
-                <div class="flex gap-2 mb-3">
-                  <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold border border-primary/20">
-                    {{ product.illumination_type || 'LED' }}
-                  </span>
-                  <span v-if="product.lead_time_days" class="inline-block bg-surface text-text-muted px-3 py-1 rounded-full text-xs">
-                    {{ product.lead_time_days }} days
-                  </span>
-                </div>
-                
-                <h3 class="font-heading text-xl font-bold text-text-main mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                  {{ product.name }}
-                </h3>
-                
-                <p v-if="product.description" class="text-text-muted text-sm mb-4 line-clamp-2">
-                  {{ product.description }}
-                </p>
-                
-                <div class="flex items-baseline gap-3 mb-4">
-                  <span class="text-3xl font-bold text-primary">
-                    €{{ Number(product.price).toFixed(2) }}
-                  </span>
-                  <span v-if="product.compare_at_price" class="text-lg text-text-muted line-through">
-                    €{{ Number(product.compare_at_price).toFixed(2) }}
-                  </span>
-                </div>
-                
-                <button 
-                  class="w-full px-6 py-3 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
-                  @click.stop="$router.push(`/products/${product.id}`)"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
+              :product="product"
+            />
           </div>
           
         </main>
@@ -153,8 +140,22 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ProductCard from '@/components/products/ProductCard.vue'
+
+const { t, locale } = useI18n()
+
+// Helper functions for locale-aware product fields
+const getProductName = (product: any) => {
+  return locale.value === 'de' && product.name_de ? product.name_de : product.name
+}
+
+const getProductDescription = (product: any) => {
+  return locale.value === 'de' && product.description_de ? product.description_de : product.description
+}
 
 const products = ref<any[]>([])
+const availableCategories = ref<any[]>([])
 const loading = ref(true)
 const error = ref('')
 const sortBy = ref('newest')
@@ -164,10 +165,39 @@ const filters = ref({
   category: ''
 })
 
+const searchQuery = ref('')
+
+const fetchCategories = async () => {
+  try {
+    const response = await fetch('http://localhost:8055/items/categories?filter[status][_eq]=published&sort=sort')
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch categories')
+    }
+    
+    const data = await response.json()
+    availableCategories.value = data.data || []
+  } catch (e: any) {
+    console.error('Failed to fetch categories:', e)
+    availableCategories.value = []
+  }
+}
+
 const fetchProducts = async () => {
   try {
     loading.value = true
-    const response = await fetch('http://localhost:8055/items/products')
+    const fields = [
+      'id', 'slug', 'name', 'name_de', 'description', 'description_de',
+      'price', 'compare_at_price', 'stock', 'customizable', 'illumination_type',
+      'lead_time_days', 'primary_image', 'day_image', 'night_image',
+      'before_image', 'after_image',
+      'categories.categories_id.id',
+      'categories.categories_id.name',
+      'categories.categories_id.name_de',
+      'categories.categories_id.slug'
+    ].join(',')
+    
+    const response = await fetch(`http://localhost:8055/items/products?fields=${fields}`)
     
     if (!response.ok) {
       throw new Error('Failed to fetch products')
@@ -190,11 +220,34 @@ const fetchProducts = async () => {
 const filteredProducts = computed(() => {
   let filtered = [...products.value]
   
+  // Filter by search query
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase().trim()
+    filtered = filtered.filter(product => {
+      const nameEn = (product.name || '').toLowerCase()
+      const nameDe = (product.name_de || '').toLowerCase()
+      const descEn = (product.description || '').toLowerCase()
+      const descDe = (product.description_de || '').toLowerCase()
+      
+      return nameEn.includes(query) || 
+             nameDe.includes(query) || 
+             descEn.includes(query) || 
+             descDe.includes(query)
+    })
+  }
+  
   // Filter by price
   filtered = filtered.filter(p => p.price <= filters.value.maxPrice)
   
-  // Filter by category (if needed)
-  // Add category filtering logic here
+  // Filter by category
+  if (filters.value.category) {
+    filtered = filtered.filter(product => {
+      if (!product.categories || !Array.isArray(product.categories)) {
+        return false
+      }
+      return product.categories.some((cat: any) => cat.categories_id?.id === filters.value.category)
+    })
+  }
   
   return filtered
 })
@@ -210,7 +263,7 @@ const sortProducts = () => {
       sorted.sort((a, b) => b.price - a.price)
       break
     case 'name':
-      sorted.sort((a, b) => a.name.localeCompare(b.name))
+      sorted.sort((a, b) => getProductName(a).localeCompare(getProductName(b)))
       break
   }
   
@@ -222,9 +275,11 @@ const resetFilters = () => {
     maxPrice: 5000,
     category: ''
   }
+  searchQuery.value = ''
 }
 
 onMounted(() => {
+  fetchCategories()
   fetchProducts()
 })
 </script>

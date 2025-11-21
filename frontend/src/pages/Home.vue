@@ -37,40 +37,34 @@
         <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
           <button 
             @click="$router.push('/products')"
-            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all duration-300 border-2 border-primary"
+            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all duration-300 border-2 border-primary cursor-pointer"
           >
             {{ t('home.hero.exploreProducts') }}
           </button>
           
           <button 
             @click="$router.push('/contact')"
-            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all duration-300"
+            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all duration-300 cursor-pointer"
           >
             {{ t('home.hero.getCustomQuote') }}
           </button>
         </div>
         
         <!-- Trust badges -->
-        <div class="flex gap-8 justify-center mt-16 flex-wrap">
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 bg-surface border border-primary/30 rounded-full flex items-center justify-center mb-2">
-              <span class="text-3xl">⚡</span>
-            </div>
-            <span class="text-text-main text-sm">{{ t('home.badges.fastDelivery') }}</span>
+        <div class="flex gap-12 justify-center mt-16 flex-wrap">
+          <div class="flex items-center gap-3">
+            <Zap :size="24" :stroke-width="2" class="text-primary" />
+            <span class="text-text-main text-sm font-medium">{{ t('home.badges.fastDelivery') }}</span>
           </div>
           
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 bg-surface border border-accent/30 rounded-full flex items-center justify-center mb-2">
-              <span class="text-3xl">🎨</span>
-            </div>
-            <span class="text-text-main text-sm">{{ t('home.badges.customDesign') }}</span>
+          <div class="flex items-center gap-3">
+            <Palette :size="24" :stroke-width="2" class="text-primary" />
+            <span class="text-text-main text-sm font-medium">{{ t('home.badges.customDesign') }}</span>
           </div>
           
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 bg-surface border border-primary/30 rounded-full flex items-center justify-center mb-2">
-              <span class="text-3xl">💎</span>
-            </div>
-            <span class="text-text-main text-sm">{{ t('home.badges.premiumQuality') }}</span>
+          <div class="flex items-center gap-3">
+            <Gem :size="24" :stroke-width="2" class="text-primary" />
+            <span class="text-text-main text-sm font-medium">{{ t('home.badges.premiumQuality') }}</span>
           </div>
         </div>
         
@@ -103,14 +97,14 @@
         
         <!-- Error State -->
         <div v-else-if="error" class="text-center py-12 bg-red-50 border border-red-200 rounded-xl p-8 max-w-2xl mx-auto">
-          <div class="text-6xl mb-4">⚠️</div>
-          <div class="text-2xl font-bold text-red-600 mb-4">{{ error }}</div>
+          <AlertTriangle :size="64" :stroke-width="2" class="mx-auto mb-4 text-error" />
+          <div class="text-2xl font-bold text-error mb-4">{{ error }}</div>
           <div class="text-gray-600 mb-6">
             <p class="mb-2">Configure Directus public permissions:</p>
             <ol class="text-left list-decimal list-inside space-y-2 text-sm">
-              <li>Go to <a href="http://localhost:8055" target="_blank" class="text-primary underline">Directus Admin</a></li>
+              <li>Go to <a href="http://localhost:8055" target="_blank" class="text-primary underline cursor-pointer">Directus Admin</a></li>
               <li>Login: admin@example.com / admin123</li>
-              <li>Settings → Access Control → Public</li>
+              <li>Settings > Access Control > Public</li>
               <li>Add read permission for "products" and "directus_files"</li>
             </ol>
           </div>
@@ -118,7 +112,7 @@
         
         <!-- Empty State -->
         <div v-else-if="!featuredProducts || featuredProducts.length === 0" class="text-center py-12">
-          <div class="text-6xl mb-4">📦</div>
+          <Package :size="64" :stroke-width="2" class="mx-auto mb-4 text-text-muted" />
           <div class="text-2xl font-bold text-text-main mb-2">No products found</div>
           <p class="text-text-muted">Add products in Directus admin panel.</p>
         </div>
@@ -129,11 +123,11 @@
             v-for="product in featuredProducts" 
             :key="product.id"
             class="group bg-surface-alt rounded-xl border border-surface overflow-hidden hover:border-primary transition-all duration-300 cursor-pointer"
-            @click="$router.push(`/products/${product.id}`)"
+            @click="$router.push(`/products/${product.slug}`)"
           >
             <!-- Product Image -->
             <div class="aspect-[4/3] bg-surface flex items-center justify-center relative overflow-hidden">
-              <span class="text-8xl relative z-10 group-hover:scale-110 transition-transform duration-300">💡</span>
+              <Lightbulb :size="80" :stroke-width="1.5" class="text-primary relative z-10" />
               
               <!-- Customizable badge -->
               <div v-if="product.customizable" class="absolute top-4 left-4 bg-accent text-background px-3 py-1 rounded-full text-xs font-bold z-10">
@@ -153,11 +147,11 @@
               </div>
               
               <h3 class="font-heading text-xl font-bold text-text-main mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                {{ product.name }}
+                {{ getProductName(product) }}
               </h3>
               
               <p v-if="product.description" class="text-text-muted text-sm mb-4 line-clamp-2">
-                {{ product.description }}
+                {{ getProductDescription(product) }}
               </p>
               
               <div class="flex items-baseline gap-3 mb-4">
@@ -170,10 +164,10 @@
               </div>
               
               <button 
-                class="w-full px-6 py-3 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
-                @click.stop="$router.push(`/products/${product.id}`)"
+                class="w-full px-6 py-3 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary cursor-pointer"
+                @click.stop="$router.push(`/products/${product.slug}`)"
               >
-                View Details
+                {{ t('home.viewDetails') }}
               </button>
             </div>
           </div>
@@ -183,9 +177,10 @@
         <div v-if="featuredProducts && featuredProducts.length > 0" class="text-center mt-12">
           <button 
             @click="$router.push('/products')"
-            class="px-12 py-4 bg-surface-alt text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all"
+            class="px-12 py-4 bg-surface-alt text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all cursor-pointer flex items-center justify-center gap-2 mx-auto"
           >
-            View All Products →
+            {{ t('home.viewAllProducts') }}
+            <ArrowRight :size="20" :stroke-width="2" />
           </button>
         </div>
       </div>
@@ -196,22 +191,13 @@
       <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-12">
           <div class="text-center">
-            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
-              15+
-            </div>
-            <div class="text-lg md:text-xl text-text-main">Years in Business</div>
+            <AnimatedCounter :target-value="15" suffix="+" :label="t('home.stats.yearsInBusiness')" />
           </div>
           <div class="text-center">
-            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
-              500+
-            </div>
-            <div class="text-lg md:text-xl text-text-main">Projects Completed</div>
+            <AnimatedCounter :target-value="500" suffix="+" :label="t('home.stats.projectsCompleted')" />
           </div>
           <div class="text-center">
-            <div class="text-5xl md:text-7xl font-heading font-bold text-primary mb-2">
-              98%
-            </div>
-            <div class="text-lg md:text-xl text-text-main">Customer Satisfaction</div>
+            <AnimatedCounter :target-value="98" suffix="%" :label="t('home.stats.customerSatisfaction')" />
           </div>
         </div>
       </div>
@@ -221,41 +207,27 @@
     <section class="py-20 bg-background">
       <div class="container mx-auto px-6">
         <h2 class="text-5xl font-heading font-bold text-center text-text-main mb-4">
-          Explore Our Collections
+          {{ t('home.categoriesPreview.title') }}
         </h2>
         <p class="text-xl text-center text-text-muted mb-12">
-          From lightboxes to LED neon - professional illuminated signage
+          {{ t('home.categoriesPreview.subtitle') }}
         </p>
         
         <div class="grid md:grid-cols-3 gap-8">
           <div 
             v-for="category in sampleCategories" 
-            :key="category.name"
-            class="group relative block rounded-2xl overflow-hidden border border-surface hover:border-primary transition-all duration-300 cursor-pointer bg-surface"
+            :key="category.key"
+            class="group block rounded-lg overflow-hidden border-2 border-surface-alt hover:border-primary transition-all duration-300 cursor-pointer bg-surface p-8"
             @click="$router.push('/products')"
           >
-            <div class="relative aspect-[16/9]">
-              <!-- Category background -->
-              <div :class="`w-full h-full bg-gradient-to-br ${category.gradient} flex items-center justify-center relative overflow-hidden`">
-                <span class="text-9xl group-hover:scale-110 transition-transform duration-300 relative z-10">{{ category.icon }}</span>
-              </div>
-              
-              <!-- Dark gradient overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
-            </div>
+            <h3 class="font-heading text-2xl font-bold text-text-main mb-3 group-hover:text-primary transition-colors">
+              {{ t(`categories.${category.key}`) }}
+            </h3>
+            <p class="text-text-muted text-sm mb-4">{{ t(`categories.${category.descKey}`) }}</p>
             
-            <div class="absolute inset-0 flex flex-col justify-end p-6">
-              <h3 class="font-heading text-3xl font-bold text-primary mb-2 group-hover:text-accent transition-all">
-                {{ category.name }}
-              </h3>
-              <p class="text-text-main text-sm">{{ category.description }}</p>
-              
-              <!-- Arrow -->
-              <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-surface border border-primary flex items-center justify-center group-hover:bg-primary transition-all">
-                <svg class="w-5 h-5 text-primary group-hover:text-background group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-              </div>
+            <div class="flex items-center gap-2 text-primary group-hover:gap-3 transition-all">
+              <span class="text-sm font-medium">{{ t('home.categoriesPreview.viewProducts') }}</span>
+              <ChevronRight :size="16" :stroke-width="2" />
             </div>
           </div>
         </div>
@@ -266,23 +238,23 @@
     <section class="py-20 bg-surface">
       <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-heading font-bold text-text-main mb-6">
-          Ready to Make Your Brand Visible?
+          {{ t('home.ctaAlt.title') }}
         </h2>
         <p class="text-xl md:text-2xl text-text-muted mb-8">
-          Get a free quote and mockup for your project today
+          {{ t('home.ctaAlt.subtitle') }}
         </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
           <button 
             @click="$router.push('/contact')"
-            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary"
+            class="px-12 py-5 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary cursor-pointer"
           >
-            Request Quote
+            {{ t('home.ctaAlt.requestQuote') }}
           </button>
           <button 
             @click="$router.push('/contact')"
-            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all"
+            class="px-12 py-5 bg-transparent text-text-main text-xl font-bold rounded-lg border-2 border-text-muted hover:border-primary hover:text-primary transition-all cursor-pointer"
           >
-            Call Us
+            {{ t('home.ctaAlt.callUs') }}
           </button>
         </div>
       </div>
@@ -295,12 +267,23 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { ChevronRight, Zap, Palette, Gem, AlertTriangle, Package, Lightbulb, ArrowRight } from 'lucide-vue-next'
 import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider.vue'
+import AnimatedCounter from '@/components/ui/AnimatedCounter.vue'
 import { getSettings } from '@/api/settings'
 import type { Settings } from '@/api/settings'
 
 const router = useRouter()
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+// Helper functions for locale-aware product fields
+const getProductName = (product: any) => {
+  return locale.value === 'de' && product.name_de ? product.name_de : product.name
+}
+
+const getProductDescription = (product: any) => {
+  return locale.value === 'de' && product.description_de ? product.description_de : product.description
+}
 
 const featuredProducts = ref<any[]>([])
 const loading = ref(true)
@@ -308,9 +291,9 @@ const error = ref('')
 const settings = ref<Settings | null>(null)
 
 const sampleCategories = [
-  { name: 'Lightboxes', icon: '💡', gradient: 'from-blue-400 to-blue-600', description: 'Illuminated display boxes for maximum visibility' },
-  { name: 'Channel Letters', icon: '🔤', gradient: 'from-pink-400 to-pink-600', description: 'Individual lit letters for premium signage' },
-  { name: 'LED Neon Signs', icon: '✨', gradient: 'from-yellow-400 to-yellow-600', description: 'Modern neon designs that captivate' },
+  { key: 'lightboxes', descKey: 'lightboxesDesc' },
+  { key: 'channelLetters', descKey: 'channelLettersDesc' },
+  { key: 'ledNeonSigns', descKey: 'ledNeonSignsDesc' },
 ]
 
 const fetchFeaturedProducts = async () => {

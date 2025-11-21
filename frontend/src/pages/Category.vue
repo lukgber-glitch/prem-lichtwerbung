@@ -82,9 +82,7 @@
             @click="showMobileFilters = true"
             class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-background rounded-lg hover:bg-primary/90 transition-all cursor-pointer border-2 border-primary"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
+            <SlidersHorizontal :size="20" :stroke-width="2" />
             Filters
             <span v-if="activeFilterCount > 0" class="bg-accent text-background px-2 py-1 rounded-full text-xs font-bold">
               {{ activeFilterCount }}
@@ -112,9 +110,7 @@
                   @click="showMobileFilters = false"
                   class="p-2 hover:bg-primary/10 rounded-full transition-colors cursor-pointer"
                 >
-                  <svg class="w-6 h-6 text-text-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <X :size="24" class="text-text-main" :stroke-width="2" />
                 </button>
               </div>
               <div class="p-4">
@@ -167,9 +163,7 @@
                     ]"
                     aria-label="Grid view"
                   >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                    </svg>
+                    <LayoutGrid :size="20" :stroke-width="2" />
                   </button>
                   <button 
                     @click="viewMode = 'list'"
@@ -179,9 +173,7 @@
                     ]"
                     aria-label="List view"
                   >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                    <List :size="20" :stroke-width="2" />
                   </button>
                 </div>
               </div>
@@ -200,9 +192,7 @@
                   class="hover:text-accent transition-colors cursor-pointer"
                   :aria-label="`Remove ${chip.label} filter`"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <X :size="16" :stroke-width="2" />
                 </button>
               </div>
               <button 
@@ -230,9 +220,7 @@
 
           <!-- Empty State -->
           <div v-else-if="products.length === 0" class="text-center py-20">
-            <svg class="w-24 h-24 mx-auto mb-6 text-text-muted opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-            </svg>
+            <Package :size="96" class="mx-auto mb-6 text-text-muted opacity-30" :stroke-width="2" />
             <p class="text-text-main text-lg mb-2">No products found in this category</p>
             <p class="text-text-muted mb-6">Try adjusting your filters or selecting a different subcategory</p>
             <div class="flex gap-4 justify-center">
@@ -313,6 +301,7 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ButtonGlow from '@/components/ui/ButtonGlow.vue'
+import { SlidersHorizontal, X, LayoutGrid, List, Package } from 'lucide-vue-next'
 import ProductCard from '@/components/products/ProductCard.vue'
 import ProductFilters from '@/components/products/ProductFilters.vue'
 import { getProducts } from '@/api/products'

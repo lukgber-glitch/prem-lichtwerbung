@@ -329,12 +329,13 @@
       }
     },
     {
-      "field": "image",
+      "field": "primary_image",
       "type": "uuid",
       "meta": {
         "interface": "file-image",
         "special": ["file"],
-        "width": "half"
+        "width": "half",
+        "note": "Primary product image"
       }
     },
     {
@@ -621,7 +622,8 @@
       "meta": {
         "interface": "file-image",
         "special": ["file"],
-        "width": "half"
+        "width": "half",
+        "note": "Product image in daylight"
       }
     },
     {
@@ -630,7 +632,8 @@
       "meta": {
         "interface": "file-image",
         "special": ["file"],
-        "width": "half"
+        "width": "half",
+        "note": "Product image illuminated at night"
       }
     },
     {
@@ -667,7 +670,8 @@
       "meta": {
         "interface": "file-image",
         "special": ["file"],
-        "width": "half"
+        "width": "half",
+        "note": "Before installation image"
       }
     },
     {
@@ -676,7 +680,8 @@
       "meta": {
         "interface": "file-image",
         "special": ["file"],
-        "width": "half"
+        "width": "half",
+        "note": "After installation image"
       }
     }
   ],

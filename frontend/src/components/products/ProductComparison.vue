@@ -37,10 +37,10 @@
                 <!-- Remove button on hover -->
                 <button 
                   @click="removeFromComparison(product.id)"
-                  class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-xs font-bold shadow-lg"
+                  class="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center shadow-lg"
                   aria-label="Remove from comparison"
                 >
-                  ✕
+                  <X :size="14" :stroke-width="2" />
                 </button>
               </div>
 
@@ -50,9 +50,7 @@
                 :key="`empty-${n}`"
                 class="w-16 h-16 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
               >
-                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
+                <Plus :size="24" :stroke-width="2" class="text-gray-400" />
               </div>
             </div>
 
@@ -103,9 +101,7 @@
               class="text-gray-400 hover:text-gray-600 transition-colors"
               aria-label="Close comparison"
             >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X :size="24" :stroke-width="2" />
             </button>
           </div>
 
@@ -272,9 +268,7 @@
                       v-if="product.stock && product.stock > 0"
                       class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold"
                     >
-                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                      </svg>
+                      <CheckCircle :size="12" :stroke-width="2" class="mr-1" />
                       In Stock
                     </span>
                     <span v-else class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">
@@ -293,8 +287,14 @@
                     :key="`custom-${product.id}`"
                     class="px-6 py-4 text-center text-sm text-gray-600 border-l border-gray-200"
                   >
-                    <span v-if="product.customizable" class="text-brand-blue font-semibold">✓ Yes</span>
-                    <span v-else class="text-gray-400">✗ No</span>
+                    <span v-if="product.customizable" class="text-brand-blue font-semibold flex items-center justify-center gap-1">
+                      <Check :size="16" :stroke-width="2" />
+                      Yes
+                    </span>
+                    <span v-else class="text-gray-400 flex items-center justify-center gap-1">
+                      <X :size="16" :stroke-width="2" />
+                      No
+                    </span>
                   </td>
                 </tr>
 
@@ -349,6 +349,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { Plus, X, CheckCircle, Check } from 'lucide-vue-next'
 import ButtonGlow from '../ui/ButtonGlow.vue'
 import { useCartStore } from '@/store/cart'
 

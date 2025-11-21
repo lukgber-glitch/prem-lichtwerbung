@@ -10,7 +10,8 @@ A production-ready e-commerce application for **Prem-Lichtwerbung**, specializin
 
 - **Semi-Automatic Setup** - Docker Compose + one manual permission configuration
 - **Tech Stack** - Directus 11.13.2, PostgreSQL 18.1, Vue.js 3.5.24 + TypeScript, Tailwind CSS 4.1.17
-- **25 Sample Products** - Lightboxes, Channel Letters, LED Neon Signs, Pylons, Fascia, Window Signs
+- **11 Sample Products** - Lightboxes, Channel Letters, LED Neon Signs, Pylons, Window Graphics, POS Terminal System
+- **POS Terminal System** - Complete 13-screen gas station self-service terminal with interactive demo
 - **Product Customization** - Live price calculator, logo upload with mockup preview
 - **Visual Features** - Day/night image toggle, before/after sliders, glow effects
 - **Mobile-First Design** - Fully responsive with touch interactions
@@ -36,14 +37,16 @@ Docker will automatically:
 1. ✅ Start PostgreSQL database
 2. ✅ Initialize Directus
 3. ✅ Import all schema (collections, fields, relations)
-4. ✅ Import sample data (products, categories, tags, orders, reviews)
-5. ✅ Create M2M relations
-6. ✅ Start the Vue.js frontend
-7. ✅ Check for outdated npm dependencies
+4. ✅ Upload 50 product images to Directus file library
+5. ✅ Prepare products with image UUID references
+6. ✅ Import sample data (products, categories, tags, orders, reviews)
+7. ✅ Create M2M relations
+8. ✅ Start the Vue.js frontend
+9. ✅ Check for outdated npm dependencies
 
 **⚠️ One Manual Step Required:**
 
-8. **Configure Public Permissions** (one-time setup, persists across restarts):
+10. **Configure Public Permissions** (one-time setup, persists across restarts):
    - Open http://localhost:8055
    - Login: `admin@example.com` / `admin123`
    - Go to **Settings → Access Control → Public**
@@ -78,9 +81,13 @@ After running `docker compose up --build`:
 
 ## 📊 Sample Data Included
 
-- **25 Signage Products** - Lightboxes, Channel Letters, LED Neon, Pylons, Fascia, Window Signs
-- **7 Product Categories** - Organized with parent-child hierarchy
+- **11 Products** - 10 Signage Products (Lightboxes, Channel Letters, LED Neon Signs, Pylons & Monuments, Window Graphics) + POS Terminal System
+- **50 Product Images** - Automatically uploaded to Directus (primary, day, night, before, after views)
+- **6 Product Categories** - Lightboxes, Channel Letters, LED Neon Signs, Pylons & Monuments, Window Graphics, POS & Terminal Systems
+- **Interactive Terminal Demo** - Complete 13-screen gas station POS terminal accessible at `/terminal-demo`
 - **Sample Customer & Orders** - For testing checkout and order tracking
+
+**Note**: All product images are automatically uploaded during Docker initialization. No manual image upload required.
 
 ## 💳 Stripe Configuration (Optional)
 

@@ -78,6 +78,24 @@
       "subtitle": "Erhalten Sie eine kostenlose Beratung und ein Angebot für Ihr Projekt",
       "button": "Kontaktieren Sie uns"
     },
+    "stats": {
+      "yearsInBusiness": "Jahre im Geschäft",
+      "projectsCompleted": "Abgeschlossene Projekte",
+      "customerSatisfaction": "Kundenzufriedenheit"
+    },
+    "categoriesPreview": {
+      "title": "Entdecken Sie unsere Kollektionen",
+      "subtitle": "Von Leuchtkästen bis LED-Neon - professionelle Lichtwerbung",
+      "viewProducts": "Produkte ansehen"
+    },
+    "ctaAlt": {
+      "title": "Bereit, Ihre Marke sichtbar zu machen?",
+      "subtitle": "Erhalten Sie noch heute ein kostenloses Angebot und Mockup für Ihr Projekt",
+      "requestQuote": "Angebot anfordern",
+      "callUs": "Rufen Sie uns an"
+    },
+    "viewAllProducts": "Alle Produkte anzeigen",
+    "viewDetails": "Details ansehen",
     "loadingProducts": "Produkte werden geladen...",
     "errorDirectusPermissions": "Directus-Öffentliche Berechtigungen konfigurieren:",
     "errorStep1": "Gehen Sie zu",
@@ -85,25 +103,46 @@
     "errorStep3": "Gehen Sie zu Einstellungen → Zugriffskontrolle → Öffentlich",
     "errorStep4": "Aktivieren Sie Lesen für Sammlungen: products, categories, tags, orders, customers"
   },
+  "categories": {
+    "lightboxes": "Leuchtkästen",
+    "channelLetters": "Profilbuchstaben",
+    "ledNeonSigns": "LED-Neon-Schilder",
+    "pylonsMonuments": "Pylone & Monumente",
+    "pylonsTotems": "Pylone & Totems",
+    "windowGraphics": "Fenstergrafiken",
+    "windowSigns": "Fensterschilder",
+    "lightboxesDesc": "Beleuchtete Displayboxen für maximale Sichtbarkeit",
+    "channelLettersDesc": "Einzelne beleuchtete Buchstaben für Premium-Beschilderung",
+    "ledNeonSignsDesc": "Moderne Neon-Designs, die faszinieren"
+  },
   "products": {
     "title": "Unsere Produkte",
     "subtitle": "Durchsuchen Sie unser komplettes Sortiment an Premium-Lichtwerbung",
     "noProducts": "Keine Produkte gefunden",
     "showingResults": "{count} Produkte werden angezeigt",
+    "showing": "Anzeige",
     "filterByCategory": "Nach Kategorie filtern",
     "allCategories": "Alle Kategorien",
+    "category": "Kategorie",
     "sortBy": "Sortieren nach",
     "sortNewest": "Neueste zuerst",
+    "sortNewest2": "Neueste",
     "sortPriceAsc": "Preis: Niedrig bis Hoch",
     "sortPriceDesc": "Preis: Hoch bis Niedrig",
     "sortNameAsc": "Name: A-Z",
+    "sortNameAsc2": "Name A-Z",
     "sortNameDesc": "Name: Z-A",
     "priceRange": "Preisspanne",
     "stockStatus": "Lagerstatus",
     "inStock": "Auf Lager",
     "outOfStock": "Nicht auf Lager",
     "customizable": "Anpassbar",
-    "featured": "Empfohlen"
+    "featured": "Empfohlen",
+    "resetFilters": "Filter zurücksetzen",
+    "searchPlaceholder": "Produkte nach Name oder Beschreibung suchen...",
+    "loadingProducts": "Produkte werden geladen...",
+    "errorPermissions": "Stellen Sie sicher, dass Directus läuft und die Berechtigungen konfiguriert sind.",
+    "days": "Tage"
   },
   "productDetail": {
     "sku": "Artikelnummer",
@@ -254,14 +293,19 @@
   },
   "footer": {
     "aboutUs": "Über uns",
+    "companyTagline": "Premium-Lichtwerbung für professionelle Sichtbarkeit.",
+    "yearsExperience": "15+ Jahre Exzellenz",
     "quickLinks": "Schnellzugriff",
+    "categoriesTitle": "Kategorien",
     "contactInfo": "Kontaktinformationen",
+    "contact": "Kontakt",
+    "location": "Berlin, Deutschland",
     "followUs": "Folgen Sie uns",
     "newsletter": "Newsletter",
     "newsletterText": "Abonnieren Sie unseren Newsletter für Updates und Sonderangebote",
     "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
     "subscribe": "Abonnieren",
-    "copyright": "© 2025 Prem-Lichtwerbung. Alle Rechte vorbehalten.",
+    "copyright": "Alle Rechte vorbehalten.",
     "privacyPolicy": "Datenschutz",
     "termsOfService": "Nutzungsbedingungen"
   },
@@ -289,5 +333,257 @@
     "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
     "serverError": "Serverfehler. Bitte versuchen Sie es später erneut.",
     "notFound": "Nicht gefunden"
+  },
+  "terminal": {
+    "common": {
+      "continue": "Weiter",
+      "back": "Zurück",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen"
+    },
+    "welcome": {
+      "title": "Willkommen bei",
+      "brand": "Prem Tankstelle",
+      "subtitle": "Selbstbedienungs-Tankstelle",
+      "touchToStart": "Berühren Sie zum Tanken",
+      "fastAndSecure": "Schnell & Sicher",
+      "multiplePayment": "Mehrere Zahlungsoptionen",
+      "selfService": "24/7 Selbstbedienung",
+      "footer": "Prem-Lichtwerbung Tankstelle",
+      "version": "Terminal v2.0"
+    },
+    "pumpSelection": {
+      "title": "Wählen Sie Ihre Zapfsäulennummer",
+      "subtitle": "An welcher Zapfsäule sind Sie?",
+      "available": "Verfügbar",
+      "inUse": "In Benutzung",
+      "outOfOrder": "Außer Betrieb",
+      "continue": "Weiter zur Kraftstoffauswahl",
+      "selectPump": "Wählen Sie Ihre Zapfsäulennummer",
+      "helpText": "Die Zapfsäulennummer wird auf dem Kraftstoffspender angezeigt"
+    },
+    "fuelType": {
+      "title": "Kraftstoffart wählen",
+      "subtitle": "Wählen Sie die Kraftstoffart für Zapfsäule {pump}",
+      "diesel": "Diesel",
+      "super": "Super",
+      "superPlus": "Super Plus",
+      "e10": "Super E10",
+      "premium": "Premium",
+      "eco": "Öko",
+      "perLiter": "pro Liter",
+      "continue": "Weiter zum Betrag",
+      "selectFuel": "Kraftstoffart wählen",
+      "helpText": "Preise pro Liter inkl. MwSt. • Überprüfen Sie die Kraftstoffanforderungen Ihres Fahrzeugs"
+    },
+    "amountSelection": {
+      "title": "Wie viel möchten Sie?",
+      "subtitle": "Zapfsäule {pump} • {fuel} @ €{price}/L",
+      "fillTank": "Volltanken",
+      "enterAmount": "Betrag eingeben €",
+      "enterLiters": "Liter eingeben",
+      "fillTankDesc": "Zapfsäule autorisiert bis zu €150,00 und stoppt, wenn der Tank voll ist",
+      "estimated": "Geschätzt",
+      "quickSelect": "Schnellauswahl",
+      "continue": "Weiter zur Zahlung",
+      "enterAmountPrompt": "Betrag eingeben",
+      "helpText": "Maximale Autorisierung: €150,00 • Zapfsäule stoppt beim gewählten Betrag"
+    },
+    "paymentMethod": {
+      "title": "Zahlungsmethode wählen",
+      "subtitle": "Wie möchten Sie bezahlen?",
+      "card": "Kartenzahlung",
+      "cash": "Barzahlung",
+      "mobile": "Mobile Zahlung",
+      "debitCredit": "Kredit- / Debitkarte",
+      "billsCoins": "Scheine & Münzen",
+      "applePay": "Apple Pay / Google Pay",
+      "mostPopular": "Beliebteste",
+      "new": "Neu",
+      "continue": "Weiter",
+      "selectMethod": "Bitte Zahlungsmethode wählen",
+      "secureText": "Ihre Zahlung ist sicher und verschlüsselt"
+    },
+    "processing": {
+      "title": "Zapfsäule wird autorisiert...",
+      "subtitle": "Bitte warten, verlassen Sie die Zapfsäule nicht",
+      "verifyingPayment": "Zahlungsmethode wird überprüft",
+      "contactingGateway": "Verbindung zum Zahlungsanbieter",
+      "authorizingPump": "Zapfsäulenzugriff wird autorisiert",
+      "activatingFuel": "Kraftstofffluss wird aktiviert",
+      "pumpReady": "Zapfsäule bereit!",
+      "proceedToPump": "Bitte zur Zapfsäule gehen...",
+      "secureTransaction": "Sichere verschlüsselte Transaktion"
+    },
+    "fueling": {
+      "title": "Tankvorgang läuft",
+      "subtitle": "Zapfsäule {pump} • {fuel}",
+      "litersDispensed": "Getankte Liter",
+      "totalAmount": "Gesamtbetrag",
+      "progress": "Fortschritt",
+      "doNotRemove": "Zapfpistole nicht entfernen",
+      "autoComplete": "Tankvorgang wird automatisch abgeschlossen",
+      "pricePerLiter": "Preis pro Liter",
+      "fillingTank": "Tank wird gefüllt - stoppt automatisch",
+      "target": "Ziel"
+    },
+    "fuelingComplete": {
+      "title": "Tankvorgang abgeschlossen",
+      "subtitle": "Vielen Dank fürs Tanken an Zapfsäule {pump}",
+      "totalLiters": "Liter gesamt",
+      "totalAmount": "Gesamtbetrag",
+      "fuelType": "Kraftstoffart",
+      "pricePerLiter": "Preis pro Liter",
+      "paymentMethod": "Zahlungsmethode",
+      "replaceNozzle": "Bitte Zapfpistole zurückhängen",
+      "closeCapRemove": "Tankdeckel schließen und Zapfpistole entfernen",
+      "continue": "Weiter zum Beleg",
+      "advancingIn": "Automatischer Fortschritt in {seconds} Sekunden..."
+    },
+    "success": {
+      "title": "Transaktion abgeschlossen!",
+      "subtitle": "Vielen Dank für Ihren Einkauf",
+      "orderNumber": "Bestellnummer",
+      "total": "Gesamt",
+      "pumpNumber": "Zapfsäule Nr.",
+      "fuelType": "Kraftstoffart",
+      "litersDispensed": "Getankte Liter",
+      "pricePerLiter": "Preis pro Liter",
+      "totalAmount": "Gesamtbetrag",
+      "paymentMethod": "Zahlungsmethode",
+      "transactionId": "Transaktions-ID",
+      "addToCart": "In den Warenkorb",
+      "newTransaction": "Neue Transaktion",
+      "receiptAvailable": "Beleg auf Anfrage erhältlich",
+      "thankYou": "Vielen Dank fürs Tanken bei uns!"
+    },
+    "error": {
+      "title": "Transaktion fehlgeschlagen",
+      "pumpAuthFailed": "Zapfsäulenfreigabe fehlgeschlagen. Bitte erneut versuchen oder andere Zapfsäule wählen.",
+      "fuelFlowError": "Kraftstofffluss-Fehler erkannt. Bitte Personal kontaktieren.",
+      "paymentFailed": "Ihre Zahlung konnte nicht verarbeitet werden.",
+      "networkError": "Keine Verbindung zum Zahlungsanbieter. Bitte Internetverbindung überprüfen.",
+      "timeout": "Zeitüberschreitung der Transaktion. Bitte erneut versuchen.",
+      "declined": "Ihre Zahlungsmethode wurde abgelehnt. Bitte andere Zahlungsmethode versuchen.",
+      "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten. Bitte erneut versuchen oder Support kontaktieren.",
+      "errorCode": "Fehlercode",
+      "tryDifferentPayment": "Versuchen Sie eine andere Zahlungsmethode oder Karte",
+      "checkConnection": "Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut",
+      "serverTimeout": "Der Server hat zu lange gebraucht, versuchen Sie es erneut",
+      "contactSupport": "Kontaktieren Sie unser Support-Team",
+      "tryAgain": "Erneut versuchen",
+      "cancelTransaction": "Transaktion abbrechen",
+      "contactSupportBtn": "Support kontaktieren",
+      "needHelp": "Benötigen Sie Hilfe? Rufen Sie uns an unter +49 123 456 789"
+    }
+  },
+  "terminalDemo": {
+    "title": "Kassensystem für Tankstellen - Gas Station Edition",
+    "subtitle": "Erleben Sie unsere komplette Self-Service-Terminallösung mit 13 interaktiven Touchscreen-Interfaces. Entwickelt für 24/7-Betrieb an Tankstellen und im Einzelhandel.",
+    "tryDemo": "Interaktive Demo testen",
+    "requestQuote": "Angebot anfordern",
+    "liveDemoTitle": "Interaktive Live-Demo",
+    "liveDemoSubtitle": "Klicken Sie sich durch die Terminal-Oberfläche unten, um die vollständige Customer Journey von der Zapfsäulenauswahl bis zum Zahlungsabschluss zu erleben.",
+    "featuresTitle": "Hauptmerkmale",
+    "features": {
+      "touchscreen": {
+        "title": "13 interaktive Bildschirme",
+        "description": "Vollständige Customer Journey mit intuitiver Touchscreen-Navigation durch alle Transaktionsschritte."
+      },
+      "pumpManagement": {
+        "title": "Zapfsäulenauswahl & Kraftstoffverwaltung",
+        "description": "Echtzeit-Zapfsäulenstatus-Überwachung, Kraftstofftyp-Auswahl und Zapfstellensteuerung für nahtlosen Betrieb."
+      },
+      "payments": {
+        "title": "Multi-Zahlungsabwicklung",
+        "description": "Akzeptieren Sie Karten-, Bar- und Mobile-Zahlungen mit integriertem Zahlungsgateway und sicherer Verschlüsselung."
+      },
+      "upselling": {
+        "title": "Produkt-Upselling",
+        "description": "Integrierte Autowäsche, Snacks und Convenience-Store-Produktverkäufe zur Maximierung des Umsatzes pro Transaktion."
+      },
+      "multilingual": {
+        "title": "Mehrsprachige Unterstützung",
+        "description": "Integrierte englische und deutsche Oberflächen mit einfacher Erweiterung auf zusätzliche Sprachen für internationale Kunden."
+      },
+      "weatherproof": {
+        "title": "Wetterfestes IP65-Gehäuse",
+        "description": "Edelstahlkonstruktion mit gehärtetem Glas-Touchscreen, zertifiziert für 24/7-Außenbetrieb bei allen Wetterbedingungen."
+      },
+      "analytics": {
+        "title": "Fernüberwachung & Analytik",
+        "description": "Echtzeit-Transaktionsüberwachung, Verkaufsanalysen und Ferndiagnose für optimales Leistungsmanagement."
+      },
+      "offline": {
+        "title": "Offline-Modus-Fähigkeit",
+        "description": "Fortführung des Betriebs bei Netzwerkausfällen mit lokaler Transaktionsverarbeitung und automatischer Synchronisation."
+      },
+      "support": {
+        "title": "24/7-Support & Garantie",
+        "description": "Umfassende 2-Jahres-Garantie mit technischem Support und Wartungsdiensten rund um die Uhr."
+      }
+    },
+    "specsTitle": "Technische Spezifikationen",
+    "specs": {
+      "screens": "Interaktive Bildschirme",
+      "screensValue": "13 Touchscreen-Interfaces",
+      "display": "Display-Optionen",
+      "displayValue": "24\", 32\" oder 42\" LED-Touchscreen",
+      "enclosure": "Gehäusematerial",
+      "enclosureValue": "Edelstahl mit gehärtetem Glas",
+      "rating": "Wetterschutzklasse",
+      "ratingValue": "IP65 (wetterfest für Außenbereich)",
+      "power": "Stromverbrauch",
+      "powerValue": "150 Watt durchschnittlich",
+      "dimensions": "Abmessungen",
+      "dimensionsValue": "60cm B × 180cm H × 40cm T",
+      "mounting": "Montageoptionen",
+      "mountingValue": "Freistehender Kiosk oder Wandmontage",
+      "languages": "Sprachen",
+      "languagesValue": "Englisch, Deutsch (erweiterbar)",
+      "warranty": "Garantie",
+      "warrantyValue": "2 Jahre mit 24/7-Support",
+      "leadTime": "Lieferzeit",
+      "leadTimeValue": "30 Tage Installation und Einrichtung"
+    },
+    "pricingTitle": "Preispläne",
+    "popular": "Beliebt",
+    "pricing": {
+      "basic": {
+        "size": "24\" Touchscreen",
+        "description": "Perfekt für kleine Tankstellen",
+        "feature1": "24-Zoll LED-Touchscreen-Display",
+        "feature2": "13 interaktive Bildschirm-Interfaces",
+        "feature3": "Multi-Zahlungsabwicklung",
+        "feature4": "2 Jahre Garantie",
+        "feature5": "E-Mail-Support"
+      },
+      "professional": {
+        "size": "32\" Touchscreen",
+        "description": "Beliebteste für mittlere Tankstellen",
+        "feature1": "32-Zoll LED-Touchscreen-Display",
+        "feature2": "13 interaktive Bildschirm-Interfaces",
+        "feature3": "Multi-Zahlungsabwicklung",
+        "feature4": "Produkt-Upselling-Integration",
+        "feature5": "Fernüberwachungs-Dashboard",
+        "feature6": "24/7-Telefon-Support"
+      },
+      "enterprise": {
+        "size": "42\" Touchscreen",
+        "description": "Premium für Hochvolumen-Tankstellen",
+        "feature1": "42-Zoll LED-Touchscreen-Display",
+        "feature2": "13 interaktive Bildschirm-Interfaces",
+        "feature3": "Multi-Zahlungsabwicklung",
+        "feature4": "Produkt-Upselling-Integration",
+        "feature5": "Erweiterte Analytik-Plattform",
+        "feature6": "Dedizierter Account Manager",
+        "feature7": "Prioritäts-24/7-Support"
+      }
+    },
+    "getStarted": "Loslegen",
+    "ctaTitle": "Bereit, Ihre Tankstelle zu modernisieren?",
+    "ctaSubtitle": "Kontaktieren Sie unser Vertriebsteam, um Ihre Anforderungen zu besprechen und ein individuelles Angebot mit Installationszeitplan zu erhalten.",
+    "contactSales": "Vertrieb kontaktieren",
+    "viewProduct": "Produktdetails anzeigen"
   }
 }

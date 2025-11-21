@@ -13,26 +13,20 @@
       aria-label="Chat with us"
     >
       <!-- Message Icon (when closed) -->
-      <svg 
+      <MessageCircle 
         v-if="!isOpen"
-        class="w-8 h-8 text-white" 
-        fill="none" 
-        stroke="currentColor" 
-        viewBox="0 0 24 24"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-      </svg>
+        :size="32" 
+        class="text-white"
+        :stroke-width="2"
+      />
       
       <!-- Close Icon (when open) -->
-      <svg 
+      <X 
         v-else
-        class="w-8 h-8 text-white" 
-        fill="none" 
-        stroke="currentColor" 
-        viewBox="0 0 24 24"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
+        :size="32" 
+        class="text-white"
+        :stroke-width="2"
+      />
 
       <!-- Unread Badge -->
       <span 
@@ -61,9 +55,7 @@
           <div class="bg-gradient-to-r from-brand-blue to-brand-pink p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
+                <MessageSquare :size="24" class="text-white" :stroke-width="2" />
               </div>
               <div>
                 <h3 class="font-bold text-white">Chat with us</h3>
@@ -75,9 +67,7 @@
               class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-colors"
               aria-label="Close chat"
             >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X :size="24" class="text-white" :stroke-width="2" />
             </button>
           </div>
 
@@ -86,13 +76,11 @@
             <!-- Welcome Message -->
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                </svg>
+                <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
               </div>
               <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
                 <p class="text-sm text-gray-800">
-                  👋 Hello! Welcome to Prem-Lichtwerbung. How can we help you today?
+                  Hello! Welcome to Prem-Lichtwerbung. How can we help you today?
                 </p>
                 <span class="text-xs text-gray-500 mt-1 block">Just now</span>
               </div>
@@ -100,20 +88,18 @@
 
             <!-- Placeholder Notice -->
             <div class="bg-brand-blue bg-opacity-10 border border-brand-blue rounded-lg p-4 text-center">
-              <svg class="w-12 h-12 mx-auto mb-3 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <Info :size="48" class="mx-auto mb-3 text-brand-blue" :stroke-width="2" />
               <p class="text-sm font-semibold text-brand-navy mb-2">Live Chat Integration</p>
               <p class="text-xs text-gray-600 mb-3">
                 Connect your preferred live chat service to enable real-time customer support:
               </p>
-              <div class="text-xs text-left text-gray-700 space-y-1 max-w-xs mx-auto">
-                <p>• Intercom</p>
-                <p>• Tawk.to</p>
-                <p>• Crisp</p>
-                <p>• Zendesk Chat</p>
-                <p>• LiveChat</p>
-              </div>
+              <ul class="text-xs text-left text-gray-700 space-y-1 max-w-xs mx-auto list-disc list-inside">
+                <li>Intercom</li>
+                <li>Tawk.to</li>
+                <li>Crisp</li>
+                <li>Zendesk Chat</li>
+                <li>LiveChat</li>
+              </ul>
             </div>
 
             <!-- Example Messages -->
@@ -125,18 +111,14 @@
                   <span class="text-xs opacity-75 mt-1 block">{{ message.time }}</span>
                 </div>
                 <div class="w-8 h-8 bg-brand-pink rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                  </svg>
+                  <User :size="20" class="text-white" :stroke-width="2" />
                 </div>
               </div>
 
               <!-- Agent Message (left aligned) -->
               <div v-else class="flex items-start gap-3">
                 <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                  </svg>
+                  <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
                 </div>
                 <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
                   <p class="text-sm text-gray-800">{{ message.text }}</p>
@@ -148,9 +130,7 @@
             <!-- Typing Indicator (optional) -->
             <div v-if="isTyping" class="flex items-start gap-3">
               <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                </svg>
+                <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
               </div>
               <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3">
                 <div class="flex gap-1">
@@ -178,13 +158,11 @@
                 class="px-4 py-3 bg-brand-blue text-white rounded-lg hover:shadow-glow-blue transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Send message"
               >
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                <Send :size="24" class="text-white" :stroke-width="2" />
               </button>
             </div>
             <p class="text-xs text-gray-500 mt-2 text-center">
-              Demo mode • Connect your live chat service for real conversations
+              Demo mode - Connect your live chat service for real conversations
             </p>
           </div>
         </div>
@@ -211,6 +189,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { MessageCircle, X, MessageSquare, UserCircle2, Info, User, Send } from 'lucide-vue-next'
 
 interface Message {
   type: 'customer' | 'agent'

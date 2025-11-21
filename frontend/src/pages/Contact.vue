@@ -72,16 +72,19 @@
               <button 
                 type="submit"
                 :disabled="submitting"
-                class="w-full px-8 py-4 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary disabled:bg-text-muted disabled:cursor-not-allowed cursor-pointer"
+                class="w-full px-8 py-4 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary disabled:bg-text-muted disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
               >
-                {{ submitting ? 'Sending...' : '📧 Send Message' }}
+                <Mail v-if="!submitting" :size="24" :stroke-width="2" />
+                {{ submitting ? 'Sending...' : 'Send Message' }}
               </button>
               
-              <p v-if="submitSuccess" class="mt-4 text-green-400 text-center">
-                ✅ Message sent successfully! We'll respond within 24 hours.
+              <p v-if="submitSuccess" class="mt-4 text-green-600 text-center flex items-center justify-center gap-2">
+                <Check :size="20" :stroke-width="2" />
+                Message sent successfully! We'll respond within 24 hours.
               </p>
-              <p v-if="submitError" class="mt-4 text-red-400 text-center">
-                ❌ {{ submitError }}
+              <p v-if="submitError" class="mt-4 text-red-600 text-center flex items-center justify-center gap-2">
+                <X :size="20" :stroke-width="2" />
+                {{ submitError }}
               </p>
             </form>
           </div>
@@ -93,7 +96,9 @@
               
               <div class="space-y-4">
                 <div class="flex items-start gap-4">
-                  <span class="text-3xl">📍</span>
+                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <MapPin :size="24" :stroke-width="1.5" class="text-primary" />
+                  </div>
                   <div>
                     <h4 class="font-semibold text-text-main">Address</h4>
                     <p class="text-text-muted">Berlin, Germany</p>
@@ -101,7 +106,9 @@
                 </div>
                 
                 <div class="flex items-start gap-4">
-                  <span class="text-3xl">📧</span>
+                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Mail :size="24" :stroke-width="1.5" class="text-primary" />
+                  </div>
                   <div>
                     <h4 class="font-semibold text-text-main">Email</h4>
                     <a href="mailto:info@prem-lichtwerbung.de" class="text-primary hover:text-accent hover:underline transition-colors cursor-pointer">
@@ -111,7 +118,9 @@
                 </div>
                 
                 <div class="flex items-start gap-4">
-                  <span class="text-3xl">📞</span>
+                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Phone :size="24" :stroke-width="1.5" class="text-primary" />
+                  </div>
                   <div>
                     <h4 class="font-semibold text-text-main">Phone</h4>
                     <a href="tel:+49123456789" class="text-primary hover:text-accent hover:underline transition-colors cursor-pointer">
@@ -121,7 +130,9 @@
                 </div>
                 
                 <div class="flex items-start gap-4">
-                  <span class="text-3xl">🕐</span>
+                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Clock :size="24" :stroke-width="1.5" class="text-primary" />
+                  </div>
                   <div>
                     <h4 class="font-semibold text-text-main">Business Hours</h4>
                     <p class="text-text-muted">Monday - Friday: 9:00 - 18:00</p>
@@ -135,9 +146,10 @@
               <h3 class="text-2xl font-heading font-bold mb-4 text-primary">Need Urgent Help?</h3>
               <p class="mb-6 text-text-muted">For immediate assistance, call us directly or use our live chat.</p>
               <button 
-                class="w-full px-6 py-3 bg-accent text-background font-bold rounded-lg hover:bg-accent/90 transition-all border-2 border-accent cursor-pointer"
+                class="w-full px-6 py-3 bg-accent text-background font-bold rounded-lg hover:bg-accent/90 transition-all border-2 border-accent cursor-pointer flex items-center justify-center gap-2"
               >
-                💬 Start Live Chat
+                <MessageSquare :size="20" :stroke-width="2" />
+                Start Live Chat
               </button>
             </div>
           </div>
@@ -150,6 +162,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Mail, MapPin, Phone, Clock, MessageSquare, Check, X } from 'lucide-vue-next'
 
 const form = ref({
   name: '',

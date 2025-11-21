@@ -3,9 +3,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
       <h3 class="text-xl font-bold text-brand-navy flex items-center gap-2">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-        </svg>
+        <Filter :size="24" :stroke-width="2" />
         Filters
         <span v-if="activeFilterCount > 0" class="bg-brand-blue text-brand-navy text-xs font-bold px-2 py-1 rounded-full">
           {{ activeFilterCount }}
@@ -65,15 +63,12 @@
         class="w-full flex items-center justify-between font-semibold text-brand-navy mb-3 hover:text-brand-blue transition-colors"
       >
         <span>Illumination Type</span>
-        <svg
-          class="w-5 h-5 transition-transform"
+        <ChevronDown 
+          :size="20" 
+          :stroke-width="2"
+          class="transition-transform"
           :class="{ 'rotate-180': !expandedSections.illumination }"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+        />
       </button>
       <div v-show="expandedSections.illumination" class="space-y-2">
         <label v-for="type in illuminationTypes" :key="type" class="flex items-center gap-2 cursor-pointer hover:text-brand-blue transition-colors">
@@ -95,15 +90,12 @@
         class="w-full flex items-center justify-between font-semibold text-brand-navy mb-3 hover:text-brand-blue transition-colors"
       >
         <span>Suitable For</span>
-        <svg
-          class="w-5 h-5 transition-transform"
+        <ChevronDown 
+          :size="20" 
+          :stroke-width="2"
+          class="transition-transform"
           :class="{ 'rotate-180': !expandedSections.suitable }"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+        />
       </button>
       <div v-show="expandedSections.suitable" class="space-y-2">
         <label v-for="location in suitableFor" :key="location" class="flex items-center gap-2 cursor-pointer hover:text-brand-blue transition-colors">
@@ -125,15 +117,12 @@
         class="w-full flex items-center justify-between font-semibold text-brand-navy mb-3 hover:text-brand-blue transition-colors"
       >
         <span>Mounting Type</span>
-        <svg
-          class="w-5 h-5 transition-transform"
+        <ChevronDown 
+          :size="20" 
+          :stroke-width="2"
+          class="transition-transform"
           :class="{ 'rotate-180': !expandedSections.mounting }"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+        />
       </button>
       <div v-show="expandedSections.mounting" class="space-y-2">
         <label v-for="type in mountingTypes" :key="type" class="flex items-center gap-2 cursor-pointer hover:text-brand-blue transition-colors">
@@ -194,6 +183,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { ChevronDown, Filter } from 'lucide-vue-next'
 
 // Filter options
 const illuminationTypes = ['LED', 'Neon', 'Backlit', 'Edge-lit', 'Front-lit', 'Non-illuminated']

@@ -24,14 +24,49 @@
         
         <!-- Left: Images -->
         <div>
-          <div class="aspect-square bg-surface rounded-xl mb-4 flex items-center justify-center border border-primary/20">
-            <span class="text-9xl">💡</span>
+          <!-- Main Image -->
+          <div class="aspect-square bg-surface rounded-xl mb-4 overflow-hidden border border-primary/20">
+            <img 
+              :src="displayImage" 
+              :alt="product.name"
+              class="w-full h-full object-cover"
+            />
           </div>
+          
+          <!-- Thumbnail Gallery -->
           <div class="grid grid-cols-4 gap-2">
-            <div class="aspect-square bg-surface rounded-lg border border-surface-alt"></div>
-            <div class="aspect-square bg-surface rounded-lg border border-surface-alt"></div>
-            <div class="aspect-square bg-surface rounded-lg border border-surface-alt"></div>
-            <div class="aspect-square bg-surface rounded-lg border border-surface-alt"></div>
+            <div 
+              v-if="product.primary_image"
+              @click="currentImage = product.primary_image"
+              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
+              :class="currentImage === product.primary_image ? 'border-primary' : 'border-surface-alt'"
+            >
+              <img :src="primaryImageUrl" :alt="product.name" class="w-full h-full object-cover" />
+            </div>
+            <div 
+              v-if="product.day_image"
+              @click="currentImage = product.day_image"
+              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
+              :class="currentImage === product.day_image ? 'border-primary' : 'border-surface-alt'"
+            >
+              <img :src="dayImageUrl" :alt="`${product.name} - Day`" class="w-full h-full object-cover" />
+            </div>
+            <div 
+              v-if="product.night_image"
+              @click="currentImage = product.night_image"
+              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
+              :class="currentImage === product.night_image ? 'border-primary' : 'border-surface-alt'"
+            >
+              <img :src="nightImageUrl" :alt="`${product.name} - Night`" class="w-full h-full object-cover" />
+            </div>
+            <div 
+              v-if="product.after_image"
+              @click="currentImage = product.after_image"
+              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
+              :class="currentImage === product.after_image ? 'border-primary' : 'border-surface-alt'"
+            >
+              <img :src="afterImageUrl" :alt="`${product.name} - After`" class="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
         
@@ -57,6 +92,18 @@
             <span v-if="product.customizable" class="inline-block px-4 py-2 bg-accent/10 text-accent border border-accent/30 rounded-full text-sm font-bold">
               ✨ Customizable
             </span>
+          </div>
+          
+          <!-- Terminal Demo Button -->
+          <div v-if="isTerminalProduct" class="mb-6 p-6 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 border-2 border-blue-500/30 rounded-xl">
+            <h3 class="text-xl font-bold text-text-main mb-2">🖥️ Interactive Demo Available</h3>
+            <p class="text-text-muted mb-4">Experience the complete 13-screen POS terminal system in action. Test the customer journey from pump selection to payment completion.</p>
+            <router-link 
+              to="/terminal-demo" 
+              class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              ▶️ Try Interactive Demo
+            </router-link>
           </div>
           
           <!-- Stock Status -->
@@ -94,37 +141,39 @@
         </div>
       </div>
       
-      <!-- Terminal Bundle Special CTA -->
-      <div v-if="product?.slug === 'pos-terminal-menu-board-bundle'" 
-           class="bg-surface border-2 border-primary p-8 rounded-lg my-8">
-        <div class="flex items-start gap-4">
-          <div class="text-4xl">💼</div>
-          <div class="flex-1">
-            <h3 class="text-2xl font-heading font-bold text-text-main mb-3">
-              Complete POS Terminal Bundle
-            </h3>
-            <p class="text-lg text-text-muted mb-4">
-              Save <span class="text-3xl font-bold text-primary">20%</span> on this complete hardware + signage solution
-            </p>
-            <ul class="text-text-main mb-6 space-y-2">
-              <li>✓ POS terminal with touchscreen</li>
-              <li>✓ LED-backlit menu board (120x80cm)</li>
-              <li>✓ Installation included (€300 value)</li>
-              <li>✓ Software setup & training</li>
-              <li>✓ 3-year warranty</li>
-            </ul>
-            <div class="flex gap-4 flex-wrap">
-              <ButtonGlow variant="primary" class="text-lg">
-                Get Bundle for €1,899
-              </ButtonGlow>
-              <ButtonGlow variant="secondary" @click="openQuoteModal">
-                Request Quote
-              </ButtonGlow>
-            </div>
-          </div>
-        </div>
+      <!-- Interactive POS Terminal (for terminal bundle product) -->
+      <div v-if="product?.slug === 'pos-terminal-menu-board-bundle'" class="my-8">
+        <POSTerminal 
+          :product="product"
+          @add-to-cart="handleTerminalAddToCart"
+          @complete="handleTerminalComplete"
+        />
       </div>
       
+      <!-- Day/Night Switcher -->
+      <div v-if="product.day_image && product.night_image" class="my-12">
+        <h2 class="text-3xl font-heading font-bold text-text-main mb-4">View in Different Lighting</h2>
+        <p class="text-lg text-text-muted mb-6">
+          See how this illuminated sign looks during the day and when illuminated at night
+        </p>
+        <DayNightSwitcher
+          :day-image="dayImageUrl"
+          :night-image="nightImageUrl"
+        />
+      </div>
+
+      <!-- Before/After Slider -->
+      <div v-if="product.before_image && product.after_image" class="my-12">
+        <h2 class="text-3xl font-heading font-bold text-text-main mb-4">See the Transformation</h2>
+        <p class="text-lg text-text-muted mb-6">
+          Drag the slider to compare before and after installation
+        </p>
+        <BeforeAfterSlider
+          :before-image="beforeImageUrl"
+          :after-image="afterImageUrl"
+        />
+      </div>
+
       <!-- Technical Specs -->
       <div class="border-t-2 border-primary/20 pt-12">
         <h2 class="text-4xl font-heading font-bold text-text-main mb-6">Technical Specifications</h2>
@@ -167,10 +216,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import QuoteRequestModal from '@/components/modals/QuoteRequestModal.vue'
+import POSTerminal from '@/components/terminal/POSTerminal.vue'
+import DayNightSwitcher from '@/components/ui/DayNightSwitcher.vue'
+import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -180,19 +232,70 @@ const loading = ref(true)
 const error = ref('')
 const quantity = ref(1)
 const showQuoteModal = ref(false)
+const currentImage = ref<string | null>(null)
+
+// Helper to convert UUID to Directus assets URL
+const getImageUrl = (imageValue: string | undefined | null): string => {
+  if (!imageValue) return '/placeholder-product.jpg'
+  
+  const directusUrl = 'http://localhost:8055'
+  
+  // Check if it's a UUID (format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(imageValue)) {
+    return `${directusUrl}/assets/${imageValue}`
+  }
+  
+  // Otherwise return as-is (legacy path or URL)
+  return imageValue
+}
+
+// Computed properties for image URLs
+const primaryImageUrl = computed(() => getImageUrl(product.value?.primary_image))
+const dayImageUrl = computed(() => getImageUrl(product.value?.day_image))
+const nightImageUrl = computed(() => getImageUrl(product.value?.night_image))
+const beforeImageUrl = computed(() => getImageUrl(product.value?.before_image))
+const afterImageUrl = computed(() => getImageUrl(product.value?.after_image))
+
+// Display image - uses currentImage if set, otherwise primary image
+const displayImage = computed(() => {
+  if (currentImage.value) {
+    return getImageUrl(currentImage.value)
+  }
+  return primaryImageUrl.value
+})
+
+// Detect if this is the terminal product
+const isTerminalProduct = computed(() => {
+  if (!product.value) return false
+  return product.value.slug === 'pos-terminal-gas-station' || 
+         product.value.sku?.includes('TERM')
+})
 
 const fetchProduct = async () => {
   try {
     loading.value = true
-    const productId = route.params.id
-    const response = await fetch(`http://localhost:8055/items/products/${productId}`)
+    const productSlug = route.params.slug
+    const fields = [
+      'id', 'slug', 'name', 'name_de', 'description', 'description_de',
+      'price', 'compare_at_price', 'stock', 'customizable', 'illumination_type',
+      'lead_time_days', 'primary_image', 'day_image', 'night_image',
+      'before_image', 'after_image', 'dimensions_width_cm', 'dimensions_height_cm',
+      'dimensions_depth_cm', 'power_consumption_watts', 'ip_rating', 'material',
+      'material_de'
+    ].join(',')
+    
+    const response = await fetch(`http://localhost:8055/items/products?filter[slug][_eq]=${productSlug}&fields=${fields}`)
     
     if (!response.ok) {
       throw new Error('Product not found')
     }
     
     const data = await response.json()
-    product.value = data.data
+    if (data.data && data.data.length > 0) {
+      product.value = data.data[0]
+    } else {
+      throw new Error('Product not found')
+    }
   } catch (e: any) {
     error.value = e.message
   } finally {
@@ -207,6 +310,17 @@ const addToCart = () => {
 
 const openQuoteModal = () => {
   showQuoteModal.value = true
+}
+
+const handleTerminalAddToCart = (orderData: any) => {
+  console.log('Terminal order:', orderData)
+  alert(`✅ Terminal Order Complete!\n\nOrder #${orderData.orderNumber}\nTotal: €${orderData.total.toFixed(2)}\n\nProducts added to cart!`)
+  // TODO: Implement actual cart logic with Pinia store
+}
+
+const handleTerminalComplete = (orderData: any) => {
+  console.log('Terminal transaction completed:', orderData)
+  // Optionally redirect or show additional confirmation
 }
 
 onMounted(() => {

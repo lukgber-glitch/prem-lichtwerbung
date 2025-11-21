@@ -1,0 +1,1 @@
+import{d as s,b as o,e as t,h as a}from"./index-CouCQ17w.js";const n={class:"container mx-auto px-4 py-8 max-w-md"},p=s({__name:"Register",setup(r){return(i,e)=>(a(),o("div",n,[...e[0]||(e[0]=[t("h1",{class:"text-3xl font-bold mb-8"},"Register",-1),t("p",{class:"text-gray-600"},"Registration page - Coming soon",-1)])]))}});export{p as default};

@@ -33,9 +33,7 @@
       </p>
       
       <div class="flex items-center gap-2 text-brand-blue">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
+        <Package :size="20" :stroke-width="2" />
         <span class="font-semibold">
           {{ productCount }} {{ productCount === 1 ? 'product' : 'products' }}
         </span>
@@ -45,15 +43,15 @@
     <!-- Hover Arrow -->
     <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
       <div class="bg-brand-blue rounded-full p-2 shadow-glow-blue">
-        <svg class="w-6 h-6 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
+        <ChevronRight :size="24" :stroke-width="2" class="text-brand-navy" />
       </div>
     </div>
   </router-link>
 </template>
 
 <script setup lang="ts">
+import { Package, ChevronRight } from 'lucide-vue-next'
+
 interface Category {
   id: number
   slug: string

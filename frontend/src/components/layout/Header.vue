@@ -5,8 +5,8 @@
         
         <!-- Logo -->
         <router-link to="/" class="flex items-center gap-3 group cursor-pointer">
-          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-            <span class="text-2xl">💡</span>
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center transition-opacity duration-300 group-hover:opacity-90">
+            <Lightbulb :size="24" :stroke-width="2" class="text-background" />
           </div>
           <div>
             <div class="text-2xl font-heading font-bold text-primary group-hover:text-accent transition-all">
@@ -69,7 +69,7 @@
             to="/cart"
             class="relative p-2 hover:bg-primary/10 rounded-lg transition-colors group cursor-pointer"
           >
-            <span class="text-2xl group-hover:scale-110 transition-transform inline-block">🛒</span>
+            <ShoppingCart :size="24" :stroke-width="2" class="text-primary" />
             <span class="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full text-xs font-bold flex items-center justify-center text-background">
               0
             </span>
@@ -87,9 +87,7 @@
             @click="mobileMenuOpen = !mobileMenuOpen"
             class="md:hidden p-2 hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
           >
-            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
+            <Menu :size="24" :stroke-width="2" class="text-primary" />
           </button>
         </div>
         
@@ -131,6 +129,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { Menu, Lightbulb, ShoppingCart } from 'lucide-vue-next'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 
 const { t } = useI18n()

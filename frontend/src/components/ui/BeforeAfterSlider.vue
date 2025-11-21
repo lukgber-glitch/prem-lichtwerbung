@@ -45,13 +45,9 @@
       <!-- Handle Circle -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
         <!-- Left Arrow -->
-        <svg class="w-4 h-4 text-brand-navy -ml-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
+        <ChevronLeft :size="16" :stroke-width="2" class="text-brand-navy -ml-2" />
         <!-- Right Arrow -->
-        <svg class="w-4 h-4 text-brand-navy -mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-        </svg>
+        <ChevronRight :size="16" :stroke-width="2" class="text-brand-navy -mr-2" />
       </div>
     </div>
 
@@ -62,9 +58,7 @@
       @click="hideInstructions"
     >
       <div class="text-center text-white">
-        <svg class="w-16 h-16 mx-auto mb-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-        </svg>
+        <ArrowUpDown :size="64" :stroke-width="2" class="mx-auto mb-4 animate-pulse" />
         <p class="text-lg font-semibold">Drag to compare</p>
       </div>
     </div>
@@ -73,6 +67,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { ChevronLeft, ChevronRight, ArrowUpDown } from 'lucide-vue-next'
 
 const props = defineProps<{
   beforeImage: string

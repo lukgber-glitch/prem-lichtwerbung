@@ -24,12 +24,10 @@
     <div v-if="safetyWarnings.length > 0" class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
       <div class="flex items-start gap-4">
         <div class="flex-shrink-0">
-          <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+          <AlertTriangle :size="32" class="text-yellow-600" :stroke-width="2" />
         </div>
         <div class="flex-grow">
-          <h3 class="text-lg font-bold text-yellow-900 mb-3">⚠️ Safety Warnings</h3>
+          <h3 class="text-lg font-bold text-yellow-900 mb-3">Safety Warnings</h3>
           <ul class="space-y-2">
             <li 
               v-for="(warning, index) in safetyWarnings"
@@ -47,10 +45,7 @@
     <!-- Tools Required -->
     <div v-if="toolsRequired.length > 0" class="bg-brand-gray-light rounded-xl p-6 mb-8">
       <h3 class="text-xl font-bold mb-4 font-accent text-brand-navy flex items-center gap-2">
-        <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
+        <Settings :size="24" class="text-brand-blue" :stroke-width="2" />
         Tools Required
       </h3>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -60,9 +55,7 @@
           class="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm"
         >
           <div class="w-10 h-10 bg-brand-blue bg-opacity-10 rounded-full flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <CheckCircle :size="20" class="text-brand-blue" :stroke-width="2" />
           </div>
           <span class="text-sm font-medium text-gray-700">{{ tool }}</span>
         </div>
@@ -101,7 +94,7 @@
           <!-- Additional Notes -->
           <div v-if="step.note" class="mt-4 p-3 bg-blue-50 border-l-4 border-brand-blue rounded">
             <p class="text-sm text-blue-900">
-              <span class="font-semibold">💡 Tip: </span>{{ step.note }}
+              <span class="font-semibold">Tip: </span>{{ step.note }}
             </p>
           </div>
         </div>
@@ -115,9 +108,7 @@
         @click="downloadPDF"
         class="inline-flex items-center gap-2"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
+        <Download :size="20" :stroke-width="2" />
         Download Complete PDF Guide
       </ButtonGlow>
     </div>
@@ -128,9 +119,7 @@
         <div class="flex items-start gap-6">
           <div class="flex-shrink-0 hidden md:block">
             <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-              <svg class="w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
+              <Users :size="40" class="text-white" :stroke-width="2" />
             </div>
           </div>
           
@@ -142,21 +131,15 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+                <Check :size="20" class="text-primary" :stroke-width="2" />
                 <span class="text-sm">Licensed & Insured</span>
               </div>
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+                <Check :size="20" class="text-primary" :stroke-width="2" />
                 <span class="text-sm">Same-Day Service Available</span>
               </div>
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+                <Check :size="20" class="text-primary" :stroke-width="2" />
                 <span class="text-sm">1-Year Warranty</span>
               </div>
             </div>
@@ -192,6 +175,7 @@
 
 <script setup lang="ts">
 import ButtonGlow from '../ui/ButtonGlow.vue'
+import { AlertTriangle, Settings, CheckCircle, Download, Users, Check } from 'lucide-vue-next'
 
 interface InstallationStep {
   title: string

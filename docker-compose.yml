@@ -58,7 +58,7 @@ services:
       STRIPE_PUBLISHABLE_KEY: ""
       STRIPE_WEBHOOK_SECRET: ""
     volumes:
-      - ${PROJECT_NAME:-webshop}_directus_uploads:/directus/uploads
+      - ./directus/uploads:/directus/uploads
       - ${PROJECT_NAME:-webshop}_directus_extensions:/directus/extensions
       - ./directus/bootstrap:/directus/bootstrap
     depends_on:

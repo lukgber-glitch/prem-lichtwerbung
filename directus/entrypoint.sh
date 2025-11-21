@@ -138,6 +138,30 @@ echo ""
 echo "================================================================"
 echo ""
 
+# Upload product images and generate UUID mapping
+echo ""
+echo "📸 Uploading product images to Directus..."
+if [ -f "/directus/bootstrap/upload-images.js" ]; then
+  node /directus/bootstrap/upload-images.js
+  if [ $? -ne 0 ]; then
+    echo "⚠️  Image upload failed, but continuing with bootstrap..."
+  fi
+else
+  echo "⚠️  Image upload script not found, skipping..."
+fi
+
+# Prepare products with image UUIDs
+echo ""
+echo "🔧 Preparing products with image UUIDs..."
+if [ -f "/directus/bootstrap/prepare-products.js" ]; then
+  node /directus/bootstrap/prepare-products.js
+  if [ $? -ne 0 ]; then
+    echo "⚠️  Products preparation failed, but continuing with bootstrap..."
+  fi
+else
+  echo "⚠️  Products preparation script not found, skipping..."
+fi
+
 # Import sample data
 echo ""
 echo "📊 Importing sample data..."
@@ -167,8 +191,17 @@ if [ -f "/directus/bootstrap/sample-data/tags.json" ]; then
 fi
 
 # Import products
-if [ -f "/directus/bootstrap/sample-data/products.json" ]; then
-  echo "  - Importing products..."
+if [ -f "/directus/bootstrap/sample-data/products-final.json" ]; then
+  echo "  - Importing products (with image UUIDs)..."
+  products=$(cat /directus/bootstrap/sample-data/products-final.json | jq -c '.[]')
+  echo "$products" | while IFS= read -r product; do
+    curl -X POST http://localhost:8055/items/products \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $ACCESS_TOKEN" \
+      --data "$product" > /dev/null 2>&1 || true
+  done
+elif [ -f "/directus/bootstrap/sample-data/products.json" ]; then
+  echo "  - Importing products (fallback to template)..."
   products=$(cat /directus/bootstrap/sample-data/products.json | jq -c '.[]')
   echo "$products" | while IFS= read -r product; do
     curl -X POST http://localhost:8055/items/products \

@@ -1,0 +1,1 @@
+import{d as t,b as n,e as o,h as s}from"./index-CouCQ17w.js";const a={class:"container mx-auto px-4 py-8 max-w-md"},c=t({__name:"Login",setup(r){return(m,e)=>(s(),n("div",a,[...e[0]||(e[0]=[o("h1",{class:"text-3xl font-bold mb-8"},"Login",-1),o("p",{class:"text-gray-600"},"Login page - Coming soon",-1)])]))}});export{c as default};

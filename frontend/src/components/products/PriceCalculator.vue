@@ -87,9 +87,7 @@
     <div class="mb-6 p-4 bg-white rounded-lg border border-gray-200">
       <div class="flex items-center justify-between text-sm">
         <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-          </svg>
+          <Truck :size="20" :stroke-width="2" class="text-brand-blue" />
           <span class="font-semibold text-brand-navy">Shipping</span>
         </div>
         <span class="font-semibold text-brand-navy">
@@ -133,9 +131,7 @@
       <!-- Lead Time -->
       <div class="flex items-center justify-between text-sm text-gray-600">
         <div class="flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <Clock :size="16" :stroke-width="2" />
           <span>Estimated Lead Time</span>
         </div>
         <span class="font-semibold">{{ totalLeadTime }} days</span>
@@ -165,6 +161,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { Truck, Clock } from 'lucide-vue-next'
 import ButtonGlow from '../ui/ButtonGlow.vue'
 
 interface ConfiguratorOption {

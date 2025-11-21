@@ -9,59 +9,74 @@
             Prem-Lichtwerbung
           </h3>
           <p class="text-sm mb-4">
-            Premium illuminated signage for professional visibility.
+            {{ t('footer.companyTagline') }}
           </p>
           <p class="text-sm text-text-muted">
-            15+ years of excellence
+            {{ t('footer.yearsExperience') }}
           </p>
         </div>
         
         <!-- Quick Links -->
         <div>
-          <h4 class="text-lg font-bold text-primary mb-4">Quick Links</h4>
+          <h4 class="text-lg font-bold text-primary mb-4">{{ t('footer.quickLinks') }}</h4>
           <ul class="space-y-2 text-sm">
             <li>
-              <router-link to="/" class="hover:text-primary transition-colors cursor-pointer">Home</router-link>
+              <router-link to="/" class="hover:text-primary transition-colors cursor-pointer">{{ t('nav.home') }}</router-link>
             </li>
             <li>
-              <router-link to="/products" class="hover:text-primary transition-colors cursor-pointer">Products</router-link>
+              <router-link to="/products" class="hover:text-primary transition-colors cursor-pointer">{{ t('nav.products') }}</router-link>
             </li>
             <li>
-              <router-link to="/portfolio" class="hover:text-primary transition-colors cursor-pointer">Portfolio</router-link>
+              <router-link to="/portfolio" class="hover:text-primary transition-colors cursor-pointer">{{ t('nav.portfolio') }}</router-link>
             </li>
             <li>
-              <router-link to="/about" class="hover:text-primary transition-colors cursor-pointer">About Us</router-link>
+              <router-link to="/about" class="hover:text-primary transition-colors cursor-pointer">{{ t('nav.about') }}</router-link>
             </li>
             <li>
-              <router-link to="/contact" class="hover:text-primary transition-colors cursor-pointer">Contact</router-link>
+              <router-link to="/contact" class="hover:text-primary transition-colors cursor-pointer">{{ t('nav.contact') }}</router-link>
             </li>
           </ul>
         </div>
         
         <!-- Categories -->
         <div>
-          <h4 class="text-lg font-bold text-primary mb-4">Categories</h4>
+          <h4 class="text-lg font-bold text-primary mb-4">{{ t('footer.categoriesTitle') }}</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">Lightboxes</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">Channel Letters</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">LED Neon Signs</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">Pylons & Totems</a></li>
-            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">Window Signs</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">{{ t('categories.lightboxes') }}</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">{{ t('categories.channelLetters') }}</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">{{ t('categories.ledNeonSigns') }}</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">{{ t('categories.pylonsTotems') }}</a></li>
+            <li><a href="#" class="hover:text-primary transition-colors cursor-pointer">{{ t('categories.windowSigns') }}</a></li>
           </ul>
         </div>
         
         <!-- Contact -->
         <div>
-          <h4 class="text-lg font-bold text-primary mb-4">Contact</h4>
+          <h4 class="text-lg font-bold text-primary mb-4">{{ t('footer.contact') }}</h4>
           <ul class="space-y-2 text-sm">
-            <li>📧 info@prem-lichtwerbung.de</li>
-            <li>📞 +49 123 456 789</li>
-            <li>📍 Berlin, Germany</li>
+            <li class="flex items-center gap-2">
+              <Mail :size="20" :stroke-width="1.5" class="text-primary" />
+              <span>info@prem-lichtwerbung.de</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <Phone :size="20" :stroke-width="1.5" class="text-primary" />
+              <span>+49 123 456 789</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <MapPin :size="20" :stroke-width="1.5" class="text-primary" />
+              <span>{{ t('footer.location') }}</span>
+            </li>
             <li class="pt-4">
               <div class="flex gap-4">
-                <a href="#" class="text-2xl hover:text-primary transition-colors cursor-pointer">📘</a>
-                <a href="#" class="text-2xl hover:text-primary transition-colors cursor-pointer">📷</a>
-                <a href="#" class="text-2xl hover:text-primary transition-colors cursor-pointer">🐦</a>
+                <a href="#" class="hover:text-primary transition-colors cursor-pointer" aria-label="Facebook">
+                  <Facebook :size="24" :stroke-width="1.5" />
+                </a>
+                <a href="#" class="hover:text-primary transition-colors cursor-pointer" aria-label="Instagram">
+                  <Instagram :size="24" :stroke-width="1.5" />
+                </a>
+                <a href="#" class="hover:text-primary transition-colors cursor-pointer" aria-label="Twitter">
+                  <Twitter :size="24" :stroke-width="1.5" />
+                </a>
               </div>
             </li>
           </ul>
@@ -71,12 +86,15 @@
       
       <!-- Copyright -->
       <div class="border-t border-primary/20 mt-8 pt-8 text-center text-sm text-text-muted">
-        <p>&copy; {{ new Date().getFullYear() }} Prem-Lichtwerbung. All rights reserved.</p>
+        <p>&copy; {{ new Date().getFullYear() }} Prem-Lichtwerbung. {{ t('footer.copyright') }}</p>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-// No logic needed for now
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-vue-next'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
