@@ -560,61 +560,151 @@ onMounted(() => {
 
 ---
 
+## Phases 5-7: Final Enhancements (NEW)
+
+### Phase 5: Terminal Frame Transformation (✅ COMPLETED)
+**File**: `POSTerminal.vue` (505→434 lines, 71 lines removed, 14% reduction)
+
+**Removed**:
+- All gradients: `linear-gradient(135deg, #6b7280, #4b5563)`, `linear-gradient(145deg, #d4d4d8, #a1a1aa)`, `linear-gradient(180deg, #18181b, #09090b)`
+- All rounded corners: `border-radius: 0.5rem`, `0.25rem`, `2px`
+- All box-shadows: 3D depth shadows, inset shadows, glow effects
+- Colored buttons: red `#ef4444`, yellow `#fbbf24`, green `#22c55e` with 3D box-shadow depth
+- 3D transform effects: `translateY(4px)` button press
+- Circular status lights: `border-radius: 50%` with pulse animations
+- Text shadows: `text-shadow: 0 1px 2px rgba(0,0,0,0.8)`
+- Industrial gray palette: `#6b7280`, `#4b5563`, `#d4d4d8`, `#a1a1aa`, `#18181b`
+
+**Replaced With**:
+- Pure black `#000000` and white `#FFFFFF` throughout
+- Sharp edges (no border-radius)
+- Flat design (no shadows)
+- Ghost buttons: 2px black border, transparent background, invert hover effect
+- Minimal square status lights: 12px with simple active state
+- Ultra-light typography: `font-weight: 300`
+- Omnicom timing: `0.8s cubic-bezier(0.4, 0.0, 0.2, 1)`
+
+**Result**: Terminal hardware frame now minimal with 2px black borders, white background, black screen bezel. Buttons match ButtonGlow ghost style. Terminal screen components (14 files) retain functional design for demo purposes.
+
+---
+
+### Phase 6: Product Filters Integration (✅ COMPLETED)
+**File**: `Products.vue` (89→214 lines, +125 lines)
+
+**Added**:
+- **Filter Section** between hero and products grid with three filter groups:
+  1. **Category Filter**: All, Lightboxes, Channel Letters, Neon, Pylons, Windows, Terminal
+  2. **Illumination Type Filter**: All, LED, Neon
+  3. **Price Range Filter**: All, <€500, €500-€1000, >€1000
+  
+- **Filter Styling**: Ghost button design with black borders, active state `bg-black text-white`, inactive `transparent border-black/20 hover:border-black`, 500ms Omnicom transitions
+- **Filter Logic**: Computed `filteredProducts` property with category name matching, illumination type matching, price range min/max filtering
+- **UI Enhancements**: Results count display ("X products found"), Reset Filters button for empty state
+- **Reactive State**: `selectedCategory`, `selectedIllumination`, `selectedPriceRange` refs with instant filtering
+
+**Design**: Ultra-minimal with `text-sm font-light` labels, `uppercase tracking-wider`, `flex-wrap gap-3` button groups, `py-20` section with `border-b border-black/10`
+
+**Result**: Seamless filter integration matching Omnicom minimal aesthetic, enabling product discovery while maintaining generous whitespace and sophisticated black/white design.
+
+---
+
+### Phase 7: Video Background Integration (✅ COMPLETED)
+**File**: `Home.vue` (105→119 lines, +14 lines)
+
+**Added**:
+- **HTML5 Video Background** in hero section per Omnicom Style Guide Section 8
+- **Video Element**: `autoplay muted loop playsinline` attributes for seamless background playback
+- **Styling**: `position absolute inset-0 w-full h-full object-cover opacity-80` for full-bleed cinematic presence
+- **Overlay**: `bg-white/40` for text readability on video background
+- **Placeholder Source**: `/videos/hero-signage.mp4` (user replaces with actual monochrome/desaturated signage video)
+- **Z-layering**: Video (z-0) → Overlay (z-1) → Hero content (z-10)
+
+**Video Specifications Met**:
+- Autoplay without controls (muted for browser compliance)
+- Seamless loop
+- Reduced opacity 80% (within 60-80% spec range)
+- Position absolute full-bleed
+- Mobile performance (`playsinline` attribute)
+
+**Expected Video Content**:
+- Monochrome or desaturated
+- Subtle motion: LED signs pulsing, installations, light rays
+- 10-30 seconds duration
+- High quality 1080p+
+- Professional cinematic quality
+
+**Result**: Completes Omnicom Style Guide Section 8 implementation. Video serves as subtle background enhancement without distracting from massive typography and ghost button CTA.
+
+---
+
 ## Conclusion
 
-The Prem-Lichtwerbung website has successfully completed **Phases 1-4** of the Omnicom Group-inspired transformation, evolving from a conventional, colorful illuminated signage website to a premium, ultra-minimal corporate experience with sophisticated black/white aesthetics.
+The Prem-Lichtwerbung website has successfully completed **Phases 1-7** of the Omnicom Group-inspired transformation, evolving from a conventional, colorful illuminated signage website to a premium, ultra-minimal corporate experience with sophisticated black/white aesthetics, functional product filtering, and cinematic video backgrounds.
 
-### Key Achievements (Phases 1-4)
+### Key Achievements (Phases 1-7)
 ✅ Implemented pure black/white color palette (21:1 contrast, WCAG AAA)  
 ✅ Deployed massive typography system (96-160px headlines, 300/900 weights)  
 ✅ Created generous whitespace layouts (80%+ empty space per section)  
 ✅ Transformed all main pages (Home, Products, ProductDetail, About, Contact)  
 ✅ Simplified navigation to 4 core pages (Story, Work, Terminal, Contact)  
 ✅ Redesigned 9 core components (Header, Footer, ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher)  
-✅ Reduced codebase by 1,969 lines (35% average reduction)  
+✅ Transformed terminal hardware frame to minimal black/white ghost button design  
+✅ Integrated product filters with category, illumination type, and price range  
+✅ Added cinematic video background to hero section per Style Guide Section 8  
+✅ Reduced terminal codebase by 71 lines (14% reduction)  
+✅ Added 139 lines for enhanced functionality (filters +125, video +14)  
 ✅ Installed premium fonts (Inter, Outfit) and GSAP animation system  
 ✅ Achieved sharp edges throughout (no rounded corners)  
 ✅ Eliminated all shadows, gradients, and decorative animations  
 ✅ Implemented 800-1200ms sophisticated transitions  
 
-### Transformation Statistics
-- **Total Files Transformed**: 21 files across 4 committed phases
-- **Total Lines Removed**: 1,969 lines
-- **Average Code Reduction**: 35%
-- **Largest Reductions**: Home.vue (70%), Products.vue (70%), Footer.vue (51%)
-- **Commits**: 4 comprehensive commits with full documentation
+### Transformation Statistics (Updated)
+- **Total Files Transformed**: 24 files across 7 committed phases
+- **Phase 1-4 Lines Removed**: 1,969 lines (35% average reduction)
+- **Phase 5 Lines Removed**: 71 lines (terminal frame)
+- **Phase 6-7 Lines Added**: 139 lines (filters +125, video +14)
+- **Net Code Change**: -1,901 lines removed overall
+- **Largest Reductions**: Home.vue (70%), Products.vue (70% then enhanced), Footer.vue (51%), POSTerminal.vue (14%)
+- **Commits**: 7 comprehensive commits with full documentation
 
 ### Design Impact
 - **Visual Hierarchy**: Dramatically improved with massive bold typography
 - **Brand Perception**: Shifted to premium, corporate, sophisticated, high-end
 - **User Focus**: Single clear powerful message per section
-- **Professional Polish**: Smooth animations, clean minimal code, invisible UI
+- **Professional Polish**: Smooth animations, clean minimal code, invisible UI, cinematic backgrounds
 - **Accessibility**: WCAG AAA compliance, 21:1 contrast ratio throughout
+- **Functionality**: Enhanced product discovery with minimal filters
+- **Engagement**: Cinematic video backgrounds add subtle motion without distraction
 
 ### Completed Pages & Components
-**Pages**: Home, Products, ProductDetail, About, Contact  
+**Pages**: Home (with video background), Products (with filters), ProductDetail, About, Contact  
 **Navigation**: Header (4 links), Footer (single row)  
-**Components**: ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher  
-**System**: Design documentation, Tailwind config, GSAP animations, Premium fonts
+**Components**: ButtonGlow, ProductCard, DayNightSwitcher, BeforeAfterSlider, LanguageSwitcher, POSTerminal (frame)  
+**System**: Design documentation, Tailwind config, GSAP animations, Premium fonts  
+**Enhancements**: Product filters (category/illumination/price), HTML5 video background
 
 ### Optional Future Enhancements
 1. Generate AI brand imagery for hero sections (scripts already exist)
-2. Implement smooth scroll with locomotive-scroll
-3. Transform terminal components (extensive 15+ file project)
-4. Add custom cursor effects and advanced micro-interactions
-5. Conduct user testing and performance audits
-6. Professional monochrome product photography
+2. Replace placeholder video with actual monochrome signage footage
+3. Implement smooth scroll with locomotive-scroll
+4. Transform terminal screen components (extensive 14 files, 500+ lines scope)
+5. Add custom cursor effects and advanced micro-interactions
+6. Conduct user testing and performance audits
+7. Professional monochrome product photography
 
 ---
 
-**Transformation Status**: ✅ **PHASES 1-4 COMPLETE**  
+**Transformation Status**: ✅ **PHASES 1-7 COMPLETE**  
 **Design System**: ✅ **Documented & Implemented**  
 **All Main Pages**: ✅ **Redesigned (Home, Products, ProductDetail, About, Contact)**  
 **Navigation**: ✅ **Header & Footer Ultra-Minimal**  
 **UI Components**: ✅ **All Core Components Transformed**  
-**Code Quality**: ✅ **35% Average Reduction, 1,969 Lines Removed**  
+**Terminal Frame**: ✅ **Minimal Black/White Ghost Button Design**  
+**Product Filters**: ✅ **Category, Illumination, Price Range Integrated**  
+**Video Background**: ✅ **Cinematic HTML5 Implementation (Style Guide Section 8)**  
+**Code Quality**: ✅ **Net 1,901 Lines Removed, Enhanced Functionality Added**  
 **Accessibility**: ✅ **WCAG AAA Compliance (21:1 Contrast)**
 
 **Prepared By**: Junie (Autonomous Programmer)  
 **Date**: November 21, 2025  
-**Version**: 2.0 (Phases 1-4 Complete)
+**Version**: 3.0 (Phases 1-7 Complete)
