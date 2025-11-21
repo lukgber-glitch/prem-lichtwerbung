@@ -3,6 +3,16 @@ import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
+
+// Omnicom-Inspired Premium Fonts
+import '@fontsource/inter/300.css'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/inter/900.css'
+import '@fontsource/outfit/600.css'
+import '@fontsource/outfit/800.css'
+
 import './style.css'
 import en from './locales/en.json'
 import de from './locales/de.json'

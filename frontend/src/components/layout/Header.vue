@@ -1,93 +1,56 @@
 <template>
-  <header class="bg-surface/95 backdrop-blur-sm text-text-main sticky top-0 z-50 border-b border-primary/20">
-    <div class="container mx-auto px-6">
-      <div class="flex items-center justify-between h-20">
+  <header class="bg-white text-black fixed top-0 left-0 right-0 z-50 border-b border-black/10">
+    <div class="max-w-content mx-auto px-6 md:px-32">
+      <div class="flex items-center justify-between h-24">
         
-        <!-- Logo -->
-        <router-link to="/" class="flex items-center gap-3 group cursor-pointer">
-          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center transition-opacity duration-300 group-hover:opacity-90">
-            <Lightbulb :size="24" :stroke-width="2" class="text-background" />
-          </div>
-          <div>
-            <div class="text-2xl font-heading font-bold text-primary group-hover:text-accent transition-all">
-              Prem-Lichtwerbung
-            </div>
-            <div class="text-xs text-text-muted">{{ t('header.tagline') }}</div>
-          </div>
+        <!-- Logo - Text Only -->
+        <router-link to="/" class="font-heading text-xl font-bold text-black hover:text-black/70 transition-all duration-500 cursor-pointer">
+          Prem-Lichtwerbung
         </router-link>
         
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8">
+        <!-- Desktop Navigation - 4 Core Links -->
+        <nav class="hidden md:flex items-center gap-12">
           <router-link 
-            to="/" 
-            class="text-text-main hover:text-primary transition-colors font-medium relative group cursor-pointer"
-            active-class="text-primary"
+            to="/about" 
+            class="text-black font-light text-base relative group cursor-pointer transition-all duration-500"
           >
-            {{ t('nav.home') }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+            Story
+            <span class="absolute bottom-0 left-0 w-0 h-px bg-black group-hover:w-full transition-all duration-500"></span>
           </router-link>
           <router-link 
             to="/products" 
-            class="text-text-main hover:text-primary transition-colors font-medium relative group cursor-pointer"
-            active-class="text-primary"
+            class="text-black font-light text-base relative group cursor-pointer transition-all duration-500"
           >
-            {{ t('nav.products') }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+            Work
+            <span class="absolute bottom-0 left-0 w-0 h-px bg-black group-hover:w-full transition-all duration-500"></span>
           </router-link>
           <router-link 
-            to="/portfolio" 
-            class="text-text-main hover:text-primary transition-colors font-medium relative group cursor-pointer"
-            active-class="text-primary"
+            to="/terminal-demo" 
+            class="text-black font-light text-base relative group cursor-pointer transition-all duration-500"
           >
-            {{ t('nav.portfolio') }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-          </router-link>
-          <router-link 
-            to="/about" 
-            class="text-text-main hover:text-primary transition-colors font-medium relative group cursor-pointer"
-            active-class="text-primary"
-          >
-            {{ t('nav.about') }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+            Terminal
+            <span class="absolute bottom-0 left-0 w-0 h-px bg-black group-hover:w-full transition-all duration-500"></span>
           </router-link>
           <router-link 
             to="/contact" 
-            class="text-text-main hover:text-primary transition-colors font-medium relative group cursor-pointer"
-            active-class="text-primary"
+            class="text-black font-light text-base relative group cursor-pointer transition-all duration-500"
           >
-            {{ t('nav.contact') }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+            Contact
+            <span class="absolute bottom-0 left-0 w-0 h-px bg-black group-hover:w-full transition-all duration-500"></span>
           </router-link>
         </nav>
         
         <!-- Actions -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
           <!-- Language Switcher -->
           <LanguageSwitcher />
-          
-          <router-link 
-            to="/cart"
-            class="relative p-2 hover:bg-primary/10 rounded-lg transition-colors group cursor-pointer"
-          >
-            <ShoppingCart :size="24" :stroke-width="2" class="text-primary" />
-            <span class="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full text-xs font-bold flex items-center justify-center text-background">
-              0
-            </span>
-          </router-link>
-          
-          <button 
-            @click="$router.push('/contact')"
-            class="px-6 py-2 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary hidden md:block cursor-pointer"
-          >
-            {{ t('header.getQuote') }}
-          </button>
           
           <!-- Mobile menu button -->
           <button 
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden p-2 hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
+            class="md:hidden p-2 cursor-pointer"
           >
-            <Menu :size="24" :stroke-width="2" class="text-primary" />
+            <Menu :size="24" :stroke-width="1.5" class="text-black" />
           </button>
         </div>
         
@@ -97,30 +60,21 @@
     <!-- Mobile Menu -->
     <div 
       v-if="mobileMenuOpen"
-      class="md:hidden bg-surface border-t border-primary/20 py-4"
+      class="md:hidden bg-white border-t border-black/10 py-8"
     >
-      <nav class="container mx-auto px-6 flex flex-col gap-4">
-        <router-link to="/" class="text-text-main hover:text-primary transition-colors font-medium py-2 cursor-pointer" @click="mobileMenuOpen = false">
-          {{ t('nav.home') }}
+      <nav class="max-w-content mx-auto px-6 flex flex-col gap-6">
+        <router-link to="/about" class="text-black font-light text-lg py-2 cursor-pointer" @click="mobileMenuOpen = false">
+          Story
         </router-link>
-        <router-link to="/products" class="text-text-main hover:text-primary transition-colors font-medium py-2 cursor-pointer" @click="mobileMenuOpen = false">
-          {{ t('nav.products') }}
+        <router-link to="/products" class="text-black font-light text-lg py-2 cursor-pointer" @click="mobileMenuOpen = false">
+          Work
         </router-link>
-        <router-link to="/portfolio" class="text-text-main hover:text-primary transition-colors font-medium py-2 cursor-pointer" @click="mobileMenuOpen = false">
-          {{ t('nav.portfolio') }}
+        <router-link to="/terminal-demo" class="text-black font-light text-lg py-2 cursor-pointer" @click="mobileMenuOpen = false">
+          Terminal
         </router-link>
-        <router-link to="/about" class="text-text-main hover:text-primary transition-colors font-medium py-2 cursor-pointer" @click="mobileMenuOpen = false">
-          {{ t('nav.about') }}
+        <router-link to="/contact" class="text-black font-light text-lg py-2 cursor-pointer" @click="mobileMenuOpen = false">
+          Contact
         </router-link>
-        <router-link to="/contact" class="text-text-main hover:text-primary transition-colors font-medium py-2 cursor-pointer" @click="mobileMenuOpen = false">
-          {{ t('nav.contact') }}
-        </router-link>
-        <button 
-          @click="$router.push('/contact'); mobileMenuOpen = false"
-          class="px-6 py-3 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all text-center border-2 border-primary cursor-pointer"
-        >
-          {{ t('header.getQuote') }}
-        </button>
       </nav>
     </div>
   </header>
@@ -128,10 +82,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { Menu, Lightbulb, ShoppingCart } from 'lucide-vue-next'
+import { Menu } from 'lucide-vue-next'
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
 
-const { t } = useI18n()
 const mobileMenuOpen = ref(false)
 </script>

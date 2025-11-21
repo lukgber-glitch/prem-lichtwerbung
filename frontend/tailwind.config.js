@@ -2,55 +2,58 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // Omnicom-Inspired Color Palette - Pure Black/White Minimal Aesthetic
       colors: {
-        // Primary & Accent - Muted Professional Palette
-        'primary': '#475569', // Muted slate-blue
-        'accent': '#0F766E', // Sophisticated teal
-        
-        // Background & Surface (Light mode)
-        'background': '#FAFAF9', // Soft warm white
-        'surface': '#F5F5F4', // Light gray
-        'surface-alt': '#E7E5E4', // Slightly darker gray
-        
-        // Text Colors
-        'text-main': '#1E293B', // Dark slate
-        'text-muted': '#64748B', // Medium gray
-        
-        // Utility Colors
-        'success': '#059669', // Muted green
-        'warning': '#D97706', // Muted amber
-        'error': '#DC2626', // Muted red
-        
-        // Extended Brand Colors (backward compatibility)
-        'brand-blue': '#475569',
-        'brand-pink': '#0F766E',
-        'brand-warm': '#64748B',
-        'brand-navy': '#1E293B',
-        'brand-gray-light': '#F5F5F4',
-        'brand-yellow': '#D97706',
+        'primary': '#000000', // Pure Black
+        'accent': '#0F766E', // Muted Teal (use sparingly for subtle CTAs)
+        'background': '#FFFFFF', // Pure White
+        'surface': '#FAFAFA', // Subtle surface variation (minimal use)
+        'surface-alt': '#F5F5F5', // Alternative surface (minimal use)
+        'text-main': '#000000', // Pure Black text
+        'text-muted': '#737373', // Muted gray (use sparingly)
+        'black': '#000000',
+        'white': '#FFFFFF',
       },
+      
+      // Premium Font Families - Omnicom Style
       fontFamily: {
         'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'heading': ['Space Grotesk', 'Inter', 'sans-serif'],
-        'accent': ['Space Grotesk', 'Inter', 'sans-serif'],
+        'heading': ['Outfit', 'Inter', 'sans-serif'],
       },
-      boxShadow: {
-        // Minimal Glow for CTAs Only (Teal accent)
-        'glow-cta': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        
-        // Shadow Scale (Professional, Subtle)
-        'soft': '0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02)',
-        'card': '0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04)',
-        'elevated': '0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06)',
-        
-        // Legacy glow effects (for backward compatibility, will be removed)
-        'glow-sm': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-md': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-lg': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-subtle': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-accent': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-pink': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
-        'glow-blue': '0 0 24px rgba(15, 118, 110, 0.15), 0 0 12px rgba(15, 118, 110, 0.1)',
+      
+      // Generous Spacing Scale - Extreme Whitespace
+      spacing: {
+        '18': '4.5rem',    // 72px
+        '88': '22rem',     // 352px
+        '100': '25rem',    // 400px
+        '128': '32rem',    // 512px
+        '144': '36rem',    // 576px
+      },
+      
+      // Massive Font Sizes - Bold Typography
+      fontSize: {
+        '7xl': ['5rem', { lineHeight: '1.1' }],      // 80px
+        '8xl': ['6rem', { lineHeight: '1.1' }],      // 96px
+        '9xl': ['8rem', { lineHeight: '1.1' }],      // 128px
+        '10xl': ['10rem', { lineHeight: '1.1' }],    // 160px
+      },
+      
+      // Animation Timings - Sophisticated Slow Motion
+      transitionDuration: {
+        '800': '800ms',
+        '1000': '1000ms',
+        '1200': '1200ms',
+      },
+      
+      // Custom Easing - Smooth Omnicom Motion
+      transitionTimingFunction: {
+        'omnicom': 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+      },
+      
+      // Max Width Constraints
+      maxWidth: {
+        'content': '1400px',
+        'text': '600px',
       },
     },
   },

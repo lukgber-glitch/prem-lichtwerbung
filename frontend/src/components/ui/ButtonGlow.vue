@@ -1,8 +1,9 @@
 <template>
   <button
     :class="[
-      'px-6 py-3 rounded-md font-medium transition-all duration-300 ease-out cursor-pointer',
-      'disabled:cursor-not-allowed disabled:opacity-50',
+      'px-8 py-4 font-semibold transition-all duration-500 ease-omnicom cursor-pointer',
+      'disabled:cursor-not-allowed disabled:opacity-40',
+      'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black',
       variantClasses,
       $attrs.class
     ]"
@@ -23,13 +24,17 @@ const props = defineProps<{
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'bg-primary text-background hover:opacity-90 border-2 border-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+      // Solid black button with white text, inverts on hover
+      return 'bg-black text-white border-2 border-black hover:bg-white hover:text-black'
     case 'secondary':
-      return 'bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-background focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+      // White/transparent button with black border, inverts on hover
+      return 'bg-white text-black border-2 border-black hover:bg-black hover:text-white'
     case 'ghost':
-      return 'bg-transparent text-primary border-2 border-transparent hover:bg-surface focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+      // Fully transparent with border only, inverts on hover
+      return 'bg-transparent text-black border-2 border-black hover:bg-black hover:text-white'
     default:
-      return 'bg-primary text-background hover:opacity-90 border-2 border-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
+      // Default to ghost style
+      return 'bg-transparent text-black border-2 border-black hover:bg-black hover:text-white'
   }
 })
 </script>

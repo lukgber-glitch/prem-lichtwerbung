@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@directus/sdk": "^12.1.0",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
     "@stripe/stripe-js": "^2.4.0",
     "axios": "^1.6.7",
+    "gsap": "^3.13.0",
     "lucide-vue-next": "^0.554.0",
     "pinia": "^2.1.7",
     "vue": "^3.5.24",
