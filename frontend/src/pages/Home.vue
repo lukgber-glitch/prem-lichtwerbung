@@ -1,8 +1,22 @@
 <template>
   <div class="min-h-screen bg-white">
     
-    <!-- HERO SECTION - Omnicom Minimal -->
+    <!-- HERO SECTION - Omnicom Minimal with Video Background -->
     <section class="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-6 py-32">
+      
+      <!-- Video Background - Omnicom Cinematic -->
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover opacity-80"
+      >
+        <source src="/videos/hero-signage.mp4" type="video/mp4" />
+      </video>
+      
+      <!-- Overlay for text readability -->
+      <div class="absolute inset-0 bg-white/40"></div>
       
       <!-- Hero content -->
       <div class="relative z-10 text-center max-w-content mx-auto">
