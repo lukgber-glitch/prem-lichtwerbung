@@ -1,7 +1,7 @@
 <template>
   <div class="relative w-full">
     <!-- Image Container -->
-    <div class="relative w-full overflow-hidden rounded-lg shadow-lg" :style="{ aspectRatio: '16/9' }">
+    <div class="relative w-full overflow-hidden" :style="{ aspectRatio: '16/9' }">
       <!-- Day Image -->
       <Transition name="fade" mode="out-in">
         <img
@@ -23,64 +23,41 @@
         />
       </Transition>
 
-      <!-- Mode Label -->
-      <div class="absolute top-4 left-4 bg-black bg-opacity-60 text-white px-4 py-2 rounded-lg font-semibold">
-        {{ isDayMode ? 'Daytime View' : 'Nighttime Illuminated' }}
+      <!-- Mode Label - Minimal -->
+      <div class="absolute top-6 right-6 bg-black text-white px-4 py-2 text-xs font-light uppercase tracking-wider">
+        {{ isDayMode ? 'Day' : 'Night' }}
       </div>
     </div>
 
-    <!-- Toggle Control -->
-    <div class="flex items-center justify-center gap-4 mt-6">
+    <!-- Toggle Control - Minimal Two Buttons -->
+    <div class="flex items-center justify-center gap-0 mt-8">
       <!-- Day Button -->
       <button
         @click="isDayMode = true"
-        class="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+        class="px-8 py-3 font-semibold text-sm transition-all duration-500 border border-black cursor-pointer"
         :class="isDayMode 
-          ? 'bg-primary text-background shadow-lg scale-105' 
-          : 'bg-surface-alt text-text-muted hover:bg-surface hover:text-text-main'"
+          ? 'bg-black text-white' 
+          : 'bg-white text-black hover:bg-black hover:text-white'"
       >
-        <Sun :size="20" :stroke-width="2.5" />
-        <span>Day</span>
+        Day
       </button>
-
-      <!-- Toggle Switch -->
-      <div
-        @click="toggleMode"
-        class="relative w-16 h-8 bg-surface-alt rounded-full cursor-pointer transition-colors duration-300 border-2 border-primary/20"
-        :class="{ 'bg-primary/20': !isDayMode }"
-      >
-        <div
-          class="absolute top-1 w-6 h-6 bg-primary rounded-full shadow-md transition-transform duration-300 ease-in-out"
-          :class="isDayMode ? 'left-1' : 'left-9'"
-        >
-          <Sun v-if="isDayMode" :size="16" :stroke-width="2.5" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-background" />
-          <Moon v-else :size="16" :stroke-width="2.5" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-background" />
-        </div>
-      </div>
 
       <!-- Night Button -->
       <button
         @click="isDayMode = false"
-        class="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+        class="px-8 py-3 font-semibold text-sm transition-all duration-500 border border-black border-l-0 cursor-pointer"
         :class="!isDayMode 
-          ? 'bg-primary text-background shadow-lg scale-105' 
-          : 'bg-surface-alt text-text-muted hover:bg-surface hover:text-text-main'"
+          ? 'bg-black text-white' 
+          : 'bg-white text-black hover:bg-black hover:text-white'"
       >
-        <Moon :size="20" :stroke-width="2.5" />
-        <span>Night</span>
+        Night
       </button>
     </div>
-
-    <!-- Description -->
-    <p class="text-center text-text-muted mt-4 text-sm">
-      Click the buttons or toggle to switch between day and night views
-    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Sun, Moon } from 'lucide-vue-next'
 
 const props = defineProps<{
   dayImage: string

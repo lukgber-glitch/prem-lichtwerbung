@@ -1,111 +1,69 @@
 <template>
   <div
-    class="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-glow-blue flex flex-col h-full group"
+    class="bg-white border border-black/10 overflow-hidden transition-all duration-800 hover:border-black flex flex-col h-full group"
   >
     <!-- Image Container with Day/Night Toggle -->
-    <router-link :to="`/products/${product.slug}`" class="relative block overflow-hidden bg-brand-gray-light">
+    <router-link :to="`/products/${product.slug}`" class="relative block overflow-hidden bg-white">
       <img
         :src="currentImage"
         :alt="product.name"
         loading="lazy"
-        class="w-full h-64 object-cover transition-opacity duration-300"
+        class="w-full h-64 object-cover transition-all duration-800 group-hover:opacity-90"
         @mouseenter="showNightImage = true"
         @mouseleave="showNightImage = false"
       />
       
-      <!-- Shimmer overlay on hover -->
-      <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-        <div class="animate-shimmer w-full h-full"></div>
-      </div>
+      <!-- Minimal Overlay on Hover -->
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-800 pointer-events-none"></div>
       
-      <!-- Electric sparks in corners -->
-      <div class="absolute top-2 left-2 w-2 h-2 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark"></div>
-      <div class="absolute top-2 right-2 w-2 h-2 bg-brand-pink rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.3s;"></div>
-      <div class="absolute bottom-2 left-2 w-2 h-2 bg-brand-yellow rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.6s;"></div>
-      <div class="absolute bottom-2 right-2 w-2 h-2 bg-brand-blue rounded-full opacity-0 group-hover:opacity-100 animate-spark" style="animation-delay: 0.9s;"></div>
-      
-      <!-- Badges Container -->
-      <div class="absolute top-3 left-3 flex flex-col gap-2">
-        <!-- Customizable Badge -->
+      <!-- Stock Status Badge - Minimal -->
+      <div class="absolute top-4 left-4">
         <span
-          v-if="product.customizable"
-          class="bg-brand-yellow text-brand-navy px-3 py-1 rounded-full text-xs font-bold uppercase"
-        >
-          Customizable
-        </span>
-        
-        <!-- Stock Status -->
-        <span
-          v-if="product.stock <= 5 && product.stock > 0"
-          class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold"
-        >
-          Only {{ product.stock }} left
-        </span>
-        <span
-          v-else-if="product.stock === 0"
-          class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold"
+          v-if="product.stock === 0"
+          class="bg-black text-white px-4 py-2 text-xs font-light uppercase tracking-wider"
         >
           Out of Stock
-        </span>
-      </div>
-
-      <!-- Illumination Type Badge -->
-      <div class="absolute top-3 right-3">
-        <span
-          class="bg-brand-navy bg-opacity-90 text-brand-blue px-3 py-1 rounded-full text-xs font-semibold"
-        >
-          {{ product.illumination_type }}
         </span>
       </div>
     </router-link>
 
     <!-- Product Info -->
-    <div class="p-4 flex flex-col flex-grow">
+    <div class="p-6 flex flex-col flex-grow">
       <!-- Product Name -->
-      <router-link :to="`/products/${product.slug}`" class="hover:text-brand-blue transition-colors">
-        <h3 class="font-accent font-bold text-lg mb-2 line-clamp-2">
+      <router-link :to="`/products/${product.slug}`" class="hover:opacity-60 transition-opacity duration-500">
+        <h3 class="font-heading font-semibold text-xl text-black mb-3 leading-tight">
           {{ productName }}
         </h3>
       </router-link>
 
       <!-- Description -->
-      <p class="text-brand-gray-dark text-sm mb-3 line-clamp-2 flex-grow">
+      <p class="text-black/60 text-sm font-light mb-4 line-clamp-2 flex-grow leading-relaxed">
         {{ productDescription }}
       </p>
 
-      <!-- Lead Time -->
-      <div class="flex items-center gap-2 mb-3 text-sm text-brand-gray-dark">
-        <Clock :size="16" :stroke-width="2" />
-        <span>Ready in {{ product.lead_time_days }} days</span>
-      </div>
-
       <!-- Price -->
-      <div class="mb-4">
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold text-brand-blue">
+      <div class="mb-6">
+        <div class="flex items-baseline gap-3">
+          <span class="text-2xl font-bold text-black">
             €{{ product.price.toFixed(2) }}
           </span>
           <span
             v-if="product.compare_at_price"
-            class="text-sm text-gray-500 line-through"
+            class="text-sm text-black/40 line-through font-light"
           >
             €{{ product.compare_at_price.toFixed(2) }}
           </span>
         </div>
-        <p v-if="product.compare_at_price" class="text-xs text-green-600 font-semibold mt-1">
-          Save €{{ (product.compare_at_price - product.price).toFixed(2) }}
-        </p>
       </div>
 
-      <!-- Add to Cart Button -->
-      <ButtonGlow
-        variant="primary"
-        :class="['w-full', { 'animate-glow-pulse': product.stock > 0 }]"
+      <!-- View Details Button - Minimal -->
+      <button
+        @click="$router.push(`/products/${product.slug}`)"
+        class="w-full px-6 py-3 bg-transparent text-black text-sm font-semibold border border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
         :disabled="product.stock === 0"
-        @click="addToCart"
       >
-        {{ product.stock === 0 ? 'Out of Stock' : 'Add to Cart' }}
-      </ButtonGlow>
+        {{ product.stock === 0 ? 'Out of Stock' : 'View Details' }}
+      </button>
     </div>
   </div>
 </template>
@@ -114,8 +72,6 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { Clock } from 'lucide-vue-next'
-import ButtonGlow from '../ui/ButtonGlow.vue'
 
 interface Product {
   id: number
