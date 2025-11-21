@@ -1,121 +1,126 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen bg-white">
     
-    <!-- Hero Section -->
-    <section class="relative py-32 bg-background overflow-hidden">
-      <div class="container mx-auto px-6 text-center">
-        <h1 class="text-6xl md:text-8xl font-heading font-bold text-primary mb-6">
-          About Prem-Lichtwerbung
+    <!-- HERO SECTION - Omnicom Minimal -->
+    <section class="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-6">
+      <div class="max-w-content mx-auto text-center">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-black leading-none tracking-tighter mb-16">
+          Our Story
         </h1>
-        <p class="text-2xl md:text-3xl text-text-main max-w-3xl mx-auto">
-          15+ years of making brands <span class="text-primary">stand out</span>
+        <p class="text-xl md:text-2xl text-black font-light max-w-2xl mx-auto leading-relaxed">
+          15 years of illuminating brands across Europe
         </p>
       </div>
     </section>
     
-    <!-- Our Story -->
-    <section class="py-20 bg-surface">
-      <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-4xl font-heading font-bold text-text-main mb-6">
-              Your Brand Deserves Visibility
-            </h2>
-            <p class="text-lg text-text-muted mb-4">
-              Since 2009, Prem-Lichtwerbung has been crafting premium illuminated signage that transforms businesses into landmarks. What started as a small workshop in Germany has grown into a leading provider of custom lighting solutions across Europe.
-            </p>
-            <p class="text-lg text-text-muted mb-4">
-              We believe every business deserves signage that not only looks incredible but performs flawlessly for years. That's why we use only the highest-quality materials, LED technology, and weatherproof construction in every project.
-            </p>
-            <p class="text-lg text-text-muted">
-              From elegant channel letters to eye-catching LED neon, from towering pylons to sleek lightboxes – we bring your vision to life with precision and passion.
-            </p>
-          </div>
-          <div class="relative">
-            <div class="aspect-square rounded-2xl overflow-hidden border-2 border-primary/20 bg-surface-alt">
-              <div class="w-full h-full flex items-center justify-center">
-                <Factory :size="120" :stroke-width="1.5" class="text-primary" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Stats Section -->
-    <section class="py-20 bg-background">
-      <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-8">
-          <div class="text-center">
-            <AnimatedCounter :target-value="15" suffix="+" label="Years of Excellence" />
-          </div>
-          <div class="text-center">
-            <AnimatedCounter :target-value="500" suffix="+" label="Happy Clients" />
-          </div>
-          <div class="text-center">
-            <AnimatedCounter :target-value="25" label="Team Members" />
-          </div>
-          <div class="text-center">
-            <AnimatedCounter :target-value="98" suffix="%" label="Satisfaction Rate" />
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Why Choose Us -->
-    <section class="py-20 bg-surface-alt">
-      <div class="container mx-auto px-6">
-        <h2 class="text-5xl font-heading font-bold text-text-main text-center mb-16">
-          Why Choose Prem-Lichtwerbung?
+    <!-- NARRATIVE SECTION - Single Column -->
+    <section class="py-44 bg-white">
+      <div class="max-w-text mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-black mb-16 leading-tight">
+          Transforming businesses into landmarks
         </h2>
         
-        <div class="grid md:grid-cols-3 gap-8">
-          
-          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
-            <Gem :size="32" :stroke-width="2" class="text-primary mb-6" />
-            <h3 class="text-2xl font-bold text-text-main mb-4">Premium Quality</h3>
-            <p class="text-text-muted">
+        <p class="text-lg md:text-xl text-black font-light leading-relaxed mb-12">
+          Since 2009, Prem-Lichtwerbung has been crafting premium illuminated signage that transforms businesses into landmarks. What started as a small workshop in Germany has grown into a leading provider of custom lighting solutions across Europe.
+        </p>
+        
+        <p class="text-lg md:text-xl text-black font-light leading-relaxed mb-12">
+          We believe every business deserves signage that not only looks incredible but performs flawlessly for years. That's why we use only the highest-quality materials, LED technology, and weatherproof construction in every project.
+        </p>
+        
+        <p class="text-lg md:text-xl text-black font-light leading-relaxed">
+          From elegant channel letters to eye-catching LED neon, from towering pylons to sleek lightboxes – we bring your vision to life with precision and passion.
+        </p>
+      </div>
+    </section>
+    
+    <!-- PHILOSOPHY SECTION - Black Background -->
+    <section class="py-44 bg-black">
+      <div class="max-w-content mx-auto px-6 md:px-32">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-white mb-20 leading-tight">
+          Our Philosophy
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-x-32 gap-y-16">
+          <div>
+            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Premium Quality</h3>
+            <p class="text-lg text-white/80 font-light leading-relaxed">
               We use only the highest-grade materials and LED technology. Every sign is built to last 10+ years with minimal maintenance.
             </p>
           </div>
           
-          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
-            <Palette :size="32" :stroke-width="2" class="text-primary mb-6" />
-            <h3 class="text-2xl font-bold text-text-main mb-4">Custom Design</h3>
-            <p class="text-text-muted">
+          <div>
+            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Custom Design</h3>
+            <p class="text-lg text-white/80 font-light leading-relaxed">
               Every project is unique. Our design team works with you to create signage that perfectly matches your brand identity.
             </p>
           </div>
           
-          <div class="bg-surface p-8 rounded-xl border-2 border-surface-alt hover:border-primary transition-all duration-300">
-            <Zap :size="32" :stroke-width="2" class="text-primary mb-6" />
-            <h3 class="text-2xl font-bold text-text-main mb-4">Fast Turnaround</h3>
-            <p class="text-text-muted">
+          <div>
+            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Fast Turnaround</h3>
+            <p class="text-lg text-white/80 font-light leading-relaxed">
               Most orders ready in 7-14 days. Need it faster? We offer rush production for urgent projects.
             </p>
           </div>
           
+          <div>
+            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Proven Expertise</h3>
+            <p class="text-lg text-white/80 font-light leading-relaxed">
+              Over 500 satisfied clients across Europe trust us with their brand visibility. Join them.
+            </p>
+          </div>
         </div>
       </div>
     </section>
     
-    <!-- CTA Section -->
-    <section class="py-20 bg-surface">
-      <div class="container mx-auto px-6 text-center">
-        <h2 class="text-5xl font-heading font-bold text-text-main mb-6">
-          Ready to Make Your Brand Visible?
+    <!-- CAPABILITIES SECTION - White Background -->
+    <section class="py-44 bg-white">
+      <div class="max-w-text mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-black mb-16 leading-tight">
+          What we create
         </h2>
-        <p class="text-2xl text-text-muted mb-8">
-          Get a free quote and mockup for your project today
-        </p>
-        <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <ButtonGlow variant="primary" class="text-xl px-12 py-5" @click="$router.push('/contact')">
-            Request Quote
-          </ButtonGlow>
-          <ButtonGlow variant="secondary" class="text-xl px-12 py-5" @click="$router.push('/contact')">
-            Call Us: +49 123 456 789
-          </ButtonGlow>
+        
+        <div class="space-y-8">
+          <div class="pb-8 border-b border-black/10">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Channel Letters</h3>
+            <p class="text-lg text-black/60 font-light">Individual illuminated letters that define your storefront</p>
+          </div>
+          
+          <div class="pb-8 border-b border-black/10">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-3">LED Neon</h3>
+            <p class="text-lg text-black/60 font-light">Modern flexible neon for creative and eye-catching designs</p>
+          </div>
+          
+          <div class="pb-8 border-b border-black/10">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Lightboxes</h3>
+            <p class="text-lg text-black/60 font-light">Premium illuminated panels for maximum brand visibility</p>
+          </div>
+          
+          <div class="pb-8 border-b border-black/10">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Pylons</h3>
+            <p class="text-lg text-black/60 font-light">Towering structures that guide customers to your location</p>
+          </div>
+          
+          <div class="pb-8 border-b border-black/10">
+            <h3 class="text-2xl font-heading font-semibold text-black mb-3">Digital Solutions</h3>
+            <p class="text-lg text-black/60 font-light">Interactive terminals and digital menu boards</p>
+          </div>
         </div>
+      </div>
+    </section>
+    
+    <!-- CTA SECTION - Black Background -->
+    <section class="py-44 bg-black">
+      <div class="max-w-content mx-auto px-6 md:px-32 text-center">
+        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-tight">
+          Ready to illuminate<br>your brand?
+        </h2>
+        <button 
+          @click="$router.push('/contact')"
+          class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer"
+        >
+          Get Started
+        </button>
       </div>
     </section>
     
@@ -123,7 +128,5 @@
 </template>
 
 <script setup lang="ts">
-import { Factory, Gem, Palette, Zap } from 'lucide-vue-next'
-import ButtonGlow from '@/components/ui/ButtonGlow.vue'
-import AnimatedCounter from '@/components/ui/AnimatedCounter.vue'
+// Omnicom minimal About page - no additional imports needed
 </script>

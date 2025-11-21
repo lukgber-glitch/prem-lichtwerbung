@@ -1,213 +1,231 @@
 <template>
-  <div class="min-h-screen bg-background">
-    <div v-if="loading" class="container mx-auto px-6 py-12 text-center">
-      <div class="text-xl text-text-muted">Loading product...</div>
+  <div class="min-h-screen bg-white">
+    
+    <!-- Loading State -->
+    <div v-if="loading" class="min-h-screen flex items-center justify-center">
+      <div class="text-xl font-light text-black">Loading...</div>
     </div>
     
-    <div v-else-if="error" class="container mx-auto px-6 py-12 text-center">
-      <div class="text-red-600 text-xl">{{ error }}</div>
+    <!-- Error State -->
+    <div v-else-if="error" class="min-h-screen flex items-center justify-center">
+      <div class="text-xl font-light text-black">{{ error }}</div>
     </div>
     
-    <div v-else-if="product" class="container mx-auto px-6 py-12">
+    <!-- Product Display - Omnicom Cinematic -->
+    <div v-else-if="product">
       
-      <!-- Breadcrumbs -->
-      <nav class="mb-8 text-sm text-text-muted">
-        <router-link to="/" class="hover:text-primary transition-colors cursor-pointer">Home</router-link>
-        <span class="mx-2">/</span>
-        <router-link to="/products" class="hover:text-primary transition-colors cursor-pointer">Products</router-link>
-        <span class="mx-2">/</span>
-        <span class="text-text-main">{{ product.name }}</span>
-      </nav>
-      
-      <!-- Product Layout -->
-      <div class="grid md:grid-cols-2 gap-12 mb-12">
+      <!-- HERO SECTION - Full Screen Product Image -->
+      <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         
-        <!-- Left: Images -->
-        <div>
-          <!-- Main Image -->
-          <div class="aspect-square bg-surface rounded-xl mb-4 overflow-hidden border border-primary/20">
-            <img 
-              :src="displayImage" 
-              :alt="product.name"
-              class="w-full h-full object-cover"
-            />
+        <!-- Background Image - Full Bleed -->
+        <div class="absolute inset-0">
+          <img 
+            :src="displayImage" 
+            :alt="product.name"
+            class="w-full h-full object-cover opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        </div>
+        
+        <!-- Product Name Overlay - Massive Typography -->
+        <div class="relative z-10 text-center px-6 max-w-content mx-auto">
+          <h1 class="text-7xl md:text-9xl font-heading font-black text-white mb-8 leading-none tracking-tighter">
+            {{ product.name }}
+          </h1>
+          <p class="text-xl md:text-2xl text-white/80 font-light max-w-2xl mx-auto leading-relaxed">
+            {{ product.description }}
+          </p>
+        </div>
+        
+        <!-- Price Floating Corner -->
+        <div class="absolute top-32 right-6 md:right-32 z-20 text-right">
+          <div class="text-5xl md:text-6xl font-black text-white mb-2">
+            €{{ Number(product.price).toFixed(2) }}
           </div>
-          
-          <!-- Thumbnail Gallery -->
-          <div class="grid grid-cols-4 gap-2">
-            <div 
-              v-if="product.primary_image"
-              @click="currentImage = product.primary_image"
-              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
-              :class="currentImage === product.primary_image ? 'border-primary' : 'border-surface-alt'"
-            >
-              <img :src="primaryImageUrl" :alt="product.name" class="w-full h-full object-cover" />
-            </div>
-            <div 
-              v-if="product.day_image"
-              @click="currentImage = product.day_image"
-              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
-              :class="currentImage === product.day_image ? 'border-primary' : 'border-surface-alt'"
-            >
-              <img :src="dayImageUrl" :alt="`${product.name} - Day`" class="w-full h-full object-cover" />
-            </div>
-            <div 
-              v-if="product.night_image"
-              @click="currentImage = product.night_image"
-              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
-              :class="currentImage === product.night_image ? 'border-primary' : 'border-surface-alt'"
-            >
-              <img :src="nightImageUrl" :alt="`${product.name} - Night`" class="w-full h-full object-cover" />
-            </div>
-            <div 
-              v-if="product.after_image"
-              @click="currentImage = product.after_image"
-              class="aspect-square bg-surface rounded-lg border cursor-pointer overflow-hidden hover:border-primary transition-colors"
-              :class="currentImage === product.after_image ? 'border-primary' : 'border-surface-alt'"
-            >
-              <img :src="afterImageUrl" :alt="`${product.name} - After`" class="w-full h-full object-cover" />
-            </div>
+          <div v-if="product.compare_at_price" class="text-xl text-white/60 font-light line-through">
+            €{{ Number(product.compare_at_price).toFixed(2) }}
           </div>
         </div>
         
-        <!-- Right: Info -->
-        <div>
-          <h1 class="text-4xl font-heading font-bold text-text-main mb-4">{{ product.name }}</h1>
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20">
+          <div class="text-white/60 text-sm font-light animate-bounce">Scroll</div>
+        </div>
+        
+      </section>
+      
+      <!-- IMAGE GALLERY - Full Bleed Slideshow -->
+      <section v-if="hasMultipleImages" class="relative h-screen bg-black">
+        <div class="absolute inset-0">
+          <img 
+            :src="displayImage" 
+            :alt="product.name"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        
+        <!-- Navigation Arrows - Minimal -->
+        <div class="absolute inset-0 flex items-center justify-between px-12 z-10">
+          <button 
+            @click="previousImage"
+            class="w-16 h-16 flex items-center justify-center text-white border border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer"
+          >
+            ←
+          </button>
+          <button 
+            @click="nextImage"
+            class="w-16 h-16 flex items-center justify-center text-white border border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer"
+          >
+            →
+          </button>
+        </div>
+        
+        <!-- Image Indicators -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+          <button 
+            v-for="(img, idx) in availableImages" 
+            :key="idx"
+            @click="currentImageIndex = idx"
+            class="w-2 h-2 border border-white transition-all duration-500 cursor-pointer"
+            :class="currentImageIndex === idx ? 'bg-white w-8' : 'bg-transparent'"
+          ></button>
+        </div>
+      </section>
+      
+      <!-- DESCRIPTION - Minimal Single Column -->
+      <section class="py-44 bg-white">
+        <div class="max-w-text mx-auto px-6">
+          <p class="text-lg md:text-xl text-black font-light leading-relaxed">
+            {{ product.description }}
+          </p>
           
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-5xl font-bold text-primary">
-              €{{ Number(product.price).toFixed(2) }}
-            </span>
-            <span v-if="product.compare_at_price" class="text-2xl text-text-muted line-through">
-              €{{ Number(product.compare_at_price).toFixed(2) }}
-            </span>
-          </div>
-          
-          <p class="text-text-muted mb-6">{{ product.description }}</p>
-          
-          <div class="mb-6">
-            <span class="inline-block px-4 py-2 bg-primary/10 text-primary border border-primary/30 rounded-full text-sm font-semibold mr-2">
-              {{ product.illumination_type || 'LED' }} Illuminated
-            </span>
-            <span v-if="product.customizable" class="inline-block px-4 py-2 bg-accent/10 text-accent border border-accent/30 rounded-full text-sm font-bold">
-              ✨ Customizable
-            </span>
-          </div>
-          
-          <!-- Terminal Demo Button -->
-          <div v-if="isTerminalProduct" class="mb-6 p-6 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 border-2 border-blue-500/30 rounded-xl">
-            <h3 class="text-xl font-bold text-text-main mb-2">🖥️ Interactive Demo Available</h3>
-            <p class="text-text-muted mb-4">Experience the complete 13-screen POS terminal system in action. Test the customer journey from pump selection to payment completion.</p>
-            <router-link 
-              to="/terminal-demo" 
-              class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            >
-              ▶️ Try Interactive Demo
-            </router-link>
-          </div>
-          
-          <!-- Stock Status -->
-          <div class="mb-6">
-            <span v-if="product.stock > 0" class="text-green-400 font-semibold">
-              ✓ In Stock ({{ product.stock }} available)
-            </span>
-            <span v-else class="text-red-400 font-semibold">
-              ✗ Out of Stock
-            </span>
-          </div>
-          
-          <!-- Add to Cart -->
-          <div class="mb-8">
-            <div class="flex items-center gap-4 mb-4">
-              <label class="text-text-main font-semibold">Quantity:</label>
-              <input 
-                v-model.number="quantity"
-                type="number" 
-                min="1" 
-                :max="product.stock"
-                class="w-20 px-4 py-2 border border-surface-alt rounded-lg bg-surface text-text-main"
-              />
-            </div>
+          <!-- Minimal Product Info -->
+          <div class="mt-16 pt-16 border-t border-black/10">
+            <div class="text-sm font-light text-black/60 mb-2">Illumination</div>
+            <div class="text-base text-black mb-8">{{ product.illumination_type || 'LED' }}</div>
             
-            <button 
-              @click="addToCart"
-              :disabled="product.stock === 0"
-              class="w-full px-8 py-4 bg-primary text-background text-xl font-bold rounded-lg hover:bg-primary/90 transition-all border-2 border-primary disabled:bg-text-muted disabled:cursor-not-allowed cursor-pointer"
-            >
-              {{ product.stock > 0 ? `⚡ Add to Cart - €${(product.price * quantity).toFixed(2)}` : 'Out of Stock' }}
-            </button>
+            <div v-if="product.customizable" class="text-sm font-light text-black/60 mb-2">Customization</div>
+            <div v-if="product.customizable" class="text-base text-black mb-8">Available on request</div>
           </div>
-          
         </div>
-      </div>
+      </section>
       
-      <!-- Interactive POS Terminal (for terminal bundle product) -->
-      <div v-if="product?.slug === 'pos-terminal-menu-board-bundle'" class="my-8">
-        <POSTerminal 
-          :product="product"
-          @add-to-cart="handleTerminalAddToCart"
-          @complete="handleTerminalComplete"
-        />
-      </div>
+      <!-- TECHNICAL SPECS - Floating Minimal List -->
+      <section class="py-44 bg-black">
+        <div class="max-w-content mx-auto px-6 md:px-32">
+          <h2 class="text-5xl md:text-6xl font-heading font-bold text-white mb-20 leading-tight">
+            Specifications
+          </h2>
+          
+          <div class="grid md:grid-cols-3 gap-x-20 gap-y-12">
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Dimensions</div>
+              <div class="text-lg text-white font-light">
+                {{ product.dimensions_width_cm || 100 }} × 
+                {{ product.dimensions_height_cm || 70 }} × 
+                {{ product.dimensions_depth_cm || 8 }} cm
+              </div>
+            </div>
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Power</div>
+              <div class="text-lg text-white font-light">{{ product.power_consumption_watts || 45 }}W</div>
+            </div>
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Rating</div>
+              <div class="text-lg text-white font-light">{{ product.ip_rating || 'IP44' }}</div>
+            </div>
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Material</div>
+              <div class="text-lg text-white font-light">{{ product.material || 'Premium acrylic with aluminum' }}</div>
+            </div>
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Lead Time</div>
+              <div class="text-lg text-white font-light">{{ product.lead_time_days || 7 }}-{{ (product.lead_time_days || 7) + 7 }} days</div>
+            </div>
+            <div>
+              <div class="text-sm font-light text-white/40 mb-3">Stock</div>
+              <div class="text-lg text-white font-light">{{ product.stock > 0 ? `${product.stock} available` : 'Made to order' }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
       
-      <!-- Day/Night Switcher -->
-      <div v-if="product.day_image && product.night_image" class="my-12">
-        <h2 class="text-3xl font-heading font-bold text-text-main mb-4">View in Different Lighting</h2>
-        <p class="text-lg text-text-muted mb-6">
-          See how this illuminated sign looks during the day and when illuminated at night
-        </p>
+      <!-- DAY/NIGHT COMPARISON - Full Screen -->
+      <section v-if="product.day_image && product.night_image" class="py-44 bg-white">
+        <div class="max-w-content mx-auto px-6 md:px-32 mb-16">
+          <h2 class="text-5xl md:text-6xl font-heading font-bold text-black leading-tight">
+            Day & Night
+          </h2>
+        </div>
         <DayNightSwitcher
           :day-image="dayImageUrl"
           :night-image="nightImageUrl"
         />
-      </div>
+      </section>
 
-      <!-- Before/After Slider -->
-      <div v-if="product.before_image && product.after_image" class="my-12">
-        <h2 class="text-3xl font-heading font-bold text-text-main mb-4">See the Transformation</h2>
-        <p class="text-lg text-text-muted mb-6">
-          Drag the slider to compare before and after installation
-        </p>
+      <!-- BEFORE/AFTER - Full Screen -->
+      <section v-if="product.before_image && product.after_image" class="py-44 bg-white">
+        <div class="max-w-content mx-auto px-6 md:px-32 mb-16">
+          <h2 class="text-5xl md:text-6xl font-heading font-bold text-black leading-tight">
+            Transformation
+          </h2>
+        </div>
         <BeforeAfterSlider
           :before-image="beforeImageUrl"
           :after-image="afterImageUrl"
         />
-      </div>
-
-      <!-- Technical Specs -->
-      <div class="border-t-2 border-primary/20 pt-12">
-        <h2 class="text-4xl font-heading font-bold text-text-main mb-6">Technical Specifications</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">Dimensions</h3>
-            <p class="text-text-muted">
-              {{ product.dimensions_width_cm || 100 }}cm × 
-              {{ product.dimensions_height_cm || 70 }}cm × 
-              {{ product.dimensions_depth_cm || 8 }}cm
-            </p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">Power Consumption</h3>
-            <p class="text-text-muted">{{ product.power_consumption_watts || 45 }}W</p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">IP Rating</h3>
-            <p class="text-text-muted">{{ product.ip_rating || 'IP44' }} (weather-resistant)</p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">Lead Time</h3>
-            <p class="text-text-muted">{{ product.lead_time_days || 7 }}-{{ (product.lead_time_days || 7) + 7 }} days</p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">Material</h3>
-            <p class="text-text-muted">{{ product.material || 'Premium acrylic with aluminum frame' }}</p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-text-main mb-2">Illumination Type</h3>
-            <p class="text-text-muted">{{ product.illumination_type || 'LED' }}</p>
-          </div>
+      </section>
+      
+      <!-- TERMINAL DEMO LINK - Minimal -->
+      <section v-if="isTerminalProduct" class="py-44 bg-black">
+        <div class="max-w-content mx-auto px-6 md:px-32 text-center">
+          <h2 class="text-5xl md:text-7xl font-heading font-black text-white mb-12 leading-none">
+            Interactive Demo
+          </h2>
+          <p class="text-xl text-white/60 font-light mb-16 max-w-2xl mx-auto">
+            Experience the complete POS terminal system
+          </p>
+          <router-link 
+            to="/terminal-demo" 
+            class="inline-block px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer"
+          >
+            Try Demo
+          </router-link>
         </div>
-      </div>
+      </section>
+      
+      <!-- CTA SECTION - Sticky Bottom -->
+      <section class="fixed bottom-0 left-0 right-0 bg-white border-t border-black/10 z-40 py-6">
+        <div class="max-w-content mx-auto px-6 md:px-32 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <!-- Quantity -->
+          <div class="flex items-center gap-4">
+            <label class="text-black font-light text-sm">Quantity</label>
+            <input 
+              v-model.number="quantity"
+              type="number" 
+              min="1" 
+              :max="product.stock || 999"
+              class="w-20 px-4 py-2 border border-black/20 bg-white text-black font-light"
+            />
+          </div>
+          
+          <!-- Price Total -->
+          <div class="text-3xl font-bold text-black">
+            €{{ (product.price * quantity).toFixed(2) }}
+          </div>
+          
+          <!-- Add to Cart Button -->
+          <button 
+            @click="addToCart"
+            :disabled="product.stock === 0"
+            class="px-12 py-4 bg-black text-white text-base font-semibold hover:bg-white hover:text-black border-2 border-black transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {{ product.stock > 0 ? 'Add to Cart' : 'Request Quote' }}
+          </button>
+          
+        </div>
+      </section>
       
     </div>
     
@@ -233,6 +251,7 @@ const error = ref('')
 const quantity = ref(1)
 const showQuoteModal = ref(false)
 const currentImage = ref<string | null>(null)
+const currentImageIndex = ref(0)
 
 // Helper to convert UUID to Directus assets URL
 const getImageUrl = (imageValue: string | undefined | null): string => {
@@ -256,10 +275,25 @@ const nightImageUrl = computed(() => getImageUrl(product.value?.night_image))
 const beforeImageUrl = computed(() => getImageUrl(product.value?.before_image))
 const afterImageUrl = computed(() => getImageUrl(product.value?.after_image))
 
-// Display image - uses currentImage if set, otherwise primary image
+// Available images array for gallery
+const availableImages = computed(() => {
+  if (!product.value) return []
+  const images = [
+    product.value.primary_image,
+    product.value.day_image,
+    product.value.night_image,
+    product.value.after_image
+  ].filter(img => img !== null && img !== undefined)
+  return images
+})
+
+// Check if product has multiple images
+const hasMultipleImages = computed(() => availableImages.value.length > 1)
+
+// Display image - uses currentImageIndex for gallery navigation
 const displayImage = computed(() => {
-  if (currentImage.value) {
-    return getImageUrl(currentImage.value)
+  if (availableImages.value.length > 0 && currentImageIndex.value < availableImages.value.length) {
+    return getImageUrl(availableImages.value[currentImageIndex.value])
   }
   return primaryImageUrl.value
 })
@@ -270,6 +304,17 @@ const isTerminalProduct = computed(() => {
   return product.value.slug === 'pos-terminal-gas-station' || 
          product.value.sku?.includes('TERM')
 })
+
+// Image gallery navigation
+const previousImage = () => {
+  if (availableImages.value.length === 0) return
+  currentImageIndex.value = (currentImageIndex.value - 1 + availableImages.value.length) % availableImages.value.length
+}
+
+const nextImage = () => {
+  if (availableImages.value.length === 0) return
+  currentImageIndex.value = (currentImageIndex.value + 1) % availableImages.value.length
+}
 
 const fetchProduct = async () => {
   try {
