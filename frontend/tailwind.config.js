@@ -2,20 +2,37 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      'omnicom-black': '#0A0A0A',
-      'omnicom-white': '#FAFAFA',
-      'omnicom-gray': '#F5F5F5',
-      'omnicom-text': '#1A1A1A',
-      'omnicom-muted': '#666666',
-      black: '#000000',
-      white: '#FFFFFF',
+      // Primary Omnicom Red (used on some pages)
+      'omnicom-red': '#AD342A',
+      'omnicom-red-dark': '#8B2821',
+      'omnicom-red-light': '#C64032',
+      
+      // Additional Omnicom brand colors (research which pages use which)
+      'omnicom-blue': '#0066CC',
+      'omnicom-purple': '#6B3FA0',
+      'omnicom-green': '#00A651',
+      'omnicom-orange': '#FF6B35',
+      'omnicom-teal': '#00A19A',
+      
+      // Neutrals (used across all pages)
+      'omnicom-black': '#000000',
+      'omnicom-gray-900': '#1A1A1A',
+      'omnicom-gray-800': '#2D2D2D',
+      'omnicom-gray-700': '#4A4A4A',
+      'omnicom-gray-600': '#6B6B6B',
+      'omnicom-gray-400': '#9E9E9E',
+      'omnicom-gray-300': '#CCCCCC',
+      'omnicom-gray-200': '#E5E5E5',
+      'omnicom-gray-100': '#F5F5F5',
+      'omnicom-white': '#FFFFFF',
+      
       transparent: 'transparent',
       current: 'currentColor'
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Inter', 'system-ui', 'sans-serif']
+        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        heading: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif']
       },
       fontSize: {
         '7xl': ['5rem', { lineHeight: '1', letterSpacing: '-0.02em' }],

@@ -15,7 +15,7 @@
       <div class="max-w-7xl mx-auto px-6">
         
         <!-- Decorative Accent Line -->
-        <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+        <OmnicomAccentLine size="md" class="mb-8" />
         
         <!-- Section Label -->
         <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">Get In Touch</p>
@@ -145,6 +145,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
 
 const form = ref({
   name: '',

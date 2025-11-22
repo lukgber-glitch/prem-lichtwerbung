@@ -26,7 +26,7 @@
           <!-- Left: Floating Text (40% of space) -->
           <div>
             <!-- Decorative Accent Line -->
-            <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+            <OmnicomAccentLine size="md" class="mb-8" />
             
             <!-- Section Label -->
             <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">Our Story</p>
@@ -50,7 +50,7 @@
         
         <!-- Section Header -->
         <div class="mb-20">
-          <div class="w-[60px] h-[2px] bg-white mb-8"></div>
+          <OmnicomAccentLine size="md" class="mb-8" custom-color="#FFFFFF" />
           <p class="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mb-6">What We Do</p>
           <h2 class="text-5xl md:text-6xl font-heading font-bold text-white leading-tight">Our Services</h2>
         </div>
@@ -93,6 +93,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
 
 const router = useRouter()
 

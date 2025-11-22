@@ -17,7 +17,7 @@
     <section class="py-32 bg-omnicom-white">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
-        <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+        <OmnicomAccentLine size="md" class="mb-8" />
         
         <!-- Section Label -->
         <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">About Us</p>
@@ -44,7 +44,7 @@
     <section class="py-60 bg-black">
       <div class="max-w-content mx-auto px-6 md:px-32">
         <!-- Decorative Accent Line -->
-        <div class="w-[60px] h-[2px] bg-white mb-8"></div>
+        <OmnicomAccentLine size="md" class="mb-8" custom-color="#FFFFFF" />
         
         <!-- Section Label -->
         <p class="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mb-6">Our Values</p>
@@ -89,7 +89,7 @@
     <section class="py-32 bg-omnicom-white">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
-        <div class="w-[60px] h-[2px] bg-black mb-8"></div>
+        <OmnicomAccentLine size="md" class="mb-8" />
         
         <!-- Section Label -->
         <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-6">Our Expertise</p>
@@ -146,5 +146,5 @@
 </template>
 
 <script setup lang="ts">
-// Omnicom minimal About page - no additional imports needed
+import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
 </script>

@@ -1,12 +1,52 @@
 @import "tailwindcss";
 
-/* Font family set in Tailwind config, weights loaded via @fontsource in main.ts */
+/* Omnicom uses Helvetica Neue/Arial system - no Google Fonts needed */
 
-/* Base typography styles - work with Tailwind, don't override */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 900;
-  letter-spacing: -0.02em;
+body {
+  background-color: #FFFFFF;
+  color: #1A1A1A;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #1A1A1A;
+}
+
+h1 { font-size: 48px; } /* Large headlines */
+h2 { font-size: 36px; } /* Section titles */
+h3 { font-size: 24px; } /* Subsections */
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 64px; }
+  h2 { font-size: 48px; }
+  h3 { font-size: 32px; }
+}
+
+/* Page-specific accent colors - apply to body or main wrapper */
+.page-home { --page-accent: #AD342A; } /* Red - research to confirm */
+.page-about { --page-accent: #0066CC; } /* Blue - placeholder, needs research */
+.page-services { --page-accent: #6B3FA0; } /* Purple - placeholder, needs research */
+.page-work { --page-accent: #00A651; } /* Green - placeholder, needs research */
+.page-news { --page-accent: #FF6B35; } /* Orange - placeholder, needs research */
+.page-careers { --page-accent: #00A19A; } /* Teal - placeholder, needs research */
+.page-contact { --page-accent: #AD342A; } /* Red - placeholder, needs research */
+.page-default { --page-accent: #AD342A; } /* Default to red */
+
+/* Utility classes to use page-specific accent */
+.accent-line { background-color: var(--page-accent); }
+.accent-text { color: var(--page-accent); }
+.accent-border { border-color: var(--page-accent); }
+.accent-bg { background-color: var(--page-accent); }
 
 /* Minimal Animations - Only Fade In */
 @keyframes fade-in {
