@@ -49,9 +49,9 @@
             
             <div class="flex items-center justify-between">
               <span class="text-sm text-omnicom-muted">{{ project.location }}</span>
-              <button class="text-omnicom-text font-semibold hover:accent-text transition-colors cursor-pointer">
+              <ButtonGlow variant="ghost" :use-page-accent="true" class="px-4 py-2 text-sm">
                 View Details →
-              </button>
+              </ButtonGlow>
             </div>
           </div>
         </div>
@@ -68,6 +68,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const selectedIndustry = ref('All')
@@ -112,9 +113,9 @@ onMounted(() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduce) return
   const { animateOnScroll } = useScrollAnimation()
-  animateOnScroll('.accent-line', { y: 40, duration: 0.8 })
-  animateOnScroll('h1', { y: 40, duration: 1.0 })
-  animateOnScroll('p', { y: 30, duration: 0.8 })
-  animateOnScroll('button', { y: 20, duration: 0.7 })
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8, delay: 0 })
+  animateOnScroll('h1', { y: 40, duration: 1.0, delay: 0.1 })
+  animateOnScroll('p', { y: 30, duration: 0.8, delay: 0.2 })
+  animateOnScroll('button', { y: 20, duration: 0.7, delay: 0.3 })
 })
 </script>

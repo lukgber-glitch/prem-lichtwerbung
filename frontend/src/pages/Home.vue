@@ -48,7 +48,7 @@
     </section>
     
     <!-- SERVICES SECTION - Omnicom Minimal Grid -->
-    <section class="relative py-60 bg-omnicom-black overflow-hidden">
+    <section class="relative pt-60 pb-32 bg-omnicom-black overflow-hidden">
       <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 md:px-32">
         
@@ -121,10 +121,10 @@ onMounted(() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduce) return
   fadeInHero()
-  animateOnScroll('.accent-line', { y: 40, duration: 0.8, ease: 'power3.out' })
-  animateOnScroll('h1', { y: 40, duration: 1.0 })
-  animateOnScroll('h2', { y: 40, duration: 0.9 })
-  animateOnScroll('p', { y: 30, duration: 0.8 })
-  animateOnScroll('button', { y: 20, duration: 0.7 })
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8, ease: 'power3.out', delay: 0 })
+  animateOnScroll('h1', { y: 40, duration: 1.0, delay: 0.1 })
+  animateOnScroll('h2', { y: 40, duration: 0.9, delay: 0.1 })
+  animateOnScroll('p', { y: 30, duration: 0.8, delay: 0.2 })
+  animateOnScroll('button', { y: 20, duration: 0.7, delay: 0.3 })
 })
 </script>

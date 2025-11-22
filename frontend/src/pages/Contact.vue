@@ -194,11 +194,11 @@ onMounted(() => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduce) return
   const { animateOnScroll } = useScrollAnimation()
-  animateOnScroll('.accent-line', { y: 40, duration: 0.8 })
-  animateOnScroll('h1', { y: 40, duration: 1.0 })
-  animateOnScroll('h2', { y: 40, duration: 0.9 })
-  animateOnScroll('p', { y: 30, duration: 0.8 })
-  animateOnScroll('button', { y: 20, duration: 0.7 })
-  animateOnScroll('label', { y: 10, duration: 0.6 })
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8, delay: 0 })
+  animateOnScroll('h1', { y: 40, duration: 1.0, delay: 0.1 })
+  animateOnScroll('h2', { y: 40, duration: 0.9, delay: 0.1 })
+  animateOnScroll('p', { y: 30, duration: 0.8, delay: 0.2 })
+  animateOnScroll('button', { y: 20, duration: 0.7, delay: 0.3 })
+  animateOnScroll('label', { y: 10, duration: 0.6, delay: 0.15 })
 })
 </script>
