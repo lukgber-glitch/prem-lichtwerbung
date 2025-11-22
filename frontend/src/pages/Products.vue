@@ -84,7 +84,7 @@
     </section>
     
     <!-- PRODUCTS GRID - Minimal Asymmetric Layout -->
-    <section class="py-44 bg-omnicom-bg">
+    <section class="py-60 bg-omnicom-bg">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Loading State -->
@@ -100,12 +100,15 @@
         <!-- Empty State -->
         <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
           <p class="text-xl font-light text-omnicom-text">No products match your filters</p>
-          <button 
-            @click="resetFilters"
-            class="mt-8 px-8 py-4 bg-transparent text-omnicom-text text-sm font-semibold border-2 border-omnicom-black hover:bg-omnicom-black hover:text-omnicom-white transition-all duration-500 cursor-pointer"
-          >
-            Reset Filters
-          </button>
+          <div class="mt-8">
+            <ButtonGlow 
+              variant="secondary" 
+              :use-page-accent="true"
+              @click="resetFilters"
+            >
+              Reset Filters
+            </ButtonGlow>
+          </div>
         </div>
         
         <!-- Products Grid - Asymmetric 2-3 columns -->
@@ -127,6 +130,7 @@
 import { ref, computed, onMounted } from 'vue'
 import ProductCard from '@/components/products/ProductCard.vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const products = ref<any[]>([])

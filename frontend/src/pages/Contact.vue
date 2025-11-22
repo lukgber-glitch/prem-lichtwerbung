@@ -37,7 +37,7 @@
                   v-model="form.name"
                   type="text" 
                   required
-                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 focus-accent"
                 />
               </div>
               
@@ -47,7 +47,7 @@
                   v-model="form.email"
                   type="email" 
                   required
-                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 focus-accent"
                 />
               </div>
               
@@ -56,7 +56,7 @@
                 <input 
                   v-model="form.phone"
                   type="tel"
-                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 focus-accent"
                 />
               </div>
               
@@ -65,7 +65,7 @@
                 <select 
                   v-model="form.subject"
                   required
-                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light cursor-pointer focus:outline-none focus:border-omnicom-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light cursor-pointer focus:outline-none focus:border-omnicom-black transition-all duration-500 focus-accent"
                 >
                   <option value="">Select a subject</option>
                   <option value="quote">Request a Quote</option>
@@ -81,17 +81,17 @@
                   v-model="form.message"
                   required
                   rows="8"
-                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 resize-none"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 resize-none focus-accent"
                 ></textarea>
               </div>
               
-              <button 
+              <ButtonGlow 
                 type="submit"
                 :disabled="submitting"
-                class="px-16 py-6 bg-transparent text-omnicom-text text-lg font-semibold border-2 border-omnicom-black hover:bg-omnicom-black hover:text-omnicom-white transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                :use-page-accent="true"
               >
                 {{ submitting ? 'Sending...' : 'Send Message' }}
-              </button>
+              </ButtonGlow>
               
               <p v-if="submitSuccess" class="mt-8 text-omnicom-text font-light">
                 Message sent successfully. We'll respond within 24 hours.
@@ -147,6 +147,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const form = ref({

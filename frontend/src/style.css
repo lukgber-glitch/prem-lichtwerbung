@@ -90,6 +90,13 @@ h6 { font-size: 16px; }
 /* Utility Classes */
 .animate-fade-in { animation: fade-in 0.5s ease-out; }
 
+/* Focus utility to use current page accent color for inputs/buttons */
+.focus-accent:focus {
+  border-color: var(--page-accent) !important;
+  outline: 2px solid var(--page-accent);
+  outline-offset: 2px;
+}
+
 /* Omnicom-Inspired Noise Texture Overlay */
 .noise-texture {
   position: absolute;

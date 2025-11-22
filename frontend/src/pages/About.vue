@@ -137,12 +137,13 @@
         <h2 class="text-6xl md:text-8xl font-heading font-black text-omnicom-text-light mb-16 leading-none tracking-[-0.02em]">
           Ready to illuminate<br>your brand?
         </h2>
-        <button 
+        <ButtonGlow 
+          variant="primary" 
+          :use-page-accent="true"
           @click="$router.push('/contact')"
-          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500 cursor-pointer"
         >
           Get Started
-        </button>
+        </ButtonGlow>
       </div>
     </section>
     
@@ -152,6 +153,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const { animateOnScroll } = useScrollAnimation()

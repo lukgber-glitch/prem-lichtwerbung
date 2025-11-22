@@ -4,19 +4,21 @@
     <!-- HERO SECTION - Omnicom Minimal with Gradient -->
     <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-omnicom-black to-omnicom-black overflow-hidden">
       <div class="noise-texture"></div>
-      <div class="max-w-content mx-auto px-6 text-center">
+      <div class="max-w-content mx-auto px-6 text-center hero-content">
         <h1 class="text-8xl md:text-10xl font-black text-omnicom-text-light leading-none tracking-[-0.04em] mb-12">
           Your Brand<br>Deserves to Shine
         </h1>
         <p class="text-xl md:text-2xl text-omnicom-text-light/60 font-light max-w-2xl mx-auto mb-16">
           Premium illuminated signage that transforms businesses into landmarks
         </p>
-        <button 
+        <ButtonGlow 
+          variant="primary" 
+          :use-page-accent="true" 
+          class="mt-2"
           @click="$router.push('/products')"
-          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500"
         >
           Explore Our Work
-        </button>
+        </ButtonGlow>
       </div>
     </section>
     
@@ -82,12 +84,13 @@
         <p class="text-xl text-omnicom-text-light/70 font-light mb-12">
           contact@prem-lichtwerbung.de
         </p>
-        <button 
+        <ButtonGlow 
+          variant="secondary" 
+          :use-page-accent="true" 
           @click="$router.push('/contact')"
-          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500 ease-omnicom cursor-pointer"
         >
           Start Project
-        </button>
+        </ButtonGlow>
       </div>
     </section>
     
@@ -98,6 +101,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import ButtonGlow from '@/components/ui/ButtonGlow.vue'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const router = useRouter()
