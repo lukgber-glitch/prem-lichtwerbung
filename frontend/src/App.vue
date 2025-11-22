@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="['flex flex-col min-h-screen bg-white', pageClass]">
+  <div id="app" :class="['flex flex-col min-h-screen bg-omnicom-bg', pageClass]">
     <Header />
     
     <main class="flex-grow">

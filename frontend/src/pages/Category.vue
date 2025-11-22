@@ -128,11 +128,11 @@
         <!-- Right Content Area -->
         <div class="flex-1 min-w-0">
           <!-- Top Toolbar -->
-          <div class="bg-surface rounded-lg border border-primary/20 p-4 mb-6">
+          <div class="bg-omnicom-bg rounded-lg border border-omnicom-gray-300/25 p-4 mb-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <!-- Product Count -->
-              <div class="text-text-muted">
-                Showing <span class="font-semibold text-text-main">{{ totalProducts }}</span> products
+              <div class="text-omnicom-muted">
+                Showing <span class="font-semibold text-omnicom-text">{{ totalProducts }}</span> products
                 <span v-if="selectedSubcategory" class="text-sm">
                   in {{ subcategories.find(s => s.id === selectedSubcategory)?.name }}
                 </span>
@@ -142,10 +142,10 @@
               <div class="flex items-center gap-4">
                 <!-- Sort Dropdown -->
                 <div class="flex items-center gap-2">
-                  <label class="text-sm text-text-muted whitespace-nowrap">Sort by:</label>
+                  <label class="text-sm text-omnicom-muted whitespace-nowrap">Sort by:</label>
                   <select 
                     v-model="sortOption"
-                    class="px-3 py-2 border border-surface-alt rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm bg-surface-alt text-text-main cursor-pointer"
+                    class="px-3 py-2 border border-omnicom-gray-300 rounded-lg focus:ring-2 focus:ring-omnicom-red focus:border-omnicom-red text-sm bg-omnicom-bg-alt text-omnicom-text cursor-pointer"
                   >
                     <option value="newest">Newest</option>
                     <option value="price-low-high">Price: Low to High</option>
@@ -155,12 +155,12 @@
                 </div>
 
                 <!-- View Toggle -->
-                <div class="flex items-center gap-1 bg-surface-alt rounded-lg p-1">
+                <div class="flex items-center gap-1 bg-omnicom-bg-alt rounded-lg p-1">
                   <button 
                     @click="viewMode = 'grid'"
                     :class="[
                       'p-2 rounded transition-all cursor-pointer',
-                      viewMode === 'grid' ? 'bg-surface border border-primary/20 text-primary' : 'text-text-muted hover:text-text-main'
+                      viewMode === 'grid' ? 'bg-omnicom-black text-omnicom-text-light border border-omnicom-black' : 'text-omnicom-muted hover:text-omnicom-text'
                     ]"
                     aria-label="Grid view"
                   >
@@ -170,7 +170,7 @@
                     @click="viewMode = 'list'"
                     :class="[
                       'p-2 rounded transition-all cursor-pointer',
-                      viewMode === 'list' ? 'bg-surface border border-primary/20 text-primary' : 'text-text-muted hover:text-text-main'
+                      viewMode === 'list' ? 'bg-omnicom-black text-omnicom-text-light border border-omnicom-black' : 'text-omnicom-muted hover:text-omnicom-text'
                     ]"
                     aria-label="List view"
                   >
@@ -185,12 +185,12 @@
               <div 
                 v-for="chip in activeFilterChips"
                 :key="chip.key"
-                class="flex items-center gap-2 px-3 py-1 bg-primary/10 text-text-main border border-primary/30 rounded-full text-sm"
+                class="flex items-center gap-2 px-3 py-1 bg-omnicom-red/10 text-omnicom-text border border-omnicom-red/30 rounded-full text-sm"
               >
                 <span>{{ chip.label }}</span>
                 <button 
                   @click="removeFilter(chip.key)"
-                  class="hover:text-accent transition-colors cursor-pointer"
+                  class="hover:text-omnicom-red transition-colors cursor-pointer"
                   :aria-label="`Remove ${chip.label} filter`"
                 >
                   <X :size="16" :stroke-width="2" />
@@ -198,7 +198,7 @@
               </div>
               <button 
                 @click="clearFilters"
-                class="px-3 py-1 text-sm text-accent hover:text-accent hover:underline cursor-pointer"
+                class="px-3 py-1 text-sm text-omnicom-red hover:text-omnicom-red hover:underline cursor-pointer"
               >
                 Clear all
               </button>
@@ -207,13 +207,13 @@
 
           <!-- Loading State -->
           <div v-if="loading" class="text-center py-20">
-            <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent"></div>
-            <p class="text-text-muted mt-4 text-lg">Loading products...</p>
+            <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-omnicom-red border-t-transparent"></div>
+            <p class="text-omnicom-muted mt-4 text-lg">Loading products...</p>
           </div>
 
           <!-- Error State -->
           <div v-else-if="error" class="text-center py-20">
-            <p class="text-red-400 mb-4 text-lg">{{ error }}</p>
+            <p class="text-omnicom-red mb-4 text-lg">{{ error }}</p>
             <ButtonGlow variant="primary" @click="loadProducts">
               Try Again
             </ButtonGlow>
@@ -221,9 +221,9 @@
 
           <!-- Empty State -->
           <div v-else-if="products.length === 0" class="text-center py-20">
-            <Package :size="96" class="mx-auto mb-6 text-text-muted opacity-30" :stroke-width="2" />
-            <p class="text-text-main text-lg mb-2">No products found in this category</p>
-            <p class="text-text-muted mb-6">Try adjusting your filters or selecting a different subcategory</p>
+            <Package :size="96" class="mx-auto mb-6 text-omnicom-muted opacity-30" :stroke-width="2" />
+            <p class="text-omnicom-text text-lg mb-2">No products found in this category</p>
+            <p class="text-omnicom-muted mb-6">Try adjusting your filters or selecting a different subcategory</p>
             <div class="flex gap-4 justify-center">
               <ButtonGlow v-if="activeFilterCount > 0" variant="secondary" @click="clearFilters">
                 Clear Filters
@@ -258,8 +258,8 @@
               :class="[
                 'px-4 py-2 rounded-lg transition-all border-2',
                 currentPage === 1 
-                  ? 'bg-surface-alt text-text-muted border-surface-alt cursor-not-allowed' 
-                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary cursor-pointer'
+                  ? 'bg-omnicom-bg-alt text-omnicom-muted border-omnicom-gray-300 cursor-not-allowed' 
+                  : 'bg-omnicom-bg text-omnicom-text border-omnicom-muted hover:border-omnicom-red hover:text-omnicom-red cursor-pointer'
               ]"
             >
               Previous
@@ -272,8 +272,8 @@
               :class="[
                 'px-4 py-2 rounded-lg transition-all border-2 cursor-pointer',
                 page === currentPage 
-                  ? 'bg-primary text-background border-primary' 
-                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary'
+                  ? 'bg-omnicom-red text-omnicom-white border-omnicom-red' 
+                  : 'bg-omnicom-bg text-omnicom-text border-omnicom-muted hover:border-omnicom-red hover:text-omnicom-red'
               ]"
             >
               {{ page }}
@@ -285,8 +285,8 @@
               :class="[
                 'px-4 py-2 rounded-lg transition-all border-2',
                 currentPage === totalPages 
-                  ? 'bg-surface-alt text-text-muted border-surface-alt cursor-not-allowed' 
-                  : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary cursor-pointer'
+                  ? 'bg-omnicom-bg-alt text-omnicom-muted border-omnicom-gray-300 cursor-not-allowed' 
+                  : 'bg-omnicom-bg text-omnicom-text border-omnicom-muted hover:border-omnicom-red hover:text-omnicom-red cursor-pointer'
               ]"
             >
               Next

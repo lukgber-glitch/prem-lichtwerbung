@@ -3,6 +3,7 @@
     
     <!-- HERO SECTION - Omnicom Minimal -->
     <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto text-center">
         <OmnicomAccentLine size="lg" class="mb-8 mx-auto" custom-color="#FFFFFF" />
         <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em] mb-16">
@@ -42,7 +43,8 @@
     </section>
     
     <!-- PHILOSOPHY SECTION - Black Background with Accent Line -->
-    <section class="py-60 bg-omnicom-black">
+    <section class="relative py-60 bg-omnicom-black overflow-hidden">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 md:px-32">
         <!-- Decorative Accent Line -->
         <OmnicomAccentLine size="md" class="mb-8" custom-color="#FFFFFF" />
@@ -129,7 +131,8 @@
     </section>
     
     <!-- CTA SECTION - Black Background -->
-    <section class="py-60 bg-omnicom-black">
+    <section class="relative py-60 bg-omnicom-black overflow-hidden">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 md:px-32 text-center">
         <h2 class="text-6xl md:text-8xl font-heading font-black text-omnicom-text-light mb-16 leading-none tracking-[-0.02em]">
           Ready to illuminate<br>your brand?
@@ -147,5 +150,19 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
+
+const { animateOnScroll } = useScrollAnimation()
+
+onMounted(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduce) return
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8 })
+  animateOnScroll('h1', { y: 40, duration: 1.0 })
+  animateOnScroll('h2', { y: 40, duration: 0.9 })
+  animateOnScroll('p', { y: 30, duration: 0.8 })
+  animateOnScroll('button', { y: 20, duration: 0.7 })
+})
 </script>

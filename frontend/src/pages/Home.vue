@@ -3,6 +3,7 @@
     
     <!-- HERO SECTION - Omnicom Minimal with Gradient -->
     <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-omnicom-black to-omnicom-black overflow-hidden">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 text-center">
         <h1 class="text-8xl md:text-10xl font-black text-omnicom-text-light leading-none tracking-[-0.04em] mb-12">
           Your Brand<br>Deserves to Shine
@@ -45,7 +46,8 @@
     </section>
     
     <!-- SERVICES SECTION - Omnicom Minimal Grid -->
-    <section class="py-60 bg-omnicom-black">
+    <section class="relative py-60 bg-omnicom-black overflow-hidden">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Section Header -->
@@ -71,7 +73,8 @@
     </section>
     
     <!-- CTA SECTION - Omnicom Dramatic -->
-    <section class="py-60 bg-omnicom-black">
+    <section class="relative py-60 bg-omnicom-black overflow-hidden">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto px-6 md:px-32 text-center">
         <h2 class="text-6xl md:text-8xl font-heading font-black text-omnicom-text-light mb-16 leading-none tracking-[-0.02em]">
           Let's Create Something<br>Extraordinary
@@ -92,10 +95,13 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const router = useRouter()
+const { animateOnScroll, fadeInHero } = useScrollAnimation()
 
 // Omnicom Minimal Services
 const services = [
@@ -106,4 +112,15 @@ const services = [
   'Windows',
   'Terminal'
 ]
+
+onMounted(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduce) return
+  fadeInHero()
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8, ease: 'power3.out' })
+  animateOnScroll('h1', { y: 40, duration: 1.0 })
+  animateOnScroll('h2', { y: 40, duration: 0.9 })
+  animateOnScroll('p', { y: 30, duration: 0.8 })
+  animateOnScroll('button', { y: 20, duration: 0.7 })
+})
 </script>

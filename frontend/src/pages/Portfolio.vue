@@ -3,10 +3,10 @@
     <div class="container mx-auto px-6 py-12">
       
       <div class="text-center mb-12">
-        <h1 class="text-5xl font-heading font-bold text-omnicom-text mb-4">Our Work</h1>
-        <p class="text-xl text-omnicom-muted">
-          See how we've helped businesses stand out
-        </p>
+        <OmnicomAccentLine size="md" class="mb-6 mx-auto" />
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-4">Portfolio</p>
+        <h1 class="text-5xl md:text-6xl font-heading font-bold text-omnicom-text tracking-[-0.02em] mb-4">Our Work</h1>
+        <p class="text-xl text-omnicom-muted">See how we've helped businesses stand out</p>
       </div>
       
       <!-- Filter Tabs -->
@@ -31,7 +31,7 @@
         <div 
           v-for="project in filteredProjects" 
           :key="project.id"
-          class="bg-omnicom-bg-alt rounded-xl border border-omnicom-gray-300/25 overflow-hidden hover:border-omnicom-black transition-all cursor-pointer"
+          class="bg-omnicom-bg-alt border border-omnicom-gray-300/25 overflow-hidden hover:border-omnicom-black transition-all cursor-pointer"
         >
           <div class="aspect-video bg-omnicom-bg flex items-center justify-center">
             <span class="text-6xl">{{ project.icon }}</span>
@@ -39,7 +39,7 @@
           
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
-              <span class="px-3 py-1 bg-omnicom-black/5 text-omnicom-text text-xs font-semibold rounded-full border border-omnicom-gray-300">
+              <span class="px-3 py-1 bg-omnicom-black/5 text-omnicom-text text-xs font-semibold border border-omnicom-gray-300">
                 {{ project.industry }}
               </span>
             </div>
@@ -49,7 +49,7 @@
             
             <div class="flex items-center justify-between">
               <span class="text-sm text-omnicom-muted">{{ project.location }}</span>
-              <button class="text-omnicom-text font-semibold hover:text-omnicom-muted transition-colors cursor-pointer">
+              <button class="text-omnicom-text font-semibold hover:accent-text transition-colors cursor-pointer">
                 View Details →
               </button>
             </div>
@@ -66,7 +66,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const selectedIndustry = ref('All')
 
@@ -104,5 +106,15 @@ const filteredProjects = computed(() => {
     return sampleProjects
   }
   return sampleProjects.filter(p => p.industry === selectedIndustry.value)
+})
+
+onMounted(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduce) return
+  const { animateOnScroll } = useScrollAnimation()
+  animateOnScroll('.accent-line', { y: 40, duration: 0.8 })
+  animateOnScroll('h1', { y: 40, duration: 1.0 })
+  animateOnScroll('p', { y: 30, duration: 0.8 })
+  animateOnScroll('button', { y: 20, duration: 0.7 })
 })
 </script>

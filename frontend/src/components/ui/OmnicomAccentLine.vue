@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="bg-omnicom-red"
+    class="bg-omnicom-red accent-line"
     :class="sizeClass"
     :style="customColor ? { backgroundColor: customColor } : {}"
   ></div>

@@ -3,6 +3,7 @@
     
     <!-- HERO SECTION - Omnicom Minimal -->
     <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
+      <div class="noise-texture"></div>
       <div class="max-w-content mx-auto text-center">
         <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em]">
           Work
@@ -126,6 +127,7 @@
 import { ref, computed, onMounted } from 'vue'
 import ProductCard from '@/components/products/ProductCard.vue'
 import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const products = ref<any[]>([])
 const loading = ref(true)
@@ -215,6 +217,15 @@ const fetchProducts = async () => {
 }
 
 onMounted(() => {
+  const { animateOnScroll } = useScrollAnimation()
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!reduce) {
+    animateOnScroll('.accent-line', { y: 40, duration: 0.8 })
+    animateOnScroll('h1', { y: 40, duration: 1.0 })
+    animateOnScroll('h2', { y: 40, duration: 0.9 })
+    animateOnScroll('p', { y: 30, duration: 0.8 })
+    animateOnScroll('button', { y: 20, duration: 0.7 })
+  }
   fetchProducts()
 })
 </script>
