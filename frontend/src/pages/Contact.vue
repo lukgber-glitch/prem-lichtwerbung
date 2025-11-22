@@ -1,17 +1,17 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-omnicom-bg page-contact">
     
     <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
+    <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em]">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em]">
           Contact
         </h1>
       </div>
     </section>
     
     <!-- CONTACT FORM SECTION - Two Column Layout with Accent Line -->
-    <section class="py-32 bg-omnicom-white">
+    <section class="py-32 bg-omnicom-bg-alt">
       <div class="max-w-7xl mx-auto px-6">
         
         <!-- Decorative Accent Line -->
@@ -36,7 +36,7 @@
                   v-model="form.name"
                   type="text" 
                   required
-                  class="w-full px-6 py-4 border border-black/20 bg-white text-omnicom-text font-light focus:outline-none focus:border-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
                 />
               </div>
               
@@ -46,7 +46,7 @@
                   v-model="form.email"
                   type="email" 
                   required
-                  class="w-full px-6 py-4 border border-black/20 bg-white text-omnicom-text font-light focus:outline-none focus:border-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
                 />
               </div>
               
@@ -55,7 +55,7 @@
                 <input 
                   v-model="form.phone"
                   type="tel"
-                  class="w-full px-6 py-4 border border-black/20 bg-white text-omnicom-text font-light focus:outline-none focus:border-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500"
                 />
               </div>
               
@@ -64,7 +64,7 @@
                 <select 
                   v-model="form.subject"
                   required
-                  class="w-full px-6 py-4 border border-black/20 bg-white text-omnicom-text font-light cursor-pointer focus:outline-none focus:border-black transition-all duration-500"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light cursor-pointer focus:outline-none focus:border-omnicom-black transition-all duration-500"
                 >
                   <option value="">Select a subject</option>
                   <option value="quote">Request a Quote</option>
@@ -80,14 +80,14 @@
                   v-model="form.message"
                   required
                   rows="8"
-                  class="w-full px-6 py-4 border border-black/20 bg-white text-omnicom-text font-light focus:outline-none focus:border-black transition-all duration-500 resize-none"
+                  class="w-full px-6 py-4 border border-omnicom-black/20 bg-omnicom-white text-omnicom-text font-light focus:outline-none focus:border-omnicom-black transition-all duration-500 resize-none"
                 ></textarea>
               </div>
               
               <button 
                 type="submit"
                 :disabled="submitting"
-                class="px-16 py-6 bg-black text-white text-lg font-semibold hover:bg-white hover:text-black border-2 border-black transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                class="px-16 py-6 bg-transparent text-omnicom-text text-lg font-semibold border-2 border-omnicom-black hover:bg-omnicom-black hover:text-omnicom-white transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {{ submitting ? 'Sending...' : 'Send Message' }}
               </button>

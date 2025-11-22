@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen bg-background">
+  <div class="min-h-screen bg-omnicom-bg page-portfolio">
     <div class="container mx-auto px-6 py-12">
       
       <div class="text-center mb-12">
-        <h1 class="text-5xl font-heading font-bold text-text-main mb-4">Our Work</h1>
-        <p class="text-xl text-text-muted">
+        <h1 class="text-5xl font-heading font-bold text-omnicom-text mb-4">Our Work</h1>
+        <p class="text-xl text-omnicom-muted">
           See how we've helped businesses stand out
         </p>
       </div>
@@ -18,8 +18,8 @@
           :class="[
             'px-6 py-3 rounded-lg font-semibold transition-all border-2 cursor-pointer',
             selectedIndustry === filter 
-              ? 'bg-primary text-background border-primary' 
-              : 'bg-surface text-text-main border-text-muted hover:border-primary hover:text-primary'
+              ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
+              : 'bg-omnicom-bg-alt text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black hover:text-omnicom-black'
           ]"
         >
           {{ filter }}
@@ -31,25 +31,25 @@
         <div 
           v-for="project in filteredProjects" 
           :key="project.id"
-          class="bg-surface rounded-xl border border-primary/20 overflow-hidden hover:border-primary transition-all cursor-pointer"
+          class="bg-omnicom-bg-alt rounded-xl border border-omnicom-gray-300/25 overflow-hidden hover:border-omnicom-black transition-all cursor-pointer"
         >
-          <div class="aspect-video bg-surface-alt flex items-center justify-center">
+          <div class="aspect-video bg-omnicom-bg flex items-center justify-center">
             <span class="text-6xl">{{ project.icon }}</span>
           </div>
           
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
-              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full border border-primary/30">
+              <span class="px-3 py-1 bg-omnicom-black/5 text-omnicom-text text-xs font-semibold rounded-full border border-omnicom-gray-300">
                 {{ project.industry }}
               </span>
             </div>
             
-            <h3 class="text-xl font-bold text-text-main mb-2">{{ project.name }}</h3>
-            <p class="text-text-muted mb-4">{{ project.description }}</p>
+            <h3 class="text-xl font-bold text-omnicom-text mb-2">{{ project.name }}</h3>
+            <p class="text-omnicom-muted mb-4">{{ project.description }}</p>
             
             <div class="flex items-center justify-between">
-              <span class="text-sm text-text-muted">{{ project.location }}</span>
-              <button class="text-primary font-semibold hover:text-accent transition-colors cursor-pointer">
+              <span class="text-sm text-omnicom-muted">{{ project.location }}</span>
+              <button class="text-omnicom-text font-semibold hover:text-omnicom-muted transition-colors cursor-pointer">
                 View Details →
               </button>
             </div>
@@ -58,7 +58,7 @@
       </div>
       
       <div v-if="filteredProjects.length === 0" class="text-center py-12">
-        <p class="text-xl text-text-muted">No projects found for this category</p>
+        <p class="text-xl text-omnicom-muted">No projects found for this category</p>
       </div>
       
     </div>

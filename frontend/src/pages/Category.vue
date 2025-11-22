@@ -1,49 +1,50 @@
 <template>
-  <div>
+  <div class="min-h-screen bg-omnicom-bg page-category">
     <!-- Category Hero Section -->
     <section 
       v-if="category"
-      class="relative bg-surface text-text-main py-20 overflow-hidden border-b border-primary/20"
+      class="relative bg-omnicom-bg-alt text-omnicom-text py-20 overflow-hidden border-b border-omnicom-gray-300/25"
       :style="category.image ? `background-image: url(${category.image}); background-size: cover; background-position: center;` : ''"
     >
       <!-- Dark overlay for better text readability -->
-      <div class="absolute inset-0 bg-background bg-opacity-90"></div>
+      <div class="absolute inset-0 bg-omnicom-bg bg-opacity-90"></div>
       
       <div class="container mx-auto px-4 relative z-10">
         <!-- Breadcrumbs -->
         <nav class="mb-6">
           <ol class="flex items-center space-x-2 text-sm">
             <li>
-              <router-link to="/" class="text-text-muted hover:text-primary transition-colors cursor-pointer">
+              <router-link to="/" class="text-omnicom-muted hover:accent-text transition-colors cursor-pointer">
                 Home
               </router-link>
             </li>
-            <li class="text-text-muted">/</li>
-            <li class="text-primary font-semibold">{{ category.name }}</li>
+            <li class="text-omnicom-muted">/</li>
+            <li class="accent-text font-semibold">{{ category.name }}</li>
           </ol>
         </nav>
 
-        <h1 class="text-5xl md:text-6xl font-bold mb-4 font-heading text-primary">
+        <OmnicomAccentLine size="md" class="mb-6" />
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 font-heading text-omnicom-text">
           {{ category.name }}
         </h1>
-        <p v-if="category.description" class="text-xl text-text-muted max-w-3xl">
+        <p v-if="category.description" class="text-xl text-omnicom-muted max-w-3xl">
           {{ category.description }}
         </p>
       </div>
     </section>
 
     <!-- Subcategories Filter Chips -->
-    <section v-if="subcategories.length > 0" class="bg-surface py-6 border-b border-primary/20">
+    <section v-if="subcategories.length > 0" class="bg-omnicom-bg-alt py-6 border-b border-omnicom-gray-300/25">
       <div class="container mx-auto px-4">
         <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-sm font-semibold text-text-main">Filter by subcategory:</span>
+          <span class="text-sm font-semibold text-omnicom-text">Filter by subcategory:</span>
           <button
             @click="selectedSubcategory = null"
             :class="[
               'px-4 py-2 rounded-full transition-all text-sm font-semibold cursor-pointer',
               selectedSubcategory === null
-                ? 'bg-primary text-background border-2 border-primary'
-                : 'bg-surface-alt text-text-main border-2 border-text-muted hover:border-primary hover:text-primary'
+                ? 'bg-omnicom-black text-omnicom-text-light border-2 border-omnicom-black'
+                : 'bg-omnicom-bg text-omnicom-text border-2 border-omnicom-gray-300 hover:border-omnicom-black hover:text-omnicom-black'
             ]"
           >
             All {{ category?.name }}
@@ -55,8 +56,8 @@
             :class="[
               'px-4 py-2 rounded-full transition-all text-sm font-semibold cursor-pointer',
               selectedSubcategory === subcategory.id
-                ? 'bg-primary text-background border-2 border-primary'
-                : 'bg-surface-alt text-text-main border-2 border-text-muted hover:border-primary hover:text-primary'
+                ? 'bg-omnicom-black text-omnicom-text-light border-2 border-omnicom-black'
+                : 'bg-omnicom-bg text-omnicom-text border-2 border-omnicom-gray-300 hover:border-omnicom-black hover:text-omnicom-black'
             ]"
           >
             {{ subcategory.name }}
@@ -80,11 +81,11 @@
         <div class="lg:hidden mb-4">
           <button 
             @click="showMobileFilters = true"
-            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-background rounded-lg hover:bg-primary/90 transition-all cursor-pointer border-2 border-primary"
+            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-transparent text-omnicom-text rounded-lg transition-all cursor-pointer border-2 border-omnicom-black hover:bg-omnicom-black hover:text-omnicom-white"
           >
             <SlidersHorizontal :size="20" :stroke-width="2" />
             Filters
-            <span v-if="activeFilterCount > 0" class="bg-accent text-background px-2 py-1 rounded-full text-xs font-bold">
+            <span v-if="activeFilterCount > 0" class="accent-bg text-omnicom-white px-2 py-1 rounded-full text-xs font-bold">
               {{ activeFilterCount }}
             </span>
           </button>
@@ -98,19 +99,19 @@
           >
             <!-- Backdrop -->
             <div 
-              class="absolute inset-0 bg-black bg-opacity-50"
+              class="absolute inset-0 bg-omnicom-black/50"
               @click="showMobileFilters = false"
             ></div>
             
             <!-- Drawer -->
-            <div class="absolute left-0 top-0 bottom-0 w-80 max-w-full bg-surface shadow-xl overflow-y-auto">
-              <div class="p-4 border-b border-primary/20 flex items-center justify-between">
-                <h2 class="text-xl font-semibold font-heading text-text-main">Filters</h2>
+            <div class="absolute left-0 top-0 bottom-0 w-80 max-w-full bg-omnicom-bg-alt shadow-xl overflow-y-auto">
+              <div class="p-4 border-b border-omnicom-gray-300/25 flex items-center justify-between">
+                <h2 class="text-xl font-semibold font-heading text-omnicom-text">Filters</h2>
                 <button 
                   @click="showMobileFilters = false"
-                  class="p-2 hover:bg-primary/10 rounded-full transition-colors cursor-pointer"
+                  class="p-2 hover:bg-omnicom-black/10 rounded-full transition-colors cursor-pointer"
                 >
-                  <X :size="24" class="text-text-main" :stroke-width="2" />
+                  <X :size="24" class="text-omnicom-text" :stroke-width="2" />
                 </button>
               </div>
               <div class="p-4">
@@ -301,6 +302,7 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ButtonGlow from '@/components/ui/ButtonGlow.vue'
+import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
 import { SlidersHorizontal, X, LayoutGrid, List, Package } from 'lucide-vue-next'
 import ProductCard from '@/components/products/ProductCard.vue'
 import ProductFilters from '@/components/products/ProductFilters.vue'

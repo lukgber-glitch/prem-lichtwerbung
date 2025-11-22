@@ -1,20 +1,21 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-omnicom-bg page-about">
     
     <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
+    <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em] mb-16">
+        <OmnicomAccentLine size="lg" class="mb-8 mx-auto" custom-color="#FFFFFF" />
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em] mb-16">
           Our Story
         </h1>
-        <p class="text-xl md:text-2xl text-white/70 font-light max-w-2xl mx-auto leading-relaxed">
+        <p class="text-xl md:text-2xl text-omnicom-text-light/70 font-light max-w-2xl mx-auto leading-relaxed">
           15 years of illuminating brands across Europe
         </p>
       </div>
     </section>
     
     <!-- NARRATIVE SECTION - Single Column with Accent Line -->
-    <section class="py-32 bg-omnicom-white">
+    <section class="py-32 bg-omnicom-bg-alt">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
         <OmnicomAccentLine size="md" class="mb-8" />
@@ -41,43 +42,43 @@
     </section>
     
     <!-- PHILOSOPHY SECTION - Black Background with Accent Line -->
-    <section class="py-60 bg-black">
+    <section class="py-60 bg-omnicom-black">
       <div class="max-w-content mx-auto px-6 md:px-32">
         <!-- Decorative Accent Line -->
         <OmnicomAccentLine size="md" class="mb-8" custom-color="#FFFFFF" />
         
         <!-- Section Label -->
-        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mb-6">Our Values</p>
+        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-text-light/60 mb-6">Our Values</p>
         
-        <h2 class="text-5xl md:text-6xl font-heading font-bold text-white mb-20 leading-tight">
+        <h2 class="text-5xl md:text-6xl font-heading font-bold text-omnicom-text-light mb-20 leading-tight">
           Our Philosophy
         </h2>
         
         <div class="grid md:grid-cols-2 gap-x-32 gap-y-16">
           <div>
-            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Premium Quality</h3>
-            <p class="text-lg text-white/80 font-light leading-relaxed">
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text-light mb-6">Premium Quality</h3>
+            <p class="text-lg text-omnicom-text-light/80 font-light leading-relaxed">
               We use only the highest-grade materials and LED technology. Every sign is built to last 10+ years with minimal maintenance.
             </p>
           </div>
           
           <div>
-            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Custom Design</h3>
-            <p class="text-lg text-white/80 font-light leading-relaxed">
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text-light mb-6">Custom Design</h3>
+            <p class="text-lg text-omnicom-text-light/80 font-light leading-relaxed">
               Every project is unique. Our design team works with you to create signage that perfectly matches your brand identity.
             </p>
           </div>
           
           <div>
-            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Fast Turnaround</h3>
-            <p class="text-lg text-white/80 font-light leading-relaxed">
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text-light mb-6">Fast Turnaround</h3>
+            <p class="text-lg text-omnicom-text-light/80 font-light leading-relaxed">
               Most orders ready in 7-14 days. Need it faster? We offer rush production for urgent projects.
             </p>
           </div>
           
           <div>
-            <h3 class="text-2xl font-heading font-semibold text-white mb-6">Proven Expertise</h3>
-            <p class="text-lg text-white/80 font-light leading-relaxed">
+            <h3 class="text-2xl font-heading font-semibold text-omnicom-text-light mb-6">Proven Expertise</h3>
+            <p class="text-lg text-omnicom-text-light/80 font-light leading-relaxed">
               Over 500 satisfied clients across Europe trust us with their brand visibility. Join them.
             </p>
           </div>
@@ -86,7 +87,7 @@
     </section>
     
     <!-- CAPABILITIES SECTION - Off-White Background with Accent Line -->
-    <section class="py-32 bg-omnicom-white">
+    <section class="py-32 bg-omnicom-bg-alt">
       <div class="max-w-text mx-auto px-6">
         <!-- Decorative Accent Line -->
         <OmnicomAccentLine size="md" class="mb-8" />
@@ -99,27 +100,27 @@
         </h2>
         
         <div class="space-y-8">
-          <div class="pb-8 border-b border-black/10">
+          <div class="pb-8 border-b border-omnicom-gray-300/25">
             <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Channel Letters</h3>
             <p class="text-lg text-omnicom-muted font-light">Individual illuminated letters that define your storefront</p>
           </div>
           
-          <div class="pb-8 border-b border-black/10">
+          <div class="pb-8 border-b border-omnicom-gray-300/25">
             <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">LED Neon</h3>
             <p class="text-lg text-omnicom-muted font-light">Modern flexible neon for creative and eye-catching designs</p>
           </div>
           
-          <div class="pb-8 border-b border-black/10">
+          <div class="pb-8 border-b border-omnicom-gray-300/25">
             <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Lightboxes</h3>
             <p class="text-lg text-omnicom-muted font-light">Premium illuminated panels for maximum brand visibility</p>
           </div>
           
-          <div class="pb-8 border-b border-black/10">
+          <div class="pb-8 border-b border-omnicom-gray-300/25">
             <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Pylons</h3>
             <p class="text-lg text-omnicom-muted font-light">Towering structures that guide customers to your location</p>
           </div>
           
-          <div class="pb-8 border-b border-black/10">
+          <div class="pb-8 border-b border-omnicom-gray-300/25">
             <h3 class="text-2xl font-heading font-semibold text-omnicom-text mb-3">Digital Solutions</h3>
             <p class="text-lg text-omnicom-muted font-light">Interactive terminals and digital menu boards</p>
           </div>
@@ -128,14 +129,14 @@
     </section>
     
     <!-- CTA SECTION - Black Background -->
-    <section class="py-60 bg-black">
+    <section class="py-60 bg-omnicom-black">
       <div class="max-w-content mx-auto px-6 md:px-32 text-center">
-        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-[-0.02em]">
+        <h2 class="text-6xl md:text-8xl font-heading font-black text-omnicom-text-light mb-16 leading-none tracking-[-0.02em]">
           Ready to illuminate<br>your brand?
         </h2>
         <button 
           @click="$router.push('/contact')"
-          class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500 cursor-pointer"
+          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500 cursor-pointer"
         >
           Get Started
         </button>

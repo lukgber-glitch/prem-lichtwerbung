@@ -1,9 +1,10 @@
 <template>
   <div 
-    class="accent-line transition-all duration-300"
+    class="bg-omnicom-red"
     :class="sizeClass"
     :style="customColor ? { backgroundColor: customColor } : {}"
   ></div>
+  
 </template>
 
 <script setup lang="ts">
@@ -11,7 +12,7 @@ import { computed } from 'vue'
 
 interface Props {
   size?: 'sm' | 'md' | 'lg'
-  customColor?: string // Allow override for specific cases
+  customColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {

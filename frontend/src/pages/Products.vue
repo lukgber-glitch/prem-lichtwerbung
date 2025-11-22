@@ -1,17 +1,17 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-omnicom-bg page-products">
     
     <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden px-6">
+    <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
       <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none tracking-[-0.03em]">
+        <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em]">
           Work
         </h1>
       </div>
     </section>
     
     <!-- FILTERS SECTION - Omnicom Minimal with Accent Line -->
-    <section class="py-20 bg-omnicom-white border-b border-black/10">
+    <section class="py-20 bg-omnicom-bg-alt border-b border-omnicom-gray-300/25">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Decorative Accent Line -->
@@ -30,8 +30,8 @@
               @click="selectedCategory = category"
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedCategory === category 
-                ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
+                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
+                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
             >
               {{ category }}
             </button>
@@ -48,8 +48,8 @@
               @click="selectedIllumination = type"
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedIllumination === type 
-                ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
+                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
+                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
             >
               {{ type }}
             </button>
@@ -66,8 +66,8 @@
               @click="selectedPriceRange = range"
               class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
               :class="selectedPriceRange === range 
-                ? 'bg-black text-white border-black' 
-                : 'bg-transparent text-omnicom-text border-black/20 hover:border-black'"
+                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
+                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
             >
               {{ range.label }}
             </button>
@@ -83,25 +83,25 @@
     </section>
     
     <!-- PRODUCTS GRID - Minimal Asymmetric Layout -->
-    <section class="py-44 bg-white">
+    <section class="py-44 bg-omnicom-bg">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Loading State -->
         <div v-if="loading" class="text-center py-20">
-          <div class="text-xl font-light text-black">Loading...</div>
+          <div class="text-xl font-light text-omnicom-text">Loading...</div>
         </div>
         
         <!-- Error State -->
         <div v-else-if="error" class="text-center py-20">
-          <div class="text-xl font-light text-black">{{ error }}</div>
+          <div class="text-xl font-light text-omnicom-text">{{ error }}</div>
         </div>
         
         <!-- Empty State -->
         <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
-          <p class="text-xl font-light text-black">No products match your filters</p>
+          <p class="text-xl font-light text-omnicom-text">No products match your filters</p>
           <button 
             @click="resetFilters"
-            class="mt-8 px-8 py-4 bg-transparent text-black text-sm font-semibold border-2 border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer"
+            class="mt-8 px-8 py-4 bg-transparent text-omnicom-text text-sm font-semibold border-2 border-omnicom-black hover:bg-omnicom-black hover:text-omnicom-white transition-all duration-500 cursor-pointer"
           >
             Reset Filters
           </button>

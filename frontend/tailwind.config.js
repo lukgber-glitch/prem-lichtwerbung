@@ -2,19 +2,14 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      // Primary Omnicom Red (used on some pages)
       'omnicom-red': '#AD342A',
       'omnicom-red-dark': '#8B2821',
       'omnicom-red-light': '#C64032',
-      
-      // Additional Omnicom brand colors (research which pages use which)
       'omnicom-blue': '#0066CC',
       'omnicom-purple': '#6B3FA0',
       'omnicom-green': '#00A651',
       'omnicom-orange': '#FF6B35',
       'omnicom-teal': '#00A19A',
-      
-      // Neutrals (used across all pages)
       'omnicom-black': '#000000',
       'omnicom-gray-900': '#1A1A1A',
       'omnicom-gray-800': '#2D2D2D',
@@ -24,10 +19,7 @@ export default {
       'omnicom-gray-300': '#CCCCCC',
       'omnicom-gray-200': '#E5E5E5',
       'omnicom-gray-100': '#F5F5F5',
-      'omnicom-white': '#FFFFFF',
-      
-      transparent: 'transparent',
-      current: 'currentColor'
+      'omnicom-white': '#FFFFFF'
     },
     extend: {
       fontFamily: {

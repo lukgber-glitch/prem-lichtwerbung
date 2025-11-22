@@ -1,18 +1,18 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen bg-omnicom-bg page-home">
     
     <!-- HERO SECTION - Omnicom Minimal with Gradient -->
-    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-omnicom-black to-black overflow-hidden">
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-omnicom-black to-omnicom-black overflow-hidden">
       <div class="max-w-content mx-auto px-6 text-center">
-        <h1 class="text-8xl md:text-10xl font-black text-white leading-none tracking-[-0.04em] mb-12">
+        <h1 class="text-8xl md:text-10xl font-black text-omnicom-text-light leading-none tracking-[-0.04em] mb-12">
           Your Brand<br>Deserves to Shine
         </h1>
-        <p class="text-xl md:text-2xl text-white/60 font-light max-w-2xl mx-auto mb-16">
+        <p class="text-xl md:text-2xl text-omnicom-text-light/60 font-light max-w-2xl mx-auto mb-16">
           Premium illuminated signage that transforms businesses into landmarks
         </p>
         <button 
           @click="$router.push('/products')"
-          class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500"
+          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500"
         >
           Explore Our Work
         </button>
@@ -20,7 +20,7 @@
     </section>
     
     <!-- ABOUT SECTION - Omnicom Narrative with Accent Line -->
-    <section class="py-32 bg-omnicom-white">
+    <section class="py-32 bg-omnicom-bg-alt">
       <div class="max-w-content mx-auto px-6 md:px-32">
         <div class="grid md:grid-cols-2 gap-32 items-center">
           <!-- Left: Floating Text (40% of space) -->
@@ -45,24 +45,24 @@
     </section>
     
     <!-- SERVICES SECTION - Omnicom Minimal Grid -->
-    <section class="py-60 bg-black">
+    <section class="py-60 bg-omnicom-black">
       <div class="max-w-content mx-auto px-6 md:px-32">
         
         <!-- Section Header -->
         <div class="mb-20">
           <OmnicomAccentLine size="md" class="mb-8" custom-color="#FFFFFF" />
-          <p class="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 mb-6">What We Do</p>
-          <h2 class="text-5xl md:text-6xl font-heading font-bold text-white leading-tight">Our Services</h2>
+          <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-text-light/60 mb-6">What We Do</p>
+          <h2 class="text-5xl md:text-6xl font-heading font-bold text-omnicom-text-light leading-tight">Our Services</h2>
         </div>
         
         <div class="grid md:grid-cols-3 gap-20">
           <div 
             v-for="service in services" 
             :key="service"
-            class="group cursor-pointer py-12 border-b border-white/20 hover:border-white transition-all duration-800"
+            class="group cursor-pointer py-12 border-b border-omnicom-white/20 hover:border-omnicom-white transition-all duration-800"
             @click="$router.push('/products')"
           >
-            <h3 class="font-heading text-4xl md:text-5xl font-bold text-white group-hover:text-white/80 transition-all duration-500">
+            <h3 class="font-heading text-4xl md:text-5xl font-bold text-omnicom-text-light group-hover:text-omnicom-text-light/80 transition-all duration-500">
               {{ service }}
             </h3>
           </div>
@@ -71,17 +71,17 @@
     </section>
     
     <!-- CTA SECTION - Omnicom Dramatic -->
-    <section class="py-60 bg-black">
+    <section class="py-60 bg-omnicom-black">
       <div class="max-w-content mx-auto px-6 md:px-32 text-center">
-        <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-16 leading-none tracking-[-0.02em]">
+        <h2 class="text-6xl md:text-8xl font-heading font-black text-omnicom-text-light mb-16 leading-none tracking-[-0.02em]">
           Let's Create Something<br>Extraordinary
         </h2>
-        <p class="text-xl text-white/70 font-light mb-12">
+        <p class="text-xl text-omnicom-text-light/70 font-light mb-12">
           contact@prem-lichtwerbung.de
         </p>
         <button 
           @click="$router.push('/contact')"
-          class="px-16 py-6 bg-transparent text-white text-lg font-semibold border-2 border-white hover:bg-white hover:text-black transition-all duration-500 ease-omnicom cursor-pointer"
+          class="px-16 py-6 bg-transparent text-omnicom-text-light text-lg font-semibold border-2 border-omnicom-white hover:bg-omnicom-white hover:text-omnicom-black transition-all duration-500 ease-omnicom cursor-pointer"
         >
           Start Project
         </button>
