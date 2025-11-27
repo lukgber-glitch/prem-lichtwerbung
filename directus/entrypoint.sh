@@ -65,13 +65,34 @@ echo "Starting Directus server in background..."
 directus start &
 DIRECTUS_PID=$!
 
-# Wait for Directus to be fully initialized
-echo "⏳ Waiting for Directus to be ready..."
-sleep 30
-
 # Determine the correct port (Railway uses PORT env var, defaults to 8055)
 DIRECTUS_PORT=${PORT:-8055}
 echo "🔍 Directus is running on port: $DIRECTUS_PORT"
+
+# Wait for Directus to be fully initialized with retry loop
+echo "⏳ Waiting for Directus to be ready..."
+MAX_RETRIES=30
+RETRY_COUNT=0
+HEALTH_URL="http://localhost:$DIRECTUS_PORT/server/health"
+
+while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$HEALTH_URL" || echo "000")
+  
+  if [ "$HTTP_CODE" = "200" ]; then
+    echo "✅ Directus is ready (responded with HTTP 200)"
+    break
+  else
+    RETRY_COUNT=$((RETRY_COUNT + 1))
+    echo "   Attempt $RETRY_COUNT/$MAX_RETRIES - Directus not ready yet (HTTP $HTTP_CODE), waiting 5 seconds..."
+    sleep 5
+  fi
+done
+
+if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+  echo "❌ Directus failed to become ready after $MAX_RETRIES attempts"
+  echo "   Last HTTP status: $HTTP_CODE"
+  exit 1
+fi
 
 # Authenticate and get access token
 echo "🔑 Authenticating with Directus..."
