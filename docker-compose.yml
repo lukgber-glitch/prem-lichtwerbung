@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: directus
-      POSTGRES_PASSWORD: directus  # ⚠️ CHANGE IN PRODUCTION
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-directus}
       POSTGRES_DB: directus
     ports:
       - "5432:5432"
@@ -26,23 +26,23 @@ services:
     ports:
       - "8055:8055"
     environment:
-      KEY: "replace-with-random-key-in-production"
-      SECRET: "replace-with-random-secret-in-production"
+      KEY: ${DIRECTUS_KEY:-replace-with-random-key-in-production}
+      SECRET: ${DIRECTUS_SECRET:-replace-with-random-secret-in-production}
       
       DB_CLIENT: "pg"
       DB_HOST: "postgres"
       DB_PORT: "5432"
       DB_DATABASE: "directus"
       DB_USER: "directus"
-      DB_PASSWORD: "directus"  # ⚠️ CHANGE IN PRODUCTION (must match POSTGRES_PASSWORD)
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-directus}
       
-      ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "admin123"  # ⚠️ CHANGE IN PRODUCTION
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
       
-      PUBLIC_URL: "http://localhost:8055"
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8055}
       
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "true"
+      CORS_ORIGIN: ${CORS_ORIGIN:-true}
       
       CACHE_ENABLED: "false"
       LOG_LEVEL: "debug"
@@ -77,28 +77,29 @@ services:
     container_name: webshop-frontend
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT:-3000}:3000"
     environment:
-      VITE_DIRECTUS_URL: "http://localhost:8055"
-      VITE_STRIPE_PUBLISHABLE_KEY: ""
+      VITE_DIRECTUS_URL: ${VITE_DIRECTUS_URL:-http://localhost:8055}
+      VITE_STRIPE_PUBLISHABLE_KEY: ${VITE_STRIPE_PUBLISHABLE_KEY:-}
     depends_on:
       - directus
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public:/app/public
 
-  dependency-checker:
-    image: node:20-alpine
-    container_name: webshop-dependency-checker
-    volumes:
-      - ./frontend:/app/frontend
-      - ./directus:/app/directus
-      - ./check-updates.sh:/app/check-updates.sh
-    entrypoint: /bin/sh
-    command: -c "apk add --no-cache bash && chmod +x /app/check-updates.sh && /app/check-updates.sh"
-    depends_on:
-      - directus
-      - frontend
+  # Dependency checker - optional, disable for Railway deployment
+  # dependency-checker:
+  #   image: node:20-alpine
+  #   container_name: webshop-dependency-checker
+  #   volumes:
+  #     - ./frontend:/app/frontend
+  #     - ./directus:/app/directus
+  #     - ./check-updates.sh:/app/check-updates.sh
+  #   entrypoint: /bin/sh
+  #   command: -c "apk add --no-cache bash && chmod +x /app/check-updates.sh && /app/check-updates.sh"
+  #   depends_on:
+  #     - directus
+  #     - frontend
 
 volumes:
   webshop_postgres_data:
