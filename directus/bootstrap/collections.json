@@ -150,6 +150,17 @@
     }
   },
   {
+    "collection": "pages_directus_files",
+    "meta": {
+      "icon": "import_export",
+      "hidden": true,
+      "singleton": false
+    },
+    "schema": {
+      "name": "pages_directus_files"
+    }
+  },
+  {
     "collection": "banners",
     "meta": {
       "icon": "image",

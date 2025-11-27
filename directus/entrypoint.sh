@@ -247,6 +247,18 @@ if [ -f "/directus/bootstrap/sample-data/orders.json" ]; then
   done
 fi
 
+# Import pages
+if [ -f "/directus/bootstrap/sample-data/pages.json" ]; then
+  echo "  - Importing pages..."
+  pages=$(cat /directus/bootstrap/sample-data/pages.json | jq -c '.[]')
+  echo "$pages" | while IFS= read -r page; do
+    curl -X POST http://localhost:8055/items/pages \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $ACCESS_TOKEN" \
+      --data "$page" > /dev/null 2>&1 || true
+  done
+fi
+
 echo ""
 echo "========================================"
 echo "✅ Directus Bootstrap Complete!"

@@ -1,0 +1,280 @@
+[
+  {
+    "id": 1,
+    "status": "published",
+    "title": "Home",
+    "title_de": "Startseite",
+    "slug": "home",
+    "content_en": {
+      "hero": {
+        "title": "Prem-Lichtwerbung",
+        "premierTitle": "Germany's Premier",
+        "premierSubtitle": "Signage Provider",
+        "year": "2024",
+        "award": "#1",
+        "awardLine1": "Premium",
+        "awardLine2": "Signage",
+        "bannerTitle": "Precision. Innovation. Quality."
+      },
+      "intro": {
+        "paragraph": "Prem-Lichtwerbung is a leading provider of premium illuminated signage and custom lighting solutions. Our innovative specialists are focused on delivering intelligent business outcomes for our clients through cutting-edge design and expert craftsmanship.",
+        "seeProducts": "see our products"
+      },
+      "services": {
+        "title": "Premium",
+        "titleLine2": "Solutions",
+        "description": "Learn how our culture of precision and creativity underpins everything we do for our clients, our partners, and the communities around us.",
+        "learnMore": "learn more"
+      },
+      "projects": {
+        "title": "FEATURED PROJECTS",
+        "mainTitle": "Custom LED Channel Letters for Premium Retail Brand",
+        "mainDescription": "We designed and installed stunning LED channel letters that elevated the brand presence of a major retail client, resulting in increased foot traffic and brand recognition.",
+        "viewProject": "view project",
+        "project2": "High-Impact Pylon Signage for Corporate Campus",
+        "project3": "Neon Art Installation for Modern Restaurant Chain"
+      },
+      "expertise": {
+        "title": "OUR EXPERTISE",
+        "mainTitle": "15 Years of Excellence",
+        "description": "We are committed to delivering exceptional results through continuous innovation and expertise. From small businesses to large corporations, everyone in the Prem-Lichtwerbung family receives world-class service and premium quality solutions.",
+        "readMore": "read more"
+      }
+    },
+    "content_de": {
+      "hero": {
+        "title": "Prem-Lichtwerbung",
+        "premierTitle": "Deutschlands führender",
+        "premierSubtitle": "Schilderanbieter",
+        "year": "2024",
+        "award": "#1",
+        "awardLine1": "Premium",
+        "awardLine2": "Beschilderung",
+        "bannerTitle": "Präzision. Innovation. Qualität."
+      },
+      "intro": {
+        "paragraph": "Prem-Lichtwerbung ist ein führender Anbieter von Premium-Leuchtreklame und individuellen Beleuchtungslösungen. Unsere innovativen Spezialisten konzentrieren sich darauf, intelligente Geschäftsergebnisse für unsere Kunden durch modernste Designs und fachmännische Handwerkskunst zu liefern.",
+        "seeProducts": "unsere produkte ansehen"
+      },
+      "services": {
+        "title": "Premium",
+        "titleLine2": "Lösungen",
+        "description": "Erfahren Sie, wie unsere Kultur der Präzision und Kreativität alles untermauert, was wir für unsere Kunden, unsere Partner und die Gemeinschaften um uns herum tun.",
+        "learnMore": "mehr erfahren"
+      },
+      "projects": {
+        "title": "VORGESTELLTE PROJEKTE",
+        "mainTitle": "Individuelle LED-Kanalbuchstaben für Premium-Einzelhandelsmarke",
+        "mainDescription": "Wir haben beeindruckende LED-Kanalbuchstaben entworfen und installiert, die die Markenpräsenz eines großen Einzelhandelskunden erhöhten, was zu erhöhtem Fußgängerverkehr und Markenbekanntheit führte.",
+        "viewProject": "projekt ansehen",
+        "project2": "Hochwertige Pylonbeschilderung für Unternehmenscampus",
+        "project3": "Neon-Kunstinstallation für moderne Restaurantkette"
+      },
+      "expertise": {
+        "title": "UNSERE EXPERTISE",
+        "mainTitle": "15 Jahre Exzellenz",
+        "description": "Wir sind bestrebt, außergewöhnliche Ergebnisse durch kontinuierliche Innovation und Expertise zu liefern. Von kleinen Unternehmen bis hin zu großen Konzernen erhält jeder in der Prem-Lichtwerbung-Familie erstklassigen Service und Premium-Qualitätslösungen.",
+        "readMore": "mehr lesen"
+      }
+    },
+    "hero_image": null
+  },
+  {
+    "id": 2,
+    "status": "published",
+    "title": "About Us",
+    "title_de": "Über Uns",
+    "slug": "about",
+    "content_en": {
+      "hero": {
+        "title": "About Us",
+        "subtitle": "15 years of illuminating brands across Europe"
+      },
+      "narrative": {
+        "title": "Transforming",
+        "titleLine2": "Businesses",
+        "paragraph1": "Since 2009, Prem-Lichtwerbung has been crafting premium illuminated signage that transforms businesses into landmarks. What started as a small workshop in Germany has grown into a leading provider of custom lighting solutions across Europe.",
+        "paragraph2": "We believe every business deserves signage that not only looks incredible but performs flawlessly for years. That's why we use only the highest-quality materials, LED technology, and weatherproof construction in every project."
+      },
+      "values": {
+        "title": "OUR VALUES",
+        "quality": {
+          "title": "Premium Quality",
+          "description": "We use only the highest-grade materials and LED technology. Every sign is built to last 10+ years with minimal maintenance."
+        },
+        "custom": {
+          "title": "Custom Design",
+          "description": "Every project is unique. Our design team works with you to create signage that perfectly matches your brand identity."
+        },
+        "turnaround": {
+          "title": "Fast Turnaround",
+          "description": "Most orders ready in 7-14 days. Need it faster? We offer rush production for urgent projects."
+        },
+        "expertise": {
+          "title": "Proven Expertise",
+          "description": "Over 500 satisfied clients across Europe trust us with their brand visibility. Join them."
+        }
+      },
+      "capabilities": {
+        "title": "What we create",
+        "channelLetters": {
+          "title": "Channel Letters",
+          "description": "Individual illuminated letters that define your storefront"
+        },
+        "ledNeon": {
+          "title": "LED Neon",
+          "description": "Modern flexible neon for creative and eye-catching designs"
+        },
+        "lightboxes": {
+          "title": "Lightboxes",
+          "description": "Premium illuminated panels for maximum brand visibility"
+        },
+        "pylons": {
+          "title": "Pylons",
+          "description": "Towering structures that guide customers to your location"
+        },
+        "digital": {
+          "title": "Digital Solutions",
+          "description": "Interactive terminals and digital menu boards"
+        }
+      },
+      "cta": {
+        "title": "Ready to illuminate",
+        "titleLine2": "your brand?",
+        "button": "Get Started"
+      }
+    },
+    "content_de": {
+      "hero": {
+        "title": "Über Uns",
+        "subtitle": "15 Jahre Markenbeleuchtung in ganz Europa"
+      },
+      "narrative": {
+        "title": "Transformation",
+        "titleLine2": "von Unternehmen",
+        "paragraph1": "Seit 2009 fertigt Prem-Lichtwerbung Premium-Leuchtreklame, die Unternehmen in Wahrzeichen verwandelt. Was als kleine Werkstatt in Deutschland begann, hat sich zu einem führenden Anbieter von individuellen Beleuchtungslösungen in ganz Europa entwickelt.",
+        "paragraph2": "Wir glauben, dass jedes Unternehmen Beschilderung verdient, die nicht nur unglaublich aussieht, sondern auch jahrelang einwandfrei funktioniert. Deshalb verwenden wir in jedem Projekt nur hochwertigste Materialien, LED-Technologie und wetterfeste Konstruktion."
+      },
+      "values": {
+        "title": "UNSERE WERTE",
+        "quality": {
+          "title": "Premium-Qualität",
+          "description": "Wir verwenden nur hochwertigste Materialien und LED-Technologie. Jedes Schild ist für eine Lebensdauer von über 10 Jahren mit minimalem Wartungsaufwand gebaut."
+        },
+        "custom": {
+          "title": "Individuelles Design",
+          "description": "Jedes Projekt ist einzigartig. Unser Designteam arbeitet mit Ihnen zusammen, um Beschilderung zu erstellen, die perfekt zu Ihrer Markenidentität passt."
+        },
+        "turnaround": {
+          "title": "Schnelle Bearbeitung",
+          "description": "Die meisten Bestellungen sind in 7-14 Tagen fertig. Brauchen Sie es schneller? Wir bieten Express-Produktion für dringende Projekte an."
+        },
+        "expertise": {
+          "title": "Bewährte Expertise",
+          "description": "Über 500 zufriedene Kunden in ganz Europa vertrauen uns ihre Markensichtbarkeit an. Schließen Sie sich ihnen an."
+        }
+      },
+      "capabilities": {
+        "title": "Was wir erschaffen",
+        "channelLetters": {
+          "title": "Kanalbuchstaben",
+          "description": "Einzelne beleuchtete Buchstaben, die Ihr Ladengeschäft definieren"
+        },
+        "ledNeon": {
+          "title": "LED-Neon",
+          "description": "Modernes flexibles Neon für kreative und auffällige Designs"
+        },
+        "lightboxes": {
+          "title": "Leuchtkästen",
+          "description": "Premium-Leuchttafeln für maximale Markensichtbarkeit"
+        },
+        "pylons": {
+          "title": "Pylone",
+          "description": "Hoch aufragende Strukturen, die Kunden zu Ihrem Standort führen"
+        },
+        "digital": {
+          "title": "Digitale Lösungen",
+          "description": "Interaktive Terminals und digitale Menütafeln"
+        }
+      },
+      "cta": {
+        "title": "Bereit, Ihre Marke",
+        "titleLine2": "zu beleuchten?",
+        "button": "Loslegen"
+      }
+    },
+    "hero_image": null
+  },
+  {
+    "id": 3,
+    "status": "published",
+    "title": "Contact",
+    "title_de": "Kontakt",
+    "slug": "contact",
+    "content_en": {
+      "hero": {
+        "title": "Contact",
+        "subtitle": "Let's start a conversation"
+      },
+      "form": {
+        "title": "Get in touch",
+        "nameLabel": "Name *",
+        "emailLabel": "Email *",
+        "phoneLabel": "Phone",
+        "subjectLabel": "Subject *",
+        "subjectPlaceholder": "Select a subject",
+        "subjectQuote": "Request a Quote",
+        "subjectQuestion": "General Question",
+        "subjectSupport": "Technical Support",
+        "subjectOther": "Other",
+        "messageLabel": "Message *",
+        "sendButton": "Send Message",
+        "sending": "Sending...",
+        "successMessage": "Message sent successfully. We'll respond within 24 hours."
+      },
+      "info": {
+        "title": "Contact Information",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "locationLabel": "Location",
+        "locationValue": "Berlin, Germany",
+        "hoursLabel": "Business Hours",
+        "hoursWeekday": "Monday - Friday: 9:00 - 18:00",
+        "hoursSaturday": "Saturday: 10:00 - 14:00"
+      }
+    },
+    "content_de": {
+      "hero": {
+        "title": "Kontakt",
+        "subtitle": "Lassen Sie uns ins Gespräch kommen"
+      },
+      "form": {
+        "title": "Kontaktieren Sie uns",
+        "nameLabel": "Name *",
+        "emailLabel": "E-Mail *",
+        "phoneLabel": "Telefon",
+        "subjectLabel": "Betreff *",
+        "subjectPlaceholder": "Betreff auswählen",
+        "subjectQuote": "Angebot anfordern",
+        "subjectQuestion": "Allgemeine Frage",
+        "subjectSupport": "Technischer Support",
+        "subjectOther": "Sonstiges",
+        "messageLabel": "Nachricht *",
+        "sendButton": "Nachricht senden",
+        "sending": "Wird gesendet...",
+        "successMessage": "Nachricht erfolgreich gesendet. Wir antworten innerhalb von 24 Stunden."
+      },
+      "info": {
+        "title": "Kontaktinformationen",
+        "emailLabel": "E-Mail",
+        "phoneLabel": "Telefon",
+        "locationLabel": "Standort",
+        "locationValue": "Berlin, Deutschland",
+        "hoursLabel": "Geschäftszeiten",
+        "hoursWeekday": "Montag - Freitag: 9:00 - 18:00",
+        "hoursSaturday": "Samstag: 10:00 - 14:00"
+      }
+    },
+    "hero_image": null
+  }
+]

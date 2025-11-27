@@ -3,10 +3,11 @@
     <div class="max-w-content mx-auto px-6 py-4 flex items-center justify-between">
       <!-- Logo -->
       <router-link to="/" class="flex items-center">
-        <span class="text-2xl font-bold">
-          <span class="text-primary">Prem-Lichtwerbung</span>
-          <span class="text-gray-400">Group</span>
-        </span>
+        <img 
+          src="/logo.png" 
+          alt="Prem-Lichtwerbung" 
+          class="h-8 md:h-10"
+        />
       </router-link>
 
       <!-- Desktop Navigation -->

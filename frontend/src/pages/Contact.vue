@@ -4,9 +4,9 @@
     <section class="bg-dark-bg text-white relative overflow-hidden">
       <div class="max-w-content mx-auto px-6 py-32 md:py-40">
         <div class="text-center">
-          <h1 class="text-6xl md:text-7xl font-bold mb-8">{{ t('contactNew.hero.title') }}</h1>
+          <h1 class="text-6xl md:text-7xl font-bold mb-8">{{ content?.hero?.title }}</h1>
           <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto">
-            {{ t('contactNew.hero.subtitle') }}
+            {{ content?.hero?.subtitle }}
           </p>
         </div>
       </div>
@@ -20,12 +20,12 @@
           <div>
             <div class="w-16 h-1 bg-primary mb-8"></div>
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 leading-tight">
-              {{ t('contactNew.form.title') }}
+              {{ content?.form?.title }}
             </h2>
 
             <form @submit.prevent="submitForm">
               <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ t('contactNew.form.nameLabel') }}</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ content?.form?.nameLabel }}</label>
                 <input 
                   v-model="form.name"
                   type="text" 
@@ -35,7 +35,7 @@
               </div>
               
               <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ t('contactNew.form.emailLabel') }}</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ content?.form?.emailLabel }}</label>
                 <input 
                   v-model="form.email"
                   type="email" 
@@ -45,7 +45,7 @@
               </div>
               
               <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ t('contactNew.form.phoneLabel') }}</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ content?.form?.phoneLabel }}</label>
                 <input 
                   v-model="form.phone"
                   type="tel"
@@ -54,22 +54,22 @@
               </div>
               
               <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ t('contactNew.form.subjectLabel') }}</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ content?.form?.subjectLabel }}</label>
                 <select 
                   v-model="form.subject"
                   required
                   class="w-full px-4 py-3 border border-gray-300 bg-white text-gray-900 cursor-pointer focus:outline-none focus:border-primary transition-all duration-500"
                 >
-                  <option value="">{{ t('contactNew.form.subjectPlaceholder') }}</option>
-                  <option value="quote">{{ t('contactNew.form.subjectQuote') }}</option>
-                  <option value="question">{{ t('contactNew.form.subjectQuestion') }}</option>
-                  <option value="support">{{ t('contactNew.form.subjectSupport') }}</option>
-                  <option value="other">{{ t('contactNew.form.subjectOther') }}</option>
+                  <option value="">{{ content?.form?.subjectPlaceholder }}</option>
+                  <option value="quote">{{ content?.form?.subjectQuote }}</option>
+                  <option value="question">{{ content?.form?.subjectQuestion }}</option>
+                  <option value="support">{{ content?.form?.subjectSupport }}</option>
+                  <option value="other">{{ content?.form?.subjectOther }}</option>
                 </select>
               </div>
               
               <div class="mb-8">
-                <label class="block text-sm font-medium text-gray-700 mb-2">{{ t('contactNew.form.messageLabel') }}</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">{{ content?.form?.messageLabel }}</label>
                 <textarea 
                   v-model="form.message"
                   required
@@ -83,11 +83,11 @@
                 :disabled="submitting"
                 class="px-12 py-4 border-2 border-primary bg-primary text-white hover:bg-primary-dark transition-all duration-500 font-medium disabled:opacity-50"
               >
-                {{ submitting ? t('contactNew.form.sending') : t('contactNew.form.sendButton') }}
+                {{ submitting ? content?.form?.sending : content?.form?.sendButton }}
               </button>
               
               <p v-if="submitSuccess" class="mt-6 text-gray-700">
-                {{ t('contactNew.form.successMessage') }}
+                {{ content?.form?.successMessage }}
               </p>
               <p v-if="submitError" class="mt-6 text-primary">
                 {{ submitError }}
@@ -99,33 +99,33 @@
           <div>
             <div class="w-16 h-1 bg-primary mb-8"></div>
             <h3 class="text-2xl font-bold text-gray-900 mb-12">
-              {{ t('contactNew.info.title') }}
+              {{ content?.info?.title }}
             </h3>
             
             <div class="space-y-8">
               <div>
-                <div class="text-sm font-medium text-gray-600 mb-2">{{ t('contactNew.info.emailLabel') }}</div>
+                <div class="text-sm font-medium text-gray-600 mb-2">{{ content?.info?.emailLabel }}</div>
                 <a href="mailto:info@prem-lichtwerbung.de" class="text-lg text-gray-900 hover:text-primary transition-all duration-500">
                   info@prem-lichtwerbung.de
                 </a>
               </div>
               
               <div>
-                <div class="text-sm font-medium text-gray-600 mb-2">{{ t('contactNew.info.phoneLabel') }}</div>
+                <div class="text-sm font-medium text-gray-600 mb-2">{{ content?.info?.phoneLabel }}</div>
                 <a href="tel:+49123456789" class="text-lg text-gray-900 hover:text-primary transition-all duration-500">
                   +49 123 456 789
                 </a>
               </div>
               
               <div>
-                <div class="text-sm font-medium text-gray-600 mb-2">{{ t('contactNew.info.locationLabel') }}</div>
-                <p class="text-lg text-gray-900">{{ t('contactNew.info.locationValue') }}</p>
+                <div class="text-sm font-medium text-gray-600 mb-2">{{ content?.info?.locationLabel }}</div>
+                <p class="text-lg text-gray-900">{{ content?.info?.locationValue }}</p>
               </div>
               
               <div>
-                <div class="text-sm font-medium text-gray-600 mb-2">{{ t('contactNew.info.hoursLabel') }}</div>
-                <p class="text-lg text-gray-900">{{ t('contactNew.info.hoursWeekday') }}</p>
-                <p class="text-lg text-gray-900">{{ t('contactNew.info.hoursSaturday') }}</p>
+                <div class="text-sm font-medium text-gray-600 mb-2">{{ content?.info?.hoursLabel }}</div>
+                <p class="text-lg text-gray-900">{{ content?.info?.hoursWeekday }}</p>
+                <p class="text-lg text-gray-900">{{ content?.info?.hoursSaturday }}</p>
               </div>
             </div>
           </div>
@@ -137,9 +137,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { usePageContent } from '@/composables/usePageContent'
 
-const { t } = useI18n()
+const { content, loading: pageLoading, error: pageError } = usePageContent('contact')
 
 const form = ref({
   name: '',

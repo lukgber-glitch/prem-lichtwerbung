@@ -1392,7 +1392,17 @@
       "meta": {
         "interface": "input",
         "required": true,
-        "width": "half"
+        "width": "half",
+        "note": "English page title"
+      }
+    },
+    {
+      "field": "title_de",
+      "type": "string",
+      "meta": {
+        "interface": "input",
+        "width": "half",
+        "note": "German page title"
       }
     },
     {
@@ -1405,15 +1415,52 @@
       "meta": {
         "interface": "input",
         "required": true,
-        "width": "half"
+        "width": "half",
+        "note": "URL-friendly identifier (e.g., home, about, contact)"
       }
     },
     {
-      "field": "content",
-      "type": "text",
+      "field": "content_en",
+      "type": "json",
       "meta": {
-        "interface": "input-rich-text-md",
-        "width": "full"
+        "interface": "input-code",
+        "options": {
+          "language": "json"
+        },
+        "width": "full",
+        "note": "English page content as structured JSON"
+      }
+    },
+    {
+      "field": "content_de",
+      "type": "json",
+      "meta": {
+        "interface": "input-code",
+        "options": {
+          "language": "json"
+        },
+        "width": "full",
+        "note": "German page content as structured JSON"
+      }
+    },
+    {
+      "field": "hero_image",
+      "type": "uuid",
+      "meta": {
+        "interface": "file-image",
+        "special": ["file"],
+        "width": "half",
+        "note": "Hero/banner image for the page"
+      }
+    },
+    {
+      "field": "images",
+      "type": "alias",
+      "meta": {
+        "interface": "files",
+        "special": ["m2m"],
+        "width": "full",
+        "note": "Gallery images for the page"
       }
     },
     {
@@ -1433,6 +1480,40 @@
       "meta": {
         "interface": "datetime",
         "readonly": true
+      }
+    }
+  ],
+  "pages_directus_files": [
+    {
+      "field": "id",
+      "type": "integer",
+      "schema": {
+        "is_primary_key": true,
+        "has_auto_increment": true
+      },
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "pages_id",
+      "type": "integer",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "directus_files_id",
+      "type": "uuid",
+      "meta": {
+        "hidden": true
+      }
+    },
+    {
+      "field": "sort",
+      "type": "integer",
+      "meta": {
+        "hidden": true
       }
     }
   ],

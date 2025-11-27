@@ -1,0 +1,89 @@
+﻿[
+    {
+        "field":  "id",
+        "type":  "integer",
+        "schema":  {
+                       "is_primary_key":  true,
+                       "has_auto_increment":  true
+                   },
+        "meta":  {
+                     "hidden":  true,
+                     "readonly":  true
+                 }
+    },
+    {
+        "field":  "status",
+        "type":  "string",
+        "schema":  {
+                       "default_value":  "published"
+                   },
+        "meta":  {
+                     "interface":  "select-dropdown",
+                     "options":  {
+                                     "choices":  [
+                                                     {
+                                                         "text":  "Published",
+                                                         "value":  "published"
+                                                     },
+                                                     {
+                                                         "text":  "Draft",
+                                                         "value":  "draft"
+                                                     }
+                                                 ]
+                                 },
+                     "width":  "half"
+                 }
+    },
+    {
+        "field":  "title",
+        "type":  "string",
+        "schema":  {
+                       "is_nullable":  false
+                   },
+        "meta":  {
+                     "interface":  "input",
+                     "required":  true,
+                     "width":  "half"
+                 }
+    },
+    {
+        "field":  "slug",
+        "type":  "string",
+        "schema":  {
+                       "is_unique":  true,
+                       "is_nullable":  false
+                   },
+        "meta":  {
+                     "interface":  "input",
+                     "required":  true,
+                     "width":  "half"
+                 }
+    },
+    {
+        "field":  "content",
+        "type":  "text",
+        "meta":  {
+                     "interface":  "input-rich-text-md",
+                     "width":  "full"
+                 }
+    },
+    {
+        "field":  "date_created",
+        "type":  "timestamp",
+        "schema":  {
+                       "default_value":  "now()"
+                   },
+        "meta":  {
+                     "interface":  "datetime",
+                     "readonly":  true
+                 }
+    },
+    {
+        "field":  "date_updated",
+        "type":  "timestamp",
+        "meta":  {
+                     "interface":  "datetime",
+                     "readonly":  true
+                 }
+    }
+]

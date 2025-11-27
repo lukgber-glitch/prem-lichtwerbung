@@ -4,9 +4,9 @@
     <section class="bg-dark-bg text-white relative overflow-hidden">
       <div class="max-w-content mx-auto px-6 py-32 md:py-40">
         <div class="text-center">
-          <h1 class="text-6xl md:text-7xl font-bold mb-8">{{ t('products.heroTitle') }}</h1>
+          <h1 class="text-6xl md:text-7xl font-bold mb-8">{{ pageContent?.hero?.title }}</h1>
           <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto">
-            {{ t('products.heroSubtitle') }}
+            {{ pageContent?.hero?.subtitle }}
           </p>
         </div>
       </div>
@@ -16,11 +16,11 @@
     <section class="py-20 bg-light-bg border-b border-gray-200">
       <div class="max-w-content mx-auto px-6">
         <div class="w-16 h-1 bg-primary mb-8"></div>
-        <h2 class="text-2xl font-bold uppercase tracking-wide mb-12 text-gray-900">{{ t('products.filterProducts') }}</h2>
+        <h2 class="text-2xl font-bold uppercase tracking-wide mb-12 text-gray-900">{{ pageContent?.filters?.filterProducts }}</h2>
 
         <!-- Category Filter -->
         <div class="mb-8">
-          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.category') }}</h3>
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ pageContent?.filters?.category }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="category in categories" 
@@ -38,7 +38,7 @@
 
         <!-- Illumination Type Filter -->
         <div class="mb-8">
-          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.illumination') }}</h3>
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ pageContent?.filters?.illumination }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="type in illuminationTypes" 
@@ -56,7 +56,7 @@
 
         <!-- Price Range Filter -->
         <div class="mb-8">
-          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.priceRange') }}</h3>
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ pageContent?.filters?.priceRange }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="range in priceRanges" 
@@ -84,7 +84,7 @@
       <div class="max-w-content mx-auto px-6">
         <!-- Loading State -->
         <div v-if="loading" class="text-center py-20">
-          <div class="text-xl text-gray-900">{{ t('products.loading') }}</div>
+          <div class="text-xl text-gray-900">{{ pageContent?.messages?.loading }}</div>
         </div>
 
         <!-- Error State -->
@@ -94,12 +94,12 @@
 
         <!-- Empty State -->
         <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
-          <p class="text-xl text-gray-900 mb-8">{{ t('products.noProductsMatchFilters') }}</p>
+          <p class="text-xl text-gray-900 mb-8">{{ pageContent?.messages?.noProductsMatchFilters }}</p>
           <button 
             @click="resetFilters"
             class="px-12 py-4 border-2 border-primary bg-primary text-white hover:bg-primary-dark transition-all duration-500 font-medium"
           >
-            {{ t('products.resetFilters') }}
+            {{ pageContent?.messages?.resetFilters }}
           </button>
         </div>
 
@@ -119,9 +119,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { usePageContent } from '@/composables/usePageContent'
 import ProductCard from '@/components/products/ProductCard.vue'
 
 const { t } = useI18n()
+const { content: pageContent, loading: pageLoading, error: pageError } = usePageContent('products')
 
 const products = ref<any[]>([])
 const loading = ref(true)
@@ -197,6 +199,7 @@ const resetFilters = () => {
 const fetchProducts = async () => {
   try {
     loading.value = true
+    const directusUrl = import.meta.env.VITE_DIRECTUS_URL || 'http://localhost:8055'
     const fields = [
       'id', 'slug', 'name', 'name_de', 'description', 'description_de',
       'price', 'compare_at_price', 'stock', 'customizable', 'illumination_type',
@@ -204,7 +207,7 @@ const fetchProducts = async () => {
       'before_image', 'after_image'
     ].join(',')
     
-    const response = await fetch(`http://localhost:8055/items/products?fields=${fields}`)
+    const response = await fetch(`${directusUrl}/items/products?fields=${fields}`)
     
     if (!response.ok) {
       throw new Error(t('products.errorFetchProducts'))
