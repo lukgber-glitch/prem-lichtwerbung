@@ -28,9 +28,25 @@ fi
 echo ""
 echo "🆕 First-time setup detected - running bootstrap..."
 
+# Explicitly export environment variables for Directus subprocess
+export DB_CLIENT="${DB_CLIENT}"
+export DB_HOST="${DB_HOST}"
+export DB_PORT="${DB_PORT}"
+export DB_DATABASE="${DB_DATABASE}"
+export DB_USER="${DB_USER}"
+export DB_PASSWORD="${DB_PASSWORD}"
+export KEY="${KEY}"
+export SECRET="${SECRET}"
+export ADMIN_EMAIL="${ADMIN_EMAIL}"
+export ADMIN_PASSWORD="${ADMIN_PASSWORD}"
+export PUBLIC_URL="${PUBLIC_URL}"
+export CORS_ENABLED="${CORS_ENABLED}"
+export CORS_ORIGIN="${CORS_ORIGIN}"
+
 # Bootstrap Directus (create admin user and apply schema)
 echo ""
 echo "📦 Bootstrapping Directus..."
+echo "🔍 Debug: DB_CLIENT=${DB_CLIENT}"
 directus bootstrap
 
 # Start Directus in background for data import
