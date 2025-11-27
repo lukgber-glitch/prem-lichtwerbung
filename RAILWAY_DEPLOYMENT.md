@@ -25,21 +25,54 @@ This guide provides step-by-step instructions for deploying the Prem Lichtwerbun
 
 ## Railway Project Setup
 
+**⚠️ IMPORTANT**: Railway's automatic buildpack (Railpack) **does NOT support docker-compose.yml**. You must manually create each service separately in Railway and point each one to its respective Dockerfile.
+
 ### Step 1: Create New Railway Project
 
 1. Log in to [Railway.app](https://railway.app)
 2. Click **"New Project"**
-3. Select **"Deploy from GitHub repo"**
-4. Authorize Railway to access your GitHub account
-5. Select the repository: `prem-lichtwerbung`
-6. Railway will automatically detect the `docker-compose.yml` configuration
+3. Click **"Empty Project"**
+4. Give your project a name (e.g., "prem-lichtwerbung-demo")
 
-### Step 2: Configure Services
+### Step 2: Add PostgreSQL Database Service
 
-Railway will create three services from your docker-compose.yml:
-- **postgres** - PostgreSQL 18.1 database
-- **directus** - Directus CMS backend
-- **frontend** - Vue.js frontend application
+1. Click **"+ New"** in your project
+2. Select **"Database"** → **"Add PostgreSQL"**
+3. Railway will create a managed PostgreSQL instance
+4. Go to **Variables** tab and add:
+   - `POSTGRES_PASSWORD` - Set a strong password (e.g., `YourStr0ngP@ssw0rd!2024`)
+5. Note: Railway automatically sets `POSTGRES_USER` and `POSTGRES_DB`
+
+### Step 3: Add Directus Service
+
+1. Click **"+ New"** in your project
+2. Select **"GitHub Repo"**
+3. Select the repository: `prem-lichtwerbung`
+4. Select branch: `feature/dependency-updates` (or `main`)
+5. In **Settings** → **Build**:
+   - Set **Root Directory**: `/` (leave empty or set to root)
+   - Set **Dockerfile Path**: `directus/Dockerfile`
+6. In **Variables** tab, add all required variables (see [Required Environment Variables](#required-environment-variables) section)
+7. Name this service "directus"
+
+### Step 4: Add Frontend Service
+
+1. Click **"+ New"** in your project
+2. Select **"GitHub Repo"**
+3. Select the repository: `prem-lichtwerbung` (same repo)
+4. Select branch: `feature/dependency-updates` (or `main`)
+5. In **Settings** → **Build**:
+   - Set **Root Directory**: `/` (leave empty or set to root)
+   - Set **Dockerfile Path**: `frontend/Dockerfile`
+6. In **Variables** tab, add required variables (see [Required Environment Variables](#required-environment-variables) section)
+7. Name this service "frontend"
+
+### Step 5: Configure Service Dependencies
+
+Railway doesn't automatically handle docker-compose `depends_on`, so ensure:
+1. PostgreSQL is fully deployed before deploying Directus
+2. Directus is fully deployed before deploying Frontend
+3. Watch deployment logs to ensure proper startup order
 
 ---
 
@@ -99,29 +132,58 @@ Configure these in Railway's frontend service environment variables:
 
 ### Internal Networking
 
-Railway provides internal networking between services. The services communicate as follows:
+Railway provides internal networking between services using Railway's private networking or service-to-service communication:
 
-- **Frontend → Directus**: Via `VITE_DIRECTUS_URL` (public URL)
-- **Directus → PostgreSQL**: Via `postgres:5432` (internal hostname)
+- **Frontend → Directus**: Uses public URL via `VITE_DIRECTUS_URL` environment variable
+  - Example: `https://your-app-directus.up.railway.app`
+  - Frontend makes API calls to Directus public endpoint
+  
+- **Directus → PostgreSQL**: Uses Railway's internal connection variables
+  - Railway automatically injects connection variables for managed PostgreSQL
+  - Set `DB_HOST` to Railway's `PGHOST` variable reference
+  - Or manually configure using Railway's internal PostgreSQL hostname
+  - Railway provides `DATABASE_URL` that contains all connection info
+
+**Important**: When connecting Directus to Railway's managed PostgreSQL:
+1. Use environment variable references (e.g., `${{PGHOST}}`, `${{PGPORT}}`)
+2. Or copy the connection details from PostgreSQL service's Variables tab
+3. Ensure `DB_PASSWORD` matches the PostgreSQL service's password
 
 ### Persistent Volumes
 
-Railway automatically manages volumes defined in docker-compose.yml:
+Railway volumes must be **manually configured** in the Railway UI for each service:
 
-- `webshop_postgres_data` - PostgreSQL database data (persists across deployments)
-- `webshop_directus_uploads` - Uploaded images and files (persists across deployments)
-- `webshop_directus_extensions` - Directus extensions (persists across deployments)
+**For Directus Service:**
+1. Go to directus service → **Settings** → **Volumes**
+2. Click **"New Volume"**
+3. Set mount path: `/directus/uploads`
+4. Railway creates a persistent volume that survives redeployments
 
-**Important**: Images uploaded to Directus will persist across redeployments.
+**For PostgreSQL Service:**
+- Railway's managed PostgreSQL automatically includes persistent storage
+- No manual volume configuration needed
+- Database data persists across restarts
 
-### Health Checks
+**Important Notes:**
+- Volumes are NOT automatically detected from docker-compose.yml
+- Each volume must be created manually in Railway's UI
+- Images uploaded to Directus will persist only if volume is configured
+- Volume data persists across redeployments and restarts
 
-Both directus and postgres services have health checks configured:
+### Health Checks and Deployment
 
-- **PostgreSQL**: `pg_isready -U directus` (every 10s)
-- **Directus**: HTTP check on `/server/health` endpoint (every 10s)
+Railway monitors service health automatically:
 
-Railway will wait for services to be healthy before marking them as deployed.
+- **PostgreSQL**: Railway's managed database includes built-in health monitoring
+- **Directus**: Railway monitors the HTTP endpoint and process status
+  - Dockerfile includes `wget` for health checking
+  - Railway detects when the service is responding on the exposed port
+- **Frontend**: Railway monitors the Vite dev server process
+
+**Deployment Behavior:**
+- Railway marks services as "Deployed" when they start successfully
+- Monitor deployment logs to verify services start without errors
+- Services may take 30-60 seconds to fully initialize (especially Directus bootstrap)
 
 ---
 
@@ -260,22 +322,50 @@ In Directus admin panel:
 
 ## Troubleshooting
 
-### Issue: VOLUME Keyword Banned Error
+### Issue: Railpack could not determine how to build the app
 
 **Symptoms:**
-- Deployment fails with error: "The `VOLUME` keyword is banned in Dockerfiles"
-- Railway rejects the deployment during build phase
+- Deployment fails with error: "error creating build plan with railpack ✖ Railpack could not determine how to build the app"
+- Railway cannot detect the project type
+
+**Root Cause:**
+Railway's automatic buildpack detection (Railpack) **does NOT support docker-compose.yml files**. When you try to deploy a repository containing only docker-compose.yml without specifying a Dockerfile path, Railpack fails to identify how to build the application.
 
 **Solution:**
-This error occurs when Railway incorrectly tries to parse `docker-compose.yml` as a Dockerfile. Railway automatically detects and deploys docker-compose.yml projects without needing a `railway.json` configuration file.
+You must manually create each service in Railway and point each one to its respective Dockerfile. Railway does not automatically parse docker-compose.yml and create multiple services.
 
 **Fix:**
-1. Remove `railway.json` from the project root (if it exists)
-2. Commit and push the changes to GitHub
-3. Railway will now correctly detect and deploy the docker-compose.yml
-4. The individual Dockerfiles (`directus/Dockerfile` and `frontend/Dockerfile`) are already Railway-compatible and contain no VOLUME keywords
+1. **Do NOT** use "Deploy from GitHub repo" with auto-detection
+2. Follow the [Railway Project Setup](#railway-project-setup) instructions above:
+   - Create an **Empty Project** in Railway
+   - Add PostgreSQL as a **managed database service**
+   - Add Directus service manually, pointing to `directus/Dockerfile`
+   - Add Frontend service manually, pointing to `frontend/Dockerfile`
+3. Configure environment variables for each service
+4. Deploy services in the correct order (PostgreSQL → Directus → Frontend)
 
-**Note:** Railway manages volumes through docker-compose.yml's `volumes:` section, not through Dockerfile `VOLUME` instructions. See [Railway Volumes Documentation](https://docs.railway.com/reference/volumes) for more details.
+**Note:** Railway requires explicit Dockerfile paths for each service. The `docker-compose.yml` file in this repository is only used for local development with Docker Compose, not for Railway deployment.
+
+---
+
+### Issue: VOLUME Keyword Banned in Dockerfiles
+
+**Symptoms:**
+- Build fails with error: "The `VOLUME` keyword is banned in Dockerfiles"
+- Railway rejects the Dockerfile during build
+
+**Root Cause:**
+Railway does not support the `VOLUME` instruction in Dockerfiles. Persistent storage must be configured through Railway's Volume system.
+
+**Solution:**
+1. Check that `directus/Dockerfile` and `frontend/Dockerfile` do **NOT** contain `VOLUME` instructions
+2. The Dockerfiles in this repository are already Railway-compatible
+3. Configure persistent volumes in Railway UI:
+   - Go to service → Settings → Volumes
+   - Add volume mount: `/directus/uploads` for Directus service
+   - Railway will handle volume persistence automatically
+
+**Note:** See [Railway Volumes Documentation](https://docs.railway.com/reference/volumes) for more details.
 
 ---
 
