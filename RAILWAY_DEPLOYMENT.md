@@ -1,5 +1,24 @@
 # Railway.app Deployment Guide
 
+---
+
+## 🚨 CRITICAL: Read This First!
+
+**DO NOT use Railway's automatic "Deploy from GitHub repo" button!**
+
+This project uses `docker-compose.yml` with multiple services (PostgreSQL, Directus, Frontend), which Railway's automatic buildpack (Railpack) **DOES NOT SUPPORT**.
+
+If you try automatic deployment, you will get this error:
+```
+❌ error creating build plan with railpack
+✖ Railpack could not determine how to build the app.
+```
+
+**✅ CORRECT DEPLOYMENT METHOD:**
+Follow the [Railway Project Setup](#railway-project-setup) instructions below to **manually create each service separately** in Railway. This is the ONLY supported deployment method for this multi-service application.
+
+---
+
 This guide provides step-by-step instructions for deploying the Prem Lichtwerbung webshop to Railway.app for client demos.
 
 ## Table of Contents
