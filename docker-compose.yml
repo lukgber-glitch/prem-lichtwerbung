@@ -26,22 +26,22 @@ services:
     ports:
       - "8055:8055"
     environment:
-      KEY: ${DIRECTUS_KEY:-replace-with-random-key-in-production}
-      SECRET: ${DIRECTUS_SECRET:-replace-with-random-secret-in-production}
+      KEY: ${KEY:-replace-with-random-key-in-production}
+      SECRET: ${SECRET:-replace-with-random-secret-in-production}
       
-      DB_CLIENT: "postgres"
-      DB_HOST: "postgres"
-      DB_PORT: "5432"
-      DB_DATABASE: "directus"
-      DB_USER: "directus"
-      DB_PASSWORD: ${POSTGRES_PASSWORD:-directus}
+      DB_CLIENT: ${DB_CLIENT:-postgres}
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_DATABASE: ${DB_DATABASE:-directus}
+      DB_USER: ${DB_USER:-directus}
+      DB_PASSWORD: ${DB_PASSWORD:-directus}
       
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
       
       PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8055}
       
-      CORS_ENABLED: "true"
+      CORS_ENABLED: ${CORS_ENABLED:-true}
       CORS_ORIGIN: ${CORS_ORIGIN:-true}
       
       CACHE_ENABLED: "false"
