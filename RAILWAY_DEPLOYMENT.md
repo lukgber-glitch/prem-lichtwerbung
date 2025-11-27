@@ -92,12 +92,18 @@ Configure these in Railway's directus service environment variables:
 
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
-| `POSTGRES_PASSWORD` | ✅ Yes | Must match postgres password | `YourStr0ngP@ssw0rd!2024` |
+| `DB_CLIENT` | ✅ Yes | Database client type | `pg` |
+| `DB_HOST` | ✅ Yes | PostgreSQL hostname | Use Railway's `${{Postgres.PGHOST}}` reference or internal hostname |
+| `DB_PORT` | ✅ Yes | PostgreSQL port | `5432` |
+| `DB_DATABASE` | ✅ Yes | Database name | `railway` (Railway default) or custom name |
+| `DB_USER` | ✅ Yes | Database user | Use Railway's `${{Postgres.PGUSER}}` reference |
+| `DB_PASSWORD` | ✅ Yes | Database password | Use Railway's `${{Postgres.PGPASSWORD}}` reference |
+| `KEY` | ✅ Yes | Directus encryption key | `a1b2c3d4e5f6...` (generate with openssl) |
+| `SECRET` | ✅ Yes | Directus secret | `x9y8z7w6v5u4...` (generate with openssl) |
 | `ADMIN_EMAIL` | ✅ Yes | Directus admin email | `admin@yourcompany.com` |
 | `ADMIN_PASSWORD` | ✅ Yes | Strong admin password (NOT "admin123") | `Adm1n$ecureP@ss!` |
-| `DIRECTUS_KEY` | ✅ Yes | Random 32+ character key | `a1b2c3d4e5f6...` (generate with openssl) |
-| `DIRECTUS_SECRET` | ✅ Yes | Random 32+ character secret | `x9y8z7w6v5u4...` (generate with openssl) |
 | `PUBLIC_URL` | ✅ Yes | Your Railway directus domain | `https://your-app-directus.railway.app` |
+| `CORS_ENABLED` | ✅ Yes | Enable CORS | `true` |
 | `CORS_ORIGIN` | ✅ Yes | Frontend domain for CORS | `https://your-app-frontend.railway.app` |
 | `VITE_STRIPE_PUBLISHABLE_KEY` | ⚠️ Optional | Stripe publishable key | `pk_live_...` or `pk_test_...` |
 | `STRIPE_SECRET_KEY` | ⚠️ Optional | Stripe secret key | `sk_live_...` or `sk_test_...` |
@@ -475,6 +481,50 @@ server: {
 4. Check Railway logs for any build errors
 
 **Note:** The dot prefix in `.railway.app` matches all subdomains (e.g., `frontend-production-a583.up.railway.app`, `frontend-staging-b123.up.railway.app`).
+
+---
+
+### Issue: DB_CLIENT Environment Variable is Missing
+
+**Symptoms:**
+- Directus service fails to start with error: `"DB_CLIENT" Environment Variable is missing`
+- Railway deployment logs show error at `[HH:MM:SS.mmm] ERROR: "DB_CLIENT" Environment Variable is missing`
+- Directus container crashes immediately after startup
+- Service status shows "Crashed" or "Failed"
+
+**Root Cause:**
+Railway does NOT automatically inherit environment variables from `docker-compose.yml`. While `docker-compose.yml` contains `DB_CLIENT: "pg"` for local development, Railway requires ALL environment variables to be explicitly configured in the Railway UI for each service.
+
+**Solution:**
+You must manually add all database connection environment variables to the Directus service in Railway:
+
+1. Go to your Railway project dashboard
+2. Click on the **directus** service
+3. Go to **Variables** tab
+4. Add the following required database variables:
+   - `DB_CLIENT` = `pg`
+   - `DB_HOST` = `${{Postgres.PGHOST}}` (or copy from PostgreSQL service)
+   - `DB_PORT` = `5432`
+   - `DB_DATABASE` = `railway` (or your custom database name)
+   - `DB_USER` = `${{Postgres.PGUSER}}` (or copy from PostgreSQL service)
+   - `DB_PASSWORD` = `${{Postgres.PGPASSWORD}}` (or copy from PostgreSQL service)
+
+5. Click **"Deploy"** to restart the service with new variables
+
+**Using Railway Variable References:**
+Railway allows you to reference variables from other services using the syntax `${{ServiceName.VARIABLE_NAME}}`. This is the recommended approach for database connections:
+- Automatically updates if database credentials change
+- Reduces manual configuration errors
+- Keeps credentials synchronized across services
+
+**Verification:**
+After adding variables and redeploying:
+1. Check Railway logs for Directus service
+2. Should see: `✅ PostgreSQL is ready` and `🚀 Starting Directus Bootstrap Process`
+3. No more `DB_CLIENT` missing errors
+4. Service status should show "Deployed" (green)
+
+**Note:** See the complete list of required environment variables in the [Required Environment Variables](#required-environment-variables) section above.
 
 ---
 
