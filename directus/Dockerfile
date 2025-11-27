@@ -3,7 +3,7 @@ FROM node:20-alpine
 WORKDIR /directus
 
 # Install required tools for bootstrap script
-RUN apk add --no-cache curl jq netcat-openbsd bash
+RUN apk add --no-cache curl jq netcat-openbsd bash postgresql-client
 
 # Install Directus globally
 RUN npm install -g directus@11.13.2

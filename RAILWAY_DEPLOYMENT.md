@@ -157,12 +157,32 @@ Railway provides internal networking between services using Railway's private ne
 
 ### Persistent Volumes
 
-Railway volumes must be **manually configured** in the Railway UI for each service:
+Railway volumes are required for the Directus service to persist data and bootstrap state across redeployments.
 
 **For Directus Service:**
+
+⚠️ **CRITICAL: A volume at `/directus` is REQUIRED** to prevent bootstrap from running on every deployment.
+
+**Option 1: Automated Setup via Railway CLI (Recommended)**
+
+```bash
+# Link to Directus service
+railway service link Directus
+
+# Create volume at /directus mount path
+railway volume add --mount-path /directus
+```
+
+This creates a persistent volume that stores:
+- Bootstrap completion flag (`.bootstrap_complete`)
+- Uploaded files (`/directus/uploads`)
+- Extensions (`/directus/extensions`)
+
+**Option 2: Manual Setup via Railway UI**
+
 1. Go to directus service → **Settings** → **Volumes**
 2. Click **"New Volume"**
-3. Set mount path: `/directus/uploads`
+3. Set mount path: `/directus`
 4. Railway creates a persistent volume that survives redeployments
 
 **For PostgreSQL Service:**
@@ -170,10 +190,31 @@ Railway volumes must be **manually configured** in the Railway UI for each servi
 - No manual volume configuration needed
 - Database data persists across restarts
 
+**Bootstrap Skip Behavior:**
+
+The Directus service uses a two-level validation system to avoid running bootstrap on every deployment:
+
+1. **Flag File Check (Fast)** - Checks for `/directus/.bootstrap_complete`
+   - If exists, skips bootstrap and starts Directus immediately (~5 seconds)
+   - Requires persistent volume at `/directus` to work
+
+2. **Database Check (Fallback)** - Queries `products` table count
+   - If products exist, skips bootstrap even if flag file is missing
+   - Provides resilience if volume is reset or deleted
+   - Ensures bootstrap only runs once, even without persistent volume
+
+**Expected Behavior:**
+
+| Deployment | Flag File | Database | Behavior | Startup Time |
+|------------|-----------|----------|----------|--------------|
+| First | ❌ Missing | ❌ Empty | ✅ Bootstrap runs | 3-5 minutes |
+| Second+ | ✅ Exists | ✅ Has data | ⚡ Skip bootstrap | ~5 seconds |
+| Volume Reset | ❌ Missing | ✅ Has data | ⚡ Skip bootstrap (database check) | ~10 seconds |
+
 **Important Notes:**
 - Volumes are NOT automatically detected from docker-compose.yml
-- Each volume must be created manually in Railway's UI
-- Images uploaded to Directus will persist only if volume is configured
+- Without the `/directus` volume, each deployment checks the database (slightly slower)
+- Images uploaded to Directus persist in Railway's PostgreSQL, not the volume
 - Volume data persists across redeployments and restarts
 
 ### Health Checks and Deployment

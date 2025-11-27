@@ -14,6 +14,26 @@ until nc -z postgres 5432; do
 done
 echo "✅ PostgreSQL is ready"
 
+# Function to check if database is already populated
+check_database_populated() {
+  echo "🔍 Checking if database is already populated..."
+  
+  # Build PostgreSQL connection string
+  PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_DATABASE}" \
+    -t -c "SELECT COUNT(*) FROM products" 2>/dev/null | xargs > /tmp/product_count.txt || echo "0" > /tmp/product_count.txt
+  
+  PRODUCT_COUNT=$(cat /tmp/product_count.txt)
+  rm -f /tmp/product_count.txt
+  
+  if [ "$PRODUCT_COUNT" -gt 0 ]; then
+    echo "✅ Database already populated (found $PRODUCT_COUNT products)"
+    return 0
+  else
+    echo "🆕 Database is empty (bootstrap required)"
+    return 1
+  fi
+}
+
 # Check if bootstrap has already been completed
 BOOTSTRAP_FLAG="/directus/.bootstrap_complete"
 
@@ -21,6 +41,14 @@ if [ -f "$BOOTSTRAP_FLAG" ]; then
   echo ""
   echo "✅ Bootstrap already completed (flag file exists)"
   echo "🚀 Starting Directus server..."
+  echo ""
+  exec directus start
+fi
+
+# Check if database is already populated (fallback if flag file missing)
+if check_database_populated; then
+  echo ""
+  echo "🚀 Starting Directus server (database already has data)..."
   echo ""
   exec directus start
 fi
