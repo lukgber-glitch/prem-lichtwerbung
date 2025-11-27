@@ -32,7 +32,7 @@ This guide provides step-by-step instructions for deploying the Prem Lichtwerbun
 3. Select **"Deploy from GitHub repo"**
 4. Authorize Railway to access your GitHub account
 5. Select the repository: `prem-lichtwerbung`
-6. Railway will detect the `docker-compose.yml` and `railway.json` configuration
+6. Railway will automatically detect the `docker-compose.yml` configuration
 
 ### Step 2: Configure Services
 
@@ -259,6 +259,25 @@ In Directus admin panel:
 ---
 
 ## Troubleshooting
+
+### Issue: VOLUME Keyword Banned Error
+
+**Symptoms:**
+- Deployment fails with error: "The `VOLUME` keyword is banned in Dockerfiles"
+- Railway rejects the deployment during build phase
+
+**Solution:**
+This error occurs when Railway incorrectly tries to parse `docker-compose.yml` as a Dockerfile. Railway automatically detects and deploys docker-compose.yml projects without needing a `railway.json` configuration file.
+
+**Fix:**
+1. Remove `railway.json` from the project root (if it exists)
+2. Commit and push the changes to GitHub
+3. Railway will now correctly detect and deploy the docker-compose.yml
+4. The individual Dockerfiles (`directus/Dockerfile` and `frontend/Dockerfile`) are already Railway-compatible and contain no VOLUME keywords
+
+**Note:** Railway manages volumes through docker-compose.yml's `volumes:` section, not through Dockerfile `VOLUME` instructions. See [Railway Volumes Documentation](https://docs.railway.com/reference/volumes) for more details.
+
+---
 
 ### Issue: 403 Forbidden on Frontend API Calls
 
