@@ -92,7 +92,7 @@ Configure these in Railway's directus service environment variables:
 
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
-| `DB_CLIENT` | ✅ Yes | Database client type | `pg` |
+| `DB_CLIENT` | ✅ Yes | Database client type | `postgres` |
 | `DB_HOST` | ✅ Yes | PostgreSQL hostname | Use Railway's `${{Postgres.PGHOST}}` reference or internal hostname |
 | `DB_PORT` | ✅ Yes | PostgreSQL port | `5432` |
 | `DB_DATABASE` | ✅ Yes | Database name | `railway` (Railway default) or custom name |
@@ -493,7 +493,7 @@ server: {
 - Service status shows "Crashed" or "Failed"
 
 **Root Cause:**
-Railway does NOT automatically inherit environment variables from `docker-compose.yml`. While `docker-compose.yml` contains `DB_CLIENT: "pg"` for local development, Railway requires ALL environment variables to be explicitly configured in the Railway UI for each service.
+Railway does NOT automatically inherit environment variables from `docker-compose.yml`. While `docker-compose.yml` contains `DB_CLIENT: "postgres"` for local development, Railway requires ALL environment variables to be explicitly configured in the Railway UI for each service.
 
 **Solution:**
 You must manually add all database connection environment variables to the Directus service in Railway:
@@ -502,7 +502,7 @@ You must manually add all database connection environment variables to the Direc
 2. Click on the **directus** service
 3. Go to **Variables** tab
 4. Add the following required database variables:
-   - `DB_CLIENT` = `pg`
+   - `DB_CLIENT` = `postgres`
    - `DB_HOST` = `${{Postgres.PGHOST}}` (or copy from PostgreSQL service)
    - `DB_PORT` = `5432`
    - `DB_DATABASE` = `railway` (or your custom database name)
@@ -525,6 +525,49 @@ After adding variables and redeploying:
 4. Service status should show "Deployed" (green)
 
 **Note:** See the complete list of required environment variables in the [Required Environment Variables](#required-environment-variables) section above.
+
+---
+
+### Issue: Incorrect DB_CLIENT Value - "pg" Does Not Work
+
+**Symptoms:**
+- Directus service fails to start after setting `DB_CLIENT` environment variable
+- Railway deployment logs show database connection errors
+- Error messages like "Unsupported database client" or connection failures
+- Service crashes or fails health checks after setting `DB_CLIENT = "pg"`
+
+**Root Cause:**
+Directus requires `DB_CLIENT` to be set to `"postgres"` for PostgreSQL databases, NOT `"pg"`. While "pg" is the name of the Node.js PostgreSQL driver package (node-postgres), Directus uses `"postgres"` as the configuration value for its database client type.
+
+**Common Mistake:**
+Users often assume `DB_CLIENT` should be `"pg"` because:
+- The npm package is called "pg"
+- PostgreSQL is sometimes abbreviated as "pg"
+- Some documentation or tutorials use "pg" as shorthand
+
+**Solution:**
+Set the `DB_CLIENT` environment variable to `"postgres"` (not "pg"):
+
+1. Go to your Railway project dashboard
+2. Click on the **directus** service
+3. Go to **Variables** tab
+4. Find the `DB_CLIENT` variable
+5. Change the value from `pg` to `postgres`
+6. Click **"Deploy"** to restart the service
+
+**Correct Value:**
+```
+DB_CLIENT = postgres
+```
+
+**Verification:**
+After updating and redeploying:
+1. Check Railway logs for Directus service
+2. Should see successful database connection: `✅ PostgreSQL is ready`
+3. Directus should start normally without database client errors
+4. Service status should show "Deployed" (green)
+
+**Note:** This is the correct value for all Directus + PostgreSQL deployments, both on Railway and other platforms.
 
 ---
 

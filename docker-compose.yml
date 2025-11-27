@@ -29,7 +29,7 @@ services:
       KEY: ${DIRECTUS_KEY:-replace-with-random-key-in-production}
       SECRET: ${DIRECTUS_SECRET:-replace-with-random-secret-in-production}
       
-      DB_CLIENT: "pg"
+      DB_CLIENT: "postgres"
       DB_HOST: "postgres"
       DB_PORT: "5432"
       DB_DATABASE: "directus"
