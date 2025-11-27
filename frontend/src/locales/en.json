@@ -117,13 +117,25 @@
   },
   "products": {
     "title": "Our Products",
+    "heroTitle": "Products",
+    "heroSubtitle": "Premium illuminated signage solutions",
     "subtitle": "Browse our complete range of premium illuminated signage",
+    "filterProducts": "FILTER PRODUCTS",
     "noProducts": "No products found",
     "showingResults": "Showing {count} products",
     "showing": "Showing",
     "filterByCategory": "Filter by Category",
     "allCategories": "All Categories",
     "category": "Category",
+    "illumination": "Illumination",
+    "all": "All",
+    "lightboxes": "Lightboxes",
+    "channelLetters": "Channel Letters",
+    "neon": "Neon",
+    "pylons": "Pylons",
+    "windows": "Windows",
+    "terminal": "Terminal",
+    "led": "LED",
     "sortBy": "Sort by",
     "sortNewest": "Newest First",
     "sortNewest2": "Newest",
@@ -133,6 +145,10 @@
     "sortNameAsc2": "Name A-Z",
     "sortNameDesc": "Name: Z-A",
     "priceRange": "Price Range",
+    "priceAll": "All",
+    "priceLow": "< €500",
+    "priceMid": "€500 - €1000",
+    "priceHigh": "> €1000",
     "stockStatus": "Stock Status",
     "inStock": "In Stock",
     "outOfStock": "Out of Stock",
@@ -140,8 +156,13 @@
     "featured": "Featured",
     "resetFilters": "Reset Filters",
     "searchPlaceholder": "Search products by name or description...",
+    "loading": "Loading...",
     "loadingProducts": "Loading products...",
     "errorPermissions": "Make sure Directus is running and permissions are configured.",
+    "errorFetchProducts": "Failed to fetch products",
+    "noProductsMatchFilters": "No products match your filters",
+    "productFound": "product found",
+    "productsFound": "products found",
     "days": "days"
   },
   "productDetail": {
@@ -151,6 +172,8 @@
     "outOfStock": "Out of Stock",
     "price": "Price",
     "comparePrice": "Was",
+    "loading": "Loading...",
+    "scroll": "Scroll",
     "specifications": "Specifications",
     "description": "Description",
     "features": "Features",
@@ -160,15 +183,29 @@
     "depth": "Depth",
     "material": "Material",
     "illuminationType": "Illumination Type",
+    "illumination": "Illumination",
+    "power": "Power",
+    "rating": "Rating",
     "suitableFor": "Suitable For",
     "mountingType": "Mounting Type",
     "powerConsumption": "Power Consumption",
     "ipRating": "IP Rating",
     "leadTime": "Lead Time",
     "days": "days",
+    "available": "available",
+    "madeToOrder": "Made to order",
     "customization": "Customization",
     "customize": "Customize",
+    "availableOnRequest": "Available on request",
+    "dayNight": "Day & Night",
+    "transformation": "Transformation",
+    "interactiveDemo": "Interactive Demo",
+    "experienceTerminal": "Experience the complete POS terminal system",
+    "tryDemo": "Try Demo",
+    "quantity": "Quantity",
     "addToCart": "Add to Cart",
+    "addedToCart": "✓ Added to Cart",
+    "requestQuote": "Request Quote",
     "installationIncluded": "Installation Included",
     "installationPrice": "Installation",
     "shippingPrice": "Shipping",
@@ -196,16 +233,21 @@
   "cart": {
     "title": "Shopping Cart",
     "empty": "Your cart is empty",
+    "emptySubtitle": "Start adding products to your cart!",
+    "browseProducts": "Browse Products",
     "continueShopping": "Continue Shopping",
     "item": "Item",
     "items": "Items",
     "price": "Price",
     "quantity": "Quantity",
+    "qty": "Qty:",
+    "remove": "Remove",
     "total": "Total",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
     "tax": "Tax",
     "grandTotal": "Grand Total",
+    "orderSummary": "Order Summary",
     "proceedToCheckout": "Proceed to Checkout",
     "removeItem": "Remove Item",
     "updateCart": "Update Cart",
@@ -475,6 +517,133 @@
       "cancelTransaction": "Cancel Transaction",
       "contactSupportBtn": "Contact Support",
       "needHelp": "Need help? Call us at +49 123 456 789"
+    }
+  },
+  "homeNew": {
+    "hero": {
+      "title": "Prem-Lichtwerbung",
+      "premierTitle": "Germany's Premier",
+      "premierSubtitle": "Signage Provider",
+      "year": "2024",
+      "award": "#1",
+      "awardLine1": "Premium",
+      "awardLine2": "Signage",
+      "bannerTitle": "Precision. Innovation. Quality."
+    },
+    "intro": {
+      "paragraph": "Prem-Lichtwerbung is a leading provider of premium illuminated signage and custom lighting solutions. Our innovative specialists are focused on delivering intelligent business outcomes for our clients through cutting-edge design and expert craftsmanship.",
+      "seeProducts": "see our products"
+    },
+    "services": {
+      "title": "Premium",
+      "titleLine2": "Solutions",
+      "description": "Learn how our culture of precision and creativity underpins everything we do for our clients, our partners, and the communities around us.",
+      "learnMore": "learn more"
+    },
+    "projects": {
+      "title": "FEATURED PROJECTS",
+      "mainTitle": "Custom LED Channel Letters for Premium Retail Brand",
+      "mainDescription": "We designed and installed stunning LED channel letters that elevated the brand presence of a major retail client, resulting in increased foot traffic and brand recognition.",
+      "viewProject": "view project",
+      "project2": "High-Impact Pylon Signage for Corporate Campus",
+      "project3": "Neon Art Installation for Modern Restaurant Chain"
+    },
+    "expertise": {
+      "title": "OUR EXPERTISE",
+      "mainTitle": "15 Years of Excellence",
+      "description": "We are committed to delivering exceptional results through continuous innovation and expertise. From small businesses to large corporations, everyone in the Prem-Lichtwerbung family receives world-class service and premium quality solutions.",
+      "readMore": "read more"
+    }
+  },
+  "aboutNew": {
+    "hero": {
+      "title": "About Us",
+      "subtitle": "15 years of illuminating brands across Europe"
+    },
+    "narrative": {
+      "title": "Transforming",
+      "titleLine2": "Businesses",
+      "paragraph1": "Since 2009, Prem-Lichtwerbung has been crafting premium illuminated signage that transforms businesses into landmarks. What started as a small workshop in Germany has grown into a leading provider of custom lighting solutions across Europe.",
+      "paragraph2": "We believe every business deserves signage that not only looks incredible but performs flawlessly for years. That's why we use only the highest-quality materials, LED technology, and weatherproof construction in every project."
+    },
+    "values": {
+      "title": "OUR VALUES",
+      "quality": {
+        "title": "Premium Quality",
+        "description": "We use only the highest-grade materials and LED technology. Every sign is built to last 10+ years with minimal maintenance."
+      },
+      "custom": {
+        "title": "Custom Design",
+        "description": "Every project is unique. Our design team works with you to create signage that perfectly matches your brand identity."
+      },
+      "turnaround": {
+        "title": "Fast Turnaround",
+        "description": "Most orders ready in 7-14 days. Need it faster? We offer rush production for urgent projects."
+      },
+      "expertise": {
+        "title": "Proven Expertise",
+        "description": "Over 500 satisfied clients across Europe trust us with their brand visibility. Join them."
+      }
+    },
+    "capabilities": {
+      "title": "What we create",
+      "channelLetters": {
+        "title": "Channel Letters",
+        "description": "Individual illuminated letters that define your storefront"
+      },
+      "ledNeon": {
+        "title": "LED Neon",
+        "description": "Modern flexible neon for creative and eye-catching designs"
+      },
+      "lightboxes": {
+        "title": "Lightboxes",
+        "description": "Premium illuminated panels for maximum brand visibility"
+      },
+      "pylons": {
+        "title": "Pylons",
+        "description": "Towering structures that guide customers to your location"
+      },
+      "digital": {
+        "title": "Digital Solutions",
+        "description": "Interactive terminals and digital menu boards"
+      }
+    },
+    "cta": {
+      "title": "Ready to illuminate",
+      "titleLine2": "your brand?",
+      "button": "Get Started"
+    }
+  },
+  "contactNew": {
+    "hero": {
+      "title": "Contact",
+      "subtitle": "Let's start a conversation"
+    },
+    "form": {
+      "title": "Get in touch",
+      "nameLabel": "Name *",
+      "emailLabel": "Email *",
+      "phoneLabel": "Phone",
+      "subjectLabel": "Subject *",
+      "subjectPlaceholder": "Select a subject",
+      "subjectQuote": "Request a Quote",
+      "subjectQuestion": "General Question",
+      "subjectSupport": "Technical Support",
+      "subjectOther": "Other",
+      "messageLabel": "Message *",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Message sent successfully. We'll respond within 24 hours."
+    },
+    "info": {
+      "title": "Contact Information",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "locationLabel": "Location",
+      "locationValue": "Berlin, Germany",
+      "hoursLabel": "Business Hours",
+      "hoursWeekday": "Monday - Friday: 9:00 - 18:00",
+      "hoursSaturday": "Saturday: 10:00 - 14:00"
     }
   },
   "terminalDemo": {

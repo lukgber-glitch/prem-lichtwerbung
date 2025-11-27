@@ -117,13 +117,25 @@
   },
   "products": {
     "title": "Unsere Produkte",
+    "heroTitle": "Produkte",
+    "heroSubtitle": "Premium-Lichtwerbungslösungen",
     "subtitle": "Durchsuchen Sie unser komplettes Sortiment an Premium-Lichtwerbung",
+    "filterProducts": "PRODUKTE FILTERN",
     "noProducts": "Keine Produkte gefunden",
     "showingResults": "{count} Produkte werden angezeigt",
     "showing": "Anzeige",
     "filterByCategory": "Nach Kategorie filtern",
     "allCategories": "Alle Kategorien",
     "category": "Kategorie",
+    "illumination": "Beleuchtung",
+    "all": "Alle",
+    "lightboxes": "Leuchtkästen",
+    "channelLetters": "Profilbuchstaben",
+    "neon": "Neon",
+    "pylons": "Pylone",
+    "windows": "Fenster",
+    "terminal": "Terminal",
+    "led": "LED",
     "sortBy": "Sortieren nach",
     "sortNewest": "Neueste zuerst",
     "sortNewest2": "Neueste",
@@ -133,6 +145,10 @@
     "sortNameAsc2": "Name A-Z",
     "sortNameDesc": "Name: Z-A",
     "priceRange": "Preisspanne",
+    "priceAll": "Alle",
+    "priceLow": "< €500",
+    "priceMid": "€500 - €1000",
+    "priceHigh": "> €1000",
     "stockStatus": "Lagerstatus",
     "inStock": "Auf Lager",
     "outOfStock": "Nicht auf Lager",
@@ -140,8 +156,13 @@
     "featured": "Empfohlen",
     "resetFilters": "Filter zurücksetzen",
     "searchPlaceholder": "Produkte nach Name oder Beschreibung suchen...",
+    "loading": "Laden...",
     "loadingProducts": "Produkte werden geladen...",
     "errorPermissions": "Stellen Sie sicher, dass Directus läuft und die Berechtigungen konfiguriert sind.",
+    "errorFetchProducts": "Fehler beim Laden der Produkte",
+    "noProductsMatchFilters": "Keine Produkte entsprechen Ihren Filtern",
+    "productFound": "Produkt gefunden",
+    "productsFound": "Produkte gefunden",
     "days": "Tage"
   },
   "productDetail": {
@@ -151,6 +172,8 @@
     "outOfStock": "Nicht auf Lager",
     "price": "Preis",
     "comparePrice": "Vorher",
+    "loading": "Laden...",
+    "scroll": "Scrollen",
     "specifications": "Spezifikationen",
     "description": "Beschreibung",
     "features": "Eigenschaften",
@@ -160,15 +183,29 @@
     "depth": "Tiefe",
     "material": "Material",
     "illuminationType": "Beleuchtungsart",
+    "illumination": "Beleuchtung",
+    "power": "Leistung",
+    "rating": "Schutzklasse",
     "suitableFor": "Geeignet für",
     "mountingType": "Montageart",
     "powerConsumption": "Stromverbrauch",
     "ipRating": "IP-Schutzklasse",
     "leadTime": "Lieferzeit",
     "days": "Tage",
+    "available": "verfügbar",
+    "madeToOrder": "Auf Bestellung gefertigt",
     "customization": "Anpassung",
     "customize": "Anpassen",
+    "availableOnRequest": "Auf Anfrage erhältlich",
+    "dayNight": "Tag & Nacht",
+    "transformation": "Verwandlung",
+    "interactiveDemo": "Interaktive Demo",
+    "experienceTerminal": "Erleben Sie das komplette Kassensystem",
+    "tryDemo": "Demo testen",
+    "quantity": "Menge",
     "addToCart": "In den Warenkorb",
+    "addedToCart": "✓ In den Warenkorb gelegt",
+    "requestQuote": "Angebot anfordern",
     "installationIncluded": "Installation inbegriffen",
     "installationPrice": "Installation",
     "shippingPrice": "Versand",
@@ -196,16 +233,21 @@
   "cart": {
     "title": "Warenkorb",
     "empty": "Ihr Warenkorb ist leer",
+    "emptySubtitle": "Beginnen Sie damit, Produkte in Ihren Warenkorb zu legen!",
+    "browseProducts": "Produkte durchsuchen",
     "continueShopping": "Weiter einkaufen",
     "item": "Artikel",
     "items": "Artikel",
     "price": "Preis",
     "quantity": "Menge",
+    "qty": "Anz:",
+    "remove": "Entfernen",
     "total": "Gesamt",
     "subtotal": "Zwischensumme",
     "shipping": "Versand",
     "tax": "MwSt.",
     "grandTotal": "Gesamtsumme",
+    "orderSummary": "Bestellübersicht",
     "proceedToCheckout": "Zur Kasse",
     "removeItem": "Artikel entfernen",
     "updateCart": "Warenkorb aktualisieren",
@@ -475,6 +517,133 @@
       "cancelTransaction": "Transaktion abbrechen",
       "contactSupportBtn": "Support kontaktieren",
       "needHelp": "Benötigen Sie Hilfe? Rufen Sie uns an unter +49 123 456 789"
+    }
+  },
+  "homeNew": {
+    "hero": {
+      "title": "Prem-Lichtwerbung",
+      "premierTitle": "Deutschlands führender",
+      "premierSubtitle": "Beschilderungsanbieter",
+      "year": "2024",
+      "award": "#1",
+      "awardLine1": "Premium",
+      "awardLine2": "Beschilderung",
+      "bannerTitle": "Präzision. Innovation. Qualität."
+    },
+    "intro": {
+      "paragraph": "Prem-Lichtwerbung ist ein führender Anbieter von Premium-Lichtwerbung und maßgeschneiderten Beleuchtungslösungen. Unsere innovativen Spezialisten konzentrieren sich darauf, intelligente Geschäftsergebnisse für unsere Kunden durch modernste Gestaltung und fachkundige Handwerkskunst zu liefern.",
+      "seeProducts": "siehe unsere Produkte"
+    },
+    "services": {
+      "title": "Premium",
+      "titleLine2": "Lösungen",
+      "description": "Erfahren Sie, wie unsere Kultur der Präzision und Kreativität alles untermauert, was wir für unsere Kunden, unsere Partner und die Gemeinschaften um uns herum tun.",
+      "learnMore": "mehr erfahren"
+    },
+    "projects": {
+      "title": "AUSGEWÄHLTE PROJEKTE",
+      "mainTitle": "Individuelle LED-Profilbuchstaben für Premium-Einzelhandelsmarke",
+      "mainDescription": "Wir haben atemberaubende LED-Profilbuchstaben entworfen und installiert, die die Markenpräsenz eines großen Einzelhandelskunden erhöht haben, was zu erhöhtem Kundenverkehr und Markenbekanntheit führte.",
+      "viewProject": "projekt ansehen",
+      "project2": "Hochwertige Pylon-Beschilderung für Firmencampus",
+      "project3": "Neon-Kunstinstallation für moderne Restaurantkette"
+    },
+    "expertise": {
+      "title": "UNSERE EXPERTISE",
+      "mainTitle": "15 Jahre Exzellenz",
+      "description": "Wir sind bestrebt, außergewöhnliche Ergebnisse durch kontinuierliche Innovation und Expertise zu liefern. Von kleinen Unternehmen bis hin zu großen Konzernen erhält jeder in der Prem-Lichtwerbung-Familie erstklassigen Service und Premium-Qualitätslösungen.",
+      "readMore": "weiterlesen"
+    }
+  },
+  "aboutNew": {
+    "hero": {
+      "title": "Über uns",
+      "subtitle": "15 Jahre Markenbeleuchtung in ganz Europa"
+    },
+    "narrative": {
+      "title": "Unternehmen",
+      "titleLine2": "transformieren",
+      "paragraph1": "Seit 2009 fertigt Prem-Lichtwerbung Premium-Lichtwerbung, die Unternehmen in Wahrzeichen verwandelt. Was als kleine Werkstatt in Deutschland begann, ist zu einem führenden Anbieter maßgeschneiderter Beleuchtungslösungen in ganz Europa gewachsen.",
+      "paragraph2": "Wir glauben, dass jedes Unternehmen eine Beschilderung verdient, die nicht nur unglaublich aussieht, sondern auch jahrelang einwandfrei funktioniert. Deshalb verwenden wir in jedem Projekt nur hochwertigste Materialien, LED-Technologie und wetterfeste Konstruktion."
+    },
+    "values": {
+      "title": "UNSERE WERTE",
+      "quality": {
+        "title": "Premium-Qualität",
+        "description": "Wir verwenden nur hochwertigste Materialien und LED-Technologie. Jedes Schild ist für eine Lebensdauer von 10+ Jahren mit minimalem Wartungsaufwand gebaut."
+      },
+      "custom": {
+        "title": "Individuelles Design",
+        "description": "Jedes Projekt ist einzigartig. Unser Designteam arbeitet mit Ihnen zusammen, um Beschilderung zu erstellen, die perfekt zu Ihrer Markenidentität passt."
+      },
+      "turnaround": {
+        "title": "Schnelle Umsetzung",
+        "description": "Die meisten Bestellungen sind in 7-14 Tagen fertig. Brauchen Sie es schneller? Wir bieten Eilproduktion für dringende Projekte."
+      },
+      "expertise": {
+        "title": "Bewährte Expertise",
+        "description": "Über 500 zufriedene Kunden in ganz Europa vertrauen uns ihre Markensichtbarkeit an. Werden Sie Teil davon."
+      }
+    },
+    "capabilities": {
+      "title": "Was wir erschaffen",
+      "channelLetters": {
+        "title": "Profilbuchstaben",
+        "description": "Einzelne beleuchtete Buchstaben, die Ihr Schaufenster definieren"
+      },
+      "ledNeon": {
+        "title": "LED-Neon",
+        "description": "Modernes flexibles Neon für kreative und auffällige Designs"
+      },
+      "lightboxes": {
+        "title": "Leuchtkästen",
+        "description": "Premium-Leuchtpaneele für maximale Markensichtbarkeit"
+      },
+      "pylons": {
+        "title": "Pylone",
+        "description": "Hohe Strukturen, die Kunden zu Ihrem Standort führen"
+      },
+      "digital": {
+        "title": "Digitale Lösungen",
+        "description": "Interaktive Terminals und digitale Menütafeln"
+      }
+    },
+    "cta": {
+      "title": "Bereit, Ihre Marke",
+      "titleLine2": "zum Leuchten zu bringen?",
+      "button": "Jetzt starten"
+    }
+  },
+  "contactNew": {
+    "hero": {
+      "title": "Kontakt",
+      "subtitle": "Lassen Sie uns ins Gespräch kommen"
+    },
+    "form": {
+      "title": "Kontaktieren Sie uns",
+      "nameLabel": "Name *",
+      "emailLabel": "E-Mail *",
+      "phoneLabel": "Telefon",
+      "subjectLabel": "Betreff *",
+      "subjectPlaceholder": "Wählen Sie einen Betreff",
+      "subjectQuote": "Angebot anfordern",
+      "subjectQuestion": "Allgemeine Frage",
+      "subjectSupport": "Technischer Support",
+      "subjectOther": "Sonstiges",
+      "messageLabel": "Nachricht *",
+      "sendButton": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "successMessage": "Nachricht erfolgreich gesendet. Wir antworten innerhalb von 24 Stunden."
+    },
+    "info": {
+      "title": "Kontaktinformationen",
+      "emailLabel": "E-Mail",
+      "phoneLabel": "Telefon",
+      "locationLabel": "Standort",
+      "locationValue": "Berlin, Deutschland",
+      "hoursLabel": "Geschäftszeiten",
+      "hoursWeekday": "Montag - Freitag: 9:00 - 18:00",
+      "hoursSaturday": "Samstag: 10:00 - 14:00"
     }
   },
   "terminalDemo": {

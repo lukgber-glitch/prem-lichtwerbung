@@ -56,14 +56,23 @@
         </div>
       </div>
 
-      <!-- View Details Button - Minimal -->
-      <button
-        @click="$router.push(`/products/${product.slug}`)"
-        class="w-full px-6 py-3 bg-transparent text-black text-sm font-semibold border border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-        :disabled="product.stock === 0"
-      >
-        {{ product.stock === 0 ? 'Out of Stock' : 'View Details' }}
-      </button>
+      <!-- Action Buttons - Minimal -->
+      <div class="flex gap-3">
+        <button
+          @click="handleAddToCart"
+          class="flex-1 px-6 py-3 bg-black text-white text-sm font-semibold border border-black hover:bg-black/80 transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+          :disabled="product.stock === 0"
+        >
+          {{ addedToCart ? '✓ Added' : 'Add to Cart' }}
+        </button>
+        <button
+          @click="$router.push(`/products/${product.slug}`)"
+          class="flex-1 px-6 py-3 bg-transparent text-black text-sm font-semibold border border-black hover:bg-black hover:text-white transition-all duration-500 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+          :disabled="product.stock === 0"
+        >
+          {{ product.stock === 0 ? 'Out of Stock' : 'View Details' }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -72,6 +81,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useCart } from '@/composables/useCart'
 
 interface Product {
   id: number
@@ -96,7 +106,9 @@ const props = defineProps<{
 
 const router = useRouter()
 const { locale } = useI18n()
+const { addToCart } = useCart()
 const showNightImage = ref(false)
+const addedToCart = ref(false)
 
 // Locale-aware computed properties
 const productName = computed(() => {
@@ -131,10 +143,21 @@ const currentImage = computed(() => {
   return getImageUrl(props.product.day_image) || '/placeholder-product.jpg'
 })
 
-const addToCart = () => {
+const handleAddToCart = () => {
   if (props.product.stock > 0) {
-    // TODO: Implement add to cart functionality
-    console.log('Add to cart:', props.product.id)
+    addToCart({
+      id: props.product.id,
+      name: productName.value,
+      price: props.product.price,
+      image: props.product.day_image,
+      slug: props.product.slug
+    }, 1)
+    
+    // Show visual feedback
+    addedToCart.value = true
+    setTimeout(() => {
+      addedToCart.value = false
+    }, 2000)
   }
 }
 </script>

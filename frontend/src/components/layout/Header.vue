@@ -1,83 +1,65 @@
 <template>
-  <header class="bg-omnicom-bg text-omnicom-text fixed top-0 left-0 right-0 z-50 border-b border-omnicom-gray-300/25">
-    <div class="max-w-content mx-auto px-6 md:px-32">
-      <div class="flex items-center justify-between h-24">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-content mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <router-link to="/" class="flex items-center">
+        <span class="text-2xl font-bold">
+          <span class="text-primary">Prem-Lichtwerbung</span>
+          <span class="text-gray-400">Group</span>
+        </span>
+      </router-link>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <router-link to="/about" class="text-gray-700 hover:text-primary transition-colors font-medium">{{ t('nav.about') }}</router-link>
+        <router-link to="/products" class="text-gray-700 hover:text-primary transition-colors font-medium">{{ t('nav.products') }}</router-link>
+        <router-link to="/terminal-demo" class="text-gray-700 hover:text-primary transition-colors font-medium">Terminal</router-link>
+        <router-link to="/contact" class="text-gray-700 hover:text-primary transition-colors font-medium">{{ t('nav.contact') }}</router-link>
         
-        <!-- Logo - Text Only -->
-        <router-link to="/" class="font-heading text-xl font-bold text-omnicom-text hover:text-omnicom-muted transition-all duration-300 cursor-pointer">
-          Prem-Lichtwerbung
+        <!-- Language Selector -->
+        <LanguageSelector />
+        
+        <!-- Cart Icon with Badge -->
+        <router-link to="/cart" class="relative text-gray-700 hover:text-primary transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span v-if="itemCount > 0" class="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            {{ itemCount }}
+          </span>
         </router-link>
-        
-        <!-- Desktop Navigation - 4 Core Links -->
-        <nav class="hidden md:flex items-center gap-12">
-          <router-link 
-            to="/about" 
-            class="text-omnicom-text font-light text-base relative group cursor-pointer transition-colors duration-300"
-            :class="{ 'accent-text': $route.path.startsWith('/about') }"
-          >
-            Story
-            <span class="absolute bottom-0 left-0 w-0 h-px bg-omnicom-black group-hover:w-full transition-all duration-300 group-hover:accent-bg"></span>
-          </router-link>
-          <router-link 
-            to="/products" 
-            class="text-omnicom-text font-light text-base relative group cursor-pointer transition-colors duration-300"
-            :class="{ 'accent-text': $route.path.startsWith('/products') }"
-          >
-            Work
-            <span class="absolute bottom-0 left-0 w-0 h-px bg-omnicom-black group-hover:w-full transition-all duration-300 group-hover:accent-bg"></span>
-          </router-link>
-          <router-link 
-            to="/terminal-demo" 
-            class="text-omnicom-text font-light text-base relative group cursor-pointer transition-colors duration-300"
-          >
-            Terminal
-            <span class="absolute bottom-0 left-0 w-0 h-px bg-omnicom-black group-hover:w-full transition-all duration-300 group-hover:accent-bg"></span>
-          </router-link>
-          <router-link 
-            to="/contact" 
-            class="text-omnicom-text font-light text-base relative group cursor-pointer transition-colors duration-300"
-            :class="{ 'accent-text': $route.path.startsWith('/contact') }"
-          >
-            Contact
-            <span class="absolute bottom-0 left-0 w-0 h-px bg-omnicom-black group-hover:w-full transition-all duration-300 group-hover:accent-bg"></span>
-          </router-link>
-        </nav>
-        
-        <!-- Actions -->
-        <div class="flex items-center gap-6">
-          <!-- Language Switcher -->
-          <LanguageSwitcher />
-          
-          <!-- Mobile menu button -->
-          <button 
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden p-2 cursor-pointer"
-          >
-            <Menu :size="24" :stroke-width="1.5" class="text-omnicom-text" />
-          </button>
-        </div>
-        
-      </div>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        @click="mobileMenuOpen = !mobileMenuOpen"
+        class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50 relative"
+        aria-label="Toggle menu"
+      >
+        <span :class="['w-7 h-0.5 bg-primary transition-all duration-300', mobileMenuOpen ? 'rotate-45 translate-y-2' : '']"></span>
+        <span :class="['w-7 h-0.5 bg-primary transition-all duration-300', mobileMenuOpen ? 'opacity-0' : '']"></span>
+        <span :class="['w-7 h-0.5 bg-primary transition-all duration-300', mobileMenuOpen ? '-rotate-45 -translate-y-2' : '']"></span>
+      </button>
     </div>
-    
+
     <!-- Mobile Menu -->
-    <div 
-      v-if="mobileMenuOpen"
-      class="md:hidden bg-omnicom-bg border-t border-omnicom-gray-300/25 py-8"
-    >
-      <nav class="max-w-content mx-auto px-6 flex flex-col gap-6">
-        <router-link to="/about" class="text-omnicom-text font-light text-lg py-2 cursor-pointer hover:accent-text transition-colors" @click="mobileMenuOpen = false">
-          Story
+    <div :class="['lg:hidden fixed inset-0 bg-white z-40 transform transition-transform duration-300', mobileMenuOpen ? 'translate-x-0' : 'translate-x-full']">
+      <nav class="flex flex-col h-full pt-24 px-8">
+        <router-link to="/about" @click="mobileMenuOpen = false" class="text-2xl font-bold py-4 border-b border-gray-200 hover:text-primary transition-colors">{{ t('nav.about') }}</router-link>
+        <router-link to="/products" @click="mobileMenuOpen = false" class="text-2xl font-bold py-4 border-b border-gray-200 hover:text-primary transition-colors">{{ t('nav.products') }}</router-link>
+        <router-link to="/terminal-demo" @click="mobileMenuOpen = false" class="text-2xl font-bold py-4 border-b border-gray-200 hover:text-primary transition-colors">Terminal</router-link>
+        <router-link to="/contact" @click="mobileMenuOpen = false" class="text-2xl font-bold py-4 border-b border-gray-200 hover:text-primary transition-colors">{{ t('nav.contact') }}</router-link>
+        <router-link to="/cart" @click="mobileMenuOpen = false" class="text-2xl font-bold py-4 border-b border-gray-200 hover:text-primary transition-colors flex items-center gap-3">
+          {{ t('nav.cart') }}
+          <span v-if="itemCount > 0" class="bg-primary text-white text-sm font-bold rounded-full w-7 h-7 flex items-center justify-center">
+            {{ itemCount }}
+          </span>
         </router-link>
-        <router-link to="/products" class="text-omnicom-text font-light text-lg py-2 cursor-pointer hover:accent-text transition-colors" @click="mobileMenuOpen = false">
-          Work
-        </router-link>
-        <router-link to="/terminal-demo" class="text-omnicom-text font-light text-lg py-2 cursor-pointer hover:accent-text transition-colors" @click="mobileMenuOpen = false">
-          Terminal
-        </router-link>
-        <router-link to="/contact" class="text-omnicom-text font-light text-lg py-2 cursor-pointer hover:accent-text transition-colors" @click="mobileMenuOpen = false">
-          Contact
-        </router-link>
+        
+        <!-- Language Selector in Mobile Menu -->
+        <div class="py-4 border-b border-gray-200">
+          <LanguageSelector />
+        </div>
       </nav>
     </div>
   </header>
@@ -85,8 +67,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Menu } from 'lucide-vue-next'
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher.vue'
+import { useI18n } from 'vue-i18n'
+import { useCart } from '@/composables/useCart'
+import LanguageSelector from '@/components/ui/LanguageSelector.vue'
 
+const { t } = useI18n()
 const mobileMenuOpen = ref(false)
+const { itemCount } = useCart()
 </script>

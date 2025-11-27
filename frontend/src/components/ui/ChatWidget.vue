@@ -7,8 +7,8 @@
         'fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-lg transition-all duration-300',
         'flex items-center justify-center',
         isOpen 
-          ? 'bg-brand-pink hover:shadow-glow-pink' 
-          : 'bg-brand-blue hover:shadow-glow-blue hover:scale-110'
+          ? 'bg-primary hover:shadow-xl' 
+          : 'bg-primary hover:shadow-xl hover:scale-110'
       ]"
       aria-label="Chat with us"
     >
@@ -31,7 +31,7 @@
       <!-- Unread Badge -->
       <span 
         v-if="unreadCount > 0 && !isOpen"
-        class="absolute -top-1 -right-1 w-6 h-6 bg-brand-pink text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse"
+        class="absolute -top-1 -right-1 w-6 h-6 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse"
       >
         {{ unreadCount }}
       </span>
@@ -50,16 +50,16 @@
         v-if="isOpen"
         class="fixed inset-x-0 bottom-0 md:bottom-6 md:right-6 md:inset-x-auto z-40"
       >
-        <div class="bg-white rounded-t-2xl md:rounded-2xl shadow-2xl w-full md:w-96 h-[80vh] md:h-[600px] flex flex-col overflow-hidden">
+        <div class="bg-white shadow-2xl w-full md:w-96 h-[80vh] md:h-[600px] flex flex-col overflow-hidden">
           <!-- Header -->
-          <div class="bg-gradient-to-r from-brand-blue to-brand-pink p-4 flex items-center justify-between">
+          <div class="bg-primary p-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
                 <MessageSquare :size="24" class="text-white" :stroke-width="2" />
               </div>
               <div>
                 <h3 class="font-bold text-white">Chat with us</h3>
-                <p class="text-xs text-brand-warm">We typically reply instantly</p>
+                <p class="text-xs text-white opacity-80">We typically reply instantly</p>
               </div>
             </div>
             <button
@@ -72,13 +72,13 @@
           </div>
 
           <!-- Chat Messages -->
-          <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-brand-gray-light">
+          <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-light-bg">
             <!-- Welcome Message -->
             <div class="flex items-start gap-3">
-              <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+              <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                 <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
               </div>
-              <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
+              <div class="bg-white shadow-sm p-3 max-w-[80%]">
                 <p class="text-sm text-gray-800">
                   Hello! Welcome to Prem-Lichtwerbung. How can we help you today?
                 </p>
@@ -87,9 +87,9 @@
             </div>
 
             <!-- Placeholder Notice -->
-            <div class="bg-brand-blue bg-opacity-10 border border-brand-blue rounded-lg p-4 text-center">
-              <Info :size="48" class="mx-auto mb-3 text-brand-blue" :stroke-width="2" />
-              <p class="text-sm font-semibold text-brand-navy mb-2">Live Chat Integration</p>
+            <div class="bg-primary bg-opacity-10 border border-primary p-4 text-center">
+              <Info :size="48" class="mx-auto mb-3 text-primary" :stroke-width="2" />
+              <p class="text-sm font-semibold text-gray-900 mb-2">Live Chat Integration</p>
               <p class="text-xs text-gray-600 mb-3">
                 Connect your preferred live chat service to enable real-time customer support:
               </p>
@@ -106,21 +106,21 @@
             <div v-for="(message, index) in demoMessages" :key="index">
               <!-- Customer Message (right aligned) -->
               <div v-if="message.type === 'customer'" class="flex items-start gap-3 justify-end">
-                <div class="bg-brand-blue text-white rounded-lg rounded-tr-none shadow-sm p-3 max-w-[80%]">
+                <div class="bg-primary text-white shadow-sm p-3 max-w-[80%]">
                   <p class="text-sm">{{ message.text }}</p>
                   <span class="text-xs opacity-75 mt-1 block">{{ message.time }}</span>
                 </div>
-                <div class="w-8 h-8 bg-brand-pink rounded-full flex items-center justify-center flex-shrink-0">
+                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                   <User :size="20" class="text-white" :stroke-width="2" />
                 </div>
               </div>
 
               <!-- Agent Message (left aligned) -->
               <div v-else class="flex items-start gap-3">
-                <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                   <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
                 </div>
-                <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3 max-w-[80%]">
+                <div class="bg-white shadow-sm p-3 max-w-[80%]">
                   <p class="text-sm text-gray-800">{{ message.text }}</p>
                   <span class="text-xs text-gray-500 mt-1 block">{{ message.time }}</span>
                 </div>
@@ -129,10 +129,10 @@
 
             <!-- Typing Indicator (optional) -->
             <div v-if="isTyping" class="flex items-start gap-3">
-              <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+              <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
                 <UserCircle2 :size="20" class="text-white" :stroke-width="2" />
               </div>
-              <div class="bg-white rounded-lg rounded-tl-none shadow-sm p-3">
+              <div class="bg-white shadow-sm p-3">
                 <div class="flex gap-1">
                   <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
                   <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></span>
@@ -149,13 +149,13 @@
                 v-model="messageInput"
                 type="text"
                 placeholder="Type your message..."
-                class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all"
+                class="flex-1 px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                 @keypress.enter="sendMessage"
               />
               <button
                 @click="sendMessage"
                 :disabled="!messageInput.trim()"
-                class="px-4 py-3 bg-brand-blue text-white rounded-lg hover:shadow-glow-blue transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                class="px-4 py-3 bg-primary text-white hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Send message"
               >
                 <Send :size="24" class="text-white" :stroke-width="2" />

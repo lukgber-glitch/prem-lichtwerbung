@@ -1,150 +1,154 @@
 <template>
-  <div class="min-h-screen bg-omnicom-bg page-products">
-    
-    <!-- HERO SECTION - Omnicom Minimal -->
-    <section class="relative min-h-screen flex items-center justify-center bg-omnicom-black overflow-hidden px-6">
-      <div class="noise-texture"></div>
-      <div class="max-w-content mx-auto text-center">
-        <h1 class="text-7xl md:text-9xl font-heading font-black text-omnicom-text-light leading-none tracking-[-0.03em]">
-          Work
-        </h1>
+  <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="bg-dark-bg text-white relative overflow-hidden">
+      <div class="max-w-content mx-auto px-6 py-32 md:py-40">
+        <div class="text-center">
+          <h1 class="text-6xl md:text-7xl font-bold mb-8">{{ t('products.heroTitle') }}</h1>
+          <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto">
+            {{ t('products.heroSubtitle') }}
+          </p>
+        </div>
       </div>
     </section>
-    
-    <!-- FILTERS SECTION - Omnicom Minimal with Accent Line -->
-    <section class="py-20 bg-omnicom-bg-alt border-b border-omnicom-gray-300/25">
-      <div class="max-w-content mx-auto px-6 md:px-32">
-        
-        <!-- Decorative Accent Line -->
-        <OmnicomAccentLine size="md" class="mb-8" />
-        
-        <!-- Section Label -->
-        <p class="text-xs uppercase tracking-[0.2em] font-semibold text-omnicom-muted mb-12">Filter Products</p>
-        
+
+    <!-- Filters Section -->
+    <section class="py-20 bg-light-bg border-b border-gray-200">
+      <div class="max-w-content mx-auto px-6">
+        <div class="w-16 h-1 bg-primary mb-8"></div>
+        <h2 class="text-2xl font-bold uppercase tracking-wide mb-12 text-gray-900">{{ t('products.filterProducts') }}</h2>
+
         <!-- Category Filter -->
-        <div class="mb-12">
-          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Category</h3>
+        <div class="mb-8">
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.category') }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="category in categories" 
-              :key="category"
-              @click="selectedCategory = category"
-              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
-              :class="selectedCategory === category 
-                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
-                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
+              :key="category.value"
+              @click="selectedCategory = category.value"
+              class="px-6 py-3 text-sm font-medium border transition-all duration-500 cursor-pointer"
+              :class="selectedCategory === category.value 
+                ? 'bg-primary text-white border-primary' 
+                : 'bg-transparent text-gray-900 border-gray-300 hover:border-primary'"
             >
-              {{ category }}
+              {{ t(category.label) }}
             </button>
           </div>
         </div>
-        
+
         <!-- Illumination Type Filter -->
-        <div class="mb-12">
-          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Illumination</h3>
+        <div class="mb-8">
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.illumination') }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="type in illuminationTypes" 
-              :key="type"
-              @click="selectedIllumination = type"
-              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
-              :class="selectedIllumination === type 
-                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
-                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
+              :key="type.value"
+              @click="selectedIllumination = type.value"
+              class="px-6 py-3 text-sm font-medium border transition-all duration-500 cursor-pointer"
+              :class="selectedIllumination === type.value 
+                ? 'bg-primary text-white border-primary' 
+                : 'bg-transparent text-gray-900 border-gray-300 hover:border-primary'"
             >
-              {{ type }}
+              {{ t(type.label) }}
             </button>
           </div>
         </div>
-        
+
         <!-- Price Range Filter -->
-        <div class="mb-12">
-          <h3 class="text-sm font-light text-omnicom-muted mb-4 uppercase tracking-wider">Price Range</h3>
+        <div class="mb-8">
+          <h3 class="text-sm font-medium text-gray-700 mb-4 uppercase tracking-wider">{{ t('products.priceRange') }}</h3>
           <div class="flex flex-wrap gap-3">
             <button 
               v-for="range in priceRanges" 
               :key="range.label"
               @click="selectedPriceRange = range"
-              class="px-6 py-3 text-sm font-semibold border transition-all duration-500 cursor-pointer"
+              class="px-6 py-3 text-sm font-medium border transition-all duration-500 cursor-pointer"
               :class="selectedPriceRange === range 
-                ? 'bg-omnicom-black text-omnicom-text-light border-omnicom-black' 
-                : 'bg-transparent text-omnicom-text border-omnicom-gray-300 hover:border-omnicom-black'"
+                ? 'bg-primary text-white border-primary' 
+                : 'bg-transparent text-gray-900 border-gray-300 hover:border-primary'"
             >
-              {{ range.label }}
+              {{ t(range.label) }}
             </button>
           </div>
         </div>
-        
+
         <!-- Results Count -->
-        <div class="text-sm font-light text-omnicom-muted">
-          {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'product' : 'products' }} found
+        <div class="text-sm text-gray-700">
+          {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? t('products.productFound') : t('products.productsFound') }}
         </div>
-        
       </div>
     </section>
-    
-    <!-- PRODUCTS GRID - Minimal Asymmetric Layout -->
-    <section class="py-60 bg-omnicom-bg">
-      <div class="max-w-content mx-auto px-6 md:px-32">
-        
+
+    <!-- Products Grid -->
+    <section class="py-20 bg-white">
+      <div class="max-w-content mx-auto px-6">
         <!-- Loading State -->
         <div v-if="loading" class="text-center py-20">
-          <div class="text-xl font-light text-omnicom-text">Loading...</div>
+          <div class="text-xl text-gray-900">{{ t('products.loading') }}</div>
         </div>
-        
+
         <!-- Error State -->
         <div v-else-if="error" class="text-center py-20">
-          <div class="text-xl font-light text-omnicom-text">{{ error }}</div>
+          <div class="text-xl text-gray-900">{{ error }}</div>
         </div>
-        
+
         <!-- Empty State -->
         <div v-else-if="filteredProducts.length === 0" class="text-center py-20">
-          <p class="text-xl font-light text-omnicom-text">No products match your filters</p>
-          <div class="mt-8">
-            <ButtonGlow 
-              variant="secondary" 
-              :use-page-accent="true"
-              @click="resetFilters"
-            >
-              Reset Filters
-            </ButtonGlow>
-          </div>
+          <p class="text-xl text-gray-900 mb-8">{{ t('products.noProductsMatchFilters') }}</p>
+          <button 
+            @click="resetFilters"
+            class="px-12 py-4 border-2 border-primary bg-primary text-white hover:bg-primary-dark transition-all duration-500 font-medium"
+          >
+            {{ t('products.resetFilters') }}
+          </button>
         </div>
-        
-        <!-- Products Grid - Asymmetric 2-3 columns -->
-        <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+
+        <!-- Products Grid -->
+        <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           <ProductCard 
             v-for="product in filteredProducts" 
             :key="product.id"
             :product="product"
           />
         </div>
-        
       </div>
     </section>
-    
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ProductCard from '@/components/products/ProductCard.vue'
-import OmnicomAccentLine from '@/components/ui/OmnicomAccentLine.vue'
-import ButtonGlow from '@/components/ui/ButtonGlow.vue'
-import { useScrollAnimation } from '@/composables/useScrollAnimation'
+
+const { t } = useI18n()
 
 const products = ref<any[]>([])
 const loading = ref(true)
 const error = ref('')
 
 // Filter options
-const categories = ['All', 'Lightboxes', 'Channel Letters', 'Neon', 'Pylons', 'Windows', 'Terminal']
-const illuminationTypes = ['All', 'LED', 'Neon']
+const categories = [
+  { value: 'All', label: 'products.all' },
+  { value: 'Lightboxes', label: 'products.lightboxes' },
+  { value: 'Channel Letters', label: 'products.channelLetters' },
+  { value: 'Neon', label: 'products.neon' },
+  { value: 'Pylons', label: 'products.pylons' },
+  { value: 'Windows', label: 'products.windows' },
+  { value: 'Terminal', label: 'products.terminal' }
+]
+
+const illuminationTypes = [
+  { value: 'All', label: 'products.all' },
+  { value: 'LED', label: 'products.led' },
+  { value: 'Neon', label: 'products.neon' }
+]
+
 const priceRanges = [
-  { label: 'All', min: 0, max: Infinity },
-  { label: '< €500', min: 0, max: 500 },
-  { label: '€500 - €1000', min: 500, max: 1000 },
-  { label: '> €1000', min: 1000, max: Infinity }
+  { label: 'products.priceAll', min: 0, max: Infinity },
+  { label: 'products.priceLow', min: 0, max: 500 },
+  { label: 'products.priceMid', min: 500, max: 1000 },
+  { label: 'products.priceHigh', min: 1000, max: Infinity }
 ]
 
 // Filter state
@@ -203,7 +207,7 @@ const fetchProducts = async () => {
     const response = await fetch(`http://localhost:8055/items/products?fields=${fields}`)
     
     if (!response.ok) {
-      throw new Error('Failed to fetch products')
+      throw new Error(t('products.errorFetchProducts'))
     }
     
     const data = await response.json()
@@ -213,7 +217,7 @@ const fetchProducts = async () => {
       compare_at_price: product.compare_at_price ? Number(product.compare_at_price) : undefined
     }))
   } catch (e: any) {
-    error.value = e.message
+    error.value = e.message || t('products.errorFetchProducts')
     products.value = []
   } finally {
     loading.value = false
@@ -221,15 +225,6 @@ const fetchProducts = async () => {
 }
 
 onMounted(() => {
-  const { animateOnScroll } = useScrollAnimation()
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (!reduce) {
-    animateOnScroll('.accent-line', { y: 40, duration: 0.8, delay: 0 })
-    animateOnScroll('h1', { y: 40, duration: 1.0, delay: 0.1 })
-    animateOnScroll('h2', { y: 40, duration: 0.9, delay: 0.1 })
-    animateOnScroll('p', { y: 30, duration: 0.8, delay: 0.2 })
-    animateOnScroll('button', { y: 20, duration: 0.7, delay: 0.3 })
-  }
   fetchProducts()
 })
 </script>
