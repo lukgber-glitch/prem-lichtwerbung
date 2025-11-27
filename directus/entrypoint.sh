@@ -94,6 +94,10 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
   exit 1
 fi
 
+# Additional wait to ensure authentication subsystem is fully initialized
+echo "⏸️  Waiting 45 seconds for Directus authentication subsystem to initialize..."
+sleep 45
+
 # Authenticate and get access token
 echo "🔑 Authenticating with Directus..."
 AUTH_RESPONSE=$(curl -s -X POST http://localhost:$DIRECTUS_PORT/auth/login \
