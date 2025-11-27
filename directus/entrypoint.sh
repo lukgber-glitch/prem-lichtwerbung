@@ -69,9 +69,13 @@ DIRECTUS_PID=$!
 echo "⏳ Waiting for Directus to be ready..."
 sleep 30
 
+# Determine the correct port (Railway uses PORT env var, defaults to 8055)
+DIRECTUS_PORT=${PORT:-8055}
+echo "🔍 Directus is running on port: $DIRECTUS_PORT"
+
 # Authenticate and get access token
 echo "🔑 Authenticating with Directus..."
-AUTH_RESPONSE=$(curl -s -X POST http://localhost:8055/auth/login \
+AUTH_RESPONSE=$(curl -s -X POST http://localhost:$DIRECTUS_PORT/auth/login \
   -H "Content-Type: application/json" \
   --data "{\"email\":\"$ADMIN_EMAIL\",\"password\":\"$ADMIN_PASSWORD\"}")
 
@@ -92,7 +96,7 @@ if [ -f "/directus/bootstrap/collections.json" ]; then
   echo "📋 Importing collections..."
   collections=$(cat /directus/bootstrap/collections.json | jq -c '.[]')
   echo "$collections" | while IFS= read -r collection; do
-    curl -X POST http://localhost:8055/collections \
+    curl -X POST http://localhost:$DIRECTUS_PORT/collections \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$collection" || echo "Collection already exists or import failed"
@@ -106,7 +110,7 @@ if [ -f "/directus/bootstrap/fields.json" ]; then
   for collection in $(cat /directus/bootstrap/fields.json | jq -r 'keys[]'); do
     fields=$(cat /directus/bootstrap/fields.json | jq -c ".\"$collection\"[]")
     echo "$fields" | while IFS= read -r field; do
-      curl -X POST "http://localhost:8055/fields/$collection" \
+      curl -X POST "http://localhost:$DIRECTUS_PORT/fields/$collection" \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $ACCESS_TOKEN" \
         --data "$field" || echo "Field already exists or import failed"
@@ -120,7 +124,7 @@ if [ -f "/directus/bootstrap/relations.json" ]; then
   echo "🔗 Importing relations..."
   relations=$(cat /directus/bootstrap/relations.json | jq -c '.[]')
   echo "$relations" | while IFS= read -r relation; do
-    curl -X POST http://localhost:8055/relations \
+    curl -X POST http://localhost:$DIRECTUS_PORT/relations \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$relation" || echo "Relation already exists or import failed"
@@ -133,7 +137,7 @@ if [ -f "/directus/bootstrap/roles.json" ]; then
   echo "👥 Importing roles..."
   roles=$(cat /directus/bootstrap/roles.json | jq -c '.[]')
   echo "$roles" | while IFS= read -r role; do
-    curl -X POST http://localhost:8055/roles \
+    curl -X POST http://localhost:$DIRECTUS_PORT/roles \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$role" || echo "Role already exists or import failed"
@@ -198,7 +202,7 @@ if [ -f "/directus/bootstrap/sample-data/categories.json" ]; then
   echo "  - Importing categories..."
   categories=$(cat /directus/bootstrap/sample-data/categories.json | jq -c '.[]')
   echo "$categories" | while IFS= read -r category; do
-    curl -X POST http://localhost:8055/items/categories \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/categories \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$category" > /dev/null 2>&1 || true
@@ -210,7 +214,7 @@ if [ -f "/directus/bootstrap/sample-data/tags.json" ]; then
   echo "  - Importing tags..."
   tags=$(cat /directus/bootstrap/sample-data/tags.json | jq -c '.[]')
   echo "$tags" | while IFS= read -r tag; do
-    curl -X POST http://localhost:8055/items/tags \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/tags \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$tag" > /dev/null 2>&1 || true
@@ -222,7 +226,7 @@ if [ -f "/directus/bootstrap/sample-data/products-final.json" ]; then
   echo "  - Importing products (with image UUIDs)..."
   products=$(cat /directus/bootstrap/sample-data/products-final.json | jq -c '.[]')
   echo "$products" | while IFS= read -r product; do
-    curl -X POST http://localhost:8055/items/products \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/products \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$product" > /dev/null 2>&1 || true
@@ -231,7 +235,7 @@ elif [ -f "/directus/bootstrap/sample-data/products.json" ]; then
   echo "  - Importing products (fallback to template)..."
   products=$(cat /directus/bootstrap/sample-data/products.json | jq -c '.[]')
   echo "$products" | while IFS= read -r product; do
-    curl -X POST http://localhost:8055/items/products \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/products \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$product" > /dev/null 2>&1 || true
@@ -243,7 +247,7 @@ if [ -f "/directus/bootstrap/sample-data/products_categories.json" ]; then
   echo "  - Importing products_categories (M2M relations)..."
   products_categories=$(cat /directus/bootstrap/sample-data/products_categories.json | jq -c '.[]')
   echo "$products_categories" | while IFS= read -r junction; do
-    curl -X POST http://localhost:8055/items/products_categories \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/products_categories \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$junction" > /dev/null 2>&1 || true
@@ -255,7 +259,7 @@ if [ -f "/directus/bootstrap/sample-data/customers.json" ]; then
   echo "  - Importing customers..."
   customers=$(cat /directus/bootstrap/sample-data/customers.json | jq -c '.[]')
   echo "$customers" | while IFS= read -r customer; do
-    curl -X POST http://localhost:8055/items/customers \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/customers \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$customer" > /dev/null 2>&1 || true
@@ -267,7 +271,7 @@ if [ -f "/directus/bootstrap/sample-data/orders.json" ]; then
   echo "  - Importing orders..."
   orders=$(cat /directus/bootstrap/sample-data/orders.json | jq -c '.[]')
   echo "$orders" | while IFS= read -r order; do
-    curl -X POST http://localhost:8055/items/orders \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/orders \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$order" > /dev/null 2>&1 || true
@@ -279,7 +283,7 @@ if [ -f "/directus/bootstrap/sample-data/pages.json" ]; then
   echo "  - Importing pages..."
   pages=$(cat /directus/bootstrap/sample-data/pages.json | jq -c '.[]')
   echo "$pages" | while IFS= read -r page; do
-    curl -X POST http://localhost:8055/items/pages \
+    curl -X POST http://localhost:$DIRECTUS_PORT/items/pages \
       -H "Content-Type: application/json" \
       -H "Authorization: Bearer $ACCESS_TOKEN" \
       --data "$page" > /dev/null 2>&1 || true
