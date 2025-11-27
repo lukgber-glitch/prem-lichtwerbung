@@ -1,24 +1,5 @@
 # Railway.app Deployment Guide
 
----
-
-## 🚨 CRITICAL: Read This First!
-
-**DO NOT use Railway's automatic "Deploy from GitHub repo" button!**
-
-This project uses `docker-compose.yml` with multiple services (PostgreSQL, Directus, Frontend), which Railway's automatic buildpack (Railpack) **DOES NOT SUPPORT**.
-
-If you try automatic deployment, you will get this error:
-```
-❌ error creating build plan with railpack
-✖ Railpack could not determine how to build the app.
-```
-
-**✅ CORRECT DEPLOYMENT METHOD:**
-Follow the [Railway Project Setup](#railway-project-setup) instructions below to **manually create each service separately** in Railway. This is the ONLY supported deployment method for this multi-service application.
-
----
-
 This guide provides step-by-step instructions for deploying the Prem Lichtwerbung webshop to Railway.app for client demos.
 
 ## Table of Contents
@@ -385,6 +366,49 @@ Railway does not support the `VOLUME` instruction in Dockerfiles. Persistent sto
    - Railway will handle volume persistence automatically
 
 **Note:** See [Railway Volumes Documentation](https://docs.railway.com/reference/volumes) for more details.
+
+---
+
+### Issue: Dockerfile COPY Error - File Not Found
+
+**Symptoms:**
+- Build fails with error: `failed to calculate checksum of ref ... "/entrypoint.sh": not found`
+- Error occurs at Dockerfile line with `COPY entrypoint.sh` or similar
+- Build fails during Docker image creation
+
+**Root Cause:**
+When Railway builds with **Root Directory: /** and **Dockerfile Path: directus/Dockerfile**, the Docker build context is set to the **project root**, not the `directus/` subdirectory. All `COPY` commands in the Dockerfile must use paths relative to the project root.
+
+**Example Error:**
+```
+Dockerfile:17
+-------------------
+15 |     # Copy bootstrap scripts and data
+16 |     COPY bootstrap /directus/bootstrap
+17 | >>> COPY entrypoint.sh /directus/entrypoint.sh
+18 |
+19 |     # Make entrypoint executable
+-------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: 
+failed to calculate checksum of ref: "/entrypoint.sh": not found
+```
+
+**Solution:**
+Update all `COPY` commands in `directus/Dockerfile` to use paths relative to the project root:
+
+```dockerfile
+# ❌ WRONG - Relative to Dockerfile location
+COPY entrypoint.sh /directus/entrypoint.sh
+COPY bootstrap /directus/bootstrap
+COPY package.json package-lock.json* ./
+
+# ✅ CORRECT - Relative to project root (build context)
+COPY directus/entrypoint.sh /directus/entrypoint.sh
+COPY directus/bootstrap /directus/bootstrap
+COPY directus/package.json directus/package-lock.json* ./
+```
+
+**Note:** The Dockerfiles in this repository have been updated to use correct paths for Railway deployment. This issue is resolved in the current version.
 
 ---
 
