@@ -1,0 +1,24 @@
+# Exclude docker-compose.yml from Docker build context
+# Railway may auto-detect and use docker-compose.yml environment variables
+# instead of Railway UI variables if this file is in the build context
+docker-compose.yml
+
+# Exclude unnecessary files from Docker build
+.git
+.gitignore
+.idea
+*.md
+*.log
+node_modules
+.env
+.env.*
+
+# Exclude large directories not needed in containers
+ai-generated-images
+signage-images-real
+dist
+
+# Exclude Railway-specific files
+.railwayignore
+railway.json
+railway.toml
