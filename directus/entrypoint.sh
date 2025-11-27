@@ -46,7 +46,18 @@ export CORS_ORIGIN="${CORS_ORIGIN}"
 # Bootstrap Directus (create admin user and apply schema)
 echo ""
 echo "📦 Bootstrapping Directus..."
-echo "🔍 Debug: DB_CLIENT=${DB_CLIENT}"
+echo "🔍 Debug: Environment variables check:"
+echo "   DB_CLIENT=${DB_CLIENT}"
+echo "   DB_HOST=${DB_HOST}"
+echo "   DB_PORT=${DB_PORT}"
+echo "   DB_DATABASE=${DB_DATABASE}"
+echo "   DB_USER=${DB_USER}"
+echo "   KEY=${KEY}"
+echo "   SECRET=${SECRET}"
+echo ""
+echo "📋 All environment variables:"
+env | grep -E '^(DB_|KEY|SECRET|ADMIN_|PUBLIC_|CORS_)' | sort
+echo ""
 directus bootstrap
 
 # Start Directus in background for data import
