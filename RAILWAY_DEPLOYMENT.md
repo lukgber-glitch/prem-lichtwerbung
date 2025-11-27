@@ -571,6 +571,231 @@ After updating and redeploying:
 
 ---
 
+### Issue: Railway Web UI Variables Not Injected Into Container
+
+**Symptoms:**
+- Environment variables configured in Railway's web UI Variables tab appear correct when editing
+- However, deployment logs show environment variables are empty or missing in the container
+- Directus crashes with errors like: `"DB_CLIENT" Environment Variable is missing` or `knex: Required configuration option 'client' is missing`
+- Variables like `DB_CLIENT`, `DB_HOST`, `KEY`, `SECRET`, etc. show as empty in debug logs
+- Some variables (`ADMIN_EMAIL`, `ADMIN_PASSWORD`) work, but database/core variables don't
+- Service status shows "Crashed" repeatedly despite variables being set in web UI
+
+**Root Cause:**
+Railway's web UI has a known issue where environment variables may not be properly injected into containers at runtime, even though they appear correctly configured in the Variables tab. This is a platform-level bug that affects variable propagation from Railway's configuration system to the running container.
+
+**Solution: Use Railway CLI to Set Variables**
+
+The Railway CLI bypasses the web UI and directly sets environment variables via Railway's API, ensuring proper injection into containers.
+
+#### Step 1: Install Railway CLI
+
+```bash
+# Install globally via npm
+npm install -g @railway/cli
+```
+
+#### Step 2: Authenticate with Railway
+
+```bash
+# Start browserless authentication
+railway login --browserless
+```
+
+This will display:
+- A pairing code (e.g., `burgundy-caring-harmony`)
+- An authentication URL
+
+**Actions:**
+1. Open the authentication URL in your browser
+2. Enter the pairing code when prompted
+3. Click "Authorize" to grant CLI access
+4. Return to terminal and wait for confirmation
+
+**Verify authentication:**
+```bash
+railway whoami
+```
+
+Should display: `Logged in as [your-name] ([your-email]) 👋`
+
+#### Step 3: Link Repository to Railway Project
+
+Navigate to your project directory and link to Railway:
+
+```bash
+cd /path/to/your/project
+railway link
+```
+
+**Interactive prompts:**
+- Select workspace: (e.g., `your-name's Projects`)
+- Select project: (e.g., `disciplined-flow` or your project name)
+- Select environment: `production`
+- Select service: Press `ESC` to skip (we'll target services individually)
+
+**Verify linking:**
+```bash
+railway status
+```
+
+Should show: `Project: [project-name]`, `Environment: production`
+
+#### Step 4: List Services
+
+View all services in your project:
+
+```bash
+railway service status --all
+```
+
+**Example output:**
+```
+Services in production:
+frontend             | 78455002-d696-4d80-9fca-21dfe3242af3 | SUCCESS
+Directus             | 43f15585-ba9d-491e-bb6e-ee939a446ec2 | CRASHED
+Postgres             | 19c31cda-4fca-453b-a4f6-3371c1cc3f81 | SUCCESS
+```
+
+#### Step 5: Get PostgreSQL Connection Details
+
+Query the Postgres service to get database credentials:
+
+```bash
+railway variables --service Postgres --kv
+```
+
+**Note these values:**
+- `PGHOST` - PostgreSQL hostname (e.g., `postgres.railway.internal`)
+- `PGPORT` - PostgreSQL port (usually `5432`)
+- `PGDATABASE` - Database name (usually `railway`)
+- `PGUSER` - Database user (usually `postgres`)
+- `PGPASSWORD` - Database password (long random string)
+
+#### Step 6: Set All Variables for Directus Service
+
+Use the Railway CLI to set all required environment variables in a single command:
+
+```bash
+railway variables --service Directus \
+  --set "DB_CLIENT=postgres" \
+  --set "DB_HOST=postgres.railway.internal" \
+  --set "DB_PORT=5432" \
+  --set "DB_DATABASE=railway" \
+  --set "DB_USER=postgres" \
+  --set "DB_PASSWORD=YOUR_POSTGRES_PASSWORD" \
+  --set "KEY=YOUR_DIRECTUS_KEY" \
+  --set "SECRET=YOUR_DIRECTUS_SECRET" \
+  --set "ADMIN_EMAIL=admin@yourcompany.com" \
+  --set "ADMIN_PASSWORD=YourStr0ngP@ss!" \
+  --set "PUBLIC_URL=https://your-directus.railway.app" \
+  --set "CORS_ENABLED=true" \
+  --set "CORS_ORIGIN=https://your-frontend.railway.app"
+```
+
+**Important:**
+- Replace `YOUR_POSTGRES_PASSWORD` with the actual `PGPASSWORD` from Step 5
+- Replace `YOUR_DIRECTUS_KEY` with your Directus encryption key
+- Replace `YOUR_DIRECTUS_SECRET` with your Directus secret
+- Replace URLs with your actual Railway domains
+- Use exact service name (case-sensitive): `Directus` or `directus` depending on how you named it
+
+**Expected output:**
+```
+Set variables DB_CLIENT, DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD, KEY, SECRET, ADMIN_EMAIL, ADMIN_PASSWORD, PUBLIC_URL, CORS_ENABLED, CORS_ORIGIN
+```
+
+Railway automatically triggers a redeploy after setting variables.
+
+#### Step 7: Monitor Deployment
+
+Wait for the deployment to complete:
+
+```bash
+# Wait 10 seconds, then check status
+railway service status --all
+```
+
+**Status progression:**
+- `INITIALIZING` - Deployment queued
+- `BUILDING` - Docker image building
+- `DEPLOYING` - Container starting
+- `SUCCESS` - Service running ✅
+
+This typically takes 1-2 minutes for Directus.
+
+#### Step 8: Verify Variables Are Injected
+
+Check the deployment logs to confirm variables are present:
+
+```bash
+railway logs --service Directus
+```
+
+**Success indicators:**
+```
+DB_CLIENT=postgres
+DB_HOST=postgres.railway.internal
+DB_PORT=5432
+DB_DATABASE=railway
+DB_USER=postgres
+DB_PASSWORD=...
+KEY=...
+SECRET=...
+✅ PostgreSQL is ready
+🚀 Starting Directus Bootstrap Process
+[INFO] Extensions loaded
+[INFO] Server started at http://0.0.0.0:8080
+```
+
+**If successful:**
+- ✅ All environment variables appear in logs with correct values
+- ✅ No "DB_CLIENT Environment Variable is missing" error
+- ✅ No "knex: Required configuration option 'client' is missing" error
+- ✅ Directus starts successfully
+- ✅ Service status shows `SUCCESS`
+
+#### Step 9: Test Directus API
+
+Verify Directus is responding:
+
+```bash
+curl https://your-directus.railway.app/server/health
+```
+
+Or open the URL in your browser - should see Directus admin panel.
+
+**Troubleshooting CLI Issues:**
+
+**If `railway whoami` shows "Unauthorized":**
+- Token may be expired - run `railway login --browserless` again
+- Clear invalid token: `unset RAILWAY_TOKEN` (Linux/Mac) or `Remove-Item Env:\RAILWAY_TOKEN` (PowerShell)
+
+**If `railway link` fails:**
+- Ensure you're in the correct project directory
+- Try `railway unlink` then `railway link` again
+- Verify you have access to the Railway project
+
+**If variables still appear empty after CLI set:**
+- Verify service name is correct (check `railway service status --all`)
+- Try setting variables one at a time to identify problematic values
+- Check for special characters in variable values that may need escaping
+- Ensure no trailing spaces in variable values
+
+**Why This Works:**
+
+The Railway CLI communicates directly with Railway's API and bypasses the web UI's variable propagation system. This ensures variables are properly stored in Railway's backend and correctly injected into containers at runtime, avoiding the web UI bug that causes variable injection failures.
+
+**After This Fix:**
+
+Once variables are set via CLI:
+- ✅ Directus service will run successfully
+- ✅ Environment variables persist across redeployments
+- ✅ You can manage variables via CLI for future updates
+- ✅ Web UI will still display the variables (but don't edit them via web UI if the bug persists)
+
+---
+
 ### Issue: 403 Forbidden on Frontend API Calls
 
 **Symptoms:**
