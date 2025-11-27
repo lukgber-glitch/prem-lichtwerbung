@@ -2,14 +2,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files (Railway build context is project root, not frontend/)
+COPY frontend/package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy application files
-COPY . .
+# Copy application files (Railway build context is project root, not frontend/)
+COPY frontend/ .
 
 # Expose port
 EXPOSE 3000

@@ -373,13 +373,14 @@ Railway does not support the `VOLUME` instruction in Dockerfiles. Persistent sto
 
 **Symptoms:**
 - Build fails with error: `failed to calculate checksum of ref ... "/entrypoint.sh": not found`
-- Error occurs at Dockerfile line with `COPY entrypoint.sh` or similar
+- Or: `npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'`
+- Error occurs at Dockerfile line with `COPY` or `RUN npm install`
 - Build fails during Docker image creation
 
 **Root Cause:**
-When Railway builds with **Root Directory: /** and **Dockerfile Path: directus/Dockerfile**, the Docker build context is set to the **project root**, not the `directus/` subdirectory. All `COPY` commands in the Dockerfile must use paths relative to the project root.
+When Railway builds with **Root Directory: /** and **Dockerfile Path: directus/Dockerfile** (or **frontend/Dockerfile**), the Docker build context is set to the **project root**, not the service subdirectory. All `COPY` commands in the Dockerfile must use paths relative to the project root.
 
-**Example Error:**
+**Example Error (Directus Service):**
 ```
 Dockerfile:17
 -------------------
@@ -393,9 +394,28 @@ ERROR: failed to build: failed to solve: failed to compute cache key:
 failed to calculate checksum of ref: "/entrypoint.sh": not found
 ```
 
-**Solution:**
-Update all `COPY` commands in `directus/Dockerfile` to use paths relative to the project root:
+**Example Error (Frontend Service):**
+```
+Dockerfile:9
+-------------------
+7 |
+8 |     # Install dependencies
+9 | >>> RUN npm install
+10 |
+11 |     # Copy application files
+-------------------
+npm error code ENOENT
+npm error syscall open
+npm error path /app/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'
+ERROR: failed to build: process "/bin/sh -c npm install" did not complete successfully: exit code: 254
+```
 
+**Solution:**
+Update all `COPY` commands in **both** `directus/Dockerfile` and `frontend/Dockerfile` to use paths relative to the project root:
+
+**For `directus/Dockerfile`:**
 ```dockerfile
 # ❌ WRONG - Relative to Dockerfile location
 COPY entrypoint.sh /directus/entrypoint.sh
@@ -406,6 +426,17 @@ COPY package.json package-lock.json* ./
 COPY directus/entrypoint.sh /directus/entrypoint.sh
 COPY directus/bootstrap /directus/bootstrap
 COPY directus/package.json directus/package-lock.json* ./
+```
+
+**For `frontend/Dockerfile`:**
+```dockerfile
+# ❌ WRONG - Relative to Dockerfile location
+COPY package*.json ./
+COPY . .
+
+# ✅ CORRECT - Relative to project root (build context)
+COPY frontend/package*.json ./
+COPY frontend/ .
 ```
 
 **Note:** The Dockerfiles in this repository have been updated to use correct paths for Railway deployment. This issue is resolved in the current version.
