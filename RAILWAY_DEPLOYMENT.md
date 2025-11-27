@@ -443,6 +443,41 @@ COPY frontend/ .
 
 ---
 
+### Issue: Blocked Request - Host Not Allowed
+
+**Symptoms:**
+- Frontend deployment succeeds but shows error page when accessed
+- Error message: "Blocked request. This host ('frontend-production-xxxx.up.railway.app') is not allowed"
+- Vite suggests adding the host to `server.allowedHosts` in vite.config.js
+- Browser shows connection error or blank page
+
+**Root Cause:**
+Vite's development server includes host checking for security. Railway generates dynamic public domains (e.g., `frontend-production-a583.up.railway.app`), which Vite blocks by default because they don't match `localhost`. The `server.allowedHosts` configuration must explicitly allow Railway domains.
+
+**Solution:**
+The `frontend/vite.config.ts` file has been updated to allow Railway domains:
+
+```typescript
+server: {
+  host: '0.0.0.0',
+  port: parseInt(process.env.PORT || '3000'),
+  allowedHosts: ['.railway.app'],  // ✅ Allows all *.railway.app domains
+  watch: {
+    usePolling: true
+  }
+}
+```
+
+**If you still see this error:**
+1. Verify `frontend/vite.config.ts` includes `allowedHosts: ['.railway.app']`
+2. Redeploy the frontend service in Railway
+3. Clear browser cache and retry
+4. Check Railway logs for any build errors
+
+**Note:** The dot prefix in `.railway.app` matches all subdomains (e.g., `frontend-production-a583.up.railway.app`, `frontend-staging-b123.up.railway.app`).
+
+---
+
 ### Issue: 403 Forbidden on Frontend API Calls
 
 **Symptoms:**
