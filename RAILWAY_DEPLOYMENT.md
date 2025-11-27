@@ -157,33 +157,23 @@ Railway provides internal networking between services using Railway's private ne
 
 ### Persistent Volumes
 
-Railway volumes are required for the Directus service to persist data and bootstrap state across redeployments.
+Railway volumes are optional for the Directus service. The application uses database validation to prevent bootstrap from running multiple times.
 
 **For Directus Service:**
 
-⚠️ **CRITICAL: A volume at `/directus` is REQUIRED** to prevent bootstrap from running on every deployment.
+✅ **No volume required** - The Directus service automatically detects if data already exists in the database and skips bootstrap accordingly.
 
-**Option 1: Automated Setup via Railway CLI (Recommended)**
+**Optional: Volume for Uploads (Recommended for Production)**
+
+If you want to persist uploaded files across redeployments, you can optionally create a volume for uploads:
 
 ```bash
 # Link to Directus service
 railway service link Directus
 
-# Create volume at /directus mount path
-railway volume add --mount-path /directus
+# Create volume for uploads only
+railway volume add --mount-path /directus/uploads
 ```
-
-This creates a persistent volume that stores:
-- Bootstrap completion flag (`.bootstrap_complete`)
-- Uploaded files (`/directus/uploads`)
-- Extensions (`/directus/extensions`)
-
-**Option 2: Manual Setup via Railway UI**
-
-1. Go to directus service → **Settings** → **Volumes**
-2. Click **"New Volume"**
-3. Set mount path: `/directus`
-4. Railway creates a persistent volume that survives redeployments
 
 **For PostgreSQL Service:**
 - Railway's managed PostgreSQL automatically includes persistent storage
@@ -194,28 +184,29 @@ This creates a persistent volume that stores:
 
 The Directus service uses a two-level validation system to avoid running bootstrap on every deployment:
 
-1. **Flag File Check (Fast)** - Checks for `/directus/.bootstrap_complete`
-   - If exists, skips bootstrap and starts Directus immediately (~5 seconds)
-   - Requires persistent volume at `/directus` to work
+1. **Flag File Check (Fast)** - Checks for `/tmp/.bootstrap_complete`
+   - Created after first successful bootstrap
+   - Persists during container lifetime
+   - Fast check (~1ms), skips bootstrap immediately
 
-2. **Database Check (Fallback)** - Queries `products` table count
-   - If products exist, skips bootstrap even if flag file is missing
-   - Provides resilience if volume is reset or deleted
-   - Ensures bootstrap only runs once, even without persistent volume
+2. **Database Check (Primary)** - Queries `products` table count
+   - If products exist, skips bootstrap automatically
+   - Works even on fresh containers
+   - Ensures bootstrap only runs once, ever
 
 **Expected Behavior:**
 
 | Deployment | Flag File | Database | Behavior | Startup Time |
 |------------|-----------|----------|----------|--------------|
 | First | ❌ Missing | ❌ Empty | ✅ Bootstrap runs | 3-5 minutes |
-| Second+ | ✅ Exists | ✅ Has data | ⚡ Skip bootstrap | ~5 seconds |
-| Volume Reset | ❌ Missing | ✅ Has data | ⚡ Skip bootstrap (database check) | ~10 seconds |
+| Same Container | ✅ Exists | ✅ Has data | ⚡ Skip bootstrap (flag check) | ~5 seconds |
+| New Container | ❌ Missing | ✅ Has data | ⚡ Skip bootstrap (database check) | ~10 seconds |
 
 **Important Notes:**
-- Volumes are NOT automatically detected from docker-compose.yml
-- Without the `/directus` volume, each deployment checks the database (slightly slower)
-- Images uploaded to Directus persist in Railway's PostgreSQL, not the volume
-- Volume data persists across redeployments and restarts
+- No persistent volume needed for bootstrap skip functionality
+- Database check is reliable and automatic
+- Uploaded images are stored in PostgreSQL via Directus, not filesystem
+- Optional uploads volume only needed if you use filesystem storage
 
 ### Health Checks and Deployment
 

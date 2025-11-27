@@ -35,7 +35,8 @@ check_database_populated() {
 }
 
 # Check if bootstrap has already been completed
-BOOTSTRAP_FLAG="/directus/.bootstrap_complete"
+# Note: Using /tmp instead of /directus to avoid conflict with Railway volume mounts
+BOOTSTRAP_FLAG="/tmp/.bootstrap_complete"
 
 if [ -f "$BOOTSTRAP_FLAG" ]; then
   echo ""
@@ -48,7 +49,8 @@ fi
 # Check if database is already populated (fallback if flag file missing)
 if check_database_populated; then
   echo ""
-  echo "🚀 Starting Directus server (database already has data)..."
+  echo "✅ Bootstrap already completed (database has data)"
+  echo "🚀 Starting Directus server..."
   echo ""
   exec directus start
 fi
