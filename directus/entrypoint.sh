@@ -17,19 +17,32 @@ echo "✅ PostgreSQL is ready"
 # Function to check if database is already populated
 check_database_populated() {
   echo "🔍 Checking if database is already populated..."
+  echo "   Connection: ${DB_USER}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}"
   
-  # Build PostgreSQL connection string
-  PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_DATABASE}" \
-    -t -c "SELECT COUNT(*) FROM products" 2>/dev/null | xargs > /tmp/product_count.txt || echo "0" > /tmp/product_count.txt
+  # First, check if products table exists
+  TABLE_EXISTS=$(PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_DATABASE}" \
+    -t -c "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'products');" 2>/dev/null | xargs)
   
-  PRODUCT_COUNT=$(cat /tmp/product_count.txt)
-  rm -f /tmp/product_count.txt
+  if [ "$TABLE_EXISTS" != "t" ]; then
+    echo "   Products table does not exist - fresh database"
+    return 1
+  fi
   
-  if [ "$PRODUCT_COUNT" -gt 0 ]; then
-    echo "✅ Database already populated (found $PRODUCT_COUNT products)"
-    return 0
+  # Table exists, check if it has data
+  PRODUCT_COUNT=$(PGPASSWORD="${DB_PASSWORD}" psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_DATABASE}" \
+    -t -c "SELECT COUNT(*) FROM products;" 2>&1 | xargs)
+  
+  # Check if query succeeded and returned a number
+  if echo "$PRODUCT_COUNT" | grep -qE '^[0-9]+$'; then
+    if [ "$PRODUCT_COUNT" -gt 0 ]; then
+      echo "✅ Database already populated (found $PRODUCT_COUNT products)"
+      return 0
+    else
+      echo "   Products table exists but is empty"
+      return 1
+    fi
   else
-    echo "🆕 Database is empty (bootstrap required)"
+    echo "   Database query failed or returned non-numeric result: $PRODUCT_COUNT"
     return 1
   fi
 }
